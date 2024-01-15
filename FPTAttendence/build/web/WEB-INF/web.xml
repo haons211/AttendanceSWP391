@@ -16,6 +16,14 @@
         <servlet-name>DashboardControler</servlet-name>
         <servlet-class>controller.DashboardControler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>employeeDAO</servlet-name>
+        <servlet-class>dal.employeeDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>In4Employees</servlet-name>
+        <servlet-class>controller.In4Employees</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeesController</servlet-name>
         <url-pattern>/HomeEmployees</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>DashboardControler</servlet-name>
         <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>employeeDAO</servlet-name>
+        <url-pattern>/employeeDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>In4Employees</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>Login</welcome-file>

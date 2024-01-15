@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/FPTAttendence/src/java/controller/SendApplicationController.java</file>
             <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/FPTAttendence/src/java/models/Application.java</file>
@@ -14,5 +15,8 @@
             <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/FPTAttendence/src/java/controller/In4Employees.java</file>
             <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/FPTAttendence/web/WEB-INF/web.xml</file>
         </group>
+=======
+        <group/>
+>>>>>>> 6f2325640b0c00db0cd3fcda08b3b1cd2edd4afe
     </open-files>
 </project-private>
