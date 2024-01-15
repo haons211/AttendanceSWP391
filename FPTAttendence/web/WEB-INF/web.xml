@@ -35,4 +35,28 @@
     <welcome-file-list>
         <welcome-file>Login</welcome-file>
     </welcome-file-list>
+    <servlet>
+        <servlet-name>allDepServlet</servlet-name>
+        <servlet-class>controller.allDepServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addDep</servlet-name>
+        <servlet-class>controller.addDep</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <servlet-class>controller.DeleteDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>allDepServlet</servlet-name>
+        <url-pattern>/department</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addDep</servlet-name>
+        <url-pattern>/addDep</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <url-pattern>/DeleteDepartment</url-pattern>
+    </servlet-mapping>
 </web-app>
