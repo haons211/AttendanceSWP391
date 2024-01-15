@@ -43,15 +43,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
-<<<<<<< HEAD
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="assets/css/main.css" rel="stylesheet">
-=======
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link href="css/main.css" rel="stylesheet">
->>>>>>> 6f2325640b0c00db0cd3fcda08b3b1cd2edd4afe
         <title>Your Website</title>
     </head>
     <body>
@@ -94,11 +88,7 @@
                         <h1>Hồ sơ cá nhân</h1>
                         <div class="profile-container">
                             <div class="profile-image">
-<<<<<<< HEAD
                                 <img src="assets/img/avatar.jpg" alt="Profile Picture">
-=======
-                                <img src="avatar.jpg" alt="Profile Picture">
->>>>>>> 6f2325640b0c00db0cd3fcda08b3b1cd2edd4afe
                             </div>
                             <table class="table" border="1">
                                 <tbody>
