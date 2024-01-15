@@ -40,7 +40,7 @@
             <aside class="col-lg-2 col-md-3">
                 <ul class="nav flex-column">
                     <li class="nav-item"><a id="attendance" class="nav-link" href="#">Điểm danh</a></li>
-                    <li class="nav-item"><a id="profile" class="nav-link" href="#">Thông tin cá nhân</a></li>
+                    <li class="nav-item"><a id="profile" class="nav-link" href="profile">Thông tin cá nhân</a></li>
                     <li class="nav-item"><a id="application"class="nav-link" href="#">Viết đơn</a></li>
                     <li class="nav-item"><a id="showapplication"class="nav-link" href="#">Xem các đơn đã gửi</a></li>
                     <li class="nav-item"><a id="Nofitication"class="nav-link" href="#">Thông báo</a></li>
@@ -198,6 +198,5 @@
 
     <!-- Bootstrap JS và Popper.js (cần thiết cho một số tính năng của Bootstrap) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/js1.js"></script>
     </body>
 </html>
