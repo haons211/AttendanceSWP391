@@ -28,7 +28,7 @@
                 <div class="user-info">
                     <p>thuy vy</p>
                     <img src="assets/img/avatar.jpg" alt="Avatar">
-                    <a href="#">Logout</a>
+                    <a href="/Login">Logout</a>
                 </div>
                 <!-- </div> -->
             </div>
@@ -40,7 +40,7 @@
             <aside class="col-lg-2 col-md-3">
                 <ul class="nav flex-column">
                     <li class="nav-item"><a id="attendance" class="nav-link" href="#">Điểm danh</a></li>
-                    <li class="nav-item"><a id="profile" class="nav-link" href="#">Thông tin cá nhân</a></li>
+                    <li class="nav-item"><a id="profile" class="nav-link" href="profile">Thông tin cá nhân</a></li>
                     <li class="nav-item"><a id="application"class="nav-link" href="#">Viết đơn</a></li>
                     <li class="nav-item"><a id="showapplication"class="nav-link" href="#">Xem các đơn đã gửi</a></li>
                     <li class="nav-item"><a id="Nofitication"class="nav-link" href="#">Thông báo</a></li>

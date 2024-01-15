@@ -115,7 +115,7 @@
                             <a class="dropdown-item" href="profile.html">My Profile</a>
                             <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                             <a class="dropdown-item" href="settings.html">Settings</a>
-                            <a class="dropdown-item" href="login.html">Logout</a>
+                            <a class="dropdown-item" href="Login">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -138,7 +138,7 @@
                                 <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+                                <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                             </li>
                             <li class="submenu">
                                 <a href="#"><i class="fa fa-user"></i> <span> Employees </span></a>

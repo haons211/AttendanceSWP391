@@ -56,7 +56,7 @@
                         <section class="main-content text">
                             <h1>Deparment</h1>
                             <button type="button" class="btn btn-success" style="margin: 10px 0 ;">
-                                <a style="text-decoration: none" href="addDep">Add new Department</a>
+                                <a style="color: #ffffff ; text-decoration: none " href="addDep">Add new Department</a>
                             </button>
                         </section>
                         <div class="main">
@@ -91,7 +91,7 @@
                                     <tr style=" border: 1px solid black;" class="table_row">
                                         <td style=" border: 1px solid black;" class="column-1">${o.getDepartment_id()}</td>    
                                         <td style=" border: 1px solid black;" class="column-2">${o.getName()}</td>
-                                        <td>
+                                        <td style=" border: 1px solid black;">
                                             <a href="UpdateDepartment?pid=${o.getDepartment_id()}" class="btn btn-success">Update</a>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             <a href="DeleteDepartment?pid=${o.getDepartment_id()}" class="btn btn-danger" onclick="doDelete('${o.getDepartment_id()}')">Delete</a>

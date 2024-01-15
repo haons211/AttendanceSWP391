@@ -59,4 +59,13 @@
         <servlet-name>DeleteDepartment</servlet-name>
         <url-pattern>/DeleteDepartment</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>In4Employees</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+     <servlet>
+        <servlet-name>In4Employees</servlet-name>
+        <servlet-class>controller.In4Employees</servlet-class>
+    </servlet>
+    
 </web-app>

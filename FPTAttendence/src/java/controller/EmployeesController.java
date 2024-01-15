@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.employeeDAO;
 import models.AccountDTO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.lang.System.Logger;
 import java.util.List;
 
 /**
@@ -67,7 +69,53 @@ public class EmployeesController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       String url = null;
+        String button = request.getParameter("btAction");
+        try {
+            if (button == null) {
+
+            } //Update thong tin nhan vien
+            else if (button.equals("Update")) {
+
+                int accid = Integer.parseInt(request.getParameter("empId"));
+                String name = request.getParameter("empName");
+                String Phone = request.getParameter("empNumber");
+                String email = request.getParameter("empEmail");
+                String address = request.getParameter("empAddress");
+                int gender = Integer.parseInt(request.getParameter("empGender"));
+                boolean genderCheck = false;
+                if (gender == 1) {
+                    genderCheck = false;
+                } else {
+                    genderCheck = true;
+                }
+                String birthdateString = request.getParameter("empBirthdate");
+
+                employeeDAO dao = new employeeDAO();
+
+                boolean checkUpdate = false;
+                checkUpdate = dao.updateIn4Information(accid, name, Phone, email, address, genderCheck, birthdateString);
+                String ms = "";
+                if (checkUpdate == true) {
+                    url = "profile";
+                    ms = "Update Succes";
+                    request.setAttribute("ms", ms);
+                } else {
+                    url = "profile";
+                    ms = "Update Failed";
+                    request.setAttribute("ms", ms);
+                }
+
+            } // sang tab thay doi thong tin nhan vien
+            else if (button.equals("Update Information")) {
+                url = "updateIn4mationUser.jsp";
+            }
+        } catch (Exception ex) {
+            
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 }
     /** 
