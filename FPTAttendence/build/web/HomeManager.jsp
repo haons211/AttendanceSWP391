@@ -162,7 +162,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg1"><i class="fa fa-home" aria-hidden="true"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>${numberOfDepartments}</h3>
+                                    <h3>${numberDepartments}</h3>
                                     <span class="widget-title1">Departments <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>${numberOfEmployees}</h3>
+                                    <h3>${numberEmployees}</h3>
                                     <span class="widget-title2">Employees <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>

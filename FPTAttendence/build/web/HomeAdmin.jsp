@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,7 +163,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg1"><i class="fa fa-home" aria-hidden="true"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>${numberOfDepartments}</h3>
+                                    <h3>${numberDepartments}</h3>
                                     <span class="widget-title1">Departments <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -171,7 +172,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>${numberOfEmployees}</h3>
+                                    <h3>${numberEmployees}</h3>
                                     <span class="widget-title2">Employees <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -200,83 +201,28 @@
                     <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline-block">Departments</h4> <a href="appointments.html" class="btn btn-primary float-right">View all</a>
+                                <h4 class="card-title d-inline-block">Departments</h4> <a href="department" class="btn btn-primary float-right">View all</a>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
                                     <table class="table mb-0">
-                                        <thead class="d-none">
+                                        <thead class="title-list-department">
                                             <tr>
                                                 <th>Department Code</th>
                                                 <th>Department Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
+                                            <c:forEach items="${listDepartment}" var="o">
+                                                <tr>
+                                                    <td style="min-width: 200px;">   
+                                                        <h2>${o.department_id}</h2>
+                                                    </td>                 
+                                                    <td>
+                                                        <h5 class="time-title p-0">${o.name}</h5>                                                   
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -368,48 +314,46 @@
                     <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline-block">New Employees </h4> <a href="patients.html" class="btn btn-primary float-right">View all</a>
+                                <h4 class="card-title d-inline-block">New Employees </h4> <a href="employee" class="btn btn-primary float-right">View all</a>
                             </div>
                             <div class="card-block">
                                 <div class="table-responsive">
                                     <table class="table mb-0 new-patient-table">
+                                        <thead class="title-list-department">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Phone Number</th>
+                                                <th>Gender</th>
+                                                <th>Hire Date</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>John Doe</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88c2e7e0e6ece7edbab9c8efe5e9e1e4a6ebe7e5">[email&#160;protected]</a></td>
-                                                <td>+1-202-555-0125</td>
-                                                <td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>Richard</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="26744f454e475442171415665f474e49490845494b">[email&#160;protected]</a></td>
-                                                <td>202-555-0127</td>
-                                                <td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>Villiam</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2e0dbd1dad3c0d6838081f2cbd3dadddd9cd1dddf">[email&#160;protected]</a></td>
-                                                <td>+1-202-555-0106</td>
-                                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>Martin</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0f2c9c3c8c1d2c4919293e0d9c1c8cfcf8ec3cfcd">[email&#160;protected]</a></td>
-                                                <td>776-2323 89562015</td>
-                                                <td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
-                                            </tr>
+                                            <c:forEach items="${listTop5Employee}" var="a">
+                                                <tr>
+                                                    <td>
+                                                        <img width="28" height="28" class="rounded-circle" src="${a.image}" alt=""> 
+                                                        <h2>${a.name}</h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>${a.email}</h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>${a.phoneNumber}</h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>
+                                                            <c:choose>
+                                                                <c:when test="${a.gender eq 'true'}">Male</c:when>
+                                                                <c:when test="${a.gender eq 'false'}">Female</c:when>
+                                                            </c:choose>
+                                                        </h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>${a.hire_date}</h2>   
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

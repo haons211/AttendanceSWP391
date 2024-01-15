@@ -7,6 +7,10 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import models.department;
+import models.employee;
 
 /**
  *
@@ -66,5 +70,45 @@ public class DashboardDAO {
             // Xử lý các ngoại lệ (exception) nếu có
         }
         return numberOfEmployees;
+    }
+
+    public List<department> getAllDepartment() {
+        List<department> list = new ArrayList<>();
+        String query = "select * from department";
+        try {
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new department(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<employee> getTop5Employee() {
+        List<employee> list = new ArrayList<>();
+        String query = "SELECT * FROM employee LIMIT 5;";
+        try {
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new employee(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getString(7),
+                        rs.getDate(8),
+                        rs.getDate(9),
+                        rs.getInt(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 }

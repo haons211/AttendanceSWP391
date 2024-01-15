@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import models.department;
+import models.employee;
 
 /**
  *
@@ -30,10 +33,15 @@ public class DashboardControler extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         DashboardDAO dao = new DashboardDAO();
-        int numberOfDepartments = dao.getNumberOfDepartments();
-        int numberOfEmployees = dao.getNumberOfEmployees();
-        request.setAttribute("numberOfDepartments", numberOfDepartments);
-        request.setAttribute("numberOfEmployees", numberOfEmployees);
+        int numberDepartments = dao.getNumberOfDepartments();
+        int numberEmployees = dao.getNumberOfEmployees();
+        List<department> listDepartment = dao.getAllDepartment();
+        List<employee> listTop5Employee = dao.getTop5Employee();
+        
+        request.setAttribute("numberDepartments", numberDepartments);
+        request.setAttribute("numberEmployees", numberEmployees);
+        request.setAttribute("listDepartment", listDepartment);
+        request.setAttribute("listTop5Employee", listTop5Employee);
         request.getRequestDispatcher("HomeAdmin.jsp").forward(request, response);
     }
 
