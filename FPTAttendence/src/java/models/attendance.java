@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author andep
  */
-public class attendance {
+public class Attendance {
 
     int attendance_id;
     int employee_id;
@@ -24,10 +24,10 @@ public class attendance {
     int remainDay_id;
     int department_id;
 
-    public attendance() {
+    public Attendance() {
     }
 
-    public attendance(int attendance_id, int employee_id, Date in_time, Date out_time, String notes, String image, String status, String in_status, String out_status, int remainDay_id, int department_id) {
+    public Attendance(int attendance_id, int employee_id, Date in_time, Date out_time, String notes, String image, String status, String in_status, String out_status, int remainDay_id, int department_id) {
         this.attendance_id = attendance_id;
         this.employee_id = employee_id;
         this.in_time = in_time;

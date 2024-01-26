@@ -9,10 +9,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-import models.department;
-import models.employee;
+import models.AccountDTO;
+import models.Department;
+import models.Employee;
 
 /**
  *
@@ -35,13 +37,22 @@ public class DashboardControler extends HttpServlet {
         DashboardDAO dao = new DashboardDAO();
         int numberDepartments = dao.getNumberOfDepartments();
         int numberEmployees = dao.getNumberOfEmployees();
-        List<department> listDepartment = dao.getAllDepartment();
-        List<employee> listTop5Employee = dao.getTop5Employee();
+        int numberAttend = dao.getNumberOfAttend();
+        int numberLeave = numberEmployees - numberAttend;
+        List<Department> listDepartment = dao.getTop3Department();
+        List<Employee> listTop5Employee = dao.getTop5Employee();
+        List<Employee> listLeave = dao.getListLeave();
         
+        
+
         request.setAttribute("numberDepartments", numberDepartments);
         request.setAttribute("numberEmployees", numberEmployees);
+        request.setAttribute("numberAttend", numberAttend);
+        request.setAttribute("numberLeave", numberLeave);
         request.setAttribute("listDepartment", listDepartment);
         request.setAttribute("listTop5Employee", listTop5Employee);
+        request.setAttribute("listLeave", listLeave);   
+       
         request.getRequestDispatcher("HomeAdmin.jsp").forward(request, response);
     }
 

@@ -21,8 +21,8 @@
         <div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
-                    <a href="index.html" class="logo">
-                        <img src="assets/img/logo.png" width="35" height="35" alt=""> <span></span>
+                    <a href="dashboard" class="logo">
+                        <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="40" height="40" alt=""/> <span>BeztTech</span>                
                     </a>
                 </div>
                 <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -106,15 +106,15 @@
                     <li class="nav-item dropdown has-arrow">
                         <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                             <span class="user-img">
-                                <img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
+                                <img class="rounded-circle" src="assets/img/user.jpg" width="24">
                                 <span class="status online"></span>
                             </span>
-                            <span>Admin</span>
+                            <span>${sessionScope.employee.name}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile.html">My Profile</a>
-                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                            <a class="dropdown-item" href="settings.html">Settings</a>
+                            <a class="dropdown-item" href="profile">My Profile</a>
+                            <a class="dropdown-item" href="#">Edit Profile</a>
+                            <a class="dropdown-item" href="#">Settings</a>
                             <a class="dropdown-item" href="Login">Logout</a>
                         </div>
                     </li>
@@ -122,10 +122,10 @@
                 <div class="dropdown mobile-user-menu float-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="profile">My Profile</a>
+                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="Login">Logout</a>
                     </div>
                 </div>
             </div>
@@ -134,23 +134,23 @@
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
                             <li class="menu-title">Main</li>
-                            <li class="active">
-                                <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <li>
+                                <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
                                 <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                             </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fa fa-user"></i> <span> Employees </span></a>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fa fa-flag-o"></i> <span> Attendance Report </span> </a>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fa fa-flag-o"></i> <span> Send Application </span> </a>
+                            <li> 
+                                <a href="#"><i class="fa fa-dashboard"></i> <span> Employees </span></a>
                             </li>
                             <li>
-                                <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                                <a href="#"><i class="fa fa-flag-o"></i> <span> Attendance Report </span> </a>
+                            </li>
+                            <li> 
+                                <a href="sendapplication"><i class="fa fa-flag-o"></i> <span> Send Application </span> </a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
                             </li>    
                         </ul>
                     </div>
@@ -181,7 +181,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg3"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>72</h3>
+                                    <h3>${numberAttend}</h3>
                                     <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg4"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>10</h3>
+                                    <h3>${numberLeave}</h3>
                                     <span class="widget-title4">Leaves <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -236,76 +236,24 @@
                             </div>
                             <div class="card-body">
                                 <ul class="contact-list">
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                    <c:forEach items="${listLeave}" var="a">
+                                        <li>
+                                            <div class="contact-cont">
+
+                                                <div class="float-left user-img m-r-10">
+                                                    <a href="#" title=${a.name}><img src=${a.image} alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
+                                                </div>
+                                                <div class="contact-info">
+                                                    <span class="contact-name text-ellipsis">${a.name}</span>
+                                                    <span class="contact-date">${a.email}</span>
+                                                </div>
                                             </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">MBBS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">BMBS</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">MBBS</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MBBS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li> 
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="card-footer text-center bg-white">
-                                <a href="doctors.html" class="text-muted">View attendance report</a>
+                                <a href="#" class="text-muted">View attendance report</a>
                             </div>
                         </div>
                     </div>

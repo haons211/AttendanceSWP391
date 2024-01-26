@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Admin Dashboard</title>
+        <title>Manager Dashboard</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -20,8 +21,8 @@
         <div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
-                    <a href="index.html" class="logo">
-                        <img src="assets/img/logo.png" width="35" height="35" alt=""> <span></span>
+                    <a href="dashboard" class="logo">
+                        <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="40" height="40" alt=""/> <span>BeztTech</span>                
                     </a>
                 </div>
                 <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -105,26 +106,26 @@
                     <li class="nav-item dropdown has-arrow">
                         <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                             <span class="user-img">
-                                <img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
+                                <img class="rounded-circle" src="assets/img/user.jpg" width="24">
                                 <span class="status online"></span>
                             </span>
-                            <span>Admin</span>
+                            <span>${sessionScope.employee.name}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile.html">My Profile</a>
-                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                            <a class="dropdown-item" href="settings.html">Settings</a>
-                            <a class="dropdown-item" href="login.html">Logout</a>
+                            <a class="dropdown-item" href="profile">My Profile</a>
+                            <a class="dropdown-item" href="#">Edit Profile</a>
+                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="Login">Logout</a>
                         </div>
                     </li>
                 </ul>
                 <div class="dropdown mobile-user-menu float-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="profile">My Profile</a>
+                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="Login">Logout</a>
                     </div>
                 </div>
             </div>
@@ -133,23 +134,23 @@
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
                             <li class="menu-title">Main</li>
-                            <li class="active">
-                                <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <li>
+                                <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+                                <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                             </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fa fa-user"></i> <span> Employees </span></a>
+                            <li> 
+                                <a href="#"><i class="fa fa-dashboard"></i> <span> Employees </span></a>
                             </li>
-                            <li class="submenu">
+                            <li>
                                 <a href="#"><i class="fa fa-flag-o"></i> <span> Attendance Report </span> </a>
                             </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fa fa-flag-o"></i> <span> Send Application </span> </a>
+                            <li> 
+                                <a href="sendapplication"><i class="fa fa-flag-o"></i> <span> Send Application </span> </a>
                             </li>
                             <li>
-                                <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                                <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
                             </li>    
                         </ul>
                     </div>
@@ -180,7 +181,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg3"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>72</h3>
+                                    <h3>${numberAttend}</h3>
                                     <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -189,7 +190,7 @@
                             <div class="dash-widget">
                                 <span class="dash-widget-bg4"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></span>
                                 <div class="dash-widget-info text-right">
-                                    <h3>10</h3>
+                                    <h3>${numberLeave}</h3>
                                     <span class="widget-title4">Leaves <i class="fa fa-check" aria-hidden="true"></i></span>
                                 </div>
                             </div>
@@ -200,83 +201,28 @@
                     <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline-block">Departments</h4> <a href="appointments.html" class="btn btn-primary float-right">View all</a>
+                                <h4 class="card-title d-inline-block">Departments</h4> <a href="department" class="btn btn-primary float-right">View all</a>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
                                     <table class="table mb-0">
-                                        <thead class="d-none">
+                                        <thead class="title-list-department">
                                             <tr>
                                                 <th>Department Code</th>
                                                 <th>Department Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="min-width: 200px;">   
-                                                    <h2>123 <span>New York, USA</span></</h2>
-                                                </td>                 
-                                                <td>
-                                                    <h5 class="time-title p-0">456</h5>
-                                                    <p>gdfgdfgd</p>
-                                                </td>
-                                                <td>
-                                                    <h5 class="time-title p-0">fgdgfd</h5>
-                                                    <p>dfgdfgdfgd</p>
-                                                </td>
-                                            </tr>
+                                            <c:forEach items="${listDepartment}" var="o">
+                                                <tr>
+                                                    <td style="min-width: 200px;">   
+                                                        <h2>${o.department_id}</h2>
+                                                    </td>                 
+                                                    <td>
+                                                        <h5 class="time-title p-0">${o.name}</h5>                                                   
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -290,76 +236,24 @@
                             </div>
                             <div class="card-body">
                                 <ul class="contact-list">
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                    <c:forEach items="${listLeave}" var="a">
+                                        <li>
+                                            <div class="contact-cont">
+
+                                                <div class="float-left user-img m-r-10">
+                                                    <a href="#" title=${a.name}><img src=${a.image} alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
+                                                </div>
+                                                <div class="contact-info">
+                                                    <span class="contact-name text-ellipsis">${a.name}</span>
+                                                    <span class="contact-date">${a.email}</span>
+                                                </div>
                                             </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">MBBS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">BMBS</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">MBBS</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MBBS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li> 
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="card-footer text-center bg-white">
-                                <a href="doctors.html" class="text-muted">View attendance report</a>
+                                <a href="#" class="text-muted">View attendance report</a>
                             </div>
                         </div>
                     </div>
@@ -368,48 +262,46 @@
                     <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline-block">New Employees </h4> <a href="patients.html" class="btn btn-primary float-right">View all</a>
+                                <h4 class="card-title d-inline-block">New Employees </h4> <a href="employee" class="btn btn-primary float-right">View all</a>
                             </div>
                             <div class="card-block">
                                 <div class="table-responsive">
                                     <table class="table mb-0 new-patient-table">
+                                        <thead class="title-list-department">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Phone Number</th>
+                                                <th>Gender</th>
+                                                <th>Hire Date</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>John Doe</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88c2e7e0e6ece7edbab9c8efe5e9e1e4a6ebe7e5">[email&#160;protected]</a></td>
-                                                <td>+1-202-555-0125</td>
-                                                <td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>Richard</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="26744f454e475442171415665f474e49490845494b">[email&#160;protected]</a></td>
-                                                <td>202-555-0127</td>
-                                                <td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>Villiam</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2e0dbd1dad3c0d6838081f2cbd3dadddd9cd1dddf">[email&#160;protected]</a></td>
-                                                <td>+1-202-555-0106</td>
-                                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-                                                    <h2>Martin</h2>
-                                                </td>
-                                                <td><a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0f2c9c3c8c1d2c4919293e0d9c1c8cfcf8ec3cfcd">[email&#160;protected]</a></td>
-                                                <td>776-2323 89562015</td>
-                                                <td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
-                                            </tr>
+                                            <c:forEach items="${listTop5Employee}" var="a">
+                                                <tr>
+                                                    <td>
+                                                        <img width="28" height="28" class="rounded-circle" src="${a.image}" alt=""> 
+                                                        <h2>${a.name}</h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>${a.email}</h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>${a.phoneNumber}</h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>
+                                                            <c:choose>
+                                                                <c:when test="${a.gender eq 'true'}">Male</c:when>
+                                                                <c:when test="${a.gender eq 'false'}">Female</c:when>
+                                                            </c:choose>
+                                                        </h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2>${a.hire_date}</h2>   
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

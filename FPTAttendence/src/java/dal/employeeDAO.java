@@ -8,13 +8,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import models.employee;
+import models.Employee;
 
 /**
  *
  * @author NCM
  */
-public class employeeDAO {
+public class EmployeeDAO {
 
     public boolean updateIn4Information(int accid, String name, String phone, String email, String address, boolean gender, String birthdate) throws Exception {
         Connection con = null;
@@ -51,11 +51,11 @@ public class employeeDAO {
         return false;
     }
 
-    public employee getin4(int userId) throws SQLException, ClassNotFoundException {
+    public Employee getin4(int userId) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        employee em = null;
+        Employee em = null;
 
         try {
             // Kết nối cơ sở dữ liệu
@@ -75,7 +75,7 @@ public class employeeDAO {
                 if (rs.next()) {
                     // Lấy dữ liệu từ ResultSet và tạo đối tượng Student
 
-                    em = new employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getDate(8), rs.getDate(9), rs.getInt(10));
+                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getDate(8), rs.getDate(9), rs.getInt(10));
                     return em;
                 }
             }

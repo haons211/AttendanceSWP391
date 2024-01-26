@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author andep
  */
-public class employee {
+public class Employee {
     int employee_id;
     String name;
     String phoneNumber;
@@ -22,10 +22,10 @@ public class employee {
     Date hire_date;
     int user_id;
 
-    public employee() {
+    public Employee() {
     }
 
-    public employee(int employee_id, String name, String phoneNumber, String address, String email, boolean gender, String image, Date birth_date, Date hire_date, int user_id) {
+    public Employee(int employee_id, String name, String phoneNumber, String address, String email, boolean gender, String image, Date birth_date, Date hire_date, int user_id) {
         this.employee_id = employee_id;
         this.name = name;
         this.phoneNumber = phoneNumber;

@@ -8,14 +8,14 @@ package models;
  *
  * @author andep
  */
-public class department {
+public class Department {
     int department_id;
     String name;
 
-    public department() {
+    public Department() {
     }
 
-    public department(int department_id, String name) {
+    public Department(int department_id, String name) {
         this.department_id = department_id;
         this.name = name;
     }
