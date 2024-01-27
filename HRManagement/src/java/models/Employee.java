@@ -4,23 +4,24 @@
  */
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
- * @author andep
+ * @author Dan
  */
 public class Employee {
-    int employee_id;
-    String name;
-    String phoneNumber;
-    String address;
-    String email;
-    boolean gender;
-    String image;
-    Date birth_date;
-    Date hire_date;
-    int user_id;
+
+    private int employee_id;
+    private String name;
+    private String phoneNumber;
+    private String address;
+    private String email;
+    private boolean gender;
+    private String image;
+    private Date birth_date;
+    private Date hire_date;
+    private int user_id;
 
     public Employee() {
     }
@@ -36,6 +37,17 @@ public class Employee {
         this.birth_date = birth_date;
         this.hire_date = hire_date;
         this.user_id = user_id;
+    }
+
+    public Employee(String name, String phoneNumber, String address, String email, boolean gender, String image, Date birth_date, Date hire_date) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.gender = gender;
+        this.image = image;
+        this.birth_date = birth_date;
+        this.hire_date = hire_date;
     }
 
     public int getEmployee_id() {
@@ -118,9 +130,4 @@ public class Employee {
         this.user_id = user_id;
     }
 
-    @Override
-    public String toString() {
-        return "Employees{" + "employee_id=" + employee_id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", address=" + address + ", email=" + email + ", gender=" + gender + ", image=" + image + ", birth_date=" + birth_date + ", hire_date=" + hire_date + ", user_id=" + user_id + '}';
-    }
-    
 }
