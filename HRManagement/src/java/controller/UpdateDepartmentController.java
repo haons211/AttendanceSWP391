@@ -5,6 +5,7 @@
 package controller;
 
 import dal.DepartmentDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +38,7 @@ public class UpdateDepartmentController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet updateDep</title>");            
+            out.println("<title>Servlet updateDep</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet updateDep at " + request.getContextPath() + "</h1>");
@@ -62,8 +63,13 @@ public class UpdateDepartmentController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("pid"));
         Department p = d.getDepartmentById(id);
         request.setAttribute("p", p);
+        // Trong phương thức doGet hoặc doGet
+        String successMessage = (String) request.getSession().getAttribute("successMessage");
+        if (successMessage != null) {
+            request.getSession().removeAttribute("successMessage"); // Xóa thông điệp sau khi sử dụng
+            request.setAttribute("successMessage", successMessage);
+        }
         request.getRequestDispatcher("UpdateDepartment.jsp").forward(request, response);
-    
     }
 
     /**
@@ -74,20 +80,43 @@ public class UpdateDepartmentController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       HttpSession session = request.getSession();
-        String id = request.getParameter("departmentID");
-        String name = request.getParameter("departmentName");
-        DepartmentDAO dao = new DepartmentDAO();
-        // Update department
-        String ms = dao.updateDepartment(Integer.parseInt(id), name);
-        request.setAttribute("p", dao.getDepartmentById(Integer.parseInt(id)));
-        session.setAttribute("ms", ms);
-        response.sendRedirect("UpdateDepartment?pid="+id);
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    String departmentIDString = request.getParameter("departmentID");
+    String departmentCode = request.getParameter("departmentCode");
+    String departmentName = request.getParameter("departmentName");
+    DepartmentDAO dao = new DepartmentDAO();
 
+    try {
+        int departmentID = Integer.parseInt(departmentIDString);
+        if (!dao.isDepartmentCodeExists(departmentCode, departmentID)) {
+            dao.updateDepartment(departmentID, departmentName, departmentCode);
+            request.getSession().setAttribute("successMessage", "Department updated successfully");
+            request.getSession().setAttribute("departmentID", departmentID);
+            request.getSession().setAttribute("departmentCode", departmentCode);
+            request.getSession().setAttribute("departmentName", departmentName);
+
+            // Check and remove errorMessage from session
+            Object errorMessage = request.getSession().getAttribute("errorMessage");
+            if (errorMessage != null) {
+                request.getSession().removeAttribute("errorMessage");
+            }
+        } else {
+            // Set the error message attribute
+            request.getSession().setAttribute("errorMessage", "Department with Code " + departmentCode + " already exists. Please enter a different Code.");
+        }
+
+        // Redirect to the update page with the departmentID parameter
+        response.sendRedirect("UpdateDepartment?pid=" + departmentID);
+    } catch (NumberFormatException | IOException e) {
+        request.getSession().setAttribute("errorMessage", "Error updating department");
+
+        // Redirect to the update page with the departmentID parameter
+        response.sendRedirect("UpdateDepartment?pid=" + departmentIDString);
     }
+}
+
 
     /**
      * Returns a short description of the servlet.

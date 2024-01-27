@@ -9,15 +9,18 @@ package models;
  * @author andep
  */
 public class Department {
+
     int department_id;
     String name;
+    String dep_code;
 
     public Department() {
     }
 
-    public Department(int department_id, String name) {
+    public Department(int department_id, String name, String dep_code) {
         this.department_id = department_id;
         this.name = name;
+        this.dep_code = dep_code;
     }
 
     public int getDepartment_id() {
@@ -36,10 +39,18 @@ public class Department {
         this.name = name;
     }
 
+    public String getDep_code() {
+        return dep_code;
+    }
+
+    public void setDep_code(String dep_code) {
+        this.dep_code = dep_code;
+    }
+
     @Override
     public String toString() {
-        return "Departments{" + "department_id=" + department_id + ", name=" + name + '}';
+        return "Department{" + "department_id=" + department_id + ", name=" + name + ", dep_code=" + dep_code + '}';
     }
-    
+
     
 }

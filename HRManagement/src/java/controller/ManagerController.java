@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.DashboardDAO;
 import models.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import models.Department;
+import models.Employee;
 
 /**
  *
@@ -37,6 +41,24 @@ public class ManagerController extends HttpServlet {
             if (acc == null) {
                 out.println("Access denied!");
             } else {
+                DashboardDAO dao = new DashboardDAO();
+        int numberDepartments = dao.getNumberOfDepartments();
+        int numberEmployees = dao.getNumberOfEmployees();
+        int numberAttend = dao.getNumberOfAttend();
+        int numberLeave = numberEmployees - numberAttend;
+        List<Department> listDepartment = dao.getTop3Department();
+        List<Employee> listTop5Employee = dao.getTop5Employee();
+        List<Employee> listLeave = dao.getListLeave();
+        
+        
+
+        request.setAttribute("numberDepartments", numberDepartments);
+        request.setAttribute("numberEmployees", numberEmployees);
+        request.setAttribute("numberAttend", numberAttend);
+        request.setAttribute("numberLeave", numberLeave);
+        request.setAttribute("listDepartment", listDepartment);
+        request.setAttribute("listTop5Employee", listTop5Employee);
+        request.setAttribute("listLeave", listLeave); 
                 request.getRequestDispatcher("HomeManager.jsp").forward(request, response);
             }
         }
