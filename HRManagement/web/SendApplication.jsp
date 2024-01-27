@@ -178,7 +178,7 @@
                                 <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                             </li>
                             <li class="submenu">
-                                <a href="#"><i class="fa fa-user"></i> <span> Employees </span></a>
+                                <a href="employee"><i class="fa fa-user"></i> <span> Employees </span></a>
                             </li>
                             <li class="submenu">
                                 <a href="#"><i class="fa fa-flag-o"></i> <span> Attendance Report </span> </a>

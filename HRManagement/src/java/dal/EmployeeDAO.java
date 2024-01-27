@@ -5,44 +5,51 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import models.Employee;
+
 
 /**
  *
  * @author NCM
  */
 public class EmployeeDAO {
+     Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
 
     public boolean updateIn4Information(int accid, String name, String phone, String email, String address, boolean gender, String birthdate) throws Exception {
-        Connection con = null;
-        PreparedStatement stm = null;
+       
+      
 
         try {
             con = new dal.DBContext().getConnection();
             if (con != null) {
                 // Tạo truy vấn SQL để cập nhật thông tin sinh viên
                 String sql = "UPDATE employee SET name = ?, phoneNumber = ?, email = ?, address = ?, gender = ?, birth_date = ? WHERE user_id=?";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, name);
-                stm.setString(2, phone);
-                stm.setString(3, email);
-                stm.setString(4, address);
-                stm.setBoolean(5, gender);
-                stm.setString(6, birthdate);
-                stm.setInt(7, accid);
+                ps = con.prepareStatement(sql);
+                ps.setString(1, name);
+                ps.setString(2, phone);
+                ps.setString(3, email);
+                ps.setString(4, address);
+                ps.setBoolean(5, gender);
+                ps.setString(6, birthdate);
+                ps.setInt(7, accid);
 
                 // Thực hiện truy vấn cập nhật
-                int row = stm.executeUpdate();
+                int row = ps.executeUpdate();
                 if (row > 0) {
                     return true;
                 }
             }
         } finally {
-            if (stm != null) {
-                stm.close();
+            if (ps != null) {
+                ps.close();
             }
             if (con != null) {
                 con.close();
@@ -52,9 +59,8 @@ public class EmployeeDAO {
     }
 
     public Employee getin4(int userId) throws SQLException, ClassNotFoundException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
+       
+      
         Employee em = null;
 
         try {
@@ -65,11 +71,11 @@ public class EmployeeDAO {
                 String sql = "select e.* from users u join employee e on u.user_id=e.user_id where u.user_id=? ";
 
                 // Tạo statement và thiết lập tham số
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, userId);
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, userId);
 
                 // Thực hiện câu truy vấn
-                rs = stm.executeQuery();
+                rs = ps.executeQuery();
 
                 // Xử lý kết quả
                 if (rs.next()) {
@@ -86,8 +92,8 @@ public class EmployeeDAO {
             if (rs != null) {
                 rs.close();
             }
-            if (stm != null) {
-                stm.close();
+            if (ps != null) {
+                ps.close();
             }
             if (con != null) {
                 con.close();
@@ -96,5 +102,172 @@ public class EmployeeDAO {
 
         return null;
     }
+    public void addEmployee(String name,
+            String phoneNumber,
+            String address,
+            String email,
+            Boolean gender,
+            String image,
+            Date birthDate,
+            Date hireDate) throws SQLException {
+         String query   = "INSERT INTO employee "
+                    + "(name, phoneNumber, address, email, gender, image, birth_date, hire_date) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+       try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, phoneNumber);
+            ps.setString(3, address);
+            ps.setString(4, email);
+            ps.setBoolean(5, gender);
+            ps.setString(6, image);
+            ps.setDate(7, (java.sql.Date) birthDate);
+            ps.setDate(8, (java.sql.Date) hireDate);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        
+    }
+
+    
+
+    public Employee getEmployeeById(int id) throws ClassNotFoundException {
+        String query = "SELECT * FROM employee WHERE employee_id = ?";
+        Employee employee = null;
+        try {
+           con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+             rs = ps.executeQuery();
+            if (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String name = rs.getString("name");
+                String phoneNumber = rs.getString("phoneNumber");
+                String address = rs.getString("address");
+                String email = rs.getString("email");
+                boolean gender = rs.getBoolean("gender");
+                String image = rs.getString("image");
+                Date birthDate = rs.getDate("birth_date");
+                Date hireDate = rs.getDate("hire_date");
+                int userId = rs.getInt("user_id");
+
+                employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return employee;
+    }
+
+    public void updateEmployee(Employee e, int id) throws ClassNotFoundException {
+        String query = "UPDATE `swp`.`employee`\n"
+                + "SET\n"
+                + "\n"
+                + "`name` = ?,\n"
+                + "`phoneNumber` =?,\n"
+                + "`address` = ?,\n"
+                + "`email` = ?,\n"
+                + "`gender` = ?,\n"
+                + "`image` = ?,\n"
+                + "`birth_date` = ?,\n"
+                + "`hire_date` =?\n"
+                + "WHERE `employee_id` = ?";
+        try {
+           con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, e.getName());
+            ps.setString(2, e.getPhoneNumber());
+            ps.setString(3, e.getAddress());
+            ps.setString(4, e.getEmail());
+            ps.setBoolean(5, e.isGender());
+            ps.setString(6, e.toString());
+            ps.setDate(7, e.getBirth_date());
+            ps.setDate(8, e.getHire_date());
+            ps.setInt(9, id);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+    }
+
+    public void deleteEmployee(int id) throws ClassNotFoundException {
+        String query = "  DELETE FROM employee WHERE employee_id =?";
+        try {
+            
+           con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+    }
+
+    public List<Employee> getAllEmployees(String search) throws ClassNotFoundException {
+        List<Employee> list = new ArrayList<>();
+        String query = "SELECT * FROM employee WHERE name LIKE ? ORDER BY employee_id ASC";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, "%" + search + "%");
+             rs = ps.executeQuery();
+            while (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String name = rs.getString("name");
+                String phoneNumber = rs.getString("phoneNumber");
+                String address = rs.getString("address");
+                String email = rs.getString("email");
+                boolean gender = rs.getBoolean("gender");
+                String image = rs.getString("image");
+                Date birthDate = rs.getDate("birth_date");
+                Date hireDate = rs.getDate("hire_date");
+                int userId = rs.getInt("user_id");
+
+                Employee employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
+                list.add(employee);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return list;
+    }
+    private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 
 }

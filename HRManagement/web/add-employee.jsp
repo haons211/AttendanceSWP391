@@ -1,10 +1,6 @@
-<%-- 
-    Document   : department
-    Created on : Jan 14, 2024, 10:53:39 AM
-    Author     : ThuyVy
---%>
 
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,19 +9,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Departments</title>
+        <title>Add Department</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/employeecss.css">
     </head>
 
     <body>
         <div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
-                    <a href="dashboard" class="logo">
-                        <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="40" height="40" alt=""/> <span>BeztTech</span>
+                    <a href="index.html" class="logo">
+                        <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="35" height="35" alt=""> <span>Preclinic</span>
                     </a>
                 </div>
                 <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -110,23 +107,23 @@
                         <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                             <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
                                 <span class="status online"></span></span>
-                            <span>${sessionScope.employee.name}</span>
+                            <span>Admin</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile">My Profile</a>
-                            <a class="dropdown-item" href="#">Edit Profile</a>
-                            <a class="dropdown-item" href="#">Settings</a>
-                            <a class="dropdown-item" href="Login">Logout</a>
+                            <a class="dropdown-item" href="profile.html">My Profile</a>
+                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                            <a class="dropdown-item" href="settings.html">Settings</a>
+                            <a class="dropdown-item" href="login.html">Logout</a>
                         </div>
                     </li>
                 </ul>
                 <div class="dropdown mobile-user-menu float-right">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="#">Edit Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="Login">Logout</a>
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                        <a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="login.html">Logout</a>
                     </div>
                 </div>
             </div>
@@ -160,64 +157,162 @@
             <div class="page-wrapper">
                 <div class="content">
                     <div class="row">
-                        <div class="col-sm-5 col-5">
-                            <h4 class="page-title">Departments</h4>
+                        <div class="col-sm-5 col-5"     >
+                            <h4 class="page-title" >Add Department</h4>
                         </div>
-                        <div class="col-sm-7 col-7 text-right m-b-30">
-                            <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Department</a>
-                        </div>
-                    </div>
-                     <div class="main-option">
-                               
-                                <div class="main-option-search">
-                                    <nav class="navbar navbar-light bg-light justify-content-between">
 
-                                        <form action="department" method="get" class="form-inline">
-                                            <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
-                                                   aria-label="Search" style="height: 30px;" >
-                                            <button class="btn btn-outline-success my-2 my-sm-0"
-                                                    type="submit" style="height: 30px;">Search</button>
-                                        </form>
-                                    </nav>
-                                </div>
+                        <div class="main">
+                            <a href="employee">
+                                <button type="button" class="btn btn-secondary" style="margin: 10px 0 ;">Back</button>
+                            </a>
 
-                            </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped custom-table mb-0 datatable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Department Name</th>
-                                            <th>Status</th>
-                                            <th class="text-right">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="o" items="${requestScope.list}">
-                                            <tr class="table_row">
-                                                <td  class="column-1">${o.getDepartment_id()}</td>    
-                                                <td  class="column-2">${o.getName()}</td>
-                                                <td><span class="custom-badge status-green">Active</span></td>
-                                                <td class="text-right">
-                                                    <div class="dropdown dropdown-action">
-                                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="UpdateDepartment?pid=${o.getDepartment_id()}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                            <a class="dropdown-item" href="DeleteDepartment?pid=${o.getDepartment_id()}" data-toggle="modal" data-target="#delete_department"  onclick="doDelete('${o.getDepartment_id()}')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                            <form action="add-employee" method="post">
+                                <div class="main-text-table">
+                                    <table>
+   
+                                            <tr >
+                                                <td >
+                                                    Employee Name
+                                                </td>
+                                                <td>
+                                                    <div class = "left-input-table" >
+                                                        <div class="input-group input-group-sm mb-3" >
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" aria-label="Small"
+                                                                   aria-describedby="inputGroup-sizing-sm" name="name" style="width: 300px;">
                                                         </div>
                                                     </div>
                                                 </td>
+                                                <td>
+                                                    <div  class = "right-text-table" >
+                                                        Employee Image
+                                                    </div>
 
+                                                </td>
+                                                <td>
+                                                    <div class ="right-input-table" style= "width: 250px" >
+                                                        <input type="file" id="fileInput" onchange="handleFileSelection()"  
+                                                               name="image" class="btn btn-outline-secondary"
+                                                               style="margin:  0 30px; " name="image" >
+                                                    </div>
+                                                </td>
                                             </tr>
-                                        </c:forEach>
+                                        
+                                        <tr >
+                                            <td>Phone Number</td>
+                                            <td>
+                                                <div class = "left-input-table"  >
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-label="Small"
+                                                               aria-describedby="inputGroup-sizing-sm" name="phoneNumber"  >
+                                                    </div>
+                                                </div>
+                                            <td>
+                                                <div class = "right-text-table">
+                                                    Address
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class ="right-input-table" style="margin-left: 40px">
 
-                                    </tbody>
-                                </table>
-                            </div>
+
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-label="Small"
+                                                               aria-describedby="inputGroup-sizing-sm" name="address" style="width: 312px;">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr  >
+                                            <td>Email</td>
+                                            <td>
+                                                <div class = "left-input-table">
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-label="Small"
+                                                               aria-describedby="inputGroup-sizing-sm" name="email" style="width: 300px;">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td> 
+                                                <div class="right-text-table" >
+                                                    Gender
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class = "right-input-table" style="margin-left: 60px" >
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                           id="flexRadioDefault1" value = "male" >
+
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Male
+                                                    </label>
+
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                           id="flexRadioDefault1" value = "female"style="margin-left: 20px"  >
+
+                                                    <label class="form-check-label" for="flexRadioDefault1" style="margin-left: 40px">
+                                                        Female
+                                                    </label>
+                                                </div>
+
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Birth Date</td>
+                                            <td>
+                                                <div class = "left-input-table">
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <input type="date" class="form-control" aria-label="Small"
+                                                               aria-describedby="inputGroup-sizing-sm" name="birthDate" style="width: 300px;">
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="right-text-table">
+                                                    Hire Date        
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class = "right-input-table" style="margin-left: 40px" >
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <input type="date" class="form-control" aria-label="Small"
+                                                               aria-describedby="inputGroup-sizing-sm" name="hireDate" style="width: 300px;">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="add-to-system">
+                                        <button type="submit" class="btn btn-success" style="margin-top: 30px" >Add to
+                                            system</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
                         </div>
                     </div>
+
                 </div>
                 <div class="notification-box">
                     <div class="msg-sidebar notifications msg-noti">
@@ -429,19 +524,6 @@
                     </div>
                 </div>
             </div>
-<!--            		<div id="delete_department" class="modal fade delete-modal" role="dialog">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                    <div class="modal-body text-center">
-                                                            <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                                            <h3>Are you sure want to delete this Department?</h3>
-                                                            <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                    </div>
-                            </div>-->
         </div>
         <div class="sidebar-overlay" data-reff=""></div>
         <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -451,13 +533,7 @@
         <script src="assets/js/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
-        <script type="text/javascript">
-                                                                function doDelete(id) {
-                                                                    if (confirm("Are you sure to delete Department_ID = " + id)) {
-                                                                        window.location = "DeleteDepartment?pid=" + id;
-                                                                    }
-                                                                }
-        </script>
+        <script src="main.js"></script>
     </body>
 
 </html>
