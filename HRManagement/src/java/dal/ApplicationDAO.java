@@ -4,19 +4,19 @@
  */
 package dal;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.AccountDTO;
 import models.Application;
 import models.ApplicationDTO;
 import models.ManagerDTO;
 import models.TypeApplication;
-
 
 /**
  *
@@ -57,42 +57,42 @@ public class ApplicationDAO extends DBContext {
         } catch (Exception e) {
             System.out.println(e);
         }
-    } 
+    }
+
     public int GetEmployeeIDbyUserID(AccountDTO accountDto0) {
 
-    int employeeId = -1;
-    String sql = "SELECT employee_id FROM employee WHERE user_id = ?";
-    Connection con = null;
-    try {
-        con = super.getConnection();
-        PreparedStatement st = con.prepareStatement(sql);
-        st.setInt(1, accountDto0.getUserID());
-        ResultSet rs = st.executeQuery();
-        if (rs.next()) {
-            employeeId = rs.getInt("employee_id");              
-        }
-    } catch (Exception e) {
-        System.out.println(e);
-        throw new RuntimeException("Error when getting employee ID", e);
-    } finally {
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+        int employeeId = -1;
+        String sql = "SELECT employee_id FROM employee WHERE user_id = ?";
+        Connection con = null;
+        try {
+            con = super.getConnection();
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, accountDto0.getUserID());
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                employeeId = rs.getInt("employee_id");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new RuntimeException("Error when getting employee ID", e);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        return employeeId;
     }
-    return employeeId;
-}
-public List<ManagerDTO> GetAllManagers() {
+
+    public List<ManagerDTO> GetAllManagers() {
         List<ManagerDTO> list = new ArrayList<>();
         String sql = "select * from employee e join users u on e.user_id=u.user_id where role_id=3";
-        try (Connection con = super.getConnection(); 
-             PreparedStatement st = con.prepareStatement(sql); 
-             ResultSet rs = st.executeQuery()) {
+        try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
-                ManagerDTO d= new ManagerDTO(rs.getInt("employee_id"), rs.getString("name"), rs.getInt("role_id"));
+                ManagerDTO d = new ManagerDTO(rs.getInt("employee_id"), rs.getString("name"), rs.getInt("role_id"));
                 list.add(d);
             }
         } catch (SQLException e) {
@@ -102,26 +102,42 @@ public List<ManagerDTO> GetAllManagers() {
         }
         return list;
     }
-public List<ApplicationDTO> getAllApplication() {
-        List<ApplicationDTO> list = new ArrayList<>();
-        String sql = "select * from application a join type_application t on a.type_id=t.type_id;";
-        try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
-            while (rs.next()) {
-                ApplicationDTO app = new ApplicationDTO();
-                app.setType_name(rs.getString("name"));
-                app.setReason(rs.getString("reason"));
-                app.setCreate_date(rs.getDate("create_date"));
-                app.setFile(rs.getString("file"));
-                app.setStatus(rs.getString("status"));
-                app.setComplete_date(rs.getDate("complete_date"));
 
-                list.add(app);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+   public List<ApplicationDTO> getAllApplicationbySenderId(int sender_id) {
+    List<ApplicationDTO> list = new ArrayList<>();
+    String sql = "SELECT * FROM application a JOIN type_application t ON a.type_id = t.type_id WHERE sender_id=?";
+    Connection con = null;
+    try {
+        con = super.getConnection();
+            PreparedStatement st = con.prepareStatement(sql);
+        st.setInt(1, sender_id);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            ApplicationDTO app = new ApplicationDTO();
+            app.setType_name(rs.getString("name"));
+            app.setReason(rs.getString("reason"));
+            app.setCreate_date(rs.getDate("create_date"));
+            app.setFile(rs.getString("file"));
+            app.setStatus(rs.getString("status"));
+            app.setComplete_date(rs.getDate("complete_date"));
+            list.add(app);
         }
-        return list;
+    } catch (SQLException e) {
+        System.out.println(e);
+        throw new RuntimeException("Error when getting all applications by sender ID", e);
+    }   catch (ClassNotFoundException ex) {
+            Logger.getLogger(ApplicationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
+    return list;
+}
 
 
 
