@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Employee;
@@ -66,6 +68,21 @@ public class LoginController extends HttpServlet {
         request.getRequestDispatcher(url).forward(request, response);
     }
 
+    public static String hashPasswordMD5(String password) throws NoSuchAlgorithmException {
+        // Tạo đối tượng MessageDigest với thuật toán MD5
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        // Cập nhật dữ liệu đầu vào
+        md.update(password.getBytes());
+        // Nhận giá trị băm dưới dạng mảng byte
+        byte[] mdBytes = md.digest();
+        // Chuyển đổi mảng byte thành chuỗi hex
+        StringBuilder hexString = new StringBuilder();
+        for (byte mdByte : mdBytes) {
+            hexString.append(String.format("%02x", mdByte));
+        }
+        return hexString.toString();
+    }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -82,21 +99,23 @@ public class LoginController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String url = "Login.jsp";
             String button = request.getParameter("btAction");
+
             String username = request.getParameter("txtUsername");
-            String password = request.getParameter("txtPassword");
+            String inpassword = request.getParameter("txtPassword");
+            String password = hashPasswordMD5(inpassword);
             String errorMessage = "";
             AccountDAO dao = new AccountDAO();
             AccountDTO account = dao.checkLogin(username, password);
             EmployeeDAO em = new EmployeeDAO();
-            Employee emp = em.getin4(account.getUserID());
+
             if (account != null) {
                 try {
-
+                    Employee emp = em.getin4(account.getUserID());
                     int role = account.getRole();
                     if (role == 2) {
                         url = "HomeEmployees";
                         HttpSession session = request.getSession();
-                        session.setAttribute("account", account);              
+                        session.setAttribute("account", account);
                         session.setAttribute("employee", emp);
                         response.sendRedirect(url);
                     } else if (role == 3) {

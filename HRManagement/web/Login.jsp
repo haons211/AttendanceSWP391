@@ -48,14 +48,16 @@
                                             </div>
                                             <form>
                                                 <div class="form-outline mb-4">
+                                                    <label class="form-label" for="form2Example11">Username</label>
                                                     <input type="text" id="form2Example11" class="form-control"
                                                            placeholder="Employee ID or Staff ID" name="txtUsername" />
-                                                    <label class="form-label" for="form2Example11">Username</label>
+                                                    
                                                 </div>
 
                                                 <div class="form-outline mb-4">
+                                                       <label class="form-label" for="form2Example22" >Password</label>
                                                     <input type="password" id="form2Example22" class="form-control" placeholder="password" name="txtPassword" />
-                                                    <label class="form-label" for="form2Example22" >Password</label>
+                                                 
                                                 </div>
                                                 <%
                                            String errorMessage = (String) request.getAttribute("error"); 

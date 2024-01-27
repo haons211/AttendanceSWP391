@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,12 +14,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.AccountDTO;
+import models.Employee;
 
 /**
  *
  * @author NCM
- */@WebServlet(name = "LogoutController", urlPatterns = {"/Logout"})
-public class LogoutController extends HttpServlet {
+ */
+@WebServlet(name="EmployeeController", urlPatterns={"/HomeEmployees"})
+public class EmployeeController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,18 +35,22 @@ public class LogoutController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Logout</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Logout at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
+            HttpSession session = request.getSession();
+            AccountDTO acc = (AccountDTO) session.getAttribute("account");
+            EmployeeDAO dao = new EmployeeDAO();
+            try {
+                Employee em = dao.getin4(acc.getUserID());
+                request.setAttribute("emp", em);
+            } catch (Exception e) {             
+            }
+
+            if (acc == null) {
+                response.sendRedirect("Login");
+            } else {
+                request.getRequestDispatcher("HomeEmployees.jsp").forward(request, response);
+            }
+    }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -55,11 +63,7 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-      HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate(); // Xóa phiên hiện tại nếu tồn tại
-        }
-        response.sendRedirect("Login");
+        processRequest(request, response);
     } 
 
     /** 

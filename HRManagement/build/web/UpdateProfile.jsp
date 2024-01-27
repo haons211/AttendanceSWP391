@@ -3,7 +3,8 @@
     Created on : Jan 14, 2024, 2:13:04 AM
     Author     : NCM
 --%>
-
+<%@ page import="models.AccountDTO" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
     <body>
+        
         <div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
@@ -106,11 +108,12 @@
                         <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                             <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
                                 <span class="status online"></span></span>
-                            <span>${sessionScope.employee.name}</span>
+                                 <c:set var="em" value="${requestScope.emp}" />
+                            <span>${em.name}</span>
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="profile">My Profile</a>
-                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                            <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
                             <a class="dropdown-item" href="settings.html">Settings</a>
                             <a class="dropdown-item" href="Login">Logout</a>
                         </div>
@@ -120,7 +123,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                        <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
                         <a class="dropdown-item" href="Login">Logout</a>
                     </div>
@@ -163,8 +166,15 @@
                             <h4 class="page-title">Edit Profile</h4>
                         </div>
                     </div>
-                    <form action="HomeEmployees" method="post">
-                        <input type="hidden" id="empId" name="empId" value="${param.idse}" readonly>
+                    <form action="UpdateInformation" method="post">
+                        <%
+                       AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                        
+                                 int accid = acc.getUserID();// Lấy giá trị accid từ dữ liệu đăng nhập, chẳng hạn từ database
+                                
+                        %>
+
+                        <input type="hidden" id="empId" name="empId" value="<%= accid %>" readonly>
                         <div class="card-box">
                             <h3 class="card-title">Basic Informations</h3>
                             <div class="row">
@@ -189,14 +199,14 @@
                                                 <div class="form-group form-focus">
                                                     <label class="focus-label">Birth Date</label>
                                                     <div class="cal-icon">
-                                                        <input type="date"id="empBirthdate" name="empBirthdate"  class="form-control floating" >
+                                                        <input type="date"id="empBirthdate" name="empBirthdate"  class="form-control floating" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-focus select-focus">
                                                     <label class="focus-label">Gender</label>
-                                                    <select class="select form-control floating" id="empGender" name="empGender">
+                                                    <select class="select form-control floating" id="empGender" name="empGender"required>
                                                         <option value="0">Male</option>
                                                         <option value="1">Female</option>
                                                     </select>
@@ -214,13 +224,13 @@
                                     <div class="form-group form-focus">
                                         <input type="hidden" id="empId" name="empId" value="${param.idse}" readonly>
                                         <label class="focus-label">Address</label>
-                                        <input type="text" id="empAddress" name="empAddress" class="form-control floating" >
+                                        <input type="text" id="empAddress" name="empAddress" class="form-control floating" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group form-focus">
                                         <label class="focus-label">Mail</label>
-                                        <input type="text" id="empEmail" name="empEmail" class="form-control floating" >
+                                        <input type="text" id="empEmail" name="empEmail" class="form-control floating" required>
                                     </div>
                                 </div>
 
@@ -228,7 +238,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group form-focus">
                                         <label class="focus-label">Phone Number</label>
-                                        <input type="text" id="empNumber" name="empNumber" class="form-control floating">
+                                        <input type="text" id="empNumber" name="empNumber" class="form-control floating"required>
                                     </div>
                                 </div>
                             </div>
