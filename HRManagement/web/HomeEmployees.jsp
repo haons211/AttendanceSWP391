@@ -115,7 +115,7 @@
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="profile">My Profile</a>
-                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                            <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
                             <a class="dropdown-item" href="settings.html">Settings</a>
                             <a class="dropdown-item" href="Logout">Logout</a>
                         </div>
@@ -125,7 +125,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                        <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>

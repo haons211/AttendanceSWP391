@@ -22,7 +22,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateProfileController</servlet-name>
-        <url-pattern>/HomeEmployees</url-pattern>
+        <url-pattern>/UpdateInformation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>

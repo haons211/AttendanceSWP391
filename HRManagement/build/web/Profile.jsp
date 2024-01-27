@@ -40,11 +40,11 @@
                         <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                             <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
                                 <span class="status online"></span></span>
-                            <span>${sessionScope.employee.name}</span>
+                            <span>${em.name}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile.html">My Profile</a>
-                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                            <a class="dropdown-item" href="profile">My Profile</a>
+                            <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
                             <a class="dropdown-item" href="settings.html">Settings</a>
                             <a class="dropdown-item" href="login.html">Logout</a>
                         </div>
@@ -53,8 +53,8 @@
                 <div class="dropdown mobile-user-menu float-right">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                        <a class="dropdown-item" href="profile">My Profile</a>
+                        <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
                         <a class="dropdown-item" href="login.html">Logout</a>
                     </div>
@@ -98,7 +98,7 @@
                         </div>
 
                         <div class="col-sm-5 col-6 text-right m-b-30">
-                            <form action="HomeEmployees" method="post">
+                            <form action="UpdateInformation" method="post">
                                 <%
                                   int accid = acc.getUserID();// Lấy giá trị accid từ dữ liệu đăng nhập, chẳng hạn từ database
                                 %>
@@ -149,12 +149,12 @@
                                                         <c:choose>
                                                             <c:when test="${em.gender}">
 
-
-                                                                <span>Female</span> 
+ <span>Male</span> 
+                                                            
 
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <span>Male</span> 
+                                                                   <span>Female</span> 
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </li>

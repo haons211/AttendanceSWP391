@@ -49,7 +49,7 @@ public class UpdateProfileController extends HttpServlet {
             if (acc == null) {
                 response.sendRedirect("Login");
             } else {
-                request.getRequestDispatcher("HomeEmployees.jsp").forward(request, response);
+                request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
             }
         }
     }
