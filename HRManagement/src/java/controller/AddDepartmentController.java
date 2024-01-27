@@ -67,57 +67,38 @@ public class AddDepartmentController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        String name = request.getParameter("deparmentName");
-//        String id_raw = request.getParameter("deparmentID");
-//        int id = Integer.parseInt(id_raw);
-//        DepartmentDAO dao = new DepartmentDAO();
-//        dao.AddDeparment(id, name);
-//        response.sendRedirect("addDep");
-//    }
-   @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    // Lấy thông tin từ form
-    String name = request.getParameter("departmentName");
-    String id_raw = request.getParameter("departmentID");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Lấy thông tin từ form
+        String name = request.getParameter("departmentName");
+        String code = request.getParameter("departmentCode");
 
-    // Kiểm tra và chuyển hướng
-    if (isValidInput(id_raw, name)) {
-        int id = Integer.parseInt(id_raw);
-
-        // Thêm department vào database
         DepartmentDAO dao = new DepartmentDAO();
 
-        // Check if the department ID already exists
-        if (!dao.isDepartmentIdExists(id)) {
-            dao.addDepartment(id, name);
-
-            // Set thông báo thành công
-            request.setAttribute("successMessage", "Add successful!");
-        } else {
-            // Set thông báo lỗi
-            request.setAttribute("errorMessage", "Department with ID " + id + " already exists. Please enter a different ID.");
-        }
-    } else {
-        // Set thông báo lỗi
-        request.setAttribute("errorMessage", "Invalid department ID or name. Please try again.");
-    }
-
-    // Chuyển hướng đến trang addDepartment.jsp để hiển thị thông báo
-    request.getRequestDispatcher("AddDepartment.jsp").forward(request, response);
-}
-
-
-    private boolean isValidInput(String id_raw, String name) {
         try {
-            int id = Integer.parseInt(id_raw);
-            return id > 0 && name != null && !name.trim().isEmpty();
-        } catch (NumberFormatException e) {
-            return false;
+            // Check if the department ID already exists
+            if (!dao.isDepartmentCodeExists(code)) {
+                dao.addDepartment(code, name);
+
+                // Set thông báo thành công
+                request.setAttribute("successMessage", "Add successful!");
+
+                // Xóa thông báo lỗi nếu có
+                request.getSession().removeAttribute("errorMessage");
+            } else {
+                // Set thông báo lỗi
+                request.setAttribute("errorMessage", "Department with Code " + code + " already exists. Please enter a different ID.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            // Set thông báo lỗi chung nếu có lỗi xảy ra
+            request.setAttribute("errorMessage", "Error adding department.");
         }
+
+        // Chuyển hướng đến trang addDepartment.jsp để hiển thị thông báo
+        request.getRequestDispatcher("AddDepartment.jsp").forward(request, response);
     }
 
     /**

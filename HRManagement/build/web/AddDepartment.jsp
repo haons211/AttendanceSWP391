@@ -174,12 +174,12 @@
 
                             <form action="addDep" method="post">
                                 <div class="mb-3">
-                                    <label for="departmentId" class="form-label">Department ID</label>
-                                    <input type="text" class="form-control" id="departmentId" name="departmentID" required>
-                                </div>
-                                <div class="mb-3">
                                     <label for="departmentName" class="form-label">Department Name</label>
                                     <input type="text" class="form-control" id="departmentName" name="departmentName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="departmentCode" class="form-label">Department Code</label>
+                                    <input type="text" class="form-control" id="departmentCode" name="departmentCode" required>
                                 </div>
                                 <div class="add-to-system">
                                     <button type="submit" class="btn btn-success" style="margin: 10px 0 ;">Add to system</button>

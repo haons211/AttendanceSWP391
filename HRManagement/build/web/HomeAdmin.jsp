@@ -216,7 +216,7 @@
                                             <c:forEach items="${listDepartment}" var="o">
                                                 <tr>
                                                     <td style="min-width: 200px;">   
-                                                        <h2>${o.department_id}</h2>
+                                                        <h2>${o.dep_code}</h2>
                                                     </td>                 
                                                     <td>
                                                         <h5 class="time-title p-0">${o.name}</h5>                                                   

@@ -3,11 +3,6 @@
     Created on : Jan 15, 2024, 9:24:00 AM
     Author     : ThuyVy
 --%>
-<%-- 
-    Document   : addDepartment
-    Created on : Jan 14, 2024, 11:06:54 AM
-    Author     : ThuyVy
---%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -185,15 +180,19 @@
                                      <label for="departmentName" class="form-label">Department Name</label>
                                     <input type="text" class="form-control" id="departmentName" name="departmentName" value="${p.name}">
                                 </div>
+                                <div class="mb-3">
+                                     <label for="departmentCode" class="form-label">Department Code</label>
+                                    <input type="text" class="form-control" id="departmentCode" name="departmentCode" value="${p.dep_code}">
+                                </div>
                                 <div class="add-to-system">
                                     <button type="submit" class="btn btn-success" style="margin: 10px 0;">Update Department</button>
                                 </div>
                             </form>
 
                             <!-- Hiển thị thông báo thành công hoặc lỗi -->
-                            <c:if test="${ms != null}">
+                            <c:if test="${not empty successMessage}">
                                 <div style="color: green" role="alert">
-                                    ${ms}
+                                    ${successMessage}
                                 </div>
                             </c:if>
                             <c:if test="${not empty errorMessage}">
