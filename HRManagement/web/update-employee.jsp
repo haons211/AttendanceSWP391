@@ -21,8 +21,8 @@
         <div class="main-wrapper">
             <div class="header">
                 <div class="header-left">
-                    <a href="index.html" class="logo">
-                        <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="35" height="35" alt=""> <span>Preclinic</span>
+                    <a href="dashboard" class="logo">
+                        <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="40" height="40" alt=""/> <span>BeztTech</span>
                     </a>
                 </div>
                 <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -107,23 +107,23 @@
                         <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                             <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
                                 <span class="status online"></span></span>
-                            <span>Admin</span>
+                            <span>${sessionScope.employee.name}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile.html">My Profile</a>
+                            <a class="dropdown-item" href="profile">My Profile</a>
                             <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                             <a class="dropdown-item" href="settings.html">Settings</a>
-                            <a class="dropdown-item" href="login.html">Logout</a>
+                            <a class="dropdown-item" href="Login">Logout</a>
                         </div>
                     </li>
                 </ul>
                 <div class="dropdown mobile-user-menu float-right">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="Login">Logout</a>
                     </div>
                 </div>
             </div>
@@ -136,16 +136,19 @@
                                 <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
-                            </li>
-                            <li> 
-                                <a href="employee"><i class="fa fa-dashboard"></i> <span> Employees </span></a>
+                                <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-flag-o"></i> <span> Attendance Report </span> </a>
+                                <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span></a>
                             </li>
                             <li> 
-                                <a href="sendapplication"><i class="fa fa-flag-o"></i> <span> Send Application </span> </a>
+                                <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+                            </li>    
+                            <li>
+                                <a href="#"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
+                            </li>
+                            <li> 
+                                <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
