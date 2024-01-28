@@ -129,7 +129,7 @@
                             <a class="dropdown-item" href="profile">My Profile</a>
                             <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                             <a class="dropdown-item" href="settings.html">Settings</a>
-                            <a class="dropdown-item" href="Login">Logout</a>
+                            <a class="dropdown-item" href="Logout">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -139,7 +139,7 @@
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="Login">Logout</a>
+                        <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </div>
             </div>

@@ -19,12 +19,49 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Employee;
+import java.util.regex.*;
 
 /**
  *
  * @author NCM
  */
 public class LoginController extends HttpServlet {
+
+    public static boolean isusernameValid(String password) {
+        // Kiểm tra độ dài của mật khẩu
+        if (password.length() < 4) {
+            return false;
+        }
+        Pattern specialCharPattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher specialCharMatcher = specialCharPattern.matcher(password);
+        if (specialCharMatcher.find()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isPasswordValid(String password) {
+        // Kiểm tra độ dài của mật khẩu
+        if (password.length() < 6) {
+            return false;
+        }
+
+        // Kiểm tra có ít nhất một chữ cái viết hoa
+        Pattern upperCasePattern = Pattern.compile("[A-Z]");
+        Matcher upperCaseMatcher = upperCasePattern.matcher(password);
+        if (!upperCaseMatcher.find()) {
+            return false;
+        }
+
+        // Kiểm tra có ít nhất một ký tự đặc biệt
+        Pattern specialCharPattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher specialCharMatcher = specialCharPattern.matcher(password);
+        if (!specialCharMatcher.find()) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +98,6 @@ public class LoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = "Login.jsp";
@@ -91,60 +127,98 @@ public class LoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
             /* TODO output your page here. You may use following sample code. */
             String url = "Login.jsp";
-            String button = request.getParameter("btAction");
-
             String username = request.getParameter("txtUsername");
             String inpassword = request.getParameter("txtPassword");
-            String password = hashPasswordMD5(inpassword);
+            if (username.equals("")) {
+                username = null;
+            }
+            if (inpassword.equals("")) {
+                inpassword = null;
+            }
             String errorMessage = "";
-            AccountDAO dao = new AccountDAO();
-            AccountDTO account = dao.checkLogin(username, password);
-            EmployeeDAO em = new EmployeeDAO();
 
-            if (account != null) {
-                try {
-                    Employee emp = em.getin4(account.getUserID());
-                    int role = account.getRole();
-                    if (role == 2) {
-                        url = "HomeEmployees";
-                        HttpSession session = request.getSession();
-                        session.setAttribute("account", account);
-                        session.setAttribute("employee", emp);
-                        response.sendRedirect(url);
-                    } else if (role == 3) {
-                        url = "HomeManager";
-                        HttpSession session = request.getSession();
-                        session.setAttribute("account", account);
-                        session.setAttribute("employee", emp);
-                        response.sendRedirect(url);
-                    } else if (role == 1) {
-                        url = "HomeAdmin";
-                        HttpSession session = request.getSession();
-                        session.setAttribute("account", account);
-                        session.setAttribute("employee", emp);
-                        response.sendRedirect(url);
+            if (username != null && inpassword != null) {
+                if (isPasswordValid(inpassword) == false && isusernameValid(username) == true) {
+                    errorMessage = "Password must have at least 6 characters or more, including at least one uppercase character and one special character";
+                    // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
+                    request.setAttribute("error", errorMessage);
+                    request.getRequestDispatcher(url).forward(request, response);
+
+                } else if (isPasswordValid(inpassword) == true && isusernameValid(username) == false) {
+                    errorMessage = "Username must be more than 4 characters long and cannot contain special characters";
+                    // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
+                    request.setAttribute("error", errorMessage);
+                    request.getRequestDispatcher(url).forward(request, response);
+                } else if (isPasswordValid(inpassword) == false && isusernameValid(username) == false) {
+                    errorMessage = "Username must be more than 4 characters long and cannot contain special characters and Password must have at least 6 characters or more, including at least one uppercase character and one special character ";
+                    // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
+                    request.setAttribute("error", errorMessage);
+                    request.getRequestDispatcher(url).forward(request, response);
+                } else {
+                    String password = hashPasswordMD5(inpassword);
+                    AccountDAO dao = new AccountDAO();
+                    AccountDTO account = dao.checkLogin(username, password);
+                    EmployeeDAO em = new EmployeeDAO();
+                    if (account != null) {
+                        try {
+                            Employee emp = em.getin4(account.getUserID());
+                            int role = account.getRole();
+                            if (role == 2) {
+                                url = "HomeEmployees";
+                                HttpSession session = request.getSession();
+                                session.setAttribute("account", account);
+                                session.setAttribute("employee", emp);
+                                response.sendRedirect(url);
+                            } else if (role == 3) {
+                                url = "HomeManager";
+                                HttpSession session = request.getSession();
+                                session.setAttribute("account", account);
+                                session.setAttribute("employee", emp);
+                                response.sendRedirect(url);
+                            } else if (role == 1) {
+                                url = "HomeAdmin";
+                                HttpSession session = request.getSession();
+                                session.setAttribute("account", account);
+                                session.setAttribute("employee", emp);
+                                response.sendRedirect(url);
+                            }
+                        } catch (Exception ex) {
+                            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        errorMessage = "Sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại.";
+                        // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
+                        request.setAttribute("error", errorMessage);
+                        request.getRequestDispatcher(url).forward(request, response);
+                        return;
                     }
-                } catch (Exception ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                errorMessage = "Sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại.";
+            } else if ((username == null && inpassword != null)) {
+                errorMessage = "Username is Empty. Please try again";
                 // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
                 request.setAttribute("error", errorMessage);
                 request.getRequestDispatcher(url).forward(request, response);
-                return;
+
+            } else if ((username != null && inpassword == null)) {
+                errorMessage = "Password is Empty.Please try again";
+                // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
+                request.setAttribute("error", errorMessage);
+                request.getRequestDispatcher(url).forward(request, response);
+            } else {
+                errorMessage = "username and password should not empty";
+                // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
+                request.setAttribute("error", errorMessage);
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (Exception e) {
+
         }
 
     }
@@ -154,7 +228,6 @@ public class LoginController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
