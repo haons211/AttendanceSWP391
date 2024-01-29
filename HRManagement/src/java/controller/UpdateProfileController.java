@@ -127,12 +127,10 @@ public class UpdateProfileController extends HttpServlet {
             else if (button.equals("Edit profile")) {
                 url = "UpdateProfile.jsp";
             }
-        } catch (Exception ex) {
+       } catch (Exception ex) {
 
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
+        response.sendRedirect(url);
     }
 }
 /**
