@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+        <title>Employee</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
@@ -183,24 +183,17 @@
                             <a href="add-employee" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Add Employee</a>
                         </div>
                     </div>
-                    <form action="employee" method="get">
-                        <div class="row filter-row">       
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group form-focus">
-                                    <label class="focus-label">Employee Name</label>
-                                    <input type="text" class="form-control floating" name="searchValue" value = "${searchValue}">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <input type="submit" class="btn btn-success btn-block" value = "Search" > 
-                            </div>
-                        </div>
-                    </form>
+                    <form action="department" method="get" class="form-inline">
+                                            <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
+                                                   aria-label="Search" style="height: 30px;" >
+                                            <button class="btn btn-outline-success my-2 my-sm-0"
+                                                    type="submit" style="height: 30px;">Search</button>
+                                        </form>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
 
-                                <table class="table table-striped custom-table">
+                                <table class="table table-striped custom-table mb-0 datatable">
                                     <thead>
                                         <tr>
                                             <th style="min-width:200px;">Name</th>
@@ -228,7 +221,7 @@
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href="update-employee?id=${e.employee_id}"><i class="fa fa-pencil m-r-5"></i>Update</a>
-                                                                <a class="dropdown-item" href="delete-employee?id=${e.employee_id}" data-toggle="modal" data-target="delete-employee?id=${e.employee_id}" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                                <a class="dropdown-item" href="delete-employee?id=${e.employee_id}"  onclick="doDelete('${e.employee_id}')" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>
