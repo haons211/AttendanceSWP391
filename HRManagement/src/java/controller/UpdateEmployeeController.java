@@ -65,15 +65,13 @@ public class UpdateEmployeeController extends HttpServlet {
         try {
             int employeeId = Integer.parseInt(request.getParameter("id"));
             // Create Employee object with updated information
-            Employee e = new Employee(name, phoneNumber, address, email, gender, image, birthDate, hireDate);
+            Employee employee = new Employee(name, phoneNumber, address, email, gender, image, birthDate, hireDate);
             // Update the employee in the database
             EmployeeDAO eDAO = new EmployeeDAO();
-            eDAO.updateEmployee(e, employeeId);
-        } catch (NumberFormatException ex) {
+            eDAO.updateEmployee(employee, employeeId);
+        } catch (NumberFormatException | ClassNotFoundException ex) {
             Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            // Handle exception, possibly inform the user
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
         // Redirect to the list-employee servlet or page
