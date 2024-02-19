@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Edit Departments</title>
+        <title>Update Employee</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -181,6 +181,7 @@
                                                 Employee Name
                                             </td>
                                             <td>
+                                                
                                                 <div class = "left-input-table" >
                                                     <div class="input-group input-group-sm mb-3" >
                                                         <div class="input-group-prepend">
@@ -198,11 +199,15 @@
 
                                             </td>
                                             <td>
+                                              
                                                 <div class ="right-input-table" style= "width: 250px" >
-                                                    <input type="file" id="fileInput" onchange="handleFileSelection()"  
-                                                           name="image" class="btn btn-outline-secondary"
-                                                           style="margin:  0 30px; " name="image" >
+                                                    <input type="file" 
+                                                           name="image" class="btn btn-outline-secondary" accept=".jpg, .png"
+                                                           style="margin:  0 30px; ">
+                                                     
+                                                   
                                                 </div>
+     
                                             </td>
                                         </tr>
 
