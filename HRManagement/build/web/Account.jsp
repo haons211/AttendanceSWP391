@@ -196,7 +196,7 @@
                                             <th>Role</th>
                                             <th>Status</th>
                                             <th class="text-right">Action</th>
-                                        </tr>SS
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach var="o" items="${requestScope.list}">

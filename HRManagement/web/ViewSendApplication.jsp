@@ -179,7 +179,7 @@
                                 <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
                             </li>
                             <li> 
-                                <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
+                                <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>

@@ -183,8 +183,8 @@
                             <a href="add-employee" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Add Employee</a>
                         </div>
                     </div>
-                    <form action="department" method="get" class="form-inline">
-                                            <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
+                    <form action="employee" method="get" class="form-inline">
+                                            <input class="form-control mr-sm-2" name="searchValue" type="text" placeholder="Search"
                                                    aria-label="Search" style="height: 30px;" >
                                             <button class="btn btn-outline-success my-2 my-sm-0"
                                                     type="submit" style="height: 30px;">Search</button>

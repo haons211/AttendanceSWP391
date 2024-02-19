@@ -11,10 +11,10 @@
                 background: #fccb90;
 
                 /* Chrome 10-25, Safari 5.1-6 */
-                background: -webkit-linear-gradient(to right,#3b7ee4 , #df8414, #59e720);
+                background: -webkit-linear-gradient(to right,#f8f4ec,#FFC0D9, #FF90BC);
 
                 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                background: linear-gradient(to right, #3b7ee4, #df8414, #59e720);
+                background: linear-gradient(to right, #f8f4ec,#FFC0D9, #FF90BC);
             }
 
             @media (min-width: 768px) {
@@ -42,22 +42,22 @@
                                         <div class="card-body p-md-5 mx-md-4">
 
                                             <div class="text-center">
-                                                <img src="https://i.chungta.vn/2017/12/22/LogoFPT-2017-copy-3042-1513928399.jpg"
+                                                <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png"
                                                      style="width: 185px;" alt="logo">
-                                                <h4 class="mt-1 mb-5 pb-1">We are FPT</h4>
+                                                <h4 class="mt-1 mb-5 pb-1"></h4>
                                             </div>
                                             <form>
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="form2Example11">Username</label>
                                                     <input type="text" id="form2Example11" class="form-control"
                                                            placeholder="Employee ID or Staff ID" name="txtUsername" />
-                                                    
+
                                                 </div>
 
                                                 <div class="form-outline mb-4">
-                                                       <label class="form-label" for="form2Example22" >Password</label>
+                                                    <label class="form-label" for="form2Example22" >Password</label>
                                                     <input type="password" id="form2Example22" class="form-control" placeholder="password" name="txtPassword" />
-                                                 
+
                                                 </div>
                                                 <%
                                            String errorMessage = (String) request.getAttribute("error"); 
@@ -68,8 +68,8 @@
                                                   }
                                                 %>
                                                 <div class="text-center pt-1 mb-5 pb-1">
-                                                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
-                                                        in</button>
+                                                    <button style="color: black"class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                            type="submit">Log in</button>
                                                     <a class="text-muted" href="#!">Forgot password?</a>
                                                 </div>
                                             </form>
@@ -77,8 +77,8 @@
                                     </div>
                                     <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                                         <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                            <h3 class="mb-4">We are more than just a company</h3>
-                                          
+                                            <h3 style="color: black"class="mb-4">We are more than just a company</h3>
+
                                         </div>
                                     </div>
                                 </div>
