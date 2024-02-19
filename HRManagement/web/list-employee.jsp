@@ -183,19 +183,12 @@
                             <a href="add-employee" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Add Employee</a>
                         </div>
                     </div>
-                    <form action="employee" method="get">
-                        <div class="row filter-row">       
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group form-focus">
-                                    <label class="focus-label">Employee Name</label>
-                                    <input type="text" class="form-control floating" name="searchValue" value = "${searchValue}">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <input type="submit" class="btn btn-success btn-block" value = "Search" > 
-                            </div>
-                        </div>
-                    </form>
+                    <form action="employee" method="get" class="form-inline">
+                                            <input class="form-control mr-sm-2" name="searchValue" type="text" placeholder="Search"
+                                                   aria-label="Search" style="height: 30px;" >
+                                            <button class="btn btn-outline-success my-2 my-sm-0"
+                                                    type="submit" style="height: 30px;">Search</button>
+                                        </form>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">

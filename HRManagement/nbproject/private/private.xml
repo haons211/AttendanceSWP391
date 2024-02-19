@@ -3,8 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/nbproject/build-impl.xml</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/Profile.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/nbproject/project.properties</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/add-employee.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/Account.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/src/java/dal/DashboardDAO.java</file>
             <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/WEB-INF/web.xml</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/Login.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/nbproject/build-impl.xml</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/Department.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/src/java/dal/DBContext.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/src/java/controller/ViewSendApplicationController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/ViewSendApplication.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/assets/css/dataTables.bootstrap4.min.css</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/nbproject/project.xml</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/assets/img/pngtree-hacker-logo-png-image_6408677.png</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/nbproject/genfiles.properties</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/src/java/controller/DeleteEmployeeController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/list-employee.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/nbproject/ant-deploy.xml</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/HomeManager.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/AttendanceSWP391/HRManagement/web/update-employee.jsp</file>
         </group>
     </open-files>
 </project-private>

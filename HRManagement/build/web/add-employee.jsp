@@ -161,7 +161,7 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-sm-5 col-5"     >
-                            <h4 class="page-title" >Add Department</h4>
+                            <h4 class="page-title" >Add Employee</h4>
                         </div>
 
                         <div class="main">
