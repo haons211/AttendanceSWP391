@@ -12,16 +12,16 @@ import java.sql.Date;
  */
 public class Employee {
 
-    private int employee_id;
-    private String name;
-    private String phoneNumber;
-    private String address;
-    private String email;
-    private boolean gender;
-    private String image;
-    private Date birth_date;
-    private Date hire_date;
-    private int user_id;
+    public int employee_id;
+    public String name;
+    public String phoneNumber;
+   public String address;
+    public String email;
+    public boolean gender;
+    public String image;
+    public Date birth_date;
+    public Date hire_date;
+    public int user_id;
 
     public Employee() {
     }
@@ -39,6 +39,7 @@ public class Employee {
         this.user_id = user_id;
     }
 
+    
     public Employee(String name, String phoneNumber, String address, String email, boolean gender, String image, Date birth_date, Date hire_date) {
         this.name = name;
         this.phoneNumber = phoneNumber;

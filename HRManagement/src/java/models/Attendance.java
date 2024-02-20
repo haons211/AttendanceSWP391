@@ -14,8 +14,8 @@ public class Attendance {
 
     int attendance_id;
     int employee_id;
-    Date in_time;
-    Date out_time;
+    String in_time;
+    String out_time;
     String notes;
     String image;
     String status;
@@ -23,11 +23,12 @@ public class Attendance {
     String out_status;
     int remainDay_id;
     int department_id;
+    Date date;
 
     public Attendance() {
     }
 
-    public Attendance(int attendance_id, int employee_id, Date in_time, Date out_time, String notes, String image, String status, String in_status, String out_status, int remainDay_id, int department_id) {
+    public Attendance(int attendance_id, int employee_id, String in_time, String out_time, String notes, String image, String status, String in_status, String out_status, int remainDay_id, int department_id, Date date) {
         this.attendance_id = attendance_id;
         this.employee_id = employee_id;
         this.in_time = in_time;
@@ -39,7 +40,12 @@ public class Attendance {
         this.out_status = out_status;
         this.remainDay_id = remainDay_id;
         this.department_id = department_id;
+        this.date = date;
     }
+
+    
+
+    
 
     public int getAttendance_id() {
         return attendance_id;
@@ -57,22 +63,23 @@ public class Attendance {
         this.employee_id = employee_id;
     }
 
-    public Date getIn_time() {
+    public String getIn_time() {
         return in_time;
     }
 
-    public void setIn_time(Date in_time) {
+    public void setIn_time(String in_time) {
         this.in_time = in_time;
     }
 
-    public Date getOut_time() {
+    public String getOut_time() {
         return out_time;
     }
 
-    public void setOut_time(Date out_time) {
+    public void setOut_time(String out_time) {
         this.out_time = out_time;
     }
 
+    
     public String getNotes() {
         return notes;
     }
@@ -129,9 +136,16 @@ public class Attendance {
         this.department_id = department_id;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
-        return "Attendance{" + "attendance_id=" + attendance_id + ", employee_id=" + employee_id + ", in_time=" + in_time + ", out_time=" + out_time + ", notes=" + notes + ", image=" + image + ", status=" + status + ", in_status=" + in_status + ", out_status=" + out_status + ", remainDay_id=" + remainDay_id + ", department_id=" + department_id + '}';
+        return "Attendance{" + "attendance_id=" + attendance_id + ", employee_id=" + employee_id + ", in_time=" + in_time + ", out_time=" + out_time + ", notes=" + notes + ", image=" + image + ", status=" + status + ", in_status=" + in_status + ", out_status=" + out_status + ", remainDay_id=" + remainDay_id + ", department_id=" + department_id + ", date=" + date + '}';
     }
-    
 }
