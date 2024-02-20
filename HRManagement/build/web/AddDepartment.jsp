@@ -167,7 +167,7 @@
                             <h4 class="page-title">Add Department</h4>
                         </div>
                         <div class="col-sm-7 col-7 text-right m-b-30">
-<!--                            <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Department</a>-->
+                            <!--                            <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Department</a>-->
                         </div>
 
                         <div class="main">
@@ -189,16 +189,19 @@
                                 </div>
 
                             </form>
-                            <c:if test="${not empty successMessage}">
-                                <div style="color: green" role="alert">
-                                    ${successMessage}
-                                </div>
-                            </c:if>
+
                             <c:if test="${not empty errorMessage}">
-                                <div style="color: red" role="alert">
-                                    ${errorMessage}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error! </strong>${errorMessage}
                                 </div>
                             </c:if>
+
+                            <c:if test="${not empty successMessage}">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Success! </strong> ${successMessage}
+                                </div>
+                            </c:if>
+
 
 
                         </div>
@@ -424,7 +427,7 @@
         <script src="assets/js/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
-        
+
     </body>
 
 </html>

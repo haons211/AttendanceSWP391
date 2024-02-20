@@ -194,7 +194,7 @@
                                             <th>#</th>
                                             <th>Department Name</th>
                                             <th>Department Code</th>
-                                            <th>Status</th>
+                                            <!--<th>Status</th>-->
                                             <th class="text-right">Action</th>
                                         </tr>
                                     </thead>
@@ -204,7 +204,8 @@
                                                 <td  class="column-1">${o.getDepartment_id()}</td>    
                                                 <td  class="column-2">${o.getName()}</td>
                                                 <td  class="column-2">${o.getDep_code()}</td>
-                                                <td><span class="custom-badge status-green">Active</span></td>
+                                                <!--<td><span class="custom-badge status-green">Active</span></td>-->
+                                                <!--<td><span class="custom-badge status-red">Inactive</span></td>-->
                                                 <td class="text-right">
                                                     <div class="dropdown dropdown-action">
                                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

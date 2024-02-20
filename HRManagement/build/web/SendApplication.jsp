@@ -52,6 +52,16 @@
             .submit-btn:hover {
                 background-color: #0056b3; /* Set a different color on hover */
             }
+
+            .select{
+                color: #676767;
+                font-size: 14px;
+                font-weight: normal;
+                line-height: 38px;
+                padding-right: 30px;
+                padding-left: 15px;
+            }
+
         </style>
     </head>
 
@@ -196,7 +206,6 @@
                     </div>
                 </div>
             </div>
-            //CODE CHINH O DAY
             <div class="page-wrapper">
                 <div class="content">
                     <div class="row">
@@ -213,18 +222,22 @@
                                     <form class="application-form" method="post" action="sendapplication" >
                                         <div class="form-group">
                                             <label for="application-type">Application Type:</label>
-                                            <select id="application-type" name="applicationType">
-                                                <c:forEach items="${requestScope.types_list}" var="tl">
-                                                    <option value="${tl.type_id}" > ${tl.name}</option>
-                                                </c:forEach>
-                                                <!-- Thêm các loại đơn khác nếu cần -->
-                                            </select>
+                                            <div class="col-md-9">
+                                                <select class="select" id="application-type" name="applicationType">
+                                                    <!--                                                    <option>Select</option>-->
+                                                    <c:forEach items="${requestScope.types_list}" var="tl">
+                                                        <option value="${tl.type_id}" > ${tl.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
                                             <label>Manager:</label>
-                                            <select name="receiver_id">
-                                                <c:forEach items="${requestScope.managers_list}" var="ml">
-                                                    <option value="${ml.employee_id}" > ${ml.name}</option>
-                                                </c:forEach>
-                                            </select>
+                                            <div class="col-md-9">
+                                                <select class="select" name="receiver_id">
+                                                    <c:forEach items="${requestScope.managers_list}" var="ml">
+                                                        <option value="${ml.employee_id}" > ${ml.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="reason">Reason:</label>

@@ -192,15 +192,15 @@
                                 </div>
                             </form>
 
-                            <!-- Hiển thị thông báo thành công hoặc lỗi -->
-                            <c:if test="${not empty successMessage}">
-                                <div style="color: green" role="alert">
-                                    ${successMessage}
+                           <c:if test="${not empty errorMessage}">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error! </strong>${errorMessage}
                                 </div>
                             </c:if>
-                            <c:if test="${not empty errorMessage}">
-                                <div style="color: red" role="alert">
-                                    ${errorMessage}
+
+                            <c:if test="${not empty successMessage}">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Success! </strong> ${successMessage}
                                 </div>
                             </c:if>
                         </div>

@@ -13,19 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import models.Employee;
 
-
 /**
  *
  * @author NCM
  */
 public class EmployeeDAO {
-     Connection con = null;
+
+    Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
     public boolean updateIn4Information(int accid, String name, String phone, String email, String address, boolean gender, String birthdate) throws Exception {
-       
-      
 
         try {
             con = new dal.DBContext().getConnection();
@@ -59,8 +57,7 @@ public class EmployeeDAO {
     }
 
     public Employee getin4(int userId) throws SQLException, ClassNotFoundException {
-       
-      
+
         Employee em = null;
 
         try {
@@ -102,6 +99,7 @@ public class EmployeeDAO {
 
         return null;
     }
+
     public void addEmployee(String name,
             String phoneNumber,
             String address,
@@ -110,10 +108,10 @@ public class EmployeeDAO {
             String image,
             Date birthDate,
             Date hireDate) throws SQLException {
-         String query   = "INSERT INTO employee "
-                    + "(name, phoneNumber, address, email, gender, image, birth_date, hire_date) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-       try {
+        String query = "INSERT INTO employee "
+                + "(name, phoneNumber, address, email, gender, image, birth_date, hire_date) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
             con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, name);
@@ -132,19 +130,17 @@ public class EmployeeDAO {
             // Close resources in a finally block
             closeResources();
         }
-        
-    }
 
-    
+    }
 
     public Employee getEmployeeById(int id) throws ClassNotFoundException {
         String query = "SELECT * FROM employee WHERE employee_id = ?";
         Employee employee = null;
         try {
-           con = new DBContext().getConnection();
+            con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
-             rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 int employeeId = rs.getInt("employee_id");
                 String name = rs.getString("name");
@@ -183,7 +179,7 @@ public class EmployeeDAO {
                 + "`hire_date` =?\n"
                 + "WHERE `employee_id` = ?";
         try {
-           con = new DBContext().getConnection();
+            con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, e.getName());
             ps.setString(2, e.getPhoneNumber());
@@ -207,8 +203,8 @@ public class EmployeeDAO {
     public void deleteEmployee(int id) throws ClassNotFoundException {
         String query = "  DELETE FROM employee WHERE employee_id =?";
         try {
-            
-           con = new DBContext().getConnection();
+
+            con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -228,7 +224,7 @@ public class EmployeeDAO {
             con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, "%" + search + "%");
-             rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 int employeeId = rs.getInt("employee_id");
                 String name = rs.getString("name");
@@ -253,6 +249,54 @@ public class EmployeeDAO {
         }
         return list;
     }
+
+    public int GetDepIDfromEmployee(int Employee_id) throws SQLException {
+        int dep_id = -1; // Giá trị mặc định nếu không tìm thấy kết quả
+        String query = "SELECT department_id FROM employeedepartment WHERE employee_id = ?";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, Employee_id);
+
+            ResultSet rs = ps.executeQuery(); // Thực hiện truy vấn
+
+            if (rs.next()) {
+                // Lấy giá trị department_id từ kết quả truy vấn
+                dep_id = rs.getInt("department_id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu có
+        } finally {
+            closeResources(); // Đóng các tài nguyên kết nối
+        }
+        return dep_id; // Trả về giá trị department_id
+    }
+    
+    public int GetRemainIDfromEmployee(int Employee_id) throws SQLException {
+        int remain_id = -1; // Giá trị mặc định nếu không tìm thấy kết quả
+        String query = "SELECT remainDay_id FROM remainday WHERE employee_id = ?";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, Employee_id);
+
+            ResultSet rs = ps.executeQuery(); 
+
+            if (rs.next()) {
+                remain_id = rs.getInt("remainDay_id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu có
+        } finally {
+            closeResources(); 
+        }
+        return remain_id; 
+    }
+
     private void closeResources() {
         try {
             if (rs != null) {
@@ -268,6 +312,5 @@ public class EmployeeDAO {
             e.printStackTrace();
         }
     }
-    
 
 }
