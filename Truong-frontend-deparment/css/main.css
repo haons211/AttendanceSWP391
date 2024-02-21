@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+}
+
+aside {
+    background-color: #add8e6; /* Màu xanh dương pastel */
+    padding: 20px;
+    
+        min-height: 100vh;
+    
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+}
+
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.user-info p {
+    margin-bottom: 0px;
+    margin-right: 20px;
+}
+
+.user-info img {
+    width: 30px; /* Đặt kích thước ảnh */
+    height: 30px; /* Đặt kích thước ảnh */
+    border-radius: 50%; /* Làm cho ảnh tròn */
+    background-color: #add8e6; /* Màu xanh dương pastel */
+    margin-right: 10px; /* Khoảng cách giữa ảnh và văn bản */
+}
+
+.container-fluid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+}
+
+
+.row img {
+    width: 30px; /* Đặt kích thước ảnh */
+    height: 30px; /* Đặt kích thước ảnh */
+}
+
+.main{
+   border-style: groove; 
+    border-width:0.5px;
+    margin-top: 20px;
+}
+.main-text-header h5{
+    padding: 5px;
+    color: rgb(141, 228, 54);
+}
+
+.main-option{
+    border-style: groove;
+    border-width:1px;
+    margin-top: 20px;
+    display: flex;
+   justify-content: space-between;
+}
