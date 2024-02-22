@@ -1,4 +1,4 @@
-package dal;
+package context;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ public class DBContext {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         String url = "jdbc:mysql://localhost:3306/" + DB_NAME;
-        conn = DriverManager.getConnection(url, "root", "1111");
+        conn = DriverManager.getConnection(url, "root", "123456");
         return conn;
     }
 }

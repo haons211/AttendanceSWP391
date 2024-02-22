@@ -111,7 +111,7 @@ public class UpdateProfileController extends HttpServlet {
                 EmployeeDAO dao = new EmployeeDAO();
 
                 boolean checkUpdate = false;
-                checkUpdate = dao.updateIn4Information(accid, name, Phone, email, address, genderCheck, birthdateString);
+                checkUpdate = dao.updateInformation(accid, name, Phone, email, address, genderCheck, birthdateString);
                 String ms = "";
                 if (checkUpdate == true) {
                     url = "profile";

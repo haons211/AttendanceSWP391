@@ -36,13 +36,13 @@
         <servlet-name>DashboardControler</servlet-name>
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>Login</welcome-file>
+    </welcome-file-list>
     <servlet-mapping>
         <servlet-name>updateDep</servlet-name>
         <url-pattern>/UpdateDepartment</url-pattern>
     </servlet-mapping>
-    <welcome-file-list>
-        <welcome-file>Login</welcome-file>
-    </welcome-file-list>
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile</url-pattern>
@@ -75,4 +75,5 @@
         <servlet-name>DeleteDepartment</servlet-name>
         <url-pattern>/DeleteDepartment</url-pattern>
     </servlet-mapping>
+    
 </web-app>

@@ -167,7 +167,7 @@
                             <h4 class="page-title">Add Department</h4>
                         </div>
                         <div class="col-sm-7 col-7 text-right m-b-30">
-                            <!--                            <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Department</a>-->
+<!--                            <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Department</a>-->
                         </div>
 
                         <div class="main">
@@ -178,30 +178,33 @@
                             <form action="addDep" method="post">
                                 <div class="mb-3">
                                     <label for="departmentName" class="form-label">Department Name</label>
-                                    <input type="text" class="form-control" id="departmentName" name="departmentName" required>
+                                    <input type="text" class="form-control" id="departmentName" name="departmentName" value="${name}" required>
+                                    <div style="color: red">
+                                    ${requestScope.messageErrorName}
+                                </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="departmentCode" class="form-label">Department Code</label>
-                                    <input type="text" class="form-control" id="departmentCode" name="departmentCode" required>
+                                    <input type="text" class="form-control" id="departmentCode" value="${code}" name="departmentCode" required>
+                                    <div style="color: red">
+                                    ${requestScope.messageErrorCode}
+                                </div>
                                 </div>
                                 <div class="add-to-system">
                                     <button type="submit" class="btn btn-success" style="margin: 10px 0 ;">Add to system</button>
                                 </div>
 
                             </form>
-
-                            <c:if test="${not empty errorMessage}">
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>Error! </strong>${errorMessage}
-                                </div>
-                            </c:if>
-
                             <c:if test="${not empty successMessage}">
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>Success! </strong> ${successMessage}
+                                <div style="color: green" role="alert">
+                                    ${successMessage}
                                 </div>
                             </c:if>
-
+                            <c:if test="${not empty errorMessage}">
+                                <div style="color: red" role="alert">
+                                    ${errorMessage}
+                                </div>
+                            </c:if>
 
 
                         </div>
@@ -427,7 +430,7 @@
         <script src="assets/js/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
-
+        
     </body>
 
 </html>

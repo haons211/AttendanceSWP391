@@ -4,6 +4,7 @@
  */
 package dal;
 
+import context.DBContext;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ import models.Employee;
 
 /**
  *
- * @author NCM
+ * @author Dan
  */
 public class EmployeeDAO {
 
@@ -23,12 +24,20 @@ public class EmployeeDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public boolean updateIn4Information(int accid, String name, String phone, String email, String address, boolean gender, String birthdate) throws Exception {
-
+    public boolean updateInformation(
+            int userId, 
+            String name, 
+            String phone, 
+            String email, 
+            String address, 
+            boolean gender, 
+            String birthDate
+    
+    ) throws Exception {
         try {
-            con = new dal.DBContext().getConnection();
+            con = new context.DBContext().getConnection();
             if (con != null) {
-                // Tạo truy vấn SQL để cập nhật thông tin sinh viên
+               
                 String sql = "UPDATE employee SET name = ?, phoneNumber = ?, email = ?, address = ?, gender = ?, birth_date = ? WHERE user_id=?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, name);
@@ -36,8 +45,8 @@ public class EmployeeDAO {
                 ps.setString(3, email);
                 ps.setString(4, address);
                 ps.setBoolean(5, gender);
-                ps.setString(6, birthdate);
-                ps.setInt(7, accid);
+                ps.setString(6, birthDate);
+                ps.setInt(7, userId);
 
                 // Thực hiện truy vấn cập nhật
                 int row = ps.executeUpdate();
@@ -62,7 +71,7 @@ public class EmployeeDAO {
 
         try {
             // Kết nối cơ sở dữ liệu
-            con = new dal.DBContext().getConnection();
+            con = new context.DBContext().getConnection();
             if (con != null) {
                 // Câu truy vấn SQL với INNER JOIN
                 String sql = "select e.* from users u join employee e on u.user_id=e.user_id where u.user_id=? ";
@@ -78,7 +87,7 @@ public class EmployeeDAO {
                 if (rs.next()) {
                     // Lấy dữ liệu từ ResultSet và tạo đối tượng Student
 
-                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getDate(8), rs.getDate(9), rs.getInt(10));
+                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
                     return em;
                 }
             }
@@ -100,14 +109,15 @@ public class EmployeeDAO {
         return null;
     }
 
-    public void addEmployee(String name,
+    public void addEmployee(
+            String name,
             String phoneNumber,
             String address,
             String email,
             Boolean gender,
             String image,
-            Date birthDate,
-            Date hireDate) throws SQLException {
+            String birthDate,
+            String hireDate) throws SQLException {
         String query = "INSERT INTO employee "
                 + "(name, phoneNumber, address, email, gender, image, birth_date, hire_date) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -120,8 +130,8 @@ public class EmployeeDAO {
             ps.setString(4, email);
             ps.setBoolean(5, gender);
             ps.setString(6, image);
-            ps.setDate(7, (java.sql.Date) birthDate);
-            ps.setDate(8, (java.sql.Date) hireDate);
+            ps.setString(7, birthDate);
+            ps.setString(8, hireDate);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -149,8 +159,8 @@ public class EmployeeDAO {
                 String email = rs.getString("email");
                 boolean gender = rs.getBoolean("gender");
                 String image = rs.getString("image");
-                Date birthDate = rs.getDate("birth_date");
-                Date hireDate = rs.getDate("hire_date");
+                String birthDate = rs.getString("birth_date");
+                String hireDate = rs.getString("hire_date");
                 int userId = rs.getInt("user_id");
 
                 employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
@@ -187,8 +197,8 @@ public class EmployeeDAO {
             ps.setString(4, e.getEmail());
             ps.setBoolean(5, e.isGender());
             ps.setString(6, e.toString());
-            ps.setDate(7, e.getBirth_date());
-            ps.setDate(8, e.getHire_date());
+            ps.setString(7, e.getBirthDate());
+            ps.setString(8, e.getHireDate());
             ps.setInt(9, id);
             ps.executeUpdate();
         } catch (Exception ex) {
@@ -233,8 +243,8 @@ public class EmployeeDAO {
                 String email = rs.getString("email");
                 boolean gender = rs.getBoolean("gender");
                 String image = rs.getString("image");
-                Date birthDate = rs.getDate("birth_date");
-                Date hireDate = rs.getDate("hire_date");
+                String birthDate = rs.getString("birth_date");
+                String hireDate = rs.getString("hire_date");
                 int userId = rs.getInt("user_id");
 
                 Employee employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
@@ -249,7 +259,6 @@ public class EmployeeDAO {
         }
         return list;
     }
-
     public int GetDepIDfromEmployee(int Employee_id) throws SQLException {
         int dep_id = -1; // Giá trị mặc định nếu không tìm thấy kết quả
         String query = "SELECT department_id FROM employeedepartment WHERE employee_id = ?";

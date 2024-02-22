@@ -4,6 +4,7 @@
  */
 package dal;
 
+import context.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -132,8 +133,8 @@ public class DashboardDAO {
                         rs.getString(5),
                         rs.getBoolean(6),
                         rs.getString(7),
-                        rs.getDate(8),
-                        rs.getDate(9),
+                        rs.getString(8),
+                        rs.getString(9),
                         rs.getInt(10)));
             }
         } catch (Exception e) {
@@ -160,8 +161,8 @@ public class DashboardDAO {
                         rs.getString(5),
                         rs.getBoolean(6),
                         rs.getString(7),
-                        rs.getDate(8),
-                        rs.getDate(9),
+                        rs.getString(8),
+                        rs.getString(9),
                         rs.getInt(10)));
             }
         } catch (Exception e) {

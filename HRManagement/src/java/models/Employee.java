@@ -4,7 +4,7 @@
  */
 package models;
 
-import java.sql.Date;
+
 
 /**
  *
@@ -12,52 +12,52 @@ import java.sql.Date;
  */
 public class Employee {
 
-    public int employee_id;
-    public String name;
-    public String phoneNumber;
-   public String address;
-    public String email;
-    public boolean gender;
-    public String image;
-    public Date birth_date;
-    public Date hire_date;
-    public int user_id;
+    private int employeeId;
+    private String name;
+    private String phoneNumber;
+    private String address;
+    private String email;
+    private boolean gender;
+    private String image;
+    private String birthDate;
+    private String hireDate;
+    private int userId;
 
     public Employee() {
     }
 
-    public Employee(int employee_id, String name, String phoneNumber, String address, String email, boolean gender, String image, Date birth_date, Date hire_date, int user_id) {
-        this.employee_id = employee_id;
+    public Employee(int employeeId, String name, String phoneNumber, String address, String email, boolean gender, String image, String birthDate, String hireDate, int userId) {
+        this.employeeId = employeeId;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
         this.gender = gender;
         this.image = image;
-        this.birth_date = birth_date;
-        this.hire_date = hire_date;
-        this.user_id = user_id;
+        this.birthDate = birthDate;
+        this.hireDate = hireDate;
+        this.userId = userId;
+    }
+
+    public Employee(String name, String phoneNumber, String address, String email, boolean gender, String image, String birthDate, String hireDate) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.gender = gender;
+        this.image = image;
+        this.birthDate = birthDate;
+        this.hireDate = hireDate;
+       
     }
 
     
-    public Employee(String name, String phoneNumber, String address, String email, boolean gender, String image, Date birth_date, Date hire_date) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.email = email;
-        this.gender = gender;
-        this.image = image;
-        this.birth_date = birth_date;
-        this.hire_date = hire_date;
-    }
 
-    public int getEmployee_id() {
-        return employee_id;
-    }
+    
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
-    }
+    
+
+    
 
     public String getName() {
         return name;
@@ -107,28 +107,37 @@ public class Employee {
         this.image = image;
     }
 
-    public Date getBirth_date() {
-        return birth_date;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setBirth_date(Date birth_date) {
-        this.birth_date = birth_date;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public Date getHire_date() {
-        return hire_date;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setHire_date(Date hire_date) {
-        this.hire_date = hire_date;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public String getHireDate() {
+        return hireDate;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+   
 }

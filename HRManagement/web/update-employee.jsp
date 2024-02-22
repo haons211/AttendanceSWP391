@@ -181,7 +181,7 @@
                                                 Employee Name
                                             </td>
                                             <td>
-                                                
+
                                                 <div class = "left-input-table" >
                                                     <div class="input-group input-group-sm mb-3" >
                                                         <div class="input-group-prepend">
@@ -189,6 +189,9 @@
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
                                                                aria-describedby="inputGroup-sizing-sm" name="name" value="${employee.name}" style="width: 300px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorName}
                                                     </div>
                                                 </div>
                                             </td>
@@ -199,15 +202,15 @@
 
                                             </td>
                                             <td>
-                                              
+
                                                 <div class ="right-input-table" style= "width: 250px" >
                                                     <input type="file" 
                                                            name="image" class="btn btn-outline-secondary" accept=".jpg, .png"
                                                            style="margin:  0 30px; ">
-                                                     
-                                                   
+
+
                                                 </div>
-     
+
                                             </td>
                                         </tr>
 
@@ -222,6 +225,10 @@
                                                         <input type="text" class="form-control" aria-label="Small"
                                                                aria-describedby="inputGroup-sizing-sm" value="${employee.phoneNumber}"  name="phoneNumber"  >
                                                     </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorPhoneNumber}
+                                                    </div>
+
                                                 </div>
                                             <td>
                                                 <div class = "right-text-table">
@@ -238,6 +245,9 @@
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
                                                                aria-describedby="inputGroup-sizing-sm" name="address" value="${employee.address}" style="width: 312px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorAddress}
                                                     </div>
                                                 </div>
                                             </td>
@@ -297,7 +307,6 @@
                                                         </label>
                                                     </div>
                                                 </c:if>
-
                                             </td>
                                         </tr>
                                         <tr>
@@ -309,16 +318,20 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="birthDate" value="${employee.birth_date}" style="width: 300px;">
+                                                               aria-describedby="inputGroup-sizing-sm" name="birthDate" value="${employee.birthDate}" style="width: 300px;">
                                                     </div>
-
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorBirthDate}
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorBirthday}
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="right-text-table">
                                                     Hire Date        
                                                 </div>
-
                                             </td>
                                             <td>
                                                 <div class = "right-input-table" style="margin-left: 40px" >
@@ -327,7 +340,13 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="hireDate" value="${employee.hire_date}" style="width: 300px;">
+                                                               aria-describedby="inputGroup-sizing-sm" name="hireDate" value="${employee.hireDate}" style="width: 300px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorHireDate}
+                                                    </div>
+                                                     <div style="color: red">
+                                                        ${requestScope.messageErrorDate}
                                                     </div>
                                                 </div>
                                             </td>
@@ -338,10 +357,7 @@
                                             system</button>
                                     </div>
                                 </div>
-
                             </form>
-
-
                         </div>
                     </div>
                 </div>

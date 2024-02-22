@@ -301,7 +301,7 @@
                                                         </h2>
                                                     </td>
                                                     <td>
-                                                        <h2>${a.hire_date}</h2>   
+                                                        <h2>${a.hireDate}</h2>   
                                                     </td>
                                                 </tr>
                                             </c:forEach>

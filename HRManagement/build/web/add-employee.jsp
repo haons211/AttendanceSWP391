@@ -183,8 +183,11 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="name" style="width: 300px;">
+                                                        <input type="text" class="form-control" aria-label="Small"  placeholder="Employee Name"
+                                                               aria-describedby="inputGroup-sizing-sm" name="name" value="${name}" style="width: 300px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorName}
                                                     </div>
                                                 </div>
                                             </td>
@@ -197,8 +200,9 @@
                                             <td>
                                                 <div class ="right-input-table" style= "width: 250px" >
                                                     <input type="file" id="fileInput"   
-                                                            accept="image/*" class="btn btn-outline-secondary"
-                                                           style="margin:  0 30px; " name="image" >
+                                                           accept="image/*" class="btn btn-outline-secondary"
+                                                           style="margin:  0 30px; "  name="image" placeholder="Employee Image" >
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -212,9 +216,13 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="phoneNumber"  >
+                                                               value="${phoneNumber}"   aria-describedby="inputGroup-sizing-sm" name="phoneNumber" placeholder="Employee Phone Number"  >
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorPhoneNumber}
                                                     </div>
                                                 </div>
+
                                             <td>
                                                 <div class = "right-text-table">
                                                     Address
@@ -228,8 +236,11 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="address" style="width: 312px;">
+                                                        <input type="text" class="form-control" aria-label="Small" value="${address}"
+                                                               aria-describedby="inputGroup-sizing-sm" name="address" placeholder="Employee Address" style="width: 312px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorAddress}
                                                     </div>
                                                 </div>
                                             </td>
@@ -242,9 +253,10 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="email" style="width: 300px;">
+                                                        <input type="text" class="form-control" aria-label="Small" value="${email}"
+                                                               aria-describedby="inputGroup-sizing-sm" name="email" placeholder="Employee Email" style="width: 300px;">
                                                     </div>
+
                                                 </div>
                                             </td>
                                             <td> 
@@ -253,22 +265,65 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class = "right-input-table" style="margin-left: 60px" >
-                                                    <input class="form-check-input" type="radio" name="gender"
-                                                           id="flexRadioDefault1" value = "male" >
 
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Male
-                                                    </label>
+                                                <c:if test="${gender != null}" >
+                                                    <div class = "right-input-table" style="margin-left: 60px" >
+                                                        <c:if test="${gender eq 'male'}" >
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                   id="flexRadioDefault1" value = "male" checked >
 
-                                                    <input class="form-check-input" type="radio" name="gender"
-                                                           id="flexRadioDefault1" value = "female"style="margin-left: 20px"  >
+                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                Male
+                                                            </label>
 
-                                                    <label class="form-check-label" for="flexRadioDefault1" style="margin-left: 40px">
-                                                        Female
-                                                    </label>
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                   id="flexRadioDefault1" value = "female"style="margin-left: 20px"  >
+
+                                                            <label class="form-check-label" for="flexRadioDefault1" style="margin-left: 40px">
+                                                                Female
+                                                            </label>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class = "right-input-table" style="margin-left: 60px" >
+                                                        <c:if test="${gender eq 'female'}" >
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                   id="flexRadioDefault1" value = "male" >
+
+                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                Male
+                                                            </label>
+
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                   id="flexRadioDefault1" value = "female" checked style="margin-left: 20px"  >
+
+                                                            <label class="form-check-label" for="flexRadioDefault1" style="margin-left: 40px">
+                                                                Female
+                                                            </label>
+                                                        </c:if>
+                                                    </div>
+                                                </c:if>
+
+                                                <c:if test="${gender == null}" >
+                                                    <div class = "right-input-table" style="margin-left: 60px" >
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                               id="flexRadioDefault1" value = "male"  >
+
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Male
+                                                        </label>
+
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                               id="flexRadioDefault1" value = "female"style="margin-left: 20px"  >
+
+                                                        <label class="form-check-label" for="flexRadioDefault1" style="margin-left: 40px">
+                                                            Female
+                                                        </label>
+                                                    </div>
+                                                </c:if>
+                                                
+                                                <div style="color: red; margin-left: 40px" >
+                                                    ${requestScope.messageErrorGender}
                                                 </div>
-
 
                                             </td>
                                         </tr>
@@ -280,8 +335,14 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="birthDate" style="width: 300px;">
+                                                        <input type="date" class="form-control" aria-label="Small" value="${birthDate}"
+                                                               aria-describedby="inputGroup-sizing-sm" name="birthDate" placeholder="Employee Birth Date" style="width: 300px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorBirthDate}
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorBirthday}
                                                     </div>
 
                                                 </div>
@@ -298,8 +359,14 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="hireDate" style="width: 300px;">
+                                                        <input type="date" class="form-control" aria-label="Small" value="${hireDate}"
+                                                               aria-describedby="inputGroup-sizing-sm" name="hireDate" placeholder="Employee Hire Date"  style="width: 300px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorHireDate}
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorDate}
                                                     </div>
                                                 </div>
                                             </td>
@@ -309,6 +376,7 @@
                                         <button type="submit" class="btn btn-success" style="margin-top: 30px" >Add to
                                             system</button>
                                     </div>
+
                                 </div>
 
                             </form>
@@ -536,7 +604,6 @@
         <script src="assets/js/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
-        <script src="main.js"></script>
     </body>
 
 </html>

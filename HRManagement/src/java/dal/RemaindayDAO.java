@@ -8,6 +8,7 @@ package dal;
  *
  * @author ThuyVy
  */
+import context.DBContext;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;

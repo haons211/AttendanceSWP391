@@ -1,5 +1,6 @@
 package controller;
 
+import configs.Validate;
 import dal.EmployeeDAO;
 import java.io.IOException;
 import java.sql.Date;
@@ -10,10 +11,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import models.Employee;
 
 @WebServlet(name = "UpdateEmployee", urlPatterns = {"/update-employee"})
 public class UpdateEmployeeController extends HttpServlet {
+
+    private Validate validate = new Validate();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,42 +44,84 @@ public class UpdateEmployeeController extends HttpServlet {
             throws ServletException, IOException {
         // Retrieve parameters from the request
         String name = request.getParameter("name");
+        name = validate.normalizeName(name);
         String image = request.getParameter("image");
         String phoneNumber = request.getParameter("phoneNumber");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-
+        String gender = request.getParameter("gender");
         // Retrieve gender parameter and handle null case
-        String genderParam = request.getParameter("gender");
-        boolean gender = "male".equals(genderParam); // Default to male if parameter is null
 
-        Date birthDate = null;
-        Date hireDate = null;
+        // Default to male if parameter is null
+        String messageError = "Please input valid ";
 
         // Parse date parameters
+        EmployeeDAO dao = new EmployeeDAO();
+        String birthDate = request.getParameter("birthDate");
+        String hireDate = request.getParameter("hireDate");
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+      
+        
         try {
-            birthDate = Date.valueOf(request.getParameter("birthDate"));
-            hireDate = Date.valueOf(request.getParameter("hireDate"));
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            // Handle exception, possibly inform the user
-        }
 
-        // Parse employee ID parameter
-        try {
             int employeeId = Integer.parseInt(request.getParameter("id"));
-            // Create Employee object with updated information
-            Employee employee = new Employee(name, phoneNumber, address, email, gender, image, birthDate, hireDate);
-            // Update the employee in the database
-            EmployeeDAO eDAO = new EmployeeDAO();
-            eDAO.updateEmployee(employee, employeeId);
-        } catch (NumberFormatException | ClassNotFoundException ex) {
-            Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
+            request.setAttribute("id", employeeId);
 
-        // Redirect to the list-employee servlet or page
-        response.sendRedirect("employee");
+            boolean genderReturn = true;
+            if (gender.equals("male")) {
+                genderReturn = false;
+
+            }
+            int count = 0;
+            if (!validate.checkPhone(phoneNumber)) {
+                request.setAttribute("messageErrorPhoneNumber", messageError + "phone number");
+                count++;
+            }
+            if (!validate.checkWords(name)) {
+                request.setAttribute("messageErrorName", messageError + "name");
+                count++;
+            }
+            if (!validate.checkAddress(address)) {
+                request.setAttribute("messageErrorAddress", messageError + "address");
+                count++;
+            }
+            if (!validate.checkDate(birthDate)) {
+                request.setAttribute("messageErrorBirthDate", messageError + "birth date");
+                count++;
+            }
+            if (!validate.checkDate(hireDate)) {
+                request.setAttribute("messageErrorHireDate", messageError + "hire date");
+                count++;
+            }  
+            
+            if(!validate.compareDate(birthDate, hireDate)){
+                request.setAttribute("messageErrorDate", messageError + ". The hire date is after the birth date");
+                count++;
+            }
+            if(!validate.isAdult(birthDate)){
+                request.setAttribute("messageErrorBirthday", messageError + ". The age of employee must be greater than 18");
+                count++;
+            }
+
+            if (count > 0) {
+                request.setAttribute("employee", employeeDAO.getEmployeeById(employeeId));
+                request.getRequestDispatcher("update-employee.jsp").forward(request, response);
+            } else {
+                // Create Employee object with updated information
+                Employee employee = new Employee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate);
+                // Update the employee in the database
+                dao.updateEmployee(employee, employeeId);
+                // Redirect to the list-employee servlet or page
+                response.sendRedirect("employee");
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (ParseException ex) {
+            Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+
     }
 
     @Override

@@ -184,11 +184,11 @@
                         </div>
                     </div>
                     <form action="employee" method="get" class="form-inline">
-                                            <input class="form-control mr-sm-2" name="searchValue" type="text" placeholder="Search"
-                                                   aria-label="Search" style="height: 30px;" >
-                                            <button class="btn btn-outline-success my-2 my-sm-0"
-                                                    type="submit" style="height: 30px;">Search</button>
-                                        </form>
+                        <input class="form-control mr-sm-2" name="searchValue" type="text" placeholder="Search"
+                               aria-label="Search" style="height: 30px;" >
+                        <button class="btn btn-outline-success my-2 my-sm-0"
+                                type="submit" style="height: 30px;">Search</button>
+                    </form>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -196,8 +196,9 @@
                                 <table class="table table-striped custom-table mb-0 datatable">
                                     <thead>
                                         <tr>
-                                            <th style="min-width:200px;">Name</th>
                                             <th>Employee ID</th>
+                                            <th style="min-width:200px;">Name</th>
+                                            
                                             <th>Email</th>
                                             <th>Mobile</th>
                                             <th style="min-width: 110px;">Hire Date</th>
@@ -211,17 +212,18 @@
                                             <c:forEach var="e" items="${requestScope.employeeList}">
 
                                                 <tr>
+                                                    <td >${e.employeeId}</td>
                                                     <td >${e.name}</td>
-                                                    <td >${e.employee_id}</td>
+                                                    
                                                     <td>${e.email}</td>
                                                     <td >${e.phoneNumber}</td>
-                                                    <td >${e.hire_date}</td>
+                                                    <td >${e.hireDate}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="update-employee?id=${e.employee_id}"><i class="fa fa-pencil m-r-5"></i>Update</a>
-                                                                <a class="dropdown-item" href="delete-employee?id=${e.employee_id}"  onclick="doDelete('${e.employee_id}')" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                                <a class="dropdown-item" href="update-employee?id=${e.employeeId}"><i class="fa fa-pencil m-r-5"></i>Edit</a>
+                                                                <a class="dropdown-item" href="delete-employee?id=${e.employeeId}"  onclick="doDelete('${e.employeeId}')" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.Validate;
 import dal.DepartmentDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,8 @@ import models.Department;
  * @author andep
  */
 public class UpdateDepartmentController extends HttpServlet {
+
+    private Validate validate = new Validate();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -80,65 +83,67 @@ public class UpdateDepartmentController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-@Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    String departmentIDString = request.getParameter("departmentID");
-        String departmentCode = request.getParameter("departmentCode");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String departmentIDString = request.getParameter("departmentID");
+        String departmentCode = request.getParameter("departmentCode").toLowerCase();
         String departmentName = request.getParameter("departmentName");
+        departmentName = validate.normalizeName(departmentName);
         
-        // Validate and sanitize inputs
-        if (isValidInput(departmentIDString) && isValidInput(departmentCode) && isValidInput(departmentName)) {
-            DepartmentDAO dao = new DepartmentDAO();
+        DepartmentDAO dao = new DepartmentDAO();
+        String messageError = "Please input valid ";
+        try {
+            int count = 0;
+            int departmentID = Integer.parseInt(departmentIDString);
+            if (!dao.isDepartmentCodeExists(departmentCode, departmentID)) {
+                if (!validate.checkWords(departmentName)) {
+                    request.setAttribute("messageErrorName", messageError + "name");
+                    count++;
+                }
+                if (!validate.checkWords(departmentCode)) {
+                    request.setAttribute("messageErrorCode", messageError + "code");
+                    count++;
+                }
+                if (count > 0) {
 
-            try {
-                int departmentID = Integer.parseInt(departmentIDString);
-                if (!dao.isDepartmentCodeExists(departmentCode, departmentID)) {
-                    // Sanitize inputs
-                    departmentName = sanitizeInput(departmentName);
-                    departmentCode = sanitizeInput(departmentCode);
-                    
+                    DepartmentDAO d = new DepartmentDAO();
+                    Department p = d.getDepartmentById(departmentID);
+                    request.setAttribute("p", p);
+                    request.getRequestDispatcher("UpdateDepartment.jsp").forward(request, response);
+                } else {
                     dao.updateDepartment(departmentID, departmentName, departmentCode);
                     request.getSession().setAttribute("successMessage", "Department updated successfully");
                     request.getSession().setAttribute("departmentID", departmentID);
                     request.getSession().setAttribute("departmentCode", departmentCode);
                     request.getSession().setAttribute("departmentName", departmentName);
-
-                    // Check and remove errorMessage from session
-                    Object errorMessage = request.getSession().getAttribute("errorMessage");
-                    if (errorMessage != null) {
-                        request.getSession().removeAttribute("errorMessage");
-                    }
-                } else {
-                    // Set the error message attribute
-                    request.getSession().setAttribute("errorMessage", "Department with Code " + departmentCode + " already exists. Please enter a different Code.");
                 }
 
-                // Redirect to the update page with the departmentID parameter
-                response.sendRedirect("UpdateDepartment?pid=" + departmentID);
-            } catch (NumberFormatException | IOException e) {
-                request.getSession().setAttribute("errorMessage", "Error updating department");
-
-                // Redirect to the update page with the departmentID parameter
-                response.sendRedirect("UpdateDepartment?pid=" + departmentIDString);
+                // Check and remove errorMessage from session
+                Object errorMessage = request.getSession().getAttribute("errorMessage");
+                if (errorMessage != null) {
+                    request.getSession().removeAttribute("errorMessage");
+                }
+            } else {
+                // Set the error message attribute
+                request.getSession().setAttribute("errorMessage", "Department with Code " + departmentCode + " already exists. Please enter a different Code.");
             }
-        } else {
-            // Invalid input, set an error message
-            request.getSession().setAttribute("errorMessage", "Invalid input. Please enter valid data.");
+
+            // Redirect to the update page with the departmentID parameter
+            response.sendRedirect("UpdateDepartment?pid=" + departmentID);
+        } catch (NumberFormatException | IOException e) {
+            request.getSession().setAttribute("errorMessage", "Error updating department");
+
+            // Redirect to the update page with the departmentID parameter
             response.sendRedirect("UpdateDepartment?pid=" + departmentIDString);
         }
-}
-
-
-    private boolean isValidInput(String input) {
-        return input != null && !input.isEmpty();
     }
 
-    private String sanitizeInput(String input) {
-        // Manually replace '<' and '>'
-        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-    }
-    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

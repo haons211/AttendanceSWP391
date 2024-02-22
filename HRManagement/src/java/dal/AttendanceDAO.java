@@ -4,6 +4,7 @@
  */
 package dal;
 
+import context.DBContext;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;

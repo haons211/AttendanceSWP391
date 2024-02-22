@@ -38,7 +38,7 @@ public class CheckOutServlet extends HttpServlet {
             RemaindayDAO DAO = new RemaindayDAO();
             try {
                 Employee em = dao.getin4(acc.getUserID());
-                int remainDay = DAO.getRemainDayById(em.employee_id);
+                int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                 request.setAttribute("re", remainDay);
                 request.setAttribute("emp", em);
                 int attendanceId = (int) session.getAttribute("attendanceId");
@@ -79,7 +79,7 @@ public class CheckOutServlet extends HttpServlet {
             if (acc != null) {
                 try {
                     Employee em = dao.getin4(acc.getUserID());
-                    int remainDay = DAO.getRemainDayById(em.employee_id);
+                    int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                     request.setAttribute("re", remainDay);
                     request.setAttribute("emp", em);
                     int attendanceId = (int) session.getAttribute("attendanceId");

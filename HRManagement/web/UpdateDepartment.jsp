@@ -180,34 +180,40 @@
                                     <input type="text" class="form-control" id="departmentId" name="departmentID" value="${p.department_id}" readonly>
                                 </div>
                                 <div class="mb-3">
-                                     <label for="departmentName" class="form-label">Department Name</label>
+                                    <label for="departmentName" class="form-label">Department Name</label>
                                     <input type="text" class="form-control" id="departmentName" name="departmentName" value="${p.name}">
                                 </div>
+                                <div style="color: red">
+                                    ${requestScope.messageErrorName}
+                                </div>
                                 <div class="mb-3">
-                                     <label for="departmentCode" class="form-label">Department Code</label>
+                                    <label for="departmentCode" class="form-label">Department Code</label>
                                     <input type="text" class="form-control" id="departmentCode" name="departmentCode" value="${p.dep_code}">
+                                    <div style="color: red">
+                                    ${requestScope.messageErrorCode}
+                                </div>
                                 </div>
                                 <div class="add-to-system">
                                     <button type="submit" class="btn btn-success" style="margin: 10px 0;">Update Department</button>
                                 </div>
                             </form>
 
-                           <c:if test="${not empty errorMessage}">
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>Error! </strong>${errorMessage}
+                            <!-- Hiển thị thông báo thành công hoặc lỗi -->
+                            <c:if test="${not empty successMessage}">
+                                <div style="color: green" role="alert">
+                                    ${successMessage}
                                 </div>
                             </c:if>
-
-                            <c:if test="${not empty successMessage}">
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>Success! </strong> ${successMessage}
+                            <c:if test="${not empty errorMessage}">
+                                <div style="color: red" role="alert">
+                                    ${errorMessage}
                                 </div>
                             </c:if>
                         </div>
                     </div>
                 </div>
-                
-               
+
+
             </div>
         </div>
         <div class="sidebar-overlay" data-reff=""></div>

@@ -46,7 +46,7 @@ public class EmployeesController extends HttpServlet {
             RemaindayDAO DAO = new RemaindayDAO();
             try {
                 Employee em = dao.getin4(acc.getUserID());
-                int remainDay = DAO.getRemainDayById(em.employee_id);
+                int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                 request.setAttribute("re", remainDay);
                 request.setAttribute("emp", em);
             } catch (Exception e) {
@@ -99,11 +99,11 @@ public class EmployeesController extends HttpServlet {
                         EmployeeDAO dao = new EmployeeDAO();
                         RemaindayDAO DAO = new RemaindayDAO();
                         Employee em = dao.getin4(acc.getUserID());
-                        int remainDay = DAO.getRemainDayById(em.employee_id);
+                        int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                         request.setAttribute("re", remainDay);
                         request.setAttribute("emp", em);
                         if (em != null) {
-                            int em_id = em.getEmployee_id();
+                            int em_id = em.getEmployeeId();
                             int dep_id = dao.GetDepIDfromEmployee(em_id);
                             int remain_id = dao.GetRemainIDfromEmployee(em_id);
                             String img = em.getImage();
