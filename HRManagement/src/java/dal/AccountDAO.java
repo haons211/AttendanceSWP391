@@ -90,13 +90,21 @@ public class AccountDAO {
         return numberOfUsers;
     }
 
-    public ArrayList<AccountDTO> getAllUsers(String search) {
+    public ArrayList<AccountDTO> getAllUsers(String search, int role_id) {
         ArrayList<AccountDTO> list = new ArrayList<>();
-        String query = "SELECT * FROM users WHERE username LIKE ? ORDER BY user_id ASC";
+        String query = "SELECT *\n"
+                + "FROM users\n"
+                + "WHERE \n"
+                + "    (username LIKE ? OR ? = '') \n" // Lọc theo username là 'admin' nếu có giá trị, nếu không thì bỏ qua
+                + "    AND (role_id = ? OR ? = 0) \n" //Bỏ qua điều kiện này vì role_id trống
+                + "ORDER BY user_id ASC;";
         try {
             con = new DBContext().getConnection();
             stm = con.prepareStatement(query);
             stm.setString(1, "%" + search + "%");
+            stm.setString(2, "%" + search + "%");
+            stm.setInt(3, role_id);
+            stm.setInt(4, role_id);
             rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new AccountDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
@@ -132,19 +140,15 @@ public class AccountDAO {
         return false;
     }
 
-    public void addUser(int user_id, String username, String password, int role_id) {
-        if (isUserIdExists(user_id)) {
-            System.out.println("User with ID " + user_id + " already exists.");
-            return;
-        }
-        String query = "INSERT INTO users (user_id, username, password, role_id) VALUES (?, ?, ?, ?)";
+    public void addUser(String username, String password, int role_id) {
+
+        String query = "INSERT INTO users (username, password, role_id) VALUES (?, ?, ?)";
         try {
             con = new DBContext().getConnection();
             stm = con.prepareStatement(query);
-            stm.setInt(1, user_id);
-            stm.setString(2, username);
-            stm.setString(3, password);
-            stm.setInt(4, role_id);
+            stm.setString(1, username);
+            stm.setString(2, password);
+            stm.setInt(3, role_id);
             stm.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

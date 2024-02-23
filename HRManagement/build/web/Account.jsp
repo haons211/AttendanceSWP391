@@ -167,24 +167,45 @@
                             <h4 class="page-title">Accounts</h4>
                         </div>
                         <div class="col-sm-7 col-7 text-right m-b-30">
-                            <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Account</a>
+                            <a href="addAccount" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Account</a>
                         </div>
                     </div>
-                    <div class="main-option">
+                    <form action="account" method="get">                        
+                        <div class="main-option">
+                            <div class="row filter-row">
+                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+                                        <input name="search" type="text" placeholder="Search"
+                                               aria-label="Search" class="form-control floating">             
+                                </div>
+                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+                                    <div class="form-group form-focus select-focus">
+                                        <label class="focus-label">Role</label>
+                                        <select name="role">
+                                            <option> -- Select -- </option>
+                                            <option>Admin</option>
+                                            <option>Manager</option>
+                                            <option>Employee</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+                                    <button type="submit" class="btn btn-success btn-block"> Search </button>
+                                </div>
+                            </div>
+                            <!--                                                <div class="main-option-search">
+                                                                                <nav class="navbar navbar-light bg-light justify-content-between">
+                                                    
+                                                                                    <form action="account" method="get" class="form-inline">
+                                                                                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
+                                                                                               aria-label="Search" style="height: 30px;" >
+                                                                                        <button class="btn btn-outline-success my-2 my-sm-0"
+                                                                                                type="submit" style="height: 30px;">Search</button>
+                                                                                    </form>
+                                                                                </nav>
+                                                                            </div>-->
 
-                        <div class="main-option-search">
-                            <nav class="navbar navbar-light bg-light justify-content-between">
-
-                                <form action="account" method="get" class="form-inline">
-                                    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
-                                           aria-label="Search" style="height: 30px;" >
-                                    <button class="btn btn-outline-success my-2 my-sm-0"
-                                            type="submit" style="height: 30px;">Search</button>
-                                </form>
-                            </nav>
                         </div>
-
-                    </div>
+                    </form>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -194,7 +215,6 @@
                                             <th>#</th>
                                             <th>Username</th>
                                             <th>Role</th>
-                                            <th>Status</th>
                                             <th class="text-right">Action</th>
                                         </tr>
                                     </thead>
@@ -202,7 +222,7 @@
                                         <c:forEach var="o" items="${requestScope.list}">
                                             <tr class="table_row">
                                                 <td  class="column-1">${o.getUserID()}</td>   
-                                                <td  class="column-2">${o.getUserName()}</td>
+                                                <td  class="column-1">${o.getUserName()}</td>
                                                 <td class="column-1">
                                                     <c:choose>
                                                         <c:when test="${o.getRole() eq 1}">Admin</c:when>
@@ -211,13 +231,12 @@
                                                         <c:otherwise>Unknown Role</c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td><span class="custom-badge status-green">Active</span></td>
                                                 <td class="text-right">
                                                     <div class="dropdown dropdown-action">
                                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="UpdateAccount?pid=${o.getUserID()}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                            <a class="dropdown-item" href="DeleteAccount?pid=${o.getUserID()}" data-toggle="modal" data-target="#delete_account"  onclick="doDelete('${o.getUserID()}')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                            <a class="dropdown-item" href="updateAccount?uid=${o.getUserID()}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                            <a class="dropdown-item" href="deleteAccount?uid=${o.getUserID()}" data-toggle="modal" data-target="#delete_account"  onclick="doDelete('${o.getUserID()}')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -451,8 +470,8 @@
         <script src="assets/js/app.js"></script>
         <script type="text/javascript">
                                                                 function doDelete(id) {
-                                                                    if (confirm("Are you sure to delete Account_ID = " + id)) {
-                                                                        window.location = "DeleteAccount?pid=" + id;
+                                                                    if (confirm("Are you sure to delete Account ID = " + id)) {
+                                                                        window.location = "deleteAccount?uid=" + id;
                                                                     }
                                                                 }
         </script>
