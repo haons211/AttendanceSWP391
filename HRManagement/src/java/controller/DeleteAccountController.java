@@ -12,15 +12,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import models.AccountDTO;
 
 /**
  *
  * @author andep
  */
-@WebServlet(name = "AllAccountController", urlPatterns = {"/account"})
-public class AllAccountController extends HttpServlet {
+@WebServlet(name = "DeleteAccountController", urlPatterns = {"/deleteAccount"})
+public class DeleteAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class AllAccountController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AllAccountController</title>");
+            out.println("<title>Servlet DeleteAccountController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AllAccountController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteAccountController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,22 +58,10 @@ public class AllAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search");
-        String role = request.getParameter("role");
-        int roleId = 0; 
-        if (role != null) {
-            roleId = role.equals("Admin") ? 1
-                    : role.equals("Manager") ? 2
-                    : role.equals("Employee") ? 3 : 0;
-        }
-        AccountDAO d = new AccountDAO();
-        ArrayList<AccountDTO> list = new ArrayList<>();
-        list = d.getAllUsers(search == null ? "" : search, roleId == 0 ? 0 : roleId);
-        request.setAttribute("list", list);
-        request.setAttribute("searchValue", search);
-        request.setAttribute("roleValue", role);
-        
-        request.getRequestDispatcher("Account.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("uid"));
+        AccountDAO dao = new AccountDAO();
+        dao.deleteUser(id);
+        request.getRequestDispatcher("account").forward(request, response);
     }
 
     /**

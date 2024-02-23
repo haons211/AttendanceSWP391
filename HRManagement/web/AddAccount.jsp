@@ -1,10 +1,10 @@
 <%-- 
-    Document   : department
-    Created on : Jan 14, 2024, 10:53:39 AM
+    Document   : addDepartment
+    Created on : Jan 14, 2024, 11:06:54 AM
     Author     : ThuyVy
 --%>
 
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Accounts</title>
+        <title>Add Account</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -113,9 +113,9 @@
                             <span>${sessionScope.employee.name}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile">My Profile</a>
-                            <a class="dropdown-item" href="#">Edit Profile</a>
-                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="profile.html">My Profile</a>
+                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                            <a class="dropdown-item" href="settings.html">Settings</a>
                             <a class="dropdown-item" href="Logout">Logout</a>
                         </div>
                     </li>
@@ -123,9 +123,9 @@
                 <div class="dropdown mobile-user-menu float-right">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="#">Edit Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                        <a class="dropdown-item" href="settings.html">Settings</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </div>
@@ -164,88 +164,54 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-sm-5 col-5">
-                            <h4 class="page-title">Accounts</h4>
+                            <h4 class="page-title">Add Account</h4>
                         </div>
                         <div class="col-sm-7 col-7 text-right m-b-30">
-                            <a href="addAccount" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Account</a>
                         </div>
-                    </div>
-                    <form action="account" method="get">                        
-                        <div class="main-option">
-                            <div class="row filter-row">
-                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
-                                        <input name="search" type="text" placeholder="Search"
-                                               aria-label="Search" class="form-control floating">             
-                                </div>
-                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
-                                    <div class="form-group form-focus select-focus">
-                                        <label class="focus-label">Role</label>
-                                        <select name="role">
-                                            <option> -- Select -- </option>
-                                            <option>Admin</option>
-                                            <option>Manager</option>
-                                            <option>Employee</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
-                                    <button type="submit" class="btn btn-success btn-block"> Search </button>
-                                </div>
-                            </div>
-                            <!--                                                <div class="main-option-search">
-                                                                                <nav class="navbar navbar-light bg-light justify-content-between">
-                                                    
-                                                                                    <form action="account" method="get" class="form-inline">
-                                                                                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
-                                                                                               aria-label="Search" style="height: 30px;" >
-                                                                                        <button class="btn btn-outline-success my-2 my-sm-0"
-                                                                                                type="submit" style="height: 30px;">Search</button>
-                                                                                    </form>
-                                                                                </nav>
-                                                                            </div>-->
 
-                        </div>
-                    </form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped custom-table mb-0 datatable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Username</th>
-                                            <th>Role</th>
-                                            <th class="text-right">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="o" items="${requestScope.list}">
-                                            <tr class="table_row">
-                                                <td  class="column-1">${o.getUserID()}</td>   
-                                                <td  class="column-1">${o.getUserName()}</td>
-                                                <td class="column-1">
-                                                    <c:choose>
-                                                        <c:when test="${o.getRole() eq 1}">Admin</c:when>
-                                                        <c:when test="${o.getRole() eq 2}">Manager</c:when>
-                                                        <c:when test="${o.getRole() eq 3}">Employee</c:when>
-                                                        <c:otherwise>Unknown Role</c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td class="text-right">
-                                                    <div class="dropdown dropdown-action">
-                                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="updateAccount?uid=${o.getUserID()}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                            <a class="dropdown-item" href="deleteAccount?uid=${o.getUserID()}" data-toggle="modal" data-target="#delete_account"  onclick="doDelete('${o.getUserID()}')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
+                        <div class="main">
+                            <a href="account">
+                                <button type="button" class="btn btn-secondary" style="margin: 10px 0 ;">Back</button>
+                            </a>
 
-                                    </tbody>
-                                </table>
-                            </div>
+                            <form action="addAccount" method="post">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">UserName</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="repass" class="form-label">Confirm password</label>
+                                    <input type="password" class="form-control" id="repass" name="repass" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="role" class="form-label">Role</label>
+                                    <select name="role" class="form-control" aria-label="Default select example">
+                                        <option>Admin</option>
+                                        <option>Manager</option>   
+                                        <option>Employee</option> 
+                                    </select>
+                                </div>
+                                <div class="add-to-system">
+                                    <button type="submit" class="btn btn-success" style="margin: 10px 0 ;">Add Account</button>
+                                </div>
+
+                            </form>
+
+                            <c:if test="${not empty errorMessage}">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error! </strong>${errorMessage}
+                                </div>
+                            </c:if>
+
+                            <c:if test="${not empty successMessage}">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Success! </strong> ${successMessage}
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -468,13 +434,9 @@
         <script src="assets/js/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
-        <script type="text/javascript">
-                                                                function doDelete(id) {
-                                                                    if (confirm("Are you sure to delete Account ID = " + id)) {
-                                                                        window.location = "deleteAccount?uid=" + id;
-                                                                    }
-                                                                }
-        </script>
+
     </body>
 
 </html>
+
+
