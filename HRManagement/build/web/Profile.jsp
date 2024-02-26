@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="models.AccountDTO" %>
+<%@ page import="models.Employee" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,77 +20,17 @@
     <body>
 
         <%
-                        AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                 int role=     acc.getRole();
         %>
         <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
-            <div class="header">
-                <div class="header-left">
-                    <a href="dashboard" class="logo">
-                        <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="40" height="40" alt=""/> <span>BeztTech</span>
-                    </a>
-                </div>
-                <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-                <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-                <ul class="nav user-menu float-right">
+            <% if (role == 2) { %>
+            <jsp:include page="SideBarforEm.jsp" />
+            <% } else if (role == 3) { %>
+            <jsp:include page="SideBarforManager.jsp" />
+            <% } %>
 
-                    <li class="nav-item dropdown d-none d-sm-block">
-                        <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                    </li>
-                    <li class="nav-item dropdown has-arrow">
-                        <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                            <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-                                <span class="status online"></span></span>
-                            <span>${em.name}</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile">My Profile</a>
-                            <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                            <a class="dropdown-item" href="settings.html">Settings</a>
-                            <a class="dropdown-item" href="login.html">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="dropdown mobile-user-menu float-right">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar" id="sidebar">
-                <div class="sidebar-inner slimscroll">
-                    <div id="sidebar-menu" class="sidebar-menu">
-                        <ul>
-                            <li class="menu-title">Main</li>
-                            <li>
-                                <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                            </li>
-                            <li>
-                                <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
-                            </li>
-                            <li>
-                                <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span></a>
-                            </li>
-                            <li> 
-                                <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
-                            </li>    
-                            <li>
-                                <a href="#"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
-                            </li>
-                            <li> 
-                                <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                            </li>    
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="page-wrapper">
                 <div class="content">
                     <div class="row">
@@ -122,7 +63,7 @@
                                                 <div class="profile-info-left">
                                                     <h3 class="user-name m-t-0 mb-0">${em.name}</h3>
                                                     <small class="text-muted">Employee </small>
-                                                    <div class="staff-id">Employee ID :${em.employee_id}</div>
+                                                    <div class="staff-id">Employee ID :${em.employeeId}</div>
                                                     <div class="staff-msg"><a href="chat.html" class="btn btn-primary">Send Message</a></div>
                                                 </div>
                                             </div>
@@ -138,7 +79,7 @@
                                                     </li>
                                                     <li>
                                                         <span class="title">Birthday:</span>
-                                                        <span class="text">${em.birth_date}</span>
+                                                        <span class="text">${em.birthDate}</span>
                                                     </li>
                                                     <li>
                                                         <span class="title">Address:</span>
@@ -198,7 +139,7 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-</body>
+
 </html>
 
 

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.DepartmentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -63,6 +64,7 @@ public class AllDepartmentController extends HttpServlet {
         ArrayList<Department> list = new ArrayList<>();
         list = d.getAllDepartments(search == null ? "" : search);
         request.setAttribute("list", list);
+        headerInfor.setSessionAttributes(request);
         request.getRequestDispatcher("Department.jsp").forward(request, response);
     }
 

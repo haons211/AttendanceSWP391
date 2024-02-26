@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.EmployeeDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -36,19 +37,12 @@ public class ProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-      HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         AccountDTO acc = (AccountDTO) session.getAttribute("account");
 
-        if (acc == null) {
-            response.sendRedirect("Login");
-        } else {
-            int empuserId = acc.getUserID();
-            int role = acc.getRole();
-            EmployeeDAO dao = new EmployeeDAO();
-            Employee em = dao.getin4(empuserId);
-            request.setAttribute("emp", em);
-            request.getRequestDispatcher("Profile.jsp").forward(request, response);
-        }
+        headerInfor.setSessionAttributes(request);
+     
+        request.getRequestDispatcher("Profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -9,7 +9,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.concurrent.TimeUnit" %>
-
+<%@ page import="models.AccountDTO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -140,7 +140,7 @@
                 text-align: center;
                 font-weight: normal;
             }
-            
+
             .form-group {
                 margin-bottom: 20px;
             }
@@ -157,84 +157,18 @@
     </head>
 
     <body>
+        <%
+                     AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                     int role=     acc.getRole();
+        %>
+
+        <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
-            <div class="header">
-                <div class="header-left">
-                    <a href="index.html" class="logo">
-                        <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>Preclinic</span>
-                    </a>
-                </div>
-                <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-                <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-                <ul class="nav user-menu float-right">
-                    <li class="nav-item dropdown d-none d-sm-block">
-                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
-
-                    </li>
-                    <li class="nav-item dropdown d-none d-sm-block">
-                        <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                    </li>
-                    <li class="nav-item dropdown has-arrow">
-                        <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                            <span class="user-img">
-                                <img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
-                                <span class="status online"></span>
-                            </span>
-
-                            <c:set var="em" value="${requestScope.emp}" />
-                            <span>${em.name}</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="profile">My Profile</a>
-                            <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                            <a class="dropdown-item" href="settings.html">Settings</a>
-                            <a class="dropdown-item" href="Logout">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="dropdown mobile-user-menu float-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="Logout">Logout</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar" id="sidebar">
-                <div class="sidebar-inner slimscroll">
-                    <div id="sidebar-menu" class="sidebar-menu">
-                        <ul>
-                            <li class="menu-title">Main</li>
-                            <li>
-                                <a href="HomeEmployees.jsp"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                            </li>
-                            <li>
-                                <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
-                            </li>
-                            <li>
-                                <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span></a>
-                            </li>
-                            <li> 
-                                <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
-                            </li>    
-                            <li>
-                                <a href="#"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
-                            </li>
-                            <li> 
-                                <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
-                            </li>
-                            <li> 
-                                <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                            </li>    
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <% if (role == 2) { %>
+            <jsp:include page="SideBarforEm.jsp" />
+            <% } else if (role == 3) { %>
+            <jsp:include page="SideBarforManager.jsp" />
+            <% } %>
             <div class="page-wrapper">
                 <div class="content">
                     <div class="row">
@@ -272,77 +206,78 @@
                     </div>
                 </div>
             </div>
-            <div class="sidebar-overlay" data-reff=""></div>
-            <script src="assets/js/jquery-3.2.1.min.js"></script>
-            <script src="assets/js/popper.min.js"></script>
-            <script src="assets/js/bootstrap.min.js"></script>
-            <script src="assets/js/jquery.slimscroll.js"></script>
-            <script src="assets/js/Chart.bundle.js"></script>
-            <script src="assets/js/chart.js"></script>
-            <script src="assets/js/app.js"></script>
-           <script>
-    // Lấy thời gian check-in từ session hoặc một nguồn khác
-    var checkInTime = new Date("<%= session.getAttribute("checkInTime") %>");
-    
-    // Hàm cập nhật thời gian hiển thị
-    function updateTotalTime() {
-        var now = new Date();
-        var elapsedTime = now - checkInTime;
-        var hours = Math.floor(elapsedTime / 3600000);
-        var minutes = Math.floor((elapsedTime % 3600000) / 60000);
-        var seconds = Math.floor((elapsedTime % 60000) / 1000);
-        document.getElementById("totalTime").innerHTML = "Total time<br>" + hours + " hours <br>" + minutes + " minutes<br> " + seconds + " seconds";
-    }
+        </div>
+        <div class="sidebar-overlay" data-reff=""></div>
+        <script src="assets/js/jquery-3.2.1.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="assets/js/Chart.bundle.js"></script>
+        <script src="assets/js/chart.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script>
+            // Lấy thời gian check-in từ session hoặc một nguồn khác
+            var checkInTime = new Date("<%= session.getAttribute("checkInTime") %>");
 
-    // Gọi hàm cập nhật thời gian mỗi giây
-    setInterval(updateTotalTime, 1000);
-</script>
-            <script>
-                var currentDate = new Date();
-                var options = {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                };
-                document.getElementById('currentDate').textContent = currentDate.toLocaleDateString('en-US', options);
-            </script>
-            <script>
-                var currentDate = new Date();
-                var currentYear = currentDate.getFullYear();
-                var currentMonth = currentDate.getMonth();
-                var currentDay = currentDate.getDate();
-                var calendarElement = document.getElementById("calendar");
-                var calendarHTML = "";
+            // Hàm cập nhật thời gian hiển thị
+            function updateTotalTime() {
+                var now = new Date();
+                var elapsedTime = now - checkInTime;
+                var hours = Math.floor(elapsedTime / 3600000);
+                var minutes = Math.floor((elapsedTime % 3600000) / 60000);
+                var seconds = Math.floor((elapsedTime % 60000) / 1000);
+                document.getElementById("totalTime").innerHTML = "Total time<br>" + hours + " hours <br>" + minutes + " minutes<br> " + seconds + " seconds";
+            }
 
-                var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                var dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                calendarHTML += '<div class="calendar-header">' + monthNames[currentMonth] + ' ' + currentYear + '</div>';
-                calendarHTML += '<div class="weekdays">';
-                for (var i = 0; i < dayNames.length; i++) {
-                    calendarHTML += '<div class="weekday">' + dayNames[i] + '</div>';
-                }
-                calendarHTML += '</div>';
+            // Gọi hàm cập nhật thời gian mỗi giây
+            setInterval(updateTotalTime, 1000);
+        </script>
+        <script>
+            var currentDate = new Date();
+            var options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            document.getElementById('currentDate').textContent = currentDate.toLocaleDateString('en-US', options);
+        </script>
+        <script>
+            var currentDate = new Date();
+            var currentYear = currentDate.getFullYear();
+            var currentMonth = currentDate.getMonth();
+            var currentDay = currentDate.getDate();
+            var calendarElement = document.getElementById("calendar");
+            var calendarHTML = "";
 
-                calendarHTML += '<div class="calendar-body">';
-                var firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-                var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-                var counter = 0;
-                for (var i = 0; i < firstDayOfMonth; i++) {
-                    calendarHTML += '<div class="calendar-day"></div>';
-                    counter++;
-                }
-                for (var day = 1; day <= daysInMonth; day++) {
-                    var className = (day === currentDay) ? 'calendar-day current-day' : 'calendar-day';
-                    calendarHTML += '<div class="' + className + '">' + day + '</div>';
-                    counter++;
-                }
-                for (var i = counter; i % 7 !== 0; i++) {
-                    calendarHTML += '<div class="calendar-day"></div>';
-                }
-                calendarHTML += '</div>';
+            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            calendarHTML += '<div class="calendar-header">' + monthNames[currentMonth] + ' ' + currentYear + '</div>';
+            calendarHTML += '<div class="weekdays">';
+            for (var i = 0; i < dayNames.length; i++) {
+                calendarHTML += '<div class="weekday">' + dayNames[i] + '</div>';
+            }
+            calendarHTML += '</div>';
 
-                calendarElement.innerHTML = calendarHTML;
-            </script>
+            calendarHTML += '<div class="calendar-body">';
+            var firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            var counter = 0;
+            for (var i = 0; i < firstDayOfMonth; i++) {
+                calendarHTML += '<div class="calendar-day"></div>';
+                counter++;
+            }
+            for (var day = 1; day <= daysInMonth; day++) {
+                var className = (day === currentDay) ? 'calendar-day current-day' : 'calendar-day';
+                calendarHTML += '<div class="' + className + '">' + day + '</div>';
+                counter++;
+            }
+            for (var i = counter; i % 7 !== 0; i++) {
+                calendarHTML += '<div class="calendar-day"></div>';
+            }
+            calendarHTML += '</div>';
+
+            calendarElement.innerHTML = calendarHTML;
+        </script>
 
 </html>

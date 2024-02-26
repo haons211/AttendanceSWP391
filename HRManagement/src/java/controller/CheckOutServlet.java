@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.AttendanceDAO;
 import dal.EmployeeDAO;
 import dal.RemaindayDAO;
@@ -31,6 +32,7 @@ public class CheckOutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        headerInfor.setSessionAttributes(request);
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             AccountDTO acc = (AccountDTO) session.getAttribute("account");
@@ -71,7 +73,7 @@ public class CheckOutServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
+headerInfor.setSessionAttributes(request);
         if (session != null) {
             AccountDTO acc = (AccountDTO) session.getAttribute("account");
             EmployeeDAO dao = new EmployeeDAO();

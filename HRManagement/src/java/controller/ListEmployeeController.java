@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -37,7 +38,7 @@ public class ListEmployeeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         EmployeeDAO dao = new EmployeeDAO();
-        
+        headerInfor.setSessionAttributes(request);
         String valueSearch = request.getParameter("searchValue");
         List<Employee> employeesList =  new ArrayList<>() ;
         try {

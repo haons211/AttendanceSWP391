@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.DashboardDAO;
 import models.AccountDTO;
 import java.io.IOException;
@@ -37,10 +38,7 @@ public class ManagerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            AccountDTO acc = (AccountDTO) session.getAttribute("account");
-            if (acc == null) {
-                out.println("Access denied!");
-            } else {
+            headerInfor.setSessionAttributes(request);
                 DashboardDAO dao = new DashboardDAO();
         int numberDepartments = dao.getNumberOfDepartments();
         int numberEmployees = dao.getNumberOfEmployees();
@@ -62,7 +60,7 @@ public class ManagerController extends HttpServlet {
                 request.getRequestDispatcher("HomeManager.jsp").forward(request, response);
             }
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
