@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.ApplicationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -63,9 +64,7 @@ public class ViewSendApplicationController extends HttpServlet {
             throws ServletException, IOException {
         ApplicationDAO a = new ApplicationDAO();
         AccountDTO account = (AccountDTO) request.getSession().getAttribute("account");
-        if (account == null) {
-            throw new ServletException("Account not found in session");
-        }
+        headerInfor.setSessionAttributes(request);
         List<ApplicationDTO> list = a.getAllApplicationbySenderId(a.GetEmployeeIDbyUserID(account));
         request.setAttribute("list_application", list);
         request.getRequestDispatcher("ViewSendApplication.jsp").forward(request, response);

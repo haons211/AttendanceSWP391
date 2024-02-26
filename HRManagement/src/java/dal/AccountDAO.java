@@ -21,7 +21,29 @@ public class AccountDAO {
     Connection con = null;
     PreparedStatement stm = null;
     ResultSet rs = null;
+public int getEmployeeId(int userId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int employeeId = -1;
 
+        try {
+            con = new DBContext().getConnection();
+            String sql = "SELECT employee_id FROM employee WHERE user_id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                employeeId = rs.getInt("employee_id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng tất cả các tài nguyên
+        }
+
+        return employeeId;
+    }
     public AccountDTO checkLogin(String username, String password) throws SQLException, ClassNotFoundException, Exception {
 
         try {

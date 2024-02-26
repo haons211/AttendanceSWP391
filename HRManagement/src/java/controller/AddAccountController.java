@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import static controller.LoginController.isPasswordValid;
 import static controller.LoginController.isusernameValid;
 import dal.AccountDAO;
@@ -66,6 +67,7 @@ public class AddAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         request.getRequestDispatcher("AddAccount.jsp").forward(request, response);
     }
 

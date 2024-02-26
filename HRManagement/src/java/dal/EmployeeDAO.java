@@ -305,6 +305,49 @@ public class EmployeeDAO {
         }
         return remain_id; 
     }
+     public Employee getin4byemid(int Id) throws SQLException, ClassNotFoundException {
+
+        Employee em = null;
+
+        try {
+            // Kết nối cơ sở dữ liệu
+            con = new DBContext().getConnection();
+            if (con != null) {
+                // Câu truy vấn SQL với INNER JOIN
+                String sql = "select distinct e.* from employee e join notification n on e.employee_id=n.employee_id where n.notification_id=?";
+
+                // Tạo statement và thiết lập tham số
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, Id);
+
+                // Thực hiện câu truy vấn
+                rs = ps.executeQuery();
+
+                // Xử lý kết quả
+                if (rs.next()) {
+                    // Lấy dữ liệu từ ResultSet và tạo đối tượng Student
+
+                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
+                    return em;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý lỗi theo ý của bạn
+        } finally {
+            // Đóng các tài nguyên
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return em;
+    }
 
     private void closeResources() {
         try {
@@ -321,5 +364,6 @@ public class EmployeeDAO {
             e.printStackTrace();
         }
     }
+    
 
 }

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.EmployeeDAO;
 import models.AccountDTO;
 import jakarta.servlet.RequestDispatcher;
@@ -36,23 +37,10 @@ public class UpdateProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            AccountDTO acc = (AccountDTO) session.getAttribute("account");
-            EmployeeDAO dao = new EmployeeDAO();
-            try {
-                Employee em = dao.getin4(acc.getUserID());
-                request.setAttribute("emp", em);
-            } catch (Exception e) {             
-            }
-
-            if (acc == null) {
-                response.sendRedirect("Login");
-            } else {
-                request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
-            }
+       
+        
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -66,14 +54,10 @@ public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+           headerInfor.setSessionAttributes(request);
+                request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
+            }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -125,7 +109,7 @@ public class UpdateProfileController extends HttpServlet {
 
             } // sang tab thay doi thong tin nhan vien
             else if (button.equals("Edit profile")) {
-                url = "UpdateProfile.jsp";
+                url = "UpdateInformation";
             }
        } catch (Exception ex) {
 

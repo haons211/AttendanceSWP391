@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.AttendanceDAO;
 import dal.EmployeeDAO;
 import dal.RemaindayDAO;
@@ -44,22 +45,22 @@ public class EmployeesController extends HttpServlet {
             AccountDTO acc = (AccountDTO) session.getAttribute("account");
             EmployeeDAO dao = new EmployeeDAO();
             RemaindayDAO DAO = new RemaindayDAO();
+            headerInfor.setSessionAttributes(request);
             try {
                 Employee em = dao.getin4(acc.getUserID());
                 int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                 request.setAttribute("re", remainDay);
-                request.setAttribute("emp", em);
+       
             } catch (Exception e) {
                 System.out.println(e);
             }
 
-            if (acc == null) {
-                response.sendRedirect("Login");
-            } else {
+           
+         
                 request.getRequestDispatcher("HomeEmployees.jsp").forward(request, response);
             }
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -96,6 +97,7 @@ public class EmployeesController extends HttpServlet {
                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
                 if (acc != null) {
                     try {
+                        headerInfor.setSessionAttributes(request);
                         EmployeeDAO dao = new EmployeeDAO();
                         RemaindayDAO DAO = new RemaindayDAO();
                         Employee em = dao.getin4(acc.getUserID());
