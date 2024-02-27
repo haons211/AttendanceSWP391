@@ -18,7 +18,6 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
-    
     public AccountDTO(int UserID, String UserName, String PassWord, int Role) {
         this.UserID = UserID;
         this.UserName = UserName;
@@ -63,7 +62,4 @@ public class AccountDTO {
         return "AccountDTO{" + "UserID=" + UserID + ", UserName=" + UserName + ", PassWord=" + PassWord + ", Role=" + Role + '}';
     }
 
-  
-
-    
 }

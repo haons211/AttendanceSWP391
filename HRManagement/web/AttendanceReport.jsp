@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>AttendanceReport</title>
+        <title>Attendance Report</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -272,9 +272,9 @@
                                                     <div class="dropdown dropdown-action">
                                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
+
                                                             <a class="dropdown-item" href="editAttendance?id=${o.attendance_id}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                             <a class="dropdown-item" href="deleteAttendance?id=${o.attendance_id}" data-toggle="modal" data-target="#delete_attendance"  onclick="doDelete('${o.attendance_id}')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-
                                                         </div>
                                                     </div>
                                                 </td>

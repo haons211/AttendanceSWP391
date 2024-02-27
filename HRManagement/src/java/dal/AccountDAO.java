@@ -162,6 +162,27 @@ public int getEmployeeId(int userId) throws ClassNotFoundException, SQLException
         return false;
     }
 
+    public boolean isUsernameExists(String username) {
+        String query = "SELECT COUNT(*) FROM users WHERE username = ?";
+        try {
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu có lỗi xảy ra
+        } finally {
+            // Đóng tài nguyên
+            closeResources();
+        }
+        return false;
+    }
+
     public void addUser(String username, String password, int role_id) {
 
         String query = "INSERT INTO users (username, password, role_id) VALUES (?, ?, ?)";

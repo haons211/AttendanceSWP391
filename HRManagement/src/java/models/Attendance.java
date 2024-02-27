@@ -24,7 +24,6 @@ public class Attendance {
     int remainDay_id;
     int department_id;
     Date date;
-
     public Attendance() {
     }
 
@@ -42,10 +41,6 @@ public class Attendance {
         this.department_id = department_id;
         this.date = date;
     }
-
-    
-
-    
 
     public int getAttendance_id() {
         return attendance_id;
@@ -79,7 +74,6 @@ public class Attendance {
         this.out_time = out_time;
     }
 
-    
     public String getNotes() {
         return notes;
     }
@@ -143,6 +137,7 @@ public class Attendance {
     public void setDate(Date date) {
         this.date = date;
     }
+
 
     @Override
     public String toString() {
