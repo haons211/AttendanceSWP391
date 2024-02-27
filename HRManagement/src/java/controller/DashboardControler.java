@@ -44,7 +44,7 @@ public class DashboardControler extends HttpServlet {
         List<Employee> listLeave = dao.getListLeave();
         
         
-
+        headerInfor.setSessionAttributes(request);
         request.setAttribute("numberDepartments", numberDepartments);
         request.setAttribute("numberEmployees", numberEmployees);
         request.setAttribute("numberAttend", numberAttend);
