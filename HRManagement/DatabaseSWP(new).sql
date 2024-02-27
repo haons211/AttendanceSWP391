@@ -492,3 +492,50 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-02-19 21:05:29
+DROP TABLE IF EXISTS `file`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `file` (
+  `file_id` int NOT NULL AUTO_INCREMENT,
+  `file_data` longblob,
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`file_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `file`
+--
+
+LOCK TABLES `file` WRITE;
+/*!40000 ALTER TABLE `file` DISABLE KEYS */;
+/*!40000 ALTER TABLE `file` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `managerfile`
+--
+
+DROP TABLE IF EXISTS `managerfile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `managerfile` (
+  `MFID` int NOT NULL AUTO_INCREMENT,
+  `FID` int DEFAULT NULL,
+  `file_id` int DEFAULT NULL,
+  PRIMARY KEY (`MFID`),
+  KEY `FID` (`FID`),
+  KEY `file_id` (`file_id`),
+  CONSTRAINT `managerfile_ibfk_1` FOREIGN KEY (`FID`) REFERENCES `notification` (`notification_id`),
+  CONSTRAINT `managerfile_ibfk_2` FOREIGN KEY (`file_id`) REFERENCES `file` (`file_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `managerfile`
+--
+
+LOCK TABLES `managerfile` WRITE;
+/*!40000 ALTER TABLE `managerfile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `managerfile` ENABLE KEYS */;
+UNLOCK TABLES;
