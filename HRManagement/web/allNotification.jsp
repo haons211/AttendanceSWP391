@@ -117,24 +117,6 @@
                                             </tr>
                                         </c:forEach>
 
-                                                    <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
-                                                        <input type="hidden" name="id" value="${o.notificationId}">
-                                                        <button class="btn btn-danger delete-btn" type="submit">Delete</button>
-                                                    </form>
-                                                </td>
-                                                <td class="column-2">  
-
-                                                    <form action="editNotification?id=" method="get">
-                                                        <input type="hidden" name="id" value="${o.notificationId}">
-                                                        <button class="btn btn-primary" type="submit">Edit</button>
-                                                    </form>
-
-                                                </td>
-
-
-
-                                            </tr>
-                                        </c:forEach>
 
                                     </tbody>
                                 </table>
