@@ -105,9 +105,9 @@ public class AttendanceDAO {
         return attendance;
     }
 
-    public ArrayList<AttendanceReport> getAllAttendance(String search, Date fromDate, Date toDate) {
+    public ArrayList<AttendanceReport> getAllAttendance(String search, String dep_name, Date fromDate, Date toDate) {
         ArrayList<AttendanceReport> list = new ArrayList<>();
-        String query = "SELECT a.attendance_id,e.name,d.name,a.date,a.status, a.in_time, a.notes, a.in_status, a.out_time, a.out_status, r.remainDay "
+        String query = "SELECT a.attendance_id,e.name,d.name as dep_name,a.date,a.status, a.in_time, a.notes, a.in_status, a.out_time, a.out_status, r.remainDay "
                 + "FROM attendance a "
                 + "JOIN employee e ON a.employee_id = e.employee_id "
                 + "JOIN department d ON a.department_id = d.department_id "
@@ -116,6 +116,10 @@ public class AttendanceDAO {
 
         if (search != null && !search.isEmpty()) {
             query += "AND (e.name LIKE ? OR d.name LIKE ? OR a.status LIKE ? OR a.in_time LIKE ? OR a.out_time LIKE ? OR a.notes LIKE ? OR a.in_status LIKE ? OR a.out_status LIKE ?)";
+        }
+
+        if (dep_name != null && !dep_name.isEmpty()) {
+            query += " AND d.name LIKE ?";
         }
 
         // Thêm điều kiện tìm kiếm theo ngày nếu có
@@ -138,6 +142,11 @@ public class AttendanceDAO {
                 }
             }
 
+            // Nếu có dep_name, đặt tham số tương ứng trong câu truy vấn
+            if (dep_name != null && !dep_name.isEmpty()) {
+                ps.setString(paramIndex++, "%" + dep_name + "%");
+            }
+
             // Nếu có ngày bắt đầu và kết thúc, đặt tham số tương ứng trong câu truy vấn
             if (fromDate != null && toDate != null) {
                 ps.setDate(paramIndex++, new java.sql.Date(fromDate.getTime()));
@@ -147,7 +156,7 @@ public class AttendanceDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new AttendanceReport(rs.getInt("a.attendance_id"), rs.getString("e.name"),
-                        rs.getString("d.name"), rs.getDate("a.date"), rs.getString("a.status"),
+                        rs.getString("dep_name"), rs.getDate("a.date"), rs.getString("a.status"),
                         rs.getString("a.notes"), rs.getString("a.in_time"), rs.getString("a.in_status"),
                         rs.getString("out_time"), rs.getString("out_status"), rs.getInt("r.remainDay")));
             }
@@ -160,6 +169,21 @@ public class AttendanceDAO {
             closeResources();
         }
         return list;
+    }
+    public void deleteAttendance(int id) {
+        String query = "DELETE FROM attendance WHERE attendance_id = ?";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
     }
 
     // Other methods for department operations

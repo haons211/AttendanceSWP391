@@ -54,7 +54,7 @@
                                         ${o.description}
                                     </div>
                                     <c:if test="${o.inputStream ne null}">
-                                        <h3 class="mb-4" id="file">Chick here to Download <a href="Download?id=${o.notificationId}">Download</a></h6>
+                                        <h4 class="mb-4" id="file"> <a href="Download?id=${o.notificationId}">Click here to Download</a></h4>
                                         </c:if>
                                 </article>     
                             </div>

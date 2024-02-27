@@ -100,7 +100,7 @@
                             <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                         </li>    
                         <li>
-                            <a href="#"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
+                            <a href="AttendanceReport"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
                         </li>
                         <li> 
                             <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>

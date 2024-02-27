@@ -6,6 +6,7 @@ package controller;
  */
 
 import dal.AttendanceDAO;
+import dal.DepartmentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import models.AttendanceReport;
+import models.Department;
 
 /**
  *
@@ -64,6 +66,9 @@ public class AttendanceReportController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String search = request.getParameter("search");
+        DepartmentDAO d = new DepartmentDAO();
+        ArrayList<Department> departmentList = d.getAllDepartments("");
+        String departmentName = request.getParameter("departmentName");
         Date fromDate = null;
         Date toDate = null;
         // Xử lý fromDate và toDate
@@ -82,8 +87,8 @@ public class AttendanceReportController extends HttpServlet {
         }
         // Gọi phương thức DAO để lấy danh sách AttendanceReport
         AttendanceDAO attendanceDAO = new AttendanceDAO();
-        ArrayList<AttendanceReport> attendanceList = attendanceDAO.getAllAttendance(search == null ? "" : search, fromDate==null?null:fromDate, toDate==null?null:toDate);
-
+        ArrayList<AttendanceReport> attendanceList = attendanceDAO.getAllAttendance(search == null ? "" : search,departmentName ,fromDate==null?null:fromDate, toDate==null?null:toDate);
+        request.setAttribute("listDep", departmentList);
         // Lưu danh sách vào request attribute để truyền tới jsp
         request.setAttribute("list", attendanceList);
         // Chuyển hướng đến trang jsp để hiển thị danh sách

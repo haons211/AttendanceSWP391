@@ -21,9 +21,9 @@
     </head>
 
     <body>
-         <%
-                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                 int role=     acc.getRole();
+        <%
+                AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                int role=     acc.getRole();
         %>
         <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
@@ -43,42 +43,26 @@
                             <a href="addAccount" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Account</a>
                         </div>
                     </div>
-                    <form action="account" method="get">                        
-                        <div class="main-option">
-                            <div class="row filter-row">
-                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
-                                        <input name="search" type="text" placeholder="Search"
-                                               aria-label="Search" class="form-control floating">             
-                                </div>
-                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
-                                    <div class="form-group form-focus select-focus">
-                                        <label class="focus-label">Role</label>
-                                        <select name="role">
-                                            <option> -- Select -- </option>
-                                            <option>Admin</option>
-                                            <option>Manager</option>
-                                            <option>Employee</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
-                                    <button type="submit" class="btn btn-success btn-block"> Search </button>
-                                </div>
-                            </div>
-                            <!--                                                <div class="main-option-search">
-                                                                                <nav class="navbar navbar-light bg-light justify-content-between">
-                                                    
-                                                                                    <form action="account" method="get" class="form-inline">
-                                                                                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
-                                                                                               aria-label="Search" style="height: 30px;" >
-                                                                                        <button class="btn btn-outline-success my-2 my-sm-0"
-                                                                                                type="submit" style="height: 30px;">Search</button>
-                                                                                    </form>
-                                                                                </nav>
-                                                                            </div>-->
+                    <div class="main-option">
+                        <div class="main-option-search">
+                            <nav class="navbar navbar-light bg-light justify-content-between">
+                                <form action="account" method="get" class="form-inline">                        
+                                    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" aria-label="Search" style="height: 30px;">
+                                    <label class="focus-label">Role </label>
+                                    <select class="form-control mr-sm-2" name="role">
+                                        <option value="">Select Role</option>
+                                        <option>Admin</option>
+                                        <option>Manager</option>
+                                        <option>Employee</option>
+                                    </select>
 
+                                    <!--<button type="submit" class="btn btn-success btn-block"> Search </button>-->
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+                                </form>
+                            </nav>
                         </div>
-                    </form>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">

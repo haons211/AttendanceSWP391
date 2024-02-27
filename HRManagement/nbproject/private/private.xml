@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Doc/AttendanceSWP391/HRManagement/src/java/controller/ProfileController.java</file>
-            <file>file:/D:/Doc/AttendanceSWP391/HRManagement/src/java/controller/EmployeesController.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/26-02-24%20swp/AttendanceSWP391/HRManagement/src/java/controller/CheckOutServlet.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/26-02-24%20swp/AttendanceSWP391/HRManagement/src/java/dal/RemaindayDAO.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/26-02-24%20swp/AttendanceSWP391/HRManagement/src/java/controller/EmployeesController.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/26-02-24%20swp/AttendanceSWP391/HRManagement/web/Success.jsp</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/26-02-24%20swp/AttendanceSWP391/HRManagement/src/java/controller/SuccessServlet.java</file>
         </group>
     </open-files>
 </project-private>

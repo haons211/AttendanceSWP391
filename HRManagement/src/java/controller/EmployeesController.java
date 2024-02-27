@@ -18,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.AccountDTO;
 import models.Employee;
 
@@ -38,29 +40,40 @@ public class EmployeesController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
+
             AccountDTO acc = (AccountDTO) session.getAttribute("account");
             EmployeeDAO dao = new EmployeeDAO();
             RemaindayDAO DAO = new RemaindayDAO();
             headerInfor.setSessionAttributes(request);
-            try {
-                Employee em = dao.getin4(acc.getUserID());
+            Employee em = dao.getin4(acc.getUserID());
+            if (session.getAttribute("checkedIn") != null && (boolean) session.getAttribute("checkedIn")) {
+                Timestamp timeIn = (Timestamp) session.getAttribute("checkInTime");
                 int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                 request.setAttribute("re", remainDay);
-       
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+                session.setAttribute("checkInTime", timeIn);
+                int id = (int) session.getAttribute("attendanceId");
+                session.setAttribute("attendanceId", id);
+                session.setAttribute("checkedIn", true);
+                request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
 
-           
-         
+            } else {
+                try {
+                    //Employee em = dao.getin4(acc.getUserID());
+                    int remainDay = DAO.getRemainDayById(em.getEmployeeId());
+                    request.setAttribute("re", remainDay);
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
                 request.getRequestDispatcher("HomeEmployees.jsp").forward(request, response);
             }
         }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -74,7 +87,13 @@ public class EmployeesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeesController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EmployeesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -117,6 +136,7 @@ public class EmployeesController extends HttpServlet {
                                 Timestamp checkInTime = new Timestamp(System.currentTimeMillis());
                                 session.setAttribute("checkInTime", checkInTime);
                                 session.setAttribute("attendanceId", attendanceId);
+                                session.setAttribute("checkedIn", true);
                                 request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
 
                                 return;

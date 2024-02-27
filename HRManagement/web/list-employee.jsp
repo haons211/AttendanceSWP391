@@ -59,7 +59,7 @@
                         <input class="form-control mr-sm-2" name="searchValue" type="text" placeholder="Search"
                                aria-label="Search" style="height: 30px;" >
                         <button class="btn btn-outline-success my-2 my-sm-0"
-                                type="submit" style="height: 30px;">Search</button>
+                                type="submit" >Search</button>
                     </form>
                     <div class="row">
                         <div class="col-md-12">

@@ -5,7 +5,6 @@
 package controller;
 
 import dal.AttendanceDAO;
-import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,17 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import models.AccountDTO;
-import models.Employee;
 
 /**
  *
  * @author ThuyVy
  */
-@WebServlet(name = "SuccessServlet", urlPatterns = {"/SuccessServlet"})
-public class SuccessServlet extends HttpServlet {
+@WebServlet(name = "DeleteAttendanceReportController", urlPatterns = {"/deleteAttendance"})
+public class DeleteAttendanceReportController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,38 +33,16 @@ public class SuccessServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-
-            if (session != null) {
-                AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                EmployeeDAO dao = new EmployeeDAO();
-//            RemaindayDAO DAO = new RemaindayDAO();
-                if (acc != null) {
-                    try {
-                        Employee em = dao.getin4(acc.getUserID());
-                        request.setAttribute("emp", em);
-                        int attendanceId = (int) session.getAttribute("attendanceId");
-                        AttendanceDAO attendanceDAO = new AttendanceDAO();
-//         Attendance attendance = (Attendance) session.getAttribute("attendance");
-//                        Attendance attendance = attendanceDAO.getAttendanceById(attendanceId);
-                        // Đặt thông tin attendance vào request attribute của Success.jsp
-//                        request.setAttribute("attendance", attendance);
-//                        System.out.println(attendance.toString());
-                        Timestamp checkInTime = (Timestamp) session.getAttribute("checkInTime");
-                        request.setAttribute("checkInTime", checkInTime);
-                        Timestamp checkOutTime = (Timestamp) session.getAttribute("checkOutTime");
-                        request.setAttribute("checkOutTime", checkOutTime);
-                        
-                    } catch (Exception e) {
-                    }
-
-                    if (acc == null) {
-                        response.sendRedirect("Login");
-                    } else {
-                        request.getRequestDispatcher("Success.jsp").forward(request, response);
-                    }
-                }
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DeleteAttendanceReportController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DeleteAttendanceReportController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -85,6 +58,10 @@ public class SuccessServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        AttendanceDAO d = new AttendanceDAO();
+        d.deleteAttendance(id);
+        request.getRequestDispatcher("AttendanceReport").forward(request, response);
     }
 
     /**
@@ -98,7 +75,7 @@ public class SuccessServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
+        processRequest(request, response);
     }
 
     /**

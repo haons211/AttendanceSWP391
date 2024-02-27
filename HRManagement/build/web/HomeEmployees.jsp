@@ -147,10 +147,11 @@
     </head>
 
     <body>
-          <%
-                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                 int role=     acc.getRole();
+        <%
+               AccountDTO acc = (AccountDTO) session.getAttribute("account");
+               int role=     acc.getRole();
         %>
+        
         <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
             <% if (role == 2) { %>
@@ -201,7 +202,7 @@
             <script src="assets/js/Chart.bundle.js"></script>
             <script src="assets/js/chart.js"></script>
             <script src="assets/js/app.js"></script>
-            
+
             <script>
                 var currentDate = new Date();
                 var options = {
