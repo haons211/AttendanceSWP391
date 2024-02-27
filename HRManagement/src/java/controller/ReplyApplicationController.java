@@ -17,42 +17,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "EmployeeDetailApplicationController", urlPatterns = {"/employee-detailapplication"})
-public class EmployeeDetailApplicationController extends HttpServlet {
+@WebServlet(name = "ReplyApplicationController", urlPatterns = {"/replyapplication"})
+public class ReplyApplicationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ApplicationDAO a = new ApplicationDAO();
-        AccountDTO account = (AccountDTO) request.getSession().getAttribute("account");
-        if (account == null) {
-            throw new ServletException("Account not found in session");
-        }
-
-        String applicationId_raw = request.getParameter("applicationId");
-        int applicationId = 0;
-        try {
-            applicationId = Integer.parseInt(applicationId_raw);
-        } catch (NumberFormatException e) {
-            // Handle parsing error
-            e.printStackTrace(); // Log or handle the exception appropriately
-            // Redirect user to an error page or display an error message
-            return;
-        }
-
-        ApplicationDTO app = null;
-        app = a.getApplicationById(applicationId);
-        if (app == null) {
-            // Handle application not found
-            // Redirect user to an error page or display an error message
-            return;
-        }
-
-        request.setAttribute("app", app);
-        request.getRequestDispatcher("EmployeeDetailApplication.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("content") != null && request.getParameter("application_id") != null) {
             String replyContent = request.getParameter("content");
             int applicationId = 0;
@@ -79,5 +48,7 @@ public class EmployeeDetailApplicationController extends HttpServlet {
             request.getRequestDispatcher("EmployeeDetailApplication.jsp").forward(request, response);
         }
     }
+
+
 
 }

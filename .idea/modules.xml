@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/AttendanceSWP391.iml" filepath="$PROJECT_DIR$/.idea/AttendanceSWP391.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRManagement/HRManagement.iml" filepath="$PROJECT_DIR$/HRManagement/HRManagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRManagement/src/HRManagement1.iml" filepath="$PROJECT_DIR$/HRManagement/src/HRManagement1.iml" />
+    </modules>
+  </component>
+</project>

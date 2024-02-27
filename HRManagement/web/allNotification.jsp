@@ -67,18 +67,22 @@
                                 </form>
                             </nav>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped custom-table mb-0 datatable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Time </th>
-                                            <th>Subject</th>
+
+                </form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Time </th>
+                                        <th>Subject</th>
+                                        <% if (role == 3||role == 1) { %>
                                             <th></th>
                                             <th></th>
+                                             <% } %>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,10 +90,32 @@
                                             <tr class="table_row">
                                                 <td  class="column-1">${loop.index + 1}</td>    
                                                 <td  class="column-1">${o.sendTime}</td>
+
+                                               
                                                 <td class="column-2">
                                                     <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
                                                 </td>
+                                                 <% if (role == 3||role == 1) { %>
                                                 <td class="column-2">  
+
+                                                    <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
+                                                        <input type="hidden" name="id" value="${o.notificationId}">
+                                                        <button class="btn btn-danger delete-btn" type="submit">Delete</button>
+                                                    </form>
+                                                </td>
+                                                <td class="column-2">  
+
+                                                    <form action="editNotification?id=" method="get">
+                                                        <input type="hidden" name="id" value="${o.notificationId}">
+                                                        <button class="btn btn-primary" type="submit">Edit</button>
+                                                    </form>
+
+                                                </td>
+                                                <% } %>
+
+
+                                            </tr>
+                                        </c:forEach>
 
                                                     <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
                                                         <input type="hidden" name="id" value="${o.notificationId}">
@@ -125,74 +151,92 @@
             function deleteNotification(event, form) {
                 event.preventDefault();
 
-                var confirmDelete = confirm("B?n có ch?c ch?n mu?n xóa không?");
+                var confirmDelete = confirm("B?n cï¿½ ch?c ch?n mu?n xï¿½a khï¿½ng?");
                 if (!confirmDelete) {
                     return;
                 }
 
 
 
-                // L?y giá tr? c?a input
+                // L?y giï¿½ tr? c?a input
                 var notificationId = form.querySelector('input[name="id"]').value;
 
                 // T?o XMLHttpRequest object
                 var xhr = new XMLHttpRequest();
 
-                // Xác ??nh ph??ng th?c và URL
+                // Xï¿½c ??nh ph??ng th?c vï¿½ URL
                 xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
 
-                // X? lý k?t qu? tr? v? t? server
+                // X? lï¿½ k?t qu? tr? v? t? server
                 xhr.onload = function () {
                     if (xhr.status === 200) {
 
 
-                        alert('?ã xóa thành công');
+                        alert('?ï¿½ xï¿½a thï¿½nh cï¿½ng');
 
-                        location.replace(location.origin + location.pathname);
-                    } else {
-                        alert('Có l?i x?y ra');
-                    }
-                };
 
-                // G?i request
-                xhr.send();
+            var confirmDelete = confirm("B?n cÃ³ ch?c ch?n mu?n xÃ³a khÃ´ng?");
+            if (!confirmDelete) {
+                return;
             }
 
-        </script>
-<script>
-            function toggleFilterOptions() {
-                var filterOptions = document.getElementById("filterOptions");
-                if (filterOptions.style.display === "none") {
-                    filterOptions.style.display = "block";
+
+
+            // L?y giÃ¡ tr? c?a input
+            var notificationId = form.querySelector('input[name="id"]').value;
+
+            // T?o XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // XÃ¡c ??nh ph??ng th?c vÃ  URL
+            xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
+
+            // X? lÃ½ k?t qu? tr? v? t? server
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+
+
+                    alert('?Ã£ xÃ³a thÃ nh cÃ´ng');
+
+                    location.replace(location.origin + location.pathname);
                 } else {
-                    filterOptions.style.display = "none";
+                    alert('CÃ³ l?i x?y ra');
+
                 }
             }
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const ellipsisLinks = document.querySelectorAll('.ellipsis');
-                ellipsisLinks.forEach(link => {
-                    const parentWidth = link.parentNode.offsetWidth;
-                    const textWidth = link.offsetWidth;
-                    if (textWidth > parentWidth) {
-                        link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kích th??c phù h?p
-                    }
-                });
+
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ellipsisLinks = document.querySelectorAll('.ellipsis');
+            ellipsisLinks.forEach(link => {
+                const parentWidth = link.parentNode.offsetWidth;
+                const textWidth = link.offsetWidth;
+                if (textWidth > parentWidth) {
+                    link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kÃ­ch th??c phÃ¹ h?p
+                }
+
             });
 
         </script>
 
-        <div class="sidebar-overlay" data-reff=""></div>
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.dataTables.min.js"></script>
-        <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-        <script src="assets/js/select2.min.js"></script>
-        <script src="assets/js/moment.min.js"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/app.js"></script>
-    </body>
+
+
+
+
+
+    <div class="sidebar-overlay" data-reff=""></div>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assets/js/select2.min.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
 </html>
+

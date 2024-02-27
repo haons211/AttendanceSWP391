@@ -20,6 +20,7 @@ public class Application {
     private String status;
     private Date create_date;
     private Date complete_date;
+    private String replyContent;
 
     public Application() {
     }
@@ -37,6 +38,27 @@ public class Application {
         this.complete_date = complete_date;
     }
 
+    public Application(int application_id, int sender_id, int type_id, int receiver_id, String file, String title, String content, String status, Date create_date, Date complete_date, String replyContent) {
+        this.application_id = application_id;
+        this.sender_id = sender_id;
+        this.type_id = type_id;
+        this.receiver_id = receiver_id;
+        this.file = file;
+        this.title = title;
+        this.content = content;
+        this.status = status;
+        this.create_date = create_date;
+        this.complete_date = complete_date;
+        this.replyContent = replyContent;
+    }
+
+    public String getReplyContent() {
+        return replyContent;
+    }
+
+    public void setReplyContent(String replyContent) {
+        this.replyContent = replyContent;
+    }
 
     public int getApplication_id() {
         return application_id;

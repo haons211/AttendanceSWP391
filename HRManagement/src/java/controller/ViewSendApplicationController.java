@@ -4,95 +4,116 @@
  */
 package controller;
 
-import configs.headerInfor;
 import dal.ApplicationDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 import models.AccountDTO;
 import models.ApplicationDTO;
+import models.TypeApplication;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author Admin
  */
 @WebServlet(name = "ViewApplicationController", urlPatterns = {"/viewsendapplication"})
 public class ViewSendApplicationController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ViewApplicationController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ViewApplicationController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ApplicationDAO a = new ApplicationDAO();
         AccountDTO account = (AccountDTO) request.getSession().getAttribute("account");
-        headerInfor.setSessionAttributes(request);
-        List<ApplicationDTO> list = a.getAllApplicationbySenderId(a.GetEmployeeIDbyUserID(account));
-        request.setAttribute("list_application", list);
-        request.getRequestDispatcher("ViewSendApplication.jsp").forward(request, response);
+        if (account == null) {
+            throw new ServletException("Account not found in session");
+        }
+
+        // Khai báo biến
+        List<ApplicationDTO> list= new ArrayList<>();
+        String searchParam = null;
+        String msgError=null;
+        String typeAppParam=null;
+
+        if(account.getRole()==2) {
+            // Xử lí type application
+            List<TypeApplication> applicationTypes= a.GetAllTypeAllications();
+            if(request.getParameter("type_id")!= null) {
+                typeAppParam = request.getParameter("type_id");
+            }
+            // Kiểm tra giá trị trả về từ GetEmployeeIDbyUserID
+            int employeeId = a.GetEmployeeIDbyUserID(account);
+            if (employeeId == -1) {
+                // Xử lý trường hợp không tìm thấy người dùng hoặc giá trị không hợp lệ
+                throw new ServletException("Employee ID not found for the given user ID");
+            }
+            // Xử lí searchParam
+            if(a.titlecontain(request.getParameter("searchTerm"))){
+                searchParam= request.getParameter("searchTerm");
+            }else{
+                msgError="Can't not found";
+                request.setAttribute("SearchError",msgError);
+            }
+
+            list=a.getAllApplicationbySenderId(employeeId,searchParam,typeAppParam);
+            request.setAttribute("list_typeapplication",applicationTypes);
+            request.setAttribute("list_application",list);
+            request.getRequestDispatcher("ViewSendApplication.jsp").forward(request, response);
+        } else if (account.getRole()==3) {
+            // Xử lí type application//
+            List<TypeApplication> applicationTypes= a.GetAllTypeAllications();
+            if(request.getParameter("type_id")!= null) {
+                typeAppParam = request.getParameter("type_id");
+            }
+
+            // lấy danh sách người gửi
+            int employeeId=a.GetEmployeeIDbyUserID(account);
+            if (employeeId == -1) {
+                // Xử lý trường hợp không tìm thấy người dùng hoặc giá trị không hợp lệ
+                throw new ServletException("Employee ID not found for the given user ID");
+            }
+
+            // Xử lí searchParam
+            if(a.titlecontain(request.getParameter("searchTerm"))){
+                searchParam= request.getParameter("searchTerm");
+            }else{
+                msgError="Can't not found";
+                request.setAttribute("SearchError",msgError);
+            }
+            list=a.getAllApplicationbyReceiverId(employeeId,searchParam,typeAppParam);
+            request.setAttribute("list_typeapplication",applicationTypes);
+            request.setAttribute("list_application",list);
+            request.getRequestDispatcher("ManagerViewApplication.jsp").forward(request, response);
+
+
+        } else if (account.getRole() ==1) {
+            // Xử lí type application//
+            List<TypeApplication> applicationTypes= a.GetAllTypeAllications();
+            if(request.getParameter("type_id")!= null) {
+                typeAppParam = request.getParameter("type_id");
+            }
+
+
+
+            // Xử lí searchParam
+            if(a.titlecontain(request.getParameter("searchTerm"))){
+                searchParam= request.getParameter("searchTerm");
+            }else{
+                msgError="Can't not found";
+                request.setAttribute("SearchError",msgError);
+            }
+            list=a.getAllApplications(searchParam,typeAppParam);
+            request.setAttribute("list_typeapplication",applicationTypes);
+            request.setAttribute("list_application",list);
+            request.getRequestDispatcher("ManagerViewApplication.jsp").forward(request, response);
+
+        }
 
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

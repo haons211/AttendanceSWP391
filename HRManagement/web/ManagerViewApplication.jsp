@@ -151,9 +151,7 @@
                     <li>
                         <a href="#"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
                     </li>
-                    <li>
-                        <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
-                    </li>
+
                     <li>
                         <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                     </li>
@@ -225,9 +223,9 @@
                                 <!--</th>-->
 
 
+                                <th><input type="checkbox" id="check_all"></th>
 
-
-                                <th>Receiver</th>
+                                <th>Sender</th>
                                 <th>Title</th>
                                 <th>Status</th>
                                 <th>SentDate</th>
@@ -236,8 +234,10 @@
                             <tbody>
                             <c:forEach var="la" items="${requestScope.list_application}">
                                 <tr class="unread clickable-row">
-
-                                    <td class="name">${la.receiver_name}</td>
+                                    <td>
+                                        <input type="checkbox" class="checkmail">
+                                    </td>
+                                    <td class="name">${la.sender_name}</td>
                                     <td>
                                         <a href="employee-detailapplication?applicationId=${la.application_id}">
                                                 ${la.title}
