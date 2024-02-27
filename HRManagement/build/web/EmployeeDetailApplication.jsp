@@ -1,3 +1,4 @@
+<%@ page import="models.AccountDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,19 +19,150 @@
     </head>
 
     <body>
-          <%
-                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                 int role=     acc.getRole();
-        %>
-        <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
-            <% if (role == 2) { %>
-            <jsp:include page="SideBarforEm.jsp" />
-            <% } else if (role == 3) { %>
-            <jsp:include page="SideBarforManager.jsp" />
-            <% } %>
-
+            <div class="header">
+                <div class="header-left">
+                    <a href="index.html" class="logo">
+                        <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>Preclinic</span>
+                    </a>
+                </div>
+                <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+                <ul class="nav user-menu float-right">
+                    <li class="nav-item dropdown d-none d-sm-block">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
+                        <div class="dropdown-menu notifications">
+                            <div class="topnav-dropdown-header">
+                                <span>Notifications</span>
+                            </div>
+                            <div class="drop-scroll">
+                                <ul class="notification-list">
+                                    <li class="notification-message">
+                                        <a href="activities.html">
+                                            <div class="media">
+                                                <span class="avatar">
+                                                    <img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
+                                                </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+                                                    <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="activities.html">
+                                            <div class="media">
+                                                <span class="avatar">V</span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="activities.html">
+                                            <div class="media">
+                                                <span class="avatar">L</span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="activities.html">
+                                            <div class="media">
+                                                <span class="avatar">G</span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
+                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="activities.html">
+                                            <div class="media">
+                                                <span class="avatar">V</span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
+                                                    <p class="noti-time"><span class="notification-time">2 days ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="topnav-dropdown-footer">
+                                <a href="activities.html">View all Notifications</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown d-none d-sm-block">
+                        <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
+                    </li>
+                    <li class="nav-item dropdown has-arrow">
+                        <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                            <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                                <span class="status online"></span></span>
+                            <span>Admin</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="profile.html">My Profile</a>
+                            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                            <a class="dropdown-item" href="settings.html">Settings</a>
+                            <a class="dropdown-item" href="login.html">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="dropdown mobile-user-menu float-right">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+                        <a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-inner slimscroll">
+                    <div id="sidebar-menu" class="sidebar-menu">
+                        <ul>
+                            <li class="menu-title">Main</li>
+                            <li>
+                                <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            </li>
+                            <li>
+                                <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
+                            </li>
+                            <li>
+                                <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span></a>
+                            </li>
+                            <li>
+                                <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
+                            </li>
+                            <li>
+                                <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
+                            </li>
+                            <li>
+                                <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <c:set var="detail" value="${requestScope.app}"></c:set>
+
                 <div class="page-wrapper">
                     <div class="content">
                         <div class="row">
@@ -49,16 +181,7 @@
                                                         <span class="mail-view-title">${detail.title}</span>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <div class="mail-view-action">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-white btn-sm" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash-o"></i></button>
-                                                        <button type="button" class="btn btn-white btn-sm" data-toggle="tooltip" title="Reply"> <i class="fa fa-reply"></i></button>
-                                                        <button type="button" class="btn btn-white btn-sm" data-toggle="tooltip" title="Forward"> <i class="fa fa-share"></i></button>
-                                                    </div>
-                                                    <button type="button" class="btn btn-white btn-sm" data-toggle="tooltip" title="Print"> <i class="fa fa-print"></i></button>
-                                                </div>
-                                            </div>
+
                                         </div>
                                         <div class="sender-info">
                                             <div class="sender-img">
@@ -78,7 +201,7 @@
                                     </div>
                                     <div class="mailview-inner">
                                         <p>${detail.content}</p>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="mail-attachments">
@@ -114,23 +237,80 @@
                                         </li>
                                     </ul>
                                 </div>
+                                    <hr>
+                                    <br>
+                                    <br>
+                                    <c:choose>
+                                    <c:when test="${empty detail.complete_date}">
                                     <div class="mailview-footer">
                                         <div class="row">
-                                            <% if(request.getAttribute("thongbao")!=null) {%>
+                                            <% if(request.getAttribute("thongbao")!=null) { %>
                                             <div class="col-sm-6 right-action">
                                                 <span style="color: #1E824C; font-size: 16px; font-weight: bold;">Delete Successfully</span>
                                             </div>
                                             <div class="col-sm-6 right-action">
                                                 <button type="button" class="btn btn-white" onclick="refreshPage()"><i class="fa fa-refresh"></i> Refresh</button>
                                             </div>
-                                            <%}%>
+                                            <% } %>
 
+                                            <%
+                                                AccountDTO account = (AccountDTO) request.getSession().getAttribute("account");
+                                                if (account.getRole() == 3) {
+                                            %>
+                                            <div class="col-sm-6 left-action">
+                                                <button id="reply-btn" type="button" class="btn btn-white"><i class="fa fa-reply"></i> Reply</button>
+                                            </div>
+                                            <% } %>
+
+                                            <%
+                                                if (account.getRole() == 2) {
+                                            %>
                                             <div class="col-sm-6 right-action">
                                                 <button type="button" class="btn btn-white" onclick="confirmDelete(${detail.application_id})"><i class="fa fa-trash-o"></i> Delete</button>
                                             </div>
+                                            <% } %>
                                         </div>
                                     </div>
 
+                                    <br>
+                                        <br>
+                                        <div id="reply-form" style="display: none;">
+                                            <form action="replyapplication" >
+                                                <textarea id="content" name="content" rows="4" cols="100" placeholder="Enter content"></textarea>
+                                                <input type="hidden" name="application_id" value=${detail.application_id}>
+                                                <br>
+                                                <input type="submit" value="Done">
+                                            </form>
+                                        </div>
+                                        
+
+                                    </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="sender-info">
+                                            <div class="sender-img">
+                                                <img width="40" alt="" src="assets/img/user.jpg" class="rounded-circle">
+                                            </div>
+                                        <div class="receiver-details float-left">
+                                            <span class="sender-name">${detail.receiver_name} (<a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e3431363034313b1e3b263f332e323b703d3133">[email&#160;protected]</a>)</span>
+                                            <span class="receiver-name">
+                                                    to <span>${detail.sender_name}</span>
+
+                                                </span>
+                                        </div>
+                                            <div class="mail-sent-time">
+                                                <span class="mail-time">${detail.complete_date}</span>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <hr>
+                                        </div>
+                                        <div class="mailview-inner">
+                                            <p>${detail.replyContent}</p>
+
+                                        </div>
+                                    </c:otherwise>
+                                    </c:choose>
 
                             </div>
                         </div>
@@ -367,6 +547,11 @@
                 // Chuyển hướng đến servlet khác
                 window.location.href = "viewsendapplication";
             }
+            document.getElementById("reply-btn").addEventListener("click", function() {
+                document.getElementById("reply-form").style.display = "block";
+            });
+
+
         </script>
 
 

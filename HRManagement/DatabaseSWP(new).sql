@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS `application`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `application` (
-    application_id INT AUTO_INCREMENT NOT NULL,
+    aapplication_id INT AUTO_INCREMENT NOT NULL,
   sender_id INT NOT NULL,
   type_id INT NOT NULL,
   receiver_id INT NOT NULL,
@@ -30,6 +30,7 @@ CREATE TABLE `application` (
   status VARCHAR(50) NOT NULL,
   create_date DATETIME NOT NULL,
   complete_date DATETIME,
+  replyContent varchar(255)  NULL,
   PRIMARY KEY (`application_id`),
   KEY `type_id` (`type_id`),
   KEY `sender_id` (`sender_id`),
