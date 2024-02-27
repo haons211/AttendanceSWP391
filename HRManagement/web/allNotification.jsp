@@ -42,41 +42,32 @@
             <jsp:include page="SideBarforManager.jsp" />
             <% } %>
             <div class="page-wrapper">
-                <form action="Notification" method="POST">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-12">
-                                <h1 class="page-title" style="text-align: center">Notification</h1>
-                            </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-5 col-5">
+                            <h4 class="page-title">Notification</h4>
                         </div>
-                        <div class="main-option">
-                            <div class="main-option-search">
-                                <nav class="navbar navbar-light bg-light justify-content-between">
+                    </div>
+                    <div class="main-option">
+                        <div class="main-option-search">
+                            <nav class="navbar navbar-light bg-light justify-content-between">
+                                <form action="AllNotification" method="POST" class="form-inline">
+                                    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" aria-label="Search" style="height: 30px;">
+                                    
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px;margin-right: 20px;"name="btAction" value="Search">Search</button>
+                                    
+                                    <label for="fromDate">From:</label>
+                                    <input type="date" name="dateFrom" id="fromDate" class="form-control" style="height: 30px;  ">
 
-                                    <div class="form-group mr-sm-2 flex-grow-1">
-                                        <label for="fromDate">Search:</label>
-                                        <input class="form-control w-100" name="search" type="text" placeholder="Search" aria-label="Search" style="height: 30px;">
-                                    </div>
-                                    <div class="form-group mr-sm-2" style="margin-top: 25px">
-                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px;"name="btAction" value="Search">Search</button>
-                                    </div>
-                                    <div class="form-group mr-sm-2">
-                                        <label for="fromDate">From:</label>
-                                        <input type="date" name="dateFrom" id="fromDate" class="form-control" style="height: 30px;  ">
-                                    </div>
-                                    <div class="form-group mr-sm-2">
-                                        <label for="toDate">To:</label>
-                                        <input type="date" name="dateEnd" id="toDate" class="form-control" style="height: 30px;">
-                                    </div>
-                                    <div class="form-group mr-sm-2"style="margin-top: 25px">
-                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px;"name="btAction"value="Find">Find</button>
-                                    </div>
-                                    </form>
-                                </nav>
+                                    <label for="toDate">To:</label>
+                                    <input type="date" name="dateEnd" id="toDate" class="form-control" style="height: 30px;">
 
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px;"name="btAction"value="Find">Find</button>
 
-                            </div>
+                                </form>
+                            </nav>
                         </div>
+
                 </form>
                 <div class="row">
                     <div class="col-md-12">
@@ -91,6 +82,7 @@
                                             <th></th>
                                             <th></th>
                                              <% } %>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -98,6 +90,7 @@
                                             <tr class="table_row">
                                                 <td  class="column-1">${loop.index + 1}</td>    
                                                 <td  class="column-1">${o.sendTime}</td>
+
                                                
                                                 <td class="column-2">
                                                     <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
@@ -124,24 +117,45 @@
                                             </tr>
                                         </c:forEach>
 
-                                </tbody>
-                            </table>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <script>
+
+
+            function deleteNotification(event, form) {
+                event.preventDefault();
+
+                var confirmDelete = confirm("B?n c� ch?c ch?n mu?n x�a kh�ng?");
+                if (!confirmDelete) {
+                    return;
+                }
 
 
 
-    </div>
+                // L?y gi� tr? c?a input
+                var notificationId = form.querySelector('input[name="id"]').value;
 
-    <script>
+                // T?o XMLHttpRequest object
+                var xhr = new XMLHttpRequest();
+
+                // X�c ??nh ph??ng th?c v� URL
+                xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
+
+                // X? l� k?t qu? tr? v? t? server
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
 
 
-        function deleteNotification(event, form) {
-            event.preventDefault();
+                        alert('?� x�a th�nh c�ng');
+
 
             var confirmDelete = confirm("B?n có ch?c ch?n mu?n xóa không?");
             if (!confirmDelete) {
@@ -169,28 +183,10 @@
                     location.replace(location.origin + location.pathname);
                 } else {
                     alert('Có l?i x?y ra');
+
                 }
-            };
-
-            // G?i request
-            xhr.send();
-        }
-
-    </script>
-
-
-
-
-
-
-    <script>
-        function toggleFilterOptions() {
-            var filterOptions = document.getElementById("filterOptions");
-            if (filterOptions.style.display === "none") {
-                filterOptions.style.display = "block";
-            } else {
-                filterOptions.style.display = "none";
             }
+
         }
     </script>
     <script>
@@ -202,10 +198,11 @@
                 if (textWidth > parentWidth) {
                     link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kích th??c phù h?p
                 }
-            });
-        });
 
-    </script>
+            });
+
+        </script>
+
 
 
 
@@ -224,3 +221,4 @@
     <script src="assets/js/app.js"></script>
 </body>
 </html>
+
