@@ -29,7 +29,7 @@
         <div class="main-wrapper">
             <% if (role == 2) { %>
             <jsp:include page="SideBarforEm.jsp" />
-            <% } else if (role == 3) { %>
+            <% } else if (role == 3|| role ==1) { %>
             <jsp:include page="SideBarforManager.jsp" />
             <% } %>
             <div class="page-wrapper">
@@ -41,6 +41,7 @@
                             <div class="blog-view">
                                 <article class="blog blog-single-post">
                                     <h3 class="blog-title">${o.subject}</h3>
+                                    <hr>
                                     <div class="blog-info clearfix">
                                         <div class="post-left">
                                             <ul>

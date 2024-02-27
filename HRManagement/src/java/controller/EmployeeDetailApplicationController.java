@@ -4,12 +4,14 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.ApplicationDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.awt.HeadlessException;
 import models.AccountDTO;
 import models.ApplicationDTO;
 
@@ -17,7 +19,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "EmployeeDetailApplicationController", urlPatterns = {"/employee-detailapplication"})
+@WebServlet(name = "EmployeeDetailApplicationController", urlPatterns = {"/detailapplication"})
 public class EmployeeDetailApplicationController extends HttpServlet {
 
     @Override
@@ -46,7 +48,7 @@ public class EmployeeDetailApplicationController extends HttpServlet {
             // Redirect user to an error page or display an error message
             return;
         }
-
+        headerInfor.setSessionAttributes(request);
         request.setAttribute("app", app);
         request.getRequestDispatcher("EmployeeDetailApplication.jsp").forward(request, response);
     }
