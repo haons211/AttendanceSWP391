@@ -158,9 +158,9 @@ public class editNotificationController extends HttpServlet {
                 boolean updateNoti = ndao.UpdateFile(subject, description, i);
 
             } else {
+
                 Part filePart = request.getPart("file");
                 if (filePart != null && filePart.getSize() > 0) {
-                    // File đã được chọn, tiếp tục xử lý
 
                     String savePath = request.getServletContext().getRealPath("") + File.separator + SAVE_DIR;
                     File fileSaveDir = new File(savePath);
@@ -182,8 +182,10 @@ public class editNotificationController extends HttpServlet {
                     }
                     boolean insertmanager = ndao.insertManagerfile(i, notiDao.getLatestFileId());
                     boolean updateNoti = ndao.UpdateFile(subject, description, i);
+
+                } else {
+                    boolean updateNoti = ndao.UpdateFile(subject, description, i);
                 }
-             
 
             }
             models.Notification n = notiDao.getdetailsNotification(i);
