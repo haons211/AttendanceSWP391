@@ -87,38 +87,42 @@
                                         <th>#</th>
                                         <th>Time </th>
                                         <th>Subject</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="o" items="${listNo1}" varStatus="loop">
-                                        <tr class="table_row">
-                                            <td  class="column-1">${loop.index + 1}</td>    
-                                            <td  class="column-1">${o.sendTime}</td>
-                                            <td class="column-2">
-                                                <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
-                                            </td>
-                                            <td class="column-2">  
-
-                                                <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
-                                                    <input type="hidden" name="id" value="${o.notificationId}">
-                                                    <button class="btn btn-danger delete-btn" type="submit">Delete</button>
-                                                </form>
-                                            </td>
-                                            <td class="column-2">  
-
-                                                <form action="editNotification?id=" method="get">
-                                                    <input type="hidden" name="id" value="${o.notificationId}">
-                                                    <button class="btn btn-primary" type="submit">Edit</button>
-                                                </form>
-
-                                            </td>
-
-
-
+                                        <% if (role == 3||role == 1) { %>
+                                            <th></th>
+                                            <th></th>
+                                             <% } %>
                                         </tr>
-                                    </c:forEach>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="o" items="${listNo1}" varStatus="loop">
+                                            <tr class="table_row">
+                                                <td  class="column-1">${loop.index + 1}</td>    
+                                                <td  class="column-1">${o.sendTime}</td>
+                                               
+                                                <td class="column-2">
+                                                    <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
+                                                </td>
+                                                 <% if (role == 3||role == 1) { %>
+                                                <td class="column-2">  
+
+                                                    <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
+                                                        <input type="hidden" name="id" value="${o.notificationId}">
+                                                        <button class="btn btn-danger delete-btn" type="submit">Delete</button>
+                                                    </form>
+                                                </td>
+                                                <td class="column-2">  
+
+                                                    <form action="editNotification?id=" method="get">
+                                                        <input type="hidden" name="id" value="${o.notificationId}">
+                                                        <button class="btn btn-primary" type="submit">Edit</button>
+                                                    </form>
+
+                                                </td>
+                                                <% } %>
+
+
+                                            </tr>
+                                        </c:forEach>
 
                                 </tbody>
                             </table>
@@ -139,32 +143,32 @@
         function deleteNotification(event, form) {
             event.preventDefault();
 
-            var confirmDelete = confirm("B?n có ch?c ch?n mu?n xóa không?");
+            var confirmDelete = confirm("B?n cÃ³ ch?c ch?n mu?n xÃ³a khÃ´ng?");
             if (!confirmDelete) {
                 return;
             }
 
 
 
-            // L?y giá tr? c?a input
+            // L?y giÃ¡ tr? c?a input
             var notificationId = form.querySelector('input[name="id"]').value;
 
             // T?o XMLHttpRequest object
             var xhr = new XMLHttpRequest();
 
-            // Xác ??nh ph??ng th?c và URL
+            // XÃ¡c ??nh ph??ng th?c vÃ  URL
             xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
 
-            // X? lý k?t qu? tr? v? t? server
+            // X? lÃ½ k?t qu? tr? v? t? server
             xhr.onload = function () {
                 if (xhr.status === 200) {
 
 
-                    alert('?ã xóa thành công');
+                    alert('?Ã£ xÃ³a thÃ nh cÃ´ng');
 
                     location.replace(location.origin + location.pathname);
                 } else {
-                    alert('Có l?i x?y ra');
+                    alert('CÃ³ l?i x?y ra');
                 }
             };
 
@@ -196,7 +200,7 @@
                 const parentWidth = link.parentNode.offsetWidth;
                 const textWidth = link.offsetWidth;
                 if (textWidth > parentWidth) {
-                    link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kích th??c phù h?p
+                    link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kÃ­ch th??c phÃ¹ h?p
                 }
             });
         });

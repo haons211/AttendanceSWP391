@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Doc/AttendanceSWP391/HRManagement/src/java/controller/ProfileController.java</file>
-            <file>file:/D:/Doc/AttendanceSWP391/HRManagement/src/java/controller/EmployeesController.java</file>
+            <file>file:/D:/AttendanceSWP391/HRManagement/web/HomeAdmin.jsp</file>
+            <file>file:/D:/AttendanceSWP391/HRManagement/src/java/dal/ApplicationDAO.java</file>
+            <file>file:/D:/AttendanceSWP391/HRManagement/src/java/dal/DBContext.java</file>
+            <file>file:/D:/AttendanceSWP391/HRManagement/src/java/controller/ViewSendApplicationController.java</file>
         </group>
     </open-files>
 </project-private>
