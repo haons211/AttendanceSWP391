@@ -23,8 +23,24 @@ public class AttendanceReport {
     String out_time;
     String out_status;
     int remainDay;
+    int approvedLeaveDays;
 
     public AttendanceReport() {
+    }
+
+    public AttendanceReport(int attendance_id, String em_name, String dep_name, Date date, String status, String notes, String in_time, String in_status, String out_time, String out_status, int remainDay, int approvedLeaveDays) {
+        this.attendance_id = attendance_id;
+        this.em_name = em_name;
+        this.dep_name = dep_name;
+        this.date = date;
+        this.status = status;
+        this.notes = notes;
+        this.in_time = in_time;
+        this.in_status = in_status;
+        this.out_time = out_time;
+        this.out_status = out_status;
+        this.remainDay = remainDay;
+        this.approvedLeaveDays = approvedLeaveDays;
     }
 
     public AttendanceReport(int attendance_id, String em_name, String dep_name, Date date, String status, String notes, String in_time, String in_status, String out_time, String out_status, int remainDay) {
@@ -129,10 +145,17 @@ public class AttendanceReport {
         this.remainDay = remainDay;
     }
 
+    public int getApprovedLeaveDays() {
+        return approvedLeaveDays;
+    }
+
+    public void setApprovedLeaveDays(int approvedLeaveDays) {
+        this.approvedLeaveDays = approvedLeaveDays;
+    }
+
     @Override
     public String toString() {
         return "AttendanceReport{" + "attendance_id=" + attendance_id + ", em_name=" + em_name + ", dep_name=" + dep_name + ", date=" + date + ", status=" + status + ", notes=" + notes + ", in_time=" + in_time + ", in_status=" + in_status + ", out_time=" + out_time + ", out_status=" + out_status + ", remainDay=" + remainDay + '}';
     }
-    
-    
+
 }

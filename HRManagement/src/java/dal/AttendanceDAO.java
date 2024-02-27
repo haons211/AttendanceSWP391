@@ -38,7 +38,7 @@ public class AttendanceDAO {
             ps.setString(3, image);
             ps.setInt(4, remainDay_id);
             ps.setInt(5, department_id);
-             affectedRows = ps.executeUpdate();
+            affectedRows = ps.executeUpdate();
 
             if (affectedRows > 0) {
                 ResultSet generatedKeys = ps.getGeneratedKeys();
@@ -160,6 +160,77 @@ public class AttendanceDAO {
             closeResources();
         }
         return list;
+    }
+
+    public String updateAttendance(int attendance_id, String in_time,
+            String out_time, String notes, String status,
+            String in_status, String out_status, int remainDay, String date) {
+        String query = "UPDATE attendance a \n"
+                + "JOIN employee e ON a.employee_id = e.employee_id \n"
+                + "JOIN department d ON a.department_id = d.department_id \n"
+                + "JOIN remainday r ON a.remainDay_id = r.remainDay_id \n"
+                + "SET a.date = ?, \n"
+                + "    a.status = ?, \n"
+                + "    a.in_time = ?, \n"
+                + "    a.notes = ?, \n"
+                + "    a.in_status = ?, \n"
+                + "    a.out_time = ?, \n"
+                + "    a.out_status = ?, \n"
+                + "    r.remainDay = ?\n"
+                + "WHERE a.attendance_id = ?;";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, date);
+            ps.setString(2, status);
+            ps.setString(3, in_time);
+            ps.setString(4, notes);
+            ps.setString(5, in_status);
+            ps.setString(6, out_time);
+            ps.setString(7, out_status);
+            ps.setInt(8, remainDay);
+            ps.setInt(9, attendance_id);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                return "Update successfully!";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return "Update failed";
+    }
+
+    public AttendanceReport getAttendanceReportById(int attendanceId) {
+        AttendanceReport attendanceReport = null;
+        String query = "SELECT *\n"
+                + "FROM attendance a \n"
+                + "JOIN employee e ON a.employee_id = e.employee_id \n"
+                + "JOIN department d ON a.department_id = d.department_id \n"
+                + "JOIN remainday r ON a.remainDay_id = r.remainDay_id \n"
+                + "WHERE attendance_id = ?;";
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, attendanceId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                // Tạo đối tượng Attendance từ thông tin lấy được
+                attendanceReport = new AttendanceReport(rs.getInt("a.attendance_id"), rs.getString("e.name"),
+                        rs.getString("d.name"), rs.getDate("a.date"), rs.getString("a.status"),
+                        rs.getString("a.notes"), rs.getString("a.in_time"), rs.getString("a.in_status"),
+                        rs.getString("out_time"), rs.getString("out_status"), rs.getInt("r.remainDay"),
+                        rs.getInt("r.approvedLeaveDays"));
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return attendanceReport;
     }
 
     // Other methods for department operations

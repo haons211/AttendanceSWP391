@@ -60,7 +60,7 @@ public class Validate {
     }
 
     public boolean compareDate(String firstDate, String secondDate) throws ParseException {
-        
+
         firstDate = firstDate.replace('-', '/');
         secondDate = secondDate.replace('-', '/');
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -96,8 +96,55 @@ public class Validate {
         // Trong trường hợp có lỗi xảy ra, trả về false
         return true;
     }
-    
 
+    public boolean validateTime(String checkin, String checkout) {
+        // Kiểm tra xem checkin và checkout có null hoặc trống không
+        if (checkin == null || checkin.isEmpty() || checkout == null || checkout.isEmpty()) {
+            return false;
+        }
+
+        // Chuyển đổi chuỗi thời gian thành đối tượng thời gian (Date) để so sánh
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        try {
+            Date checkinTime = sdf.parse(checkin);
+            Date checkoutTime = sdf.parse(checkout);
+
+            // So sánh checkin và checkout
+            return checkinTime.before(checkoutTime);
+        } catch (ParseException e) {
+            // Xử lý ngoại lệ nếu định dạng thời gian không hợp lệ
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean validateDateBeforeToday(String date) {
+        // Kiểm tra xem date có null hoặc trống không
+        if (date == null || date.isEmpty()) {
+            return false;
+        }
+
+        // Lấy ngày hiện tại
+        Date currentDate = new Date();
+
+        // Chuyển đổi chuỗi ngày thành đối tượng ngày (Date) để so sánh
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date inputDate = sdf.parse(date);
+
+            // So sánh date với ngày hiện tại
+            return inputDate.before(currentDate);
+        } catch (ParseException e) {
+            // Xử lý ngoại lệ nếu định dạng ngày không hợp lệ
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean validateRemainDay(int remainday, int approvedLeaveDays) {
+        return remainday <= approvedLeaveDays;
+    }
+}
 //    public static void main(String[] args) throws ParseException {
 //        String a = "2024-02-15";
 //        String b = "2024-02-03";
@@ -114,4 +161,4 @@ public class Validate {
 //
 //    }
 
-}
+
