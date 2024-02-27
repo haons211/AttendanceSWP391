@@ -65,6 +65,7 @@ public class AttendanceReportController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         String search = request.getParameter("search");
         DepartmentDAO d = new DepartmentDAO();
         ArrayList<Department> departmentList = d.getAllDepartments("");
