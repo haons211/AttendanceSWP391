@@ -6,6 +6,7 @@ package controller;
 
 import configs.headerInfor;
 import dal.DashboardDAO;
+import dal.DepartmentDAO;
 import models.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import models.Department;
 import models.Employee;
 
@@ -39,28 +42,37 @@ public class ManagerController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             headerInfor.setSessionAttributes(request);
-                DashboardDAO dao = new DashboardDAO();
-        int numberDepartments = dao.getNumberOfDepartments();
-        int numberEmployees = dao.getNumberOfEmployees();
-        int numberAttend = dao.getNumberOfAttend();
-        int numberLeave = numberEmployees - numberAttend;
-        List<Department> listDepartment = dao.getTop3Department();
-        List<Employee> listTop5Employee = dao.getTop5Employee();
-        List<Employee> listLeave = dao.getListLeave();
-        
-        
+            DashboardDAO dao = new DashboardDAO();
+            DepartmentDAO DAO = new DepartmentDAO();
+            int numberDepartments = dao.getNumberOfDepartments();
+            int numberEmployees = dao.getNumberOfEmployees();
+            int numberAttend = dao.getNumberOfAttend();
+            int numberLeave = numberEmployees - numberAttend;
+            //List<Department> listDepartment = dao.getTop3Department();
+//        List<Department> listDepartment = DAO.getAllDepartments("");
+            Map<Integer, List<Employee>> departmentEmployees = new HashMap<>();
 
-        request.setAttribute("numberDepartments", numberDepartments);
-        request.setAttribute("numberEmployees", numberEmployees);
-        request.setAttribute("numberAttend", numberAttend);
-        request.setAttribute("numberLeave", numberLeave);
-        request.setAttribute("listDepartment", listDepartment);
-        request.setAttribute("listTop5Employee", listTop5Employee);
-        request.setAttribute("listLeave", listLeave); 
-                request.getRequestDispatcher("HomeManager.jsp").forward(request, response);
+            List<Department> listDepartment = DAO.getAllDepartments("");
+            for (Department department : listDepartment) {
+                List<Employee> employees = dao.getEmployee(department.getDepartment_id());
+                departmentEmployees.put(department.getDepartment_id(), employees);
             }
+
+            //List<Employee> listTop5Employee = dao.getTop5Employee();
+//            List<Employee> listEmployee = dao.getEmployee(id);
+            List<Employee> listLeave = dao.getListLeave();
+
+            request.setAttribute("numberDepartments", numberDepartments);
+            request.setAttribute("numberEmployees", numberEmployees);
+            request.setAttribute("numberAttend", numberAttend);
+            request.setAttribute("numberLeave", numberLeave);
+            request.setAttribute("listDepartment", listDepartment);
+//            request.setAttribute("listEmployee", listEmployee);
+            request.setAttribute("departmentEmployees", departmentEmployees);
+            request.setAttribute("listLeave", listLeave);
+            request.getRequestDispatcher("HomeManager.jsp").forward(request, response);
         }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.DashboardDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
