@@ -9,9 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import models.Department;
 import models.DepartmentAttendanceDTO;
 import models.DepartmentEmployeeCountDTO;
@@ -114,45 +112,16 @@ public class DashboardDAO {
             rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new Department(rs.getInt(1),
-                        rs.getString(2), rs.getString(3)));
+                        rs.getString(2),rs.getString(3)));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-
     public List<Employee> getTop5Employee() {
         List<Employee> list = new ArrayList<>();
         String query = "SELECT * FROM employee LIMIT 5;";
-        try {
-            con = new DBContext().getConnection();
-            stm = con.prepareStatement(query);
-            rs = stm.executeQuery();
-            while (rs.next()) {
-                list.add(new Employee(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getBoolean(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getInt(10)));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    public List<Employee> getListLeave() {
-        List<Employee> list = new ArrayList<>();
-        String query = "SELECT *\n"
-                + "FROM employee e\n"
-                + "LEFT JOIN attendance a ON e.employee_id = a.employee_id\n"
-                + "WHERE a.status = 'Absent';";
         try {
             con = new DBContext().getConnection();
             stm = con.prepareStatement(query);
@@ -240,8 +209,65 @@ public class DashboardDAO {
 
         return departmentAttendanceList;
     }
-// Phương thức để đóng ResultSet, PreparedStatement và Connection
+    
 
+    public List<Employee> getEmployee(int departmentId) {
+        List<Employee> list = new ArrayList<>();
+    String query = "SELECT e.* FROM employee e "
+                 + "JOIN employeedepartment ed ON e.employee_id = ed.employee_id "
+                 + "WHERE ed.department_id = ?";
+    try {
+        con = new DBContext().getConnection();
+        stm = con.prepareStatement(query);
+        stm.setInt(1, departmentId); // Thiết lập giá trị cho tham số trong truy vấn
+        rs = stm.executeQuery();
+        while (rs.next()) {
+            list.add(new Employee(rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getBoolean(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getString(9),
+                    rs.getInt(10)));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+    
+
+    public List<Employee> getListLeave() {
+        List<Employee> list = new ArrayList<>();
+        String query = "SELECT *\n"
+                + "FROM employee e\n"
+                + "LEFT JOIN attendance a ON e.employee_id = a.employee_id\n"
+                + "WHERE a.status = 'Absent';";
+        try {
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new Employee(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getInt(10)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
     private void closeResources() {
         try {
             if (rs != null) {
@@ -257,5 +283,5 @@ public class DashboardDAO {
             e.printStackTrace();
         }
     }
-
+    
 }

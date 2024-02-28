@@ -3,34 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/META-INF/context.xml</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/models/AccountDTO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/AddDepartment.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/controller/AttendanceReportController.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/assets/css/style.css</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/assets/css/bootstrap.min.css</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/controller/AllAccountController.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/controller/UpdateAttendance.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/controller/AddAccountController.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/configs/Validate.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/UpdateAccount.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/dal/DashboardDAO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/Account.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/controller/ChartData.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/controller/CheckOutServlet.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/CheckOut.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/controller/UpdateAccountController.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/models/Attendance.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/AttendanceReport.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/AddAccount.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/dal/AccountDAO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/HomeAdmin.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/dal/AttendanceDAO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/models/AttendanceReport.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/WEB-INF/web.xml</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/src/java/context/DBContext.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/assets/js/chart.js</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(2)/AttendanceSWP391/HRManagement/web/UpdateAttendance.jsp</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%20it2/AttendanceSWP391/HRManagement/src/java/controller/DashboardControler.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%20it2/AttendanceSWP391/HRManagement/src/java/controller/AttendanceReportController.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%20it2/AttendanceSWP391/HRManagement/src/java/context/DBContext.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%20it2/AttendanceSWP391/HRManagement/src/java/dal/DashboardDAO.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%20it2/AttendanceSWP391/HRManagement/web/HomeManager.jsp</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%20it2/AttendanceSWP391/HRManagement/src/java/controller/ManagerController.java</file>
         </group>
     </open-files>
 </project-private>
