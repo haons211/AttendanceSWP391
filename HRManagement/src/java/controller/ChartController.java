@@ -6,24 +6,24 @@ package controller;
 
 import dal.DashboardDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import models.AccountDTO;
+import java.util.Map;
 import models.Department;
-import models.DepartmentAttendanceDTO;
 import models.DepartmentEmployeeCountDTO;
-import models.Employee;
 
 /**
  *
  * @author andep
  */
-public class DashboardControler extends HttpServlet {
+@WebServlet(name = "ChartController", urlPatterns = {"/chartController"})
+public class ChartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,32 +37,18 @@ public class DashboardControler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DashboardDAO dao = new DashboardDAO();
-        int numberDepartments = dao.getNumberOfDepartments();
-        int numberEmployees = dao.getNumberOfEmployees();
-        int numberAttend = dao.getNumberOfAttend();
-        int numberLeave = numberEmployees - numberAttend;
-        List<Department> listDepartment = dao.getTop3Department();
-        List<Employee> listTop5Employee = dao.getTop5Employee();
-        List<Employee> listLeave = dao.getListLeave();
-        ArrayList<DepartmentEmployeeCountDTO> listDepartmentEmployee = dao.getEmployeeCountByDepartment();
-        ArrayList<DepartmentAttendanceDTO> departmentAttendanceList = dao.getAttendancePercentageByDepartment();
-
-        
-        
-        headerInfor.setSessionAttributes(request);
-        request.setAttribute("numberDepartments", numberDepartments);
-        request.setAttribute("numberEmployees", numberEmployees);
-        request.setAttribute("numberAttend", numberAttend);
-        request.setAttribute("numberLeave", numberLeave);
-        request.setAttribute("listDepartment", listDepartment);
-        request.setAttribute("listTop5Employee", listTop5Employee);
-        request.setAttribute("listLeave", listLeave);
-        request.setAttribute("listDepartmentEmployee", listDepartmentEmployee);
-        request.setAttribute("departmentAttendanceList", departmentAttendanceList);
-        
-        
-        request.getRequestDispatcher("HomeAdmin.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ChartController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ChartController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,7 +63,13 @@ public class DashboardControler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        DashboardDAO dao = new DashboardDAO();
+        // Gọi phương thức getEmployeeCountByDepartment để lấy số lượng nhân viên theo phòng ban
+        ArrayList<DepartmentEmployeeCountDTO> listDepartmentEmployee = new ArrayList<>();
+        listDepartmentEmployee = dao.getEmployeeCountByDepartment();
+        request.setAttribute("listDepartmentEmployee", listDepartmentEmployee);
+        request.getRequestDispatcher("HomeAdmin.jsp").forward(request, response);
     }
 
     /**
