@@ -9,8 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import models.Department;
+import models.DepartmentAttendanceDTO;
+import models.DepartmentEmployeeCountDTO;
 import models.Employee;
 
 /**
@@ -110,7 +114,7 @@ public class DashboardDAO {
             rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new Department(rs.getInt(1),
-                        rs.getString(2),rs.getString(3)));
+                        rs.getString(2), rs.getString(3)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,4 +174,88 @@ public class DashboardDAO {
         }
         return list;
     }
+
+    public ArrayList<DepartmentEmployeeCountDTO> getEmployeeCountByDepartment() {
+        ArrayList<DepartmentEmployeeCountDTO> departmentEmployeeCounts = new ArrayList<>();
+        String query = "SELECT d.name AS department_name, COUNT(e.employee_id) AS employee_count "
+                + "FROM department d "
+                + "LEFT JOIN employeedepartment ed ON d.department_id = ed.department_id "
+                + "LEFT JOIN employee e ON ed.employee_id = e.employee_id "
+                + "GROUP BY d.name";
+
+        try {
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                String departmentName = rs.getString("department_name");
+                int employeeCount = rs.getInt("employee_count");
+                DepartmentEmployeeCountDTO dto = new DepartmentEmployeeCountDTO();
+                dto.setDepartmentName(departmentName);
+                dto.setEmployeeCount(employeeCount);
+                departmentEmployeeCounts.add(dto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý các ngoại lệ (exception) nếu có
+        } finally {
+            // Đóng ResultSet, PreparedStatement và Connection ở đây nếu cần
+            closeResources();
+        }
+
+        return departmentEmployeeCounts;
+    }
+
+    public ArrayList<DepartmentAttendanceDTO> getAttendancePercentageByDepartment() {
+        ArrayList<DepartmentAttendanceDTO> departmentAttendanceList = new ArrayList<>();
+        String query = "SELECT d.name AS department_name, "
+                + "SUM(CASE WHEN a.status = 'Present' THEN 1 ELSE 0 END) * 100.0 / COUNT(e.employee_id) AS attendance_percentage "
+                + "FROM department d "
+                + "LEFT JOIN employeedepartment ed ON d.department_id = ed.department_id "
+                + "LEFT JOIN employee e ON ed.employee_id = e.employee_id "
+                + "LEFT JOIN attendance a ON e.employee_id = a.employee_id "
+                + "GROUP BY d.name";
+
+        try {
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                String departmentName = rs.getString("department_name");
+                double attendancePercentage = rs.getDouble("attendance_percentage");
+                DepartmentAttendanceDTO dto = new DepartmentAttendanceDTO();
+                dto.setDepartmentName(departmentName);
+                dto.setAttendancePercentage(attendancePercentage);
+                departmentAttendanceList.add(dto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý các ngoại lệ (exception) nếu có
+        } finally {
+            // Đóng ResultSet, PreparedStatement và Connection ở đây nếu cần
+            closeResources();
+        }
+
+        return departmentAttendanceList;
+    }
+// Phương thức để đóng ResultSet, PreparedStatement và Connection
+
+    private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

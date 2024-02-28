@@ -11,10 +11,18 @@
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <!--[if lt IE 9]>
                     <script src="assets/js/html5shiv.min.js"></script>
                     <script src="assets/js/respond.min.js"></script>
             <![endif]-->
+        <%@ page import="java.util.Map" %>
+        <%@ page import="java.util.HashMap" %>
+
+        <%
+            // Assuming departmentEmployeeCount is available as a request attribute
+            Map<String, Integer> departmentEmployeeCount = (Map<String, Integer>) request.getAttribute("departmentEmployeeCount");
+        %>
     </head>
 
     <body>
@@ -200,6 +208,154 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="chart-title">
+                                    <h4>Employee By Department</h4>
+                                </div>	
+                                <canvas id="myDoughnutChart" width="400" height="400"></canvas>
+                                <script>
+                                    // Khai báo bi?n departmentData bên ngoài vòng l?p
+                                    var departmentData = {
+                                        labels: [],
+                                        datasets: [{
+                                                data: [],
+                                                backgroundColor: [
+                                                    'rgb(255, 99, 132)',
+                                                    'rgb(54, 162, 235)',
+                                                    'rgb(255, 205, 86)',
+                                                    'rgb(75, 192, 192)',
+                                                    'rgb(153, 102, 255)',
+                                                    'rgb(255, 159, 64)',
+                                                    'rgb(255, 77, 77)',
+                                                    'rgb(92, 184, 92)',
+                                                    'rgb(240, 173, 78)',
+                                                    'rgb(112, 146, 190)',
+                                                    'rgb(217, 83, 79)',
+                                                    'rgb(54, 162, 235)',
+                                                    'rgb(183, 55, 156)',
+                                                    'rgb(64, 191, 128)',
+                                                    'rgb(255, 184, 82)',
+                                                    'rgb(70, 130, 180)',
+                                                    'rgb(0, 128, 0)',
+                                                    'rgb(255, 20, 147)'
+                                                ]
+                                            }]
+                                    };
+
+                                    <c:forEach var="entry" items="${listDepartmentEmployee}">
+                                    var departmentName = "${entry.departmentName}";
+                                    var employeeCount = ${entry.employeeCount};
+                                    departmentData.labels.push(departmentName);
+                                    departmentData.datasets[0].data.push(employeeCount);
+                                    </c:forEach>
+                                    // L?y th? canvas ?? v? bi?u ??
+                                    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+
+                                    // T?o bi?u ?? doughnut
+                                    var myDoughnutChart = new Chart(ctx, {
+                                        type: 'doughnut',
+                                        data: departmentData,
+                                        options: {
+                                            // Tùy ch?n khác có th? ???c thêm vào ? ?ây
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="chart-title">
+                                    <h4>Attendance By Department</h4>
+                                    <div class="float-right">
+                                        <ul class="chat-user-total">      
+                                        </ul>
+                                    </div>
+                                </div>	
+                                <canvas id="myBarChart" width="400" height="400"></canvas>
+
+                                <script>
+                                    var attendanceData = {
+                                        labels: [],
+                                        datasets: [{
+                                                label: ["%"],
+                                                data: [],
+                                                backgroundColor: [
+                                                    'rgb(255, 99, 132)',
+                                                    'rgb(54, 162, 235)',
+                                                    'rgb(255, 205, 86)',
+                                                    'rgb(75, 192, 192)',
+                                                    'rgb(153, 102, 255)',
+                                                    'rgb(255, 159, 64)',
+                                                    'rgb(255, 77, 77)',
+                                                    'rgb(92, 184, 92)',
+                                                    'rgb(240, 173, 78)',
+                                                    'rgb(112, 146, 190)',
+                                                    'rgb(217, 83, 79)',
+                                                    'rgb(54, 162, 235)',
+                                                    'rgb(183, 55, 156)',
+                                                    'rgb(64, 191, 128)',
+                                                    'rgb(255, 184, 82)',
+                                                    'rgb(70, 130, 180)',
+                                                    'rgb(0, 128, 0)',
+                                                    'rgb(255, 20, 147)'
+                                                ],
+                                                borderColor: [
+                                                    'rgb(255, 99, 132)',
+                                                    'rgb(54, 162, 235)',
+                                                    'rgb(255, 205, 86)',
+                                                    'rgb(75, 192, 192)',
+                                                    'rgb(153, 102, 255)',
+                                                    'rgb(255, 159, 64)',
+                                                    'rgb(255, 77, 77)',
+                                                    'rgb(92, 184, 92)',
+                                                    'rgb(240, 173, 78)',
+                                                    'rgb(112, 146, 190)',
+                                                    'rgb(217, 83, 79)',
+                                                    'rgb(54, 162, 235)',
+                                                    'rgb(183, 55, 156)',
+                                                    'rgb(64, 191, 128)',
+                                                    'rgb(255, 184, 82)',
+                                                    'rgb(70, 130, 180)',
+                                                    'rgb(0, 128, 0)',
+                                                    'rgb(255, 20, 147)'
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                    };
+                                    <c:forEach var="entry" items="${departmentAttendanceList}">
+                                    var departmentName = "${entry.departmentName}";
+                                    var attendancePercentage = ${entry.attendancePercentage};
+                                    attendanceData.labels.push(departmentName);
+                                    attendanceData.datasets[0].data.push(attendancePercentage);
+                                    </c:forEach>
+                                    var ctxBar = document.getElementById('myBarChart').getContext('2d');
+
+                                    var myBarChart = new Chart(ctxBar, {
+                                        type: 'bar',
+                                        data: attendanceData,
+                                        options: {
+                                            scales: {
+                                                yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        }
+                                                    }]
+                                            },
+                                            legend: {
+                                                display: false // ?n nhãn c?a bi?u ??
+                                            }
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>       
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                         <div class="card">
