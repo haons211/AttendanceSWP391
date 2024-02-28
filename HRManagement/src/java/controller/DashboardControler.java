@@ -48,6 +48,9 @@ public class DashboardControler extends HttpServlet {
         ArrayList<DepartmentEmployeeCountDTO> listDepartmentEmployee = dao.getEmployeeCountByDepartment();
         ArrayList<DepartmentAttendanceDTO> departmentAttendanceList = dao.getAttendancePercentageByDepartment();
 
+        
+        
+        headerInfor.setSessionAttributes(request);
         request.setAttribute("numberDepartments", numberDepartments);
         request.setAttribute("numberEmployees", numberEmployees);
         request.setAttribute("numberAttend", numberAttend);

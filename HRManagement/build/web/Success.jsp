@@ -147,7 +147,7 @@
         <div class="main-wrapper">
             <% if (role == 2) { %>
             <jsp:include page="SideBarforEm.jsp" />
-            <% } else if (role == 3) { %>
+            <% } else if (role == 3|| role == 1) { %>
             <jsp:include page="SideBarforManager.jsp" />
             <% } %>
             <div class="page-wrapper">

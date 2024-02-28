@@ -152,7 +152,19 @@ public class Authentication implements Filter {
                     filterchain.doFilter(servletRequest, servletResponse);
                 }
 
+            } else {
+                response.sendRedirect(request.getContextPath() + "/401.jsp");
             }
+        } else if (url.contains("employeedetailapplication")) {
+            if (user != null) {
+                if (user.getRole() == 1 || user.getRole() == 3 || user.getRole() == 2) {
+                    filterchain.doFilter(servletRequest, servletResponse);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/401.jsp");
+                }
+
+            }
+
         } else {
 
             if (user != null) {
