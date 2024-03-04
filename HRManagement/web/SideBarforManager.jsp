@@ -67,7 +67,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">ChangePassword</a>
+                        <a class="dropdown-item" href="Setting">Setting</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -77,7 +77,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
                     <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">ChangePassword</a>
+                    <a class="dropdown-item" href="Setting">Setting</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </div>
@@ -111,6 +111,9 @@
                         <li>
                             <a href="ManagerNotification"><i class="fa fa-bell"></i> <span>Notification</span></a>
                         </li> 
+                        <li>
+                                <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                            </li>
                     </ul>
                 </div>
             </div>

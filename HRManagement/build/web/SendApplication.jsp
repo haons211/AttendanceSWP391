@@ -102,11 +102,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="title">Title:</label>
-                                            <textarea id="title" name="title" rows="1" placeholder="Enter title"></textarea>
+                                            <textarea id="title" name="title" rows="1" placeholder="Enter title" required=""></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Content:</label>
-                                            <textarea id="content" name="content" rows="4" placeholder="Enter content"></textarea>
+                                            <textarea id="content" name="content" rows="4" placeholder="Enter content" required=""></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="file-attach">Attach File:</label>

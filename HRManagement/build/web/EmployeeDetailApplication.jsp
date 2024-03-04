@@ -148,7 +148,7 @@
                                         <br>
                                         <div id="reply-form" style="display: none;">
                                             <form action="replyapplication" >
-                                                <textarea id="content" name="content" rows="4" cols="100" placeholder="Enter content"></textarea>
+                                                <textarea id="content" name="content" rows="4" cols="100" placeholder="Enter content" required=""></textarea>
                                                 <input type="hidden" name="application_id" value=${detail.application_id}>
                                                 <br>
                                                 <input type="submit" value="Done">

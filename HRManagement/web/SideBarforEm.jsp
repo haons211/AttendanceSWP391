@@ -67,7 +67,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">ChangePassword</a>
+                         <a class="dropdown-item" href="Setting">Setting</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -77,7 +77,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
                     <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">ChangePassword</a>
+                    <a class="dropdown-item" href="Setting">Setting</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                             <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-cog"></i> <span>ChangePassword </span></a>
+                            <a href="Setting"><i class="fa fa-cog"></i> <span>Setting </span></a>
                         </li>    
                          <li>
                             <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>

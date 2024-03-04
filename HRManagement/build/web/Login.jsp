@@ -70,7 +70,7 @@
                                                 <div class="text-center pt-1 mb-5 pb-1">
                                                     <button style="color: black"class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                                                             type="submit">Log in</button>
-                                                    <a class="text-muted" href="#!">Forgot password?</a>
+                                                    <a class="text-muted" href="ForgetPassword">Forgot password?</a>
                                                 </div>
                                             </form>
                                         </div>

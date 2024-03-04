@@ -4,6 +4,7 @@
  */
 package dal;
 
+import configs.PasswordEncryption;
 import context.DBContext;
 import models.AccountDTO;
 import java.sql.Connection;
@@ -21,7 +22,82 @@ public class AccountDAO {
     Connection con = null;
     PreparedStatement stm = null;
     ResultSet rs = null;
-public int getEmployeeId(int userId) throws ClassNotFoundException, SQLException {
+
+    public AccountDTO getIdByUsername(String username) {
+        String query = "SELECT * FROM users WHERE username = ?";
+        try {
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                return new AccountDTO(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return null;
+
+    }
+
+    public void updatePassword(int user_id, String password) {
+        String query = "UPDATE users\n"
+                + "                SET password = ? \n"
+                + "                WHERE user_id = ? ";
+        try {
+
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+
+            stm.setString(1, password);
+
+            stm.setInt(2, user_id);
+
+            stm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+
+    }
+
+    public void resetDefaultPassword(int user_id) {
+        PasswordEncryption passwordEncryption = new PasswordEncryption();
+        String defaultPassword = passwordEncryption.hashPasswordMD5("12345N@");
+        String query = "UPDATE users\n"
+                + "SET password = N'" + defaultPassword + "'\n"
+                + "WHERE user_id = ?";
+        try {
+
+            con = new DBContext().getConnection();
+            stm = con.prepareStatement(query);
+
+            stm.setInt(1, user_id);
+
+            stm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+
+    }
+
+    public int getEmployeeId(int userId) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -44,6 +120,7 @@ public int getEmployeeId(int userId) throws ClassNotFoundException, SQLException
 
         return employeeId;
     }
+
     public AccountDTO checkLogin(String username, String password) throws SQLException, ClassNotFoundException, Exception {
 
         try {

@@ -26,7 +26,7 @@
             <![endif]-->
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Are you sure to delete Employee ID = " + id)) {
+                if (confirm("are you sure to delete id = " + id)) {
                     window.location = "delete-employee?id=" + id;
                 }
             }
@@ -95,7 +95,7 @@
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href="update-employee?id=${e.employeeId}"><i class="fa fa-pencil m-r-5"></i>Edit</a>
-                                                                <a class="dropdown-item" href="delete-employee?id=${e.employeeId}"  onclick="doDelete('${e.employeeId}')" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                                <a class="dropdown-item" href="#" onclick="doDelete('${e.employeeId}')" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>

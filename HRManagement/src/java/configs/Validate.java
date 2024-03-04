@@ -9,94 +9,22 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
+import models.AccountDTO;
+
+import java.io.IOException;
 
 /**
  *
  * @author Dan
  */
 public class Validate {
-
-    public boolean checkPhone(String phone) {
-        String regex = "^0\\d{9}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(phone);
-        return matcher.matches();
+    public boolean validateRemainDay(int remainday, int approvedLeaveDays) {
+        return remainday <= approvedLeaveDays;
     }
-
-//    public  boolean checkEmail(String email) {
-//        String regex = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
-//        Pattern pattern = Pattern.compile(regex);
-//        Matcher matcher = pattern.matcher(email);
-//        return matcher.matches();
-//    }
-    public boolean checkWords(String input) {
-        String regex = "^[a-zA-Z0-9 ]+$";
-        return Pattern.matches(regex, input);
-    }
-
-    public boolean checkAddress(String input) {
-        String regex = "^[a-zA-Z0-9,/]+$";
-        return Pattern.matches(regex, input);
-    }
-
-    public boolean checkDate(String input) {
-        String regex = "^[0-9/-]+$";
-        return Pattern.matches(regex, input);
-    }
-
-    public String normalizeName(String name) {
-
-        String lowercaseName = name.toLowerCase();
-        // Chuyển ký tự đầu tiên của mỗi từ thành chữ hoa
-        String[] nameParts = lowercaseName.split(" ");
-        StringBuilder normalized = new StringBuilder();
-        for (String part : nameParts) {
-            if (!part.isEmpty()) {
-                normalized.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1)).append(" ");
-            }
-        }
-        return normalized.toString().trim();
-    }
-
-    public boolean compareDate(String firstDate, String secondDate) throws ParseException {
-
-        firstDate = firstDate.replace('-', '/');
-        secondDate = secondDate.replace('-', '/');
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date date1 = dateFormat.parse(firstDate);
-        Date date2 = dateFormat.parse(secondDate);
-
-        if (date1.after(date2)) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isAdult(String dateOfBirthString) throws ParseException {
-        dateOfBirthString = dateOfBirthString.replace('-', '/');
-
-        // Chuyển đổi chuỗi ngày tháng thành đối tượng Date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date dateOfBirth = dateFormat.parse(dateOfBirthString);
-
-        // Tạo một Calendar object để lấy ngày hiện tại
-        Calendar dob = Calendar.getInstance();
-        dob.setTime(dateOfBirth);
-
-        // Lấy ngày hiện tại
-        Calendar today = Calendar.getInstance();
-
-        // Tính tuổi dựa trên năm sinh và năm hiện tại
-        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
-        if (age < 18) {
-            return false;
-        }
-
-        // Trong trường hợp có lỗi xảy ra, trả về false
-        return true;
-    }
-
     public boolean validateTime(String checkin, String checkout) {
         // Kiểm tra xem checkin và checkout có null hoặc trống không
         if (checkin == null || checkin.isEmpty() || checkout == null || checkout.isEmpty()) {
@@ -141,24 +69,109 @@ public class Validate {
         }
     }
 
-    public boolean validateRemainDay(int remainday, int approvedLeaveDays) {
-        return remainday <= approvedLeaveDays;
+    public boolean checkPhone(String phone) {
+        String regex = "^0\\d{9}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(phone);
+        return matcher.matches();
     }
+
+    public boolean checkEmail(String email) {
+        String regex = "^[A-Za-z0-9_.-]+@example\\.com$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public boolean checkWords(String input) {
+        String regex = "^[\\p{L}0-9\\s\\p{M}]+$";
+        return Pattern.matches(regex, input);
+    }
+
+    public boolean checkAddress(String input) {
+        String regex = "^[\\p{L}0-9\\s,\\/\\p{M}]+$";
+        return Pattern.matches(regex, input);
+    }
+
+    public boolean checkDate(String input) {
+        String regex = "^[0-9/-]+$";
+        return Pattern.matches(regex, input);
+    }
+
+    public String normalizeName(String name) {
+
+        String lowercaseName = name.toLowerCase();
+
+        String[] nameParts = lowercaseName.split(" ");
+        StringBuilder normalized = new StringBuilder();
+        for (String part : nameParts) {
+            if (!part.isEmpty()) {
+                normalized.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1)).append(" ");
+            }
+        }
+        return normalized.toString().trim();
+    }
+
+    public boolean compareDate(String firstDate, String secondDate) throws ParseException {
+
+        firstDate = firstDate.replace('-', '/');
+        secondDate = secondDate.replace('-', '/');
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date1 = dateFormat.parse(firstDate);
+        Date date2 = dateFormat.parse(secondDate);
+
+        if (date1.after(date2)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isAdult(String dateOfBirthString) throws ParseException {
+        dateOfBirthString = dateOfBirthString.replace('-', '/');
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date dateOfBirth = dateFormat.parse(dateOfBirthString);
+
+        Calendar dob = Calendar.getInstance();
+        dob.setTime(dateOfBirth);
+
+        Calendar today = Calendar.getInstance();
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if (age < 18) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean isPasswordValid(String password) {
+        // Kiểm tra độ dài của mật khẩu
+
+        if (password.length() < 6 || password == null) {
+            return false;
+        }
+
+        // Kiểm tra có ít nhất một chữ cái viết hoa
+        Pattern upperCasePattern = Pattern.compile("[A-Z]");
+        Matcher upperCaseMatcher = upperCasePattern.matcher(password);
+        if (!upperCaseMatcher.find()) {
+            return false;
+        }
+
+        // Kiểm tra có ít nhất một ký tự đặc biệt
+        Pattern specialCharPattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher specialCharMatcher = specialCharPattern.matcher(password);
+        if (!specialCharMatcher.find()) {
+            return false;
+        }
+
+        return true;
+    }
+    
+
+    
+    
+
+  
 }
-//    public static void main(String[] args) throws ParseException {
-//        String a = "2024-02-15";
-//        String b = "2024-02-03";
-//        Validate validate = new Validate();
-//        Date currentDate = new Date();
-//
-//        
-//        try {
-//            System.out.println(validate.compareDate(a, b));
-////            System.out.println("Age check: " + validate.isAdult(b));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
-
