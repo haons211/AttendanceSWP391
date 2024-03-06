@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/AddDepartment.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/SideBarforManager.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/Setting.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/SideBarforEm.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/src/java/filter/Authentication.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/Account.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/CompanySetting.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/src/java/controller/SettingController.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/Login.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/src/java/controller/ForgetPasswordController.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/EditNotification.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/HomeEmployees.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/29224/AttendanceSWP391/HRManagement/web/AddAccount.jsp</file>
+        </group>
     </open-files>
 </project-private>
