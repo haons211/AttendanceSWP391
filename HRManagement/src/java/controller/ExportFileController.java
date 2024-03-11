@@ -14,16 +14,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.AttendanceReport;
+import models.AttendanceDepartmentDTO;
 import models.Department;
 import models.Employee;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -59,6 +57,7 @@ public class ExportFileController extends HttpServlet {
         } else if ("attendance".equals(exportType)) {
             exportAttendanceReport(response);
         }
+        request.getRequestDispatcher("ExportFile.jsp").forward(request, response);
     }
 
     private void exportDepartmentList(HttpServletResponse response) throws IOException {
@@ -177,7 +176,7 @@ public class ExportFileController extends HttpServlet {
             ex.printStackTrace();
         }
         AttendanceDAO attendanceDAO = new AttendanceDAO();
-        ArrayList<AttendanceReport> attendanceList = attendanceDAO.getAllAttendance("", "", fromDate == null ? null : fromDate, toDate == null ? null : toDate);
+        ArrayList<AttendanceDepartmentDTO> attendanceList = attendanceDAO.getAllAttendance("", "", fromDate == null ? null : fromDate, toDate == null ? null : toDate);
 
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); // Thiết lập kiểu MIME cho file Excel
         response.setHeader("Content-Disposition", "attachment; filename=\"ListAttendance.xlsx\""); // Thiết lập tiêu đề phản hồi để trình duyệt hiển thị hộp thoại tải xuống
@@ -214,7 +213,7 @@ public class ExportFileController extends HttpServlet {
             cell.setCellValue("Remain Day");
 
             int rowNum = 1;
-            for (AttendanceReport attendance : attendanceList) {
+            for (AttendanceDepartmentDTO attendance : attendanceList) {
                 row = workSheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(attendance.getAttendance_id());
                 row.createCell(1).setCellValue(attendance.getEm_name());
@@ -247,6 +246,7 @@ public class ExportFileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         processRequest(request, response);
+
     }
 
     /**

@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.AttendanceReport;
+
 import models.AttendanceSheet;
 import models.Department;
 import models.Employee;
@@ -96,7 +96,7 @@ public class AttendanceByMonthYearController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         headerInfor.setSessionAttributes(request);
-        
+
         Calendar calendar = Calendar.getInstance();
         int currentMonth = calendar.get(Calendar.MONTH) + 1;
         int currentYear = calendar.get(Calendar.YEAR);
@@ -121,8 +121,8 @@ public class AttendanceByMonthYearController extends HttpServlet {
         // Iterate over employees to fetch attendance for each one
         for (Employee employee : employeesList) {
             ArrayList<AttendanceSheet> employeeAttendanceList = attendanceDAO.getAttendanceByEmployeeAndDateRange(
-                employee.getEmployeeId(), (month == null || month.isEmpty()) ? String.format("%02d", currentMonth) : month, (year == null|| year.isEmpty()) ? String.valueOf(currentYear) : year);
-        allAttendanceLists.add(employeeAttendanceList);
+                    employee.getEmployeeId(), (month == null || month.isEmpty()) ? String.format("%02d", currentMonth) : month, (year == null || year.isEmpty()) ? String.valueOf(currentYear) : year);
+            allAttendanceLists.add(employeeAttendanceList);
         }
 
         // Set the attribute containing all attendance lists
@@ -143,7 +143,7 @@ public class AttendanceByMonthYearController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

@@ -122,10 +122,10 @@
                             <a href="ManagerNotification"><i class="fa fa-bell"></i> <span>Notification</span></a>
                         </li> 
                         <li>
-                            <a href="ExportFile.jsp"><i class="fa fa-download"></i> <span>Export File</span></a>
+                            <a href="ExportFileController"><i class="fa fa-download"></i> <span>Export File</span></a>
                         </li> 
                         <li>
-                        <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                            <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
                         </li>
                     </ul>
                 </div>
