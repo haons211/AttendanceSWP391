@@ -3,7 +3,7 @@
     Created on : Feb 26, 2024, 10:38:38 PM
     Author     : Dan
 --%>
-
+<%@ page import="models.AccountDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -87,6 +87,13 @@
                             <li>
                                 <a href="ChangePassword"><i class="fa fa-lock"></i> <span>Change Password</span></a>
                             </li>
+                            
+                                   <li>
+                                <a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span> Salary</span> </a>
+                            </li>
+                         
+                            
+                         
 
 
                         </ul>

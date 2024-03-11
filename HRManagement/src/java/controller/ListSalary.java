@@ -4,10 +4,9 @@
  */
 package controller;
 
-import configs.Validate;
-import dal.CompanyDAO;
-import dal.DepartmentDAO;
 import dal.EmployeeDAO;
+import models.EmployeeSalary;
+import dal.SalaryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,23 +14,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.AccountDTO;
-import models.Company;
-import models.Department;
 import models.Employee;
+import models.Salary;
 
 /**
  *
  * @author Dan
  */
-@WebServlet(name = "SettingController", urlPatterns = {"/Setting"})
-public class SettingController extends HttpServlet {
-
-    private final Validate validate = new Validate();
+@WebServlet(name = "ListSalary", urlPatterns = {"/ListSalary"})
+public class ListSalary extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,10 +44,10 @@ public class SettingController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SettingController</title>");
+            out.println("<title>Servlet ListSalary</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SettingController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ListSalary at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,15 +65,17 @@ public class SettingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        SalaryDAO salaryDAO = new SalaryDAO();
+        try {
 
-        HttpSession session =  request.getSession();
-        AccountDTO acc = (AccountDTO) session.getAttribute("account");
-        if(acc.getRole() == 2){
-            request.setAttribute("emp", acc);
+            List<EmployeeSalary> lists = salaryDAO.getAllSalary();
+
+            request.setAttribute("listSalary", lists);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListSalary.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.getRequestDispatcher("Setting.jsp").forward(request, response);
 
+        request.getRequestDispatcher("Salary.jsp").forward(request, response);
     }
 
     /**

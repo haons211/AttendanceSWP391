@@ -196,7 +196,7 @@ public class EmployeeDAO {
             ps.setString(3, e.getAddress());
             ps.setString(4, e.getEmail());
             ps.setBoolean(5, e.isGender());
-            ps.setString(6, e.toString());
+            ps.setString(6, e.getImage());
             ps.setString(7, e.getBirthDate());
             ps.setString(8, e.getHireDate());
             ps.setInt(9, id);

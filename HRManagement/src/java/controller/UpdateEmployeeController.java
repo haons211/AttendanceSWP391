@@ -54,7 +54,7 @@ public class UpdateEmployeeController extends HttpServlet {
 
         // Default to male if parameter is null
         String messageError = "Please input valid ";
-
+        System.out.println(image);
         // Parse date parameters
         EmployeeDAO dao = new EmployeeDAO();
         String birthDate = request.getParameter("birthDate");

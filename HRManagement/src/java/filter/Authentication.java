@@ -119,7 +119,8 @@ public class Authentication implements Filter {
         
         if (url.contains("404.jsp")) {
             filterchain.doFilter(servletRequest, servletResponse);
-        } else if (url.contains("Login")) {
+        } 
+        else if (url.contains("Login")) {
 
             if (user != null) {
 
