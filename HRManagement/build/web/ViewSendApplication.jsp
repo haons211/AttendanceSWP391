@@ -145,40 +145,40 @@
                         </div>
                     </div>
                 </div>
-               
-            <!--            		<div id="delete_department" class="modal fade delete-modal" role="dialog">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                                <div class="modal-body text-center">
-                                                                        <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                                                        <h3>Are you sure want to delete this Department?</h3>
-                                                                        <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>-->
-        </div>
-        <div class="sidebar-overlay" data-reff=""></div>
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/Chart.bundle.js"></script>
-        <script src="assets/js/chart.js"></script>
-        <script src="assets/js/app.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/jquery.dataTables.min.js"></script>
-        <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-        <script>
-            document.getElementById("searchInput").addEventListener("keyup", function (event) {
-                if (event.key === "Enter") {
-                    var searchTerm = this.value;
-                    window.location.href = "viewsendapplication?searchTerm=" + searchTerm;
-                }
-            });
-        </script>
+
+                <!--            		<div id="delete_department" class="modal fade delete-modal" role="dialog">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                    <div class="modal-body text-center">
+                                                                            <img src="assets/img/sent.png" alt="" width="50" height="46">
+                                                                            <h3>Are you sure want to delete this Department?</h3>
+                                                                            <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                                                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                                            </div>
+                                                                    </div>
+                                                            </div>
+                                                    </div>
+                                            </div>-->
+            </div>
+            <div class="sidebar-overlay" data-reff=""></div>
+            <script src="assets/js/jquery-3.2.1.min.js"></script>
+            <script src="assets/js/popper.min.js"></script>
+            <script src="assets/js/bootstrap.min.js"></script>
+            <script src="assets/js/jquery.slimscroll.js"></script>
+            <script src="assets/js/Chart.bundle.js"></script>
+            <script src="assets/js/chart.js"></script>
+            <script src="assets/js/app.js"></script>
+            <script src="assets/js/jquery.slimscroll.js"></script>
+            <script src="assets/js/jquery.dataTables.min.js"></script>
+            <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+            <script>
+                document.getElementById("searchInput").addEventListener("keyup", function (event) {
+                    if (event.key === "Enter") {
+                        var searchTerm = this.value;
+                        window.location.href = "viewsendapplication?searchTerm=" + searchTerm;
+                    }
+                });
+            </script>
     </body>
 
 </html>

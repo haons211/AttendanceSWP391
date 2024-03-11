@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.Date;
 import models.AccountDTO;
 import models.Attendance;
 import models.Employee;
@@ -38,27 +37,28 @@ public class CheckOutServlet extends HttpServlet {
             AccountDTO acc = (AccountDTO) session.getAttribute("account");
             EmployeeDAO dao = new EmployeeDAO();
             RemaindayDAO DAO = new RemaindayDAO();
-            try {
-                Employee em = dao.getin4(acc.getUserID());
-                int remainDay = DAO.getRemainDayById(em.getEmployeeId());
-                request.setAttribute("re", remainDay);
-                request.setAttribute("emp", em);
-                int attendanceId = (int) session.getAttribute("attendanceId");
-                request.setAttribute("attendanceId", attendanceId);
-                Timestamp checkOutTime = new Timestamp(System.currentTimeMillis());
-                session.setAttribute("checkOutTime", checkOutTime);
-                Timestamp checkInTime = (Timestamp) session.getAttribute("checkInTime");
-                request.setAttribute("checkInTime", checkInTime);
-                
+            out.print("abc");
+            if (session.getAttribute("checkedOut") != null && (boolean) session.getAttribute("checkedOut")) {
 
-            } catch (Exception e) {
-            }
-
-            if (acc == null) {
-                response.sendRedirect("Login");
+                request.getRequestDispatcher("Success.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
+                try {
+                    Employee em = dao.getin4(acc.getUserID());
+                    int remainDay = DAO.getRemainDayById(em.getEmployeeId());
+                    session.setAttribute("re", remainDay);
+                    request.setAttribute("emp", em);
+
+                    int attendanceId = (int) session.getAttribute("attendanceId");
+                    Timestamp checkOutTime = new Timestamp(System.currentTimeMillis());
+                    session.setAttribute("checkOutTime", checkOutTime);
+
+                    Timestamp checkInTime = (Timestamp) request.getAttribute("checkInTime");
+                    session.setAttribute("checkInTime", checkInTime);
+
+                } catch (Exception e) {
+                }
             }
+
         }
     }
 
@@ -73,7 +73,7 @@ public class CheckOutServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-headerInfor.setSessionAttributes(request);
+        headerInfor.setSessionAttributes(request);
         if (session != null) {
             AccountDTO acc = (AccountDTO) session.getAttribute("account");
             EmployeeDAO dao = new EmployeeDAO();
@@ -82,30 +82,25 @@ headerInfor.setSessionAttributes(request);
                 try {
                     Employee em = dao.getin4(acc.getUserID());
                     int remainDay = DAO.getRemainDayById(em.getEmployeeId());
-                    request.setAttribute("re", remainDay);
+                    session.setAttribute("re", remainDay);
                     request.setAttribute("emp", em);
                     int attendanceId = (int) session.getAttribute("attendanceId");
-                    System.out.println("con so may man la" + attendanceId);
-                    // Gọi phương thức DAO để cập nhật dữ liệu Check Out vào cơ sở dữ liệu
                     AttendanceDAO attendanceDAO = new AttendanceDAO();
                     attendanceDAO.CheckOut(attendanceId);
                     Attendance attendance = attendanceDAO.getAttendanceById(attendanceId);
                     request.setAttribute("attendance", attendance);
-                    System.out.println(attendance.toString());
                     Timestamp checkOutTime = new Timestamp(System.currentTimeMillis());
-                session.setAttribute("checkOutTime", checkOutTime);
-                Timestamp checkInTime = (Timestamp) session.getAttribute("checkInTime");
-                request.setAttribute("checkInTime", checkInTime);
-                System.out.println(checkInTime+"va"+ checkOutTime);
+                    session.setAttribute("checkOutTime", checkOutTime);
+                    Timestamp checkInTime = (Timestamp) session.getAttribute("checkInTime");
+                    session.setAttribute("checkInTime", checkInTime);
+//                    attendanceDAO.insertCheckStatus(em.getEmployeeId(), true, true);
+                    session.setAttribute("checkedOut", true);
+//                    session.setAttribute("checkedOut", attendanceDAO.getCheckedOutStatus(em.getEmployeeId()));
                 } catch (Exception e) {
                     System.out.println(e);
                 }
 
-                if (acc == null) {
-                    response.sendRedirect("Login");
-                } else {
-                    request.getRequestDispatcher("Success.jsp").forward(request, response);
-                }
+                request.getRequestDispatcher("Success.jsp").forward(request, response);
 
             }
         }

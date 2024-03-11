@@ -539,3 +539,70 @@ LOCK TABLES `managerfile` WRITE;
 /*!40000 ALTER TABLE `managerfile` DISABLE KEYS */;
 /*!40000 ALTER TABLE `managerfile` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+
+CREATE TABLE insurance (
+    insurance_id INT PRIMARY KEY,
+    employee_id INT,
+    insurance_company VARCHAR(100),
+    policy_number VARCHAR(50),
+    coverage_type VARCHAR(50),
+    start_date DATE,
+    end_date DATE,
+    premium_amount DECIMAL(10, 2),
+    deductible DECIMAL(10, 2),
+    co_pay DECIMAL(10, 2),
+    coverage_details TEXT,
+    policy_type VARCHAR(50),
+    policy_issuer VARCHAR(100),
+    beneficiary VARCHAR(100),
+    coverage_limit DECIMAL(15, 2),
+    renewal_date DATE,
+	FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
+);
+
+-- Nhập 10 thông tin vào bảng Insurance_Info
+INSERT INTO insurance (insurance_id, employee_id, insurance_company, policy_number, coverage_type, start_date, end_date, premium_amount, deductible, co_pay, coverage_details, policy_type, policy_issuer, beneficiary, coverage_limit, renewal_date)
+VALUES 
+    (1, 1, 'ABC Insurance', 'POL001', 'Health', '2024-01-01', '2025-01-01', 1000.00, 100.00, 20.00, 'Health checkups', 'Health Insurance', 'ABC Insurance', NULL, 5000.00, '2025-01-01'),
+    (2, 2, 'XYZ Insurance', 'POL002', 'Life', '2024-03-15', '2034-03-15', 500.00, NULL, NULL, 'Death Benefit', 'Life Insurance', 'XYZ Insurance', 'Family', 100000.00, '2034-03-15'),
+    (3, 3, 'ABC Insurance', 'POL003', 'Accident', '2023-06-01', '2024-06-01', 800.00, 50.00, NULL, 'Medical Expense', 'Accident Insurance', 'ABC Insurance', NULL, 2000.00, '2024-06-01'),
+    (4, 4, 'DEF Insurance', 'POL004', 'Health', '2023-12-01', '2024-12-01', 1200.00, 150.00, 30.00, 'Hospitalization', 'Health Insurance', 'DEF Insurance', NULL, 8000.00, '2024-12-01'),
+    (5, 5, 'GHI Insurance', 'POL005', 'Health', '2024-02-01', '2025-02-01', 1100.00, 120.00, 25.00, 'Dental Care', 'Health Insurance', 'GHI Insurance', NULL, 6000.00, '2025-02-01'),
+    (6, 6, 'JKL Insurance', 'POL006', 'Life', '2024-04-01', '2034-04-01', 550.00, NULL, NULL, 'Critical Illness', 'Life Insurance', 'JKL Insurance', 'Spouse', 120000.00, '2034-04-01'),
+    (7, 7, 'MNO Insurance', 'POL007', 'Health', '2023-10-01', '2024-10-01', 950.00, 80.00, 15.00, 'Prescription Drugs', 'Health Insurance', 'MNO Insurance', NULL, 7000.00, '2024-10-01'),
+    (8, 8, 'PQR Insurance', 'POL008', 'Accident', '2023-08-01', '2024-08-01', 850.00, 70.00, NULL, 'Emergency Room Visits', 'Accident Insurance', 'PQR Insurance', NULL, 3000.00, '2024-08-01'),
+    (9, 9, 'STU Insurance', 'POL009', 'Health', '2024-05-01', '2025-05-01', 1300.00, 180.00, 35.00, 'Surgery', 'Health Insurance', 'STU Insurance', NULL, 9000.00, '2025-05-01'),
+    (10, 10, 'VWX Insurance', 'POL010', 'Life', '2024-07-01', '2034-07-01', 600.00, NULL, NULL, 'Accidental Death', 'Life Insurance', 'VWX Insurance', 'Child', 150000.00, '2034-07-01');
+    
+    
+    CREATE TABLE dependents (
+    dependent_id INT PRIMARY KEY,
+    employee_id INT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    date_of_birth DATE,
+    relationship VARCHAR(50),
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
+);
+
+INSERT INTO dependents (dependent_id, employee_id, first_name, last_name, date_of_birth, relationship)
+VALUES
+    (1, 1, 'Alice', 'Doe', '1990-01-01', 'Spouse'),       -- Từ bản ghi 1
+    (2, 1, 'Emma', 'Doe', '2010-05-15', 'Child'),          -- Từ bản ghi 1
+    (3, 2, 'Tom', 'Smith', '1995-06-20', 'Spouse'),        -- Từ bản ghi 3
+    (4, 3, 'Sarah', 'Johnson', '1992-11-15', 'Spouse'),    -- Từ bản ghi 4
+    (5, 3, 'Liam', 'Johnson', '2010-09-25', 'Child'),      -- Từ bản ghi 4
+    (6, 4, 'Olivia', 'Williams', '2005-08-12', 'Child'),   -- Từ bản ghi 5
+    (7, 5, 'Noah', 'Brown', '2018-03-30', 'Child'),        -- Từ bản ghi 6
+    (8, 6, 'Sophia', 'Miller', '2002-06-18', 'Child'),     -- Từ bản ghi 7
+    (9, 7, 'James', 'Wilson', '2012-12-03', 'Child'),      -- Từ bản ghi 8
+    (10, 7, 'Ava', 'Wilson', '2015-09-10', 'Child'),      -- Từ bản ghi 8
+    (11, 8, 'Emily', 'Wilson', '2018-07-20', 'Child'),     -- Từ bản ghi 9
+    (12, 8, 'Jacob', 'Wilson', '2020-02-12', 'Child'),     -- Từ bản ghi 9
+    (13, 8, 'Sophie', 'Wilson', '2022-01-05', 'Child'),    -- Từ bản ghi 9
+    (14, 9, 'Oliver', 'Smith', '2017-10-10', 'Child'),     -- Từ bản ghi 10
+    (15, 9, 'Charlotte', 'Smith', '2019-04-25', 'Child'),
+    (16, 10, 'Ethan', 'Brown', '2016-12-15', 'Child'),     -- Từ bản ghi 11
+    (17, 10, 'Amelia', 'Brown', '2018-08-20', 'Child');

@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.AttendanceDAO;
 import dal.EmployeeDAO;
 import models.AccountDTO;
 import java.io.IOException;
@@ -165,27 +166,44 @@ public class LoginController extends HttpServlet {
                     AccountDAO dao = new AccountDAO();
                     AccountDTO account = dao.checkLogin(username, password);
                     EmployeeDAO em = new EmployeeDAO();
+                    AttendanceDAO attenDAO = new AttendanceDAO();
                     if (account != null) {
                         try {
                             Employee emp = em.getin4(account.getUserID());
+                            //thuy vy cmt
+                            int userId = account.getUserID();
+                            attenDAO.insertCheckStatus(userId, false, false);
+                            //thuy vy cmt
                             int role = account.getRole();
                             if (role == 2) {
                                 url = "HomeEmployees";
                                 HttpSession session = request.getSession();
                                 session.setAttribute("account", account);
                                 session.setAttribute("employee", emp);
+
+                                // Đặt thời gian sống của session thành 1 ngày (86400 giây)
+                                session.setMaxInactiveInterval(86400);
+
                                 response.sendRedirect(url);
                             } else if (role == 3) {
                                 url = "HomeManager";
                                 HttpSession session = request.getSession();
                                 session.setAttribute("account", account);
                                 session.setAttribute("employee", emp);
+
+                                // Đặt thời gian sống của session thành 1 ngày (86400 giây)
+                                session.setMaxInactiveInterval(86400);
+
                                 response.sendRedirect(url);
                             } else if (role == 1) {
                                 url = "HomeAdmin";
                                 HttpSession session = request.getSession();
                                 session.setAttribute("account", account);
                                 session.setAttribute("employee", emp);
+
+                                // Đặt thời gian sống của session thành 1 ngày (86400 giây)
+                                session.setMaxInactiveInterval(86400);
+
                                 response.sendRedirect(url);
                             }
                         } catch (Exception ex) {

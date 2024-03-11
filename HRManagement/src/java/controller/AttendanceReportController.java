@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import models.AttendanceReport;
+import models.AttendanceDepartmentDTO;
 import models.Department;
 
 /**
@@ -89,7 +89,7 @@ public class AttendanceReportController extends HttpServlet {
         }
         // Gọi phương thức DAO để lấy danh sách AttendanceReport
         AttendanceDAO attendanceDAO = new AttendanceDAO();
-        ArrayList<AttendanceReport> attendanceList = attendanceDAO.getAllAttendance(search == null ? "" : search,departmentName ,fromDate==null?null:fromDate, toDate==null?null:toDate);
+        ArrayList<AttendanceDepartmentDTO> attendanceList = attendanceDAO.getAllAttendance(search == null ? "" : search,departmentName ,fromDate==null?null:fromDate, toDate==null?null:toDate);
         request.setAttribute("listDep", departmentList);
         // Lưu danh sách vào request attribute để truyền tới jsp
         request.setAttribute("list", attendanceList);

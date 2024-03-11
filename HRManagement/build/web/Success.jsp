@@ -134,13 +134,38 @@
             .details{
                 padding-top: 20px;
             }
+            .attendance-info {
+                background-color: #D2E0FB; /* Màu nền xám nhạt */
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng mờ */
+                display: flex; /* Sử dụng flexbox */
+                flex-direction: column; /* Hiển thị thành cột */
+            }
+
+            .attendance-info ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .attendance-info ul li {
+                margin-bottom: 15px;
+                font-size: 18px; /* Tăng kích thước chữ */
+            }
+
+            .attendance-data {
+                font-size: 16px; /* Tăng kích thước chữ */
+                font-weight: bold;
+            }
+
         </style>
     </head>
 
     <body>
-         <%
-                     AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                     int role=     acc.getRole();
+        <%
+                    AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                    int role=     acc.getRole();
         %>
 
         <c:set var="em" value="${requestScope.emp}" />
@@ -173,21 +198,18 @@
 
                         </div>
                         <div class="col-md-8 details">
-                            <h4>Attendance Details</h4>
-                            <c:set var="attendance" value="${requestScope.attendance}" />
-                            <ul>
-                                <li>Attendance ID: ${attendance.getAttendance_id()}</li>
-                                <li>Employee ID: ${attendance.getEmployee_id()}</li>
-                                <li>In Time: ${attendance.in_time}</li>
-                                <li>Out Time: ${attendance.getOut_time()}</li>
-                                <li>Message: ${attendance.getNotes()}</li>
-                                <!-- Thêm các thuộc tính khác tương ứng -->
-                            </ul>
+                            <h4 class="mb-4">Attendance Details</h4>
+                            <div class="attendance-info">
+                                <ul class="list-unstyled">
+                                    <li>Attendance ID: ${attendance.getAttendance_id()}</li>
+                                    <li>Employee ID: ${attendance.getEmployee_id()}</li>
+                                    <li>In Time: ${attendance.in_time}</li>
+                                    <li>Out Time: ${attendance.getOut_time()}</li>
+                                    <li>Message: ${attendance.getNotes()}</li>
+                                    <!-- Add styling for other attributes if needed -->
+                                </ul>
+                            </div>
                         </div>
-                       
-
-
-
                         <div class="col-md-4">
                             <div class="calendar" id="calendar"></div>
                         </div>

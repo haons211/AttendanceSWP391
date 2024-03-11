@@ -88,7 +88,7 @@ public class SendApplicationController extends HttpServlet {
             a.insertApplication(application);
 
             // Chuyển hướng sau khi gửi thành công
-            response.sendRedirect("HomeEmployees.jsp");
+            response.sendRedirect("HomeEmployees");
         } catch (Exception e) {
             throw new ServletException("Error inserting application", e);
         }

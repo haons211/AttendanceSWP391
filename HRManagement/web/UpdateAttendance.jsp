@@ -46,7 +46,6 @@
                             <form action="updateAttendance" method="post" >
                                 <div class="main-text-table">
                                     <table>
-
                                         <tr >
                                             <td>Attendance ID</td>
                                             <td>
