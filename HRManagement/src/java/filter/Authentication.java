@@ -146,11 +146,9 @@ public class Authentication implements Filter {
             }
         } else if (url.contains("HomeEmployee")) {
             if (user != null) {
-                if (user.getRole() == 1 || user.getRole() == 3) {
-                    response.sendRedirect(request.getContextPath() + "/401.jsp");
-                } else if (user.getRole() == 2) {
+                
                     filterchain.doFilter(servletRequest, servletResponse);
-                }
+                
 
             } else {
                 response.sendRedirect(request.getContextPath() + "/401.jsp");

@@ -43,21 +43,15 @@ public class SuccessServlet extends HttpServlet {
             if (session != null) {
                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
                 EmployeeDAO dao = new EmployeeDAO();
-//            RemaindayDAO DAO = new RemaindayDAO();
                 if (acc != null) {
                     try {
                         Employee em = dao.getin4(acc.getUserID());
                         request.setAttribute("emp", em);
                         int attendanceId = (int) session.getAttribute("attendanceId");
                         AttendanceDAO attendanceDAO = new AttendanceDAO();
-//         Attendance attendance = (Attendance) session.getAttribute("attendance");
-//                        Attendance attendance = attendanceDAO.getAttendanceById(attendanceId);
-                        // Đặt thông tin attendance vào request attribute của Success.jsp
-//                        request.setAttribute("attendance", attendance);
-//                        System.out.println(attendance.toString());
-                        Timestamp checkInTime = (Timestamp) session.getAttribute("checkInTime");
+                        Timestamp checkInTime = (Timestamp) request.getAttribute("checkInTime");
                         request.setAttribute("checkInTime", checkInTime);
-                        Timestamp checkOutTime = (Timestamp) session.getAttribute("checkOutTime");
+                        Timestamp checkOutTime = (Timestamp) request.getAttribute("checkOutTime");
                         request.setAttribute("checkOutTime", checkOutTime);
                         
                     } catch (Exception e) {

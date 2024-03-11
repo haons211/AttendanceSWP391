@@ -5,6 +5,7 @@
 package dal;
 
 import context.DBContext;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import models.Attendance;
 import models.AttendanceReport;
+import models.AttendanceSheet;
 
 /**
  *
@@ -26,24 +28,35 @@ public class AttendanceDAO {
     ResultSet rs = null;
 
     // Phương thức để thêm đối tượng Attendance vào cơ sở dữ liệu
-    public int CheckIn(int employee_id, String notes, String image, int remainDay_id, int department_id) {
-        String query = "INSERT INTO attendance (employee_id, in_time, notes, image, remainDay_id, department_id) VALUES (?, now(), ?, ?, ?, ?)";
+    public int CheckIn(int employee_id, String notes, int remainDay_id) {
+        String updateQuery = "UPDATE attendance "
+                + "SET in_time = NOW(), "
+                + "    notes = ?, "
+                + "    remainDay_id = ? "
+                + "WHERE employee_id = ? AND DATE(date) = CURDATE()";
+
+        String selectQuery = "SELECT attendance_id "
+                + "FROM attendance "
+                + "WHERE employee_id = ? AND DATE(date) = CURDATE()";
+
         int attendanceId = -1; // Mặc định gán attendanceId là -1
         try {
-            int affectedRows = 0;
             con = DBContext.getConnection();
-            ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS); // Sử dụng Statement.RETURN_GENERATED_KEYS để lấy khóa tự tăng
-            ps.setInt(1, employee_id);
-            ps.setString(2, notes);
-            ps.setString(3, image);
-            ps.setInt(4, remainDay_id);
-            ps.setInt(5, department_id);
-            affectedRows = ps.executeUpdate();
+
+            // Thực hiện câu lệnh UPDATE
+            ps = con.prepareStatement(updateQuery);
+            ps.setString(1, notes);
+            ps.setInt(2, remainDay_id);
+            ps.setInt(3, employee_id);
+            int affectedRows = ps.executeUpdate(); // Số lượng bản ghi đã được cập nhật
 
             if (affectedRows > 0) {
-                ResultSet generatedKeys = ps.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    attendanceId = generatedKeys.getInt(1); // Lấy giá trị tự tăng
+                // Nếu có bản ghi được cập nhật thành công, thực hiện truy vấn SELECT để lấy attendance_id
+                ps = con.prepareStatement(selectQuery);
+                ps.setInt(1, employee_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    attendanceId = rs.getInt("attendance_id"); // Lấy attendance_id từ kết quả truy vấn SELECT
                 } else {
                     System.out.println("Attendance added, but couldn't retrieve attendance_id.");
                 }
@@ -53,14 +66,13 @@ public class AttendanceDAO {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
-
             closeResources();
         }
         return attendanceId;
     }
 
     public void CheckOut(int attendanceId) {
-        String query = "UPDATE attendance SET out_time = now(), date = CURDATE() WHERE attendance_id = ?;";
+        String query = "UPDATE attendance SET out_time = now() WHERE attendance_id = ?;";
 
         try {
             con = DBContext.getConnection();
@@ -170,6 +182,7 @@ public class AttendanceDAO {
         }
         return list;
     }
+
     public void deleteAttendance(int id) {
         String query = "DELETE FROM attendance WHERE attendance_id = ?";
         try {
@@ -255,6 +268,129 @@ public class AttendanceDAO {
             closeResources();
         }
         return attendanceReport;
+    }
+
+    public void insertCheckStatus(int employeeId, boolean checkedIn, boolean checkedOut) {
+        String sql = "UPDATE UserCheckStatus SET CheckedIn = ?, CheckedOut = ? WHERE employee_id = ?";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setBoolean(1, checkedIn);
+            ps.setBoolean(2, checkedOut);
+            ps.setInt(3, employeeId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý các ngoại lệ nếu có
+        } finally {
+            // Đóng các tài nguyên trong khối finally
+            closeResources();
+        }
+    }
+
+    public boolean getCheckedInStatus(int employeeId) throws ClassNotFoundException {
+        String sql = "SELECT CheckedIn FROM UserCheckStatus WHERE employee_id = ?";
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getBoolean("CheckedIn");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return false;
+    }
+
+    public boolean getCheckedOutStatus(int employeeId) throws ClassNotFoundException {
+        String sql = "SELECT CheckedOut FROM UserCheckStatus WHERE employee_id = ?";
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getBoolean("CheckedOut");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return false;
+    }
+
+    public void CallAttendanceByDay() {
+        String procedureCall = "{CALL generateDailyAttendance()}";
+
+        try {
+            con = DBContext.getConnection();
+            CallableStatement cs = con.prepareCall(procedureCall);
+            cs.execute();
+            System.out.println("Stored procedure executed successfully.");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+    }
+
+    public ArrayList<AttendanceSheet> getAttendanceByEmployeeAndDateRange(int em_id, String month, String Year) {
+        ArrayList<AttendanceSheet> attendanceList = new ArrayList<>();
+        String query = "SELECT e.name, "
+                + "       dates.date AS date, "
+                //                + "       COALESCE(a.status, 'Absent') AS status "
+                + "       a.status AS status "
+                + "FROM ("
+                + "    -- Tạo một bảng tạm thời chứa tất cả các ngày trong tháng được chỉ định\n"
+                + "    SELECT DATE_ADD('" + Year + "-" + month + "-01', INTERVAL (t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) DAY) AS date "
+                + "    FROM "
+                + "        (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t0, "
+                + "        (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t1, "
+                + "        (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t2, "
+                + "        (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t3, "
+                + "        (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t4 "
+                + "    WHERE DATE_FORMAT(DATE_ADD('" + Year + "-" + month + "-01', INTERVAL (t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) DAY), '%Y-%m') = '" + Year + "-" + month + "'"
+                + ") AS dates "
+                + "CROSS JOIN (SELECT DISTINCT employee_id FROM attendance) AS aid "
+                + "JOIN employee e ON aid.employee_id = e.employee_id "
+                + "LEFT JOIN attendance a ON e.employee_id = a.employee_id AND dates.date = DATE_FORMAT(a.date, '%Y-%m-%d') "
+                + "where e.employee_id = ? "
+                + "ORDER BY e.employee_id, dates.date;";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, em_id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                AttendanceSheet attendance = new AttendanceSheet(
+                        rs.getString("name"),
+                        rs.getString("date"),
+                        rs.getString("status")
+                );
+                attendanceList.add(attendance);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return attendanceList;
     }
 
     // Other methods for department operations

@@ -67,7 +67,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                        <a class="dropdown-item" href="Setting">Setting</a>
+                        <a class="dropdown-item" href="settings.html">ChangePassword</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -77,7 +77,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
                     <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                    <a class="dropdown-item" href="Setting">Setting</a>
+                    <a class="dropdown-item" href="settings.html">ChangePassword</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </div>
@@ -91,6 +91,9 @@
                             <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
                         <li>
+                            <a href="HomeEmployees"><i class="fa fa-check-square-o"></i> <span>Take Attendance</span></a>
+                        </li>
+                        <li>
                             <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
                         </li>
                         <li>
@@ -102,9 +105,12 @@
                         <li>
                             <a href="AttendanceReport"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
                         </li>
+                        <li>
+                            <a href="AttendanceSheet"><i class="fa fa-calendar"></i> <span>Attendance Sheet</span></a>
+                        </li>
                         <li> 
-                                <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
-                            </li>
+                            <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
+                        </li>
                         <li>
                             <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>
                         </li>  
@@ -112,8 +118,8 @@
                             <a href="ManagerNotification"><i class="fa fa-bell"></i> <span>Notification</span></a>
                         </li> 
                         <li>
-                                <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                            </li>
+                            <a href="ExportFile.jsp"><i class="fa fa-download"></i> <span>Export File</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

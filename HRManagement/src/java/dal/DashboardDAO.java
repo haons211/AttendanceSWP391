@@ -79,7 +79,7 @@ public class DashboardDAO {
         int numberOfAttend = 0;
         String query = "SELECT COUNT(*)\n"
                 + "FROM employee e\n"
-                + "LEFT JOIN attendance a ON e.employee_id = a.employee_id\n"
+                + "LEFT JOIN attendance a ON e.employee_id = a.employee_id AND DATE(date) = CURDATE()\n"
                 + "WHERE a.status = 'Present';";
 
         try {

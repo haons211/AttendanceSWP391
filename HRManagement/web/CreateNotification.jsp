@@ -42,14 +42,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea class="form-control" id="description" name="description" rows="20" style="resize: none;" required></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="10" style="resize: none;" required></textarea>
                             </div>
-                            <div class="form-group">
                                 <label for="file">Choose File:</label>
 
-                                <input class="form-control" type="file" class="form-control-file" id="file" name="file">
+                                <input class="" type="file" class="form-control-file" id="file" name="file">
                                 <small class="form-text text-muted">Max. file size: 20 MB. Allowed images: jpg, zip, png., docx,... </small>
-                            </div>
+
 
                             <button type="submit" class="btn btn-primary">Send</button>
                         </form>
