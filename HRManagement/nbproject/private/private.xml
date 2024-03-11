@@ -3,30 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%203-4/AttendanceSWP391/HRManagement/web/ExportFile.jsp</file>
-            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%203-4/AttendanceSWP391/HRManagement/web/AttendanceReport.jsp</file>
-            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%203-4/AttendanceSWP391/HRManagement/src/java/controller/ExportDetailsServlet.java</file>
-            <file>file:/C:/Users/ThuyVy/Desktop/workspace/swp%203-4/AttendanceSWP391/HRManagement/src/java/controller/ExportFileController.java</file>
-=======
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/test/test.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/web/Insurance.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/web/SideBarforManager.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/dal/InsuranceDAO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/models/AccountDTO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/controller/AllAccountController.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/controller/AllInsuranceController.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/models/InsuranceEmployeeDTO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/dal/AttendanceDAO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/models/AttendanceDepartmentDTO.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/models/Employee.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/controller/UpdateAttendance.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/context/DBContext.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/controller/AttendanceReportController.java</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/web/SideBarforEm.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/web/AttendanceReport.jsp</file>
-            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(6)/AttendanceSWP391/HRManagement/src/java/dal/DepartmentDAO.java</file>
->>>>>>> 87dbf40f697530978fbfabea2a32e291fbaa729e
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/AttendanceSWP391/HRManagement/src/java/controller/ExportFileController.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/AttendanceSWP391/HRManagement/src/java/context/DBContext.java</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/AttendanceSWP391/HRManagement/web/SideBarforManager.jsp</file>
+            <file>file:/C:/Users/ThuyVy/Desktop/workspace/AttendanceSWP391/HRManagement/src/java/controller/CheckOutServlet.java</file>
         </group>
     </open-files>
 </project-private>

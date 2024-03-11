@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.AttendanceReport;
+import models.AttendanceDepartmentDTO;
 import models.Department;
 import models.Employee;
 
@@ -166,7 +166,7 @@ public class ExportDetailsServlet extends HttpServlet {
                 ex.printStackTrace();
             }
             AttendanceDAO attendanceDAO = new AttendanceDAO();
-            ArrayList<AttendanceReport> attendanceList = attendanceDAO.getAllAttendance("", "", fromDate == null ? null : fromDate, toDate == null ? null : toDate);
+            ArrayList<AttendanceDepartmentDTO> attendanceList = attendanceDAO.getAllAttendance("", "", fromDate == null ? null : fromDate, toDate == null ? null : toDate);
             // Generate HTML for the attendance table
             detailData += "<table class=\"table table-striped custom-table mb-0 datatable\">";
             detailData += "<thead>";
@@ -186,7 +186,7 @@ public class ExportDetailsServlet extends HttpServlet {
             detailData += "</thead>";
             detailData += "<tbody>";
 
-            for (AttendanceReport attendance : attendanceList) {
+            for (AttendanceDepartmentDTO attendance : attendanceList) {
                 detailData += "<tr>";
                 detailData += "<td>" + attendance.getAttendance_id() + "</td>";
                 detailData += "<td>" + attendance.getEm_name() + "</td>";

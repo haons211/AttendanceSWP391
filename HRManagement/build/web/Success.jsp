@@ -210,8 +210,7 @@
                                 </ul>
                             </div>
                         </div>
-
-                       <div class="col-md-4">
+                        <div class="col-md-4">
                             <div class="calendar" id="calendar"></div>
                         </div>
                     </div>

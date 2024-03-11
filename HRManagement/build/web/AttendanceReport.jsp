@@ -170,7 +170,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="sidebar-overlay" data-reff=""></div>
         <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -186,7 +185,6 @@
                                                                             window.location = "deleteAttendance?id=" + id;
                                                                         }
                                                                     }
-
         </script>
         <script>
             // Get today's date in the format YYYY-MM-DD
@@ -202,7 +200,6 @@
                     document.getElementById('fromDate').value = getCurrentDate();
         </script>
     </body>
-
 
 </html>
 
