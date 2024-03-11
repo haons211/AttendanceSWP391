@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author ThuyVy
  */
-public class AttendanceReport {
+public class AttendanceDepartmentDTO {
 
     int attendance_id;
     String em_name;
@@ -25,10 +25,10 @@ public class AttendanceReport {
     int remainDay;
     int approvedLeaveDays;
 
-    public AttendanceReport() {
+    public AttendanceDepartmentDTO() {
     }
 
-    public AttendanceReport(int attendance_id, String em_name, String dep_name, Date date, String status, String notes, String in_time, String in_status, String out_time, String out_status, int remainDay, int approvedLeaveDays) {
+    public AttendanceDepartmentDTO(int attendance_id, String em_name, String dep_name, Date date, String status, String notes, String in_time, String in_status, String out_time, String out_status, int remainDay, int approvedLeaveDays) {
         this.attendance_id = attendance_id;
         this.em_name = em_name;
         this.dep_name = dep_name;
@@ -43,7 +43,7 @@ public class AttendanceReport {
         this.approvedLeaveDays = approvedLeaveDays;
     }
 
-    public AttendanceReport(int attendance_id, String em_name, String dep_name, Date date, String status, String notes, String in_time, String in_status, String out_time, String out_status, int remainDay) {
+    public AttendanceDepartmentDTO(int attendance_id, String em_name, String dep_name, Date date, String status, String notes, String in_time, String in_status, String out_time, String out_status, int remainDay) {
         this.attendance_id = attendance_id;
         this.em_name = em_name;
         this.dep_name = dep_name;

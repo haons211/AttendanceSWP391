@@ -1,32 +1,29 @@
-package controller;
-
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+* Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller;
 
 import configs.headerInfor;
-import dal.AttendanceDAO;
-import dal.DepartmentDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import dal.InsuranceDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import models.AttendanceDepartmentDTO;
-import models.Department;
+import models.InsuranceEmployeeDTO;
 
 /**
  *
- * @author ThuyVy
+ * @author andep
  */
-@WebServlet(urlPatterns = {"/AttendanceReport"})
-public class AttendanceReportController extends HttpServlet {
+@WebServlet(name = "AllInsuranceController", urlPatterns = {"/insurance"})
+public class AllInsuranceController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +42,10 @@ public class AttendanceReportController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AttendanceReportController</title>");            
+            out.println("<title>Servlet AllInsuranceController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AttendanceReportController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AllInsuranceController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,9 +65,20 @@ public class AttendanceReportController extends HttpServlet {
             throws ServletException, IOException {
         headerInfor.setSessionAttributes(request);
         String search = request.getParameter("search");
-        DepartmentDAO d = new DepartmentDAO();
-        ArrayList<Department> departmentList = d.getAllDepartments("");
-        String departmentName = request.getParameter("departmentName");
+        String amountString = request.getParameter("amount");
+        double amount = 0; // Giá trị mặc định nếu không thể chuyển đổi
+        try {
+            if (amountString != null) {
+                amount = Double.parseDouble(amountString);
+            }
+        } catch (NumberFormatException e) {
+            // Xử lý ngoại lệ nếu chuỗi không thể chuyển đổi thành số
+            e.printStackTrace();
+        }
+        InsuranceDAO insuranceDAO = new InsuranceDAO();
+        ArrayList<InsuranceEmployeeDTO> typeList = insuranceDAO.getAllType();
+        request.setAttribute("typeList", typeList);
+        String typeName = request.getParameter("typeName");
         Date fromDate = null;
         Date toDate = null;
         // Xử lý fromDate và toDate
@@ -88,15 +96,14 @@ public class AttendanceReportController extends HttpServlet {
             ex.printStackTrace();
         }
         // Gọi phương thức DAO để lấy danh sách AttendanceReport
-        AttendanceDAO attendanceDAO = new AttendanceDAO();
-        ArrayList<AttendanceDepartmentDTO> attendanceList = attendanceDAO.getAllAttendance(search == null ? "" : search,departmentName ,fromDate==null?null:fromDate, toDate==null?null:toDate);
-        request.setAttribute("listDep", departmentList);
+        ArrayList<InsuranceEmployeeDTO> insuranceList = insuranceDAO.getAllInsurance(
+                search == null ? "" : search, typeName,
+                fromDate == null ? null : fromDate, toDate == null ? null : toDate, amount == 10000 ? 10000 : amount);
         // Lưu danh sách vào request attribute để truyền tới jsp
-        request.setAttribute("list", attendanceList);
+        request.setAttribute("list", insuranceList);
         // Chuyển hướng đến trang jsp để hiển thị danh sách
-        request.getRequestDispatcher("AttendanceReport.jsp").forward(request, response);
+        request.getRequestDispatcher("Insurance.jsp").forward(request, response);
     }
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.

@@ -138,9 +138,9 @@
     </head>
 
     <body>
-         <%
-                     AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                     int role=     acc.getRole();
+        <%
+                    AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                    int role=     acc.getRole();
         %>
 
         <c:set var="em" value="${requestScope.emp}" />
@@ -184,7 +184,7 @@
                                 <!-- Thêm các thuộc tính khác tương ứng -->
                             </ul>
                         </div>
-                       
+
 
 
 

@@ -20,7 +20,7 @@
     </head>
 
     <body>
-        
+
         <%
                  AccountDTO acc = (AccountDTO) session.getAttribute("account");
                  int role=     acc.getRole();
@@ -109,42 +109,42 @@
                                         </li>
                                     </ul>
                                 </div>
-                                    <hr>
-                                    <br>
-                                    <br>
-                                    <c:choose>
+                                <hr>
+                                <br>
+                                <br>
+                                <c:choose>
                                     <c:when test="${empty detail.complete_date}">
-                                    <div class="mailview-footer">
-                                        <div class="row">
-                                            <% if(request.getAttribute("thongbao")!=null) { %>
-                                            <div class="col-sm-6 right-action">
-                                                <span style="color: #1E824C; font-size: 16px; font-weight: bold;">Delete Successfully</span>
-                                            </div>
-                                            <div class="col-sm-6 right-action">
-                                                <button type="button" class="btn btn-white" onclick="refreshPage()"><i class="fa fa-refresh"></i> Refresh</button>
-                                            </div>
-                                            <% } %>
+                                        <div class="mailview-footer">
+                                            <div class="row">
+                                                <% if(request.getAttribute("thongbao")!=null) { %>
+                                                <div class="col-sm-6 right-action">
+                                                    <span style="color: #1E824C; font-size: 16px; font-weight: bold;">Delete Successfully</span>
+                                                </div>
+                                                <div class="col-sm-6 right-action">
+                                                    <button type="button" class="btn btn-white" onclick="refreshPage()"><i class="fa fa-refresh"></i> Refresh</button>
+                                                </div>
+                                                <% } %>
 
-                                            <%
-                                                AccountDTO account = (AccountDTO) request.getSession().getAttribute("account");
-                                                if (account.getRole() == 3) {
-                                            %>
-                                            <div class="col-sm-6 left-action">
-                                                <button id="reply-btn" type="button" class="btn btn-white"><i class="fa fa-reply"></i> Reply</button>
-                                            </div>
-                                            <% } %>
+                                                <%
+                                                    AccountDTO account = (AccountDTO) request.getSession().getAttribute("account");
+                                                    if (account.getRole() == 3) {
+                                                %>
+                                                <div class="col-sm-6 left-action">
+                                                    <button id="reply-btn" type="button" class="btn btn-white"><i class="fa fa-reply"></i> Reply</button>
+                                                </div>
+                                                <% } %>
 
-                                            <%
-                                                if (account.getRole() == 2) {
-                                            %>
-                                            <div class="col-sm-6 right-action">
-                                                <button type="button" class="btn btn-white" onclick="confirmDelete(${detail.application_id})"><i class="fa fa-trash-o"></i> Delete</button>
+                                                <%
+                                                    if (account.getRole() == 2) {
+                                                %>
+                                                <div class="col-sm-6 right-action">
+                                                    <button type="button" class="btn btn-white" onclick="confirmDelete(${detail.application_id})"><i class="fa fa-trash-o"></i> Delete</button>
+                                                </div>
+                                                <% } %>
                                             </div>
-                                            <% } %>
                                         </div>
-                                    </div>
 
-                                    <br>
+                                        <br>
                                         <br>
                                         <div id="reply-form" style="display: none;">
                                             <form action="replyapplication" >
@@ -154,246 +154,34 @@
                                                 <input type="submit" value="Done">
                                             </form>
                                         </div>
-                                        
+
 
                                     </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="sender-info">
-                                            <div class="sender-img">
-                                                <img width="40" alt="" src="assets/img/user.jpg" class="rounded-circle">
-                                            </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="sender-info">
+                                        <div class="sender-img">
+                                            <img width="40" alt="" src="assets/img/user.jpg" class="rounded-circle">
+                                        </div>
                                         <div class="receiver-details float-left">
                                             <span class="sender-name">${detail.receiver_name} (<a href="http://cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e3431363034313b1e3b263f332e323b703d3133">[email&#160;protected]</a>)</span>
                                             <span class="receiver-name">
-                                                    to <span>${detail.sender_name}</span>
+                                                to <span>${detail.sender_name}</span>
 
-                                                </span>
+                                            </span>
                                         </div>
-                                            <div class="mail-sent-time">
-                                                <span class="mail-time">${detail.complete_date}</span>
-                                            </div>
-                                            <br>
-                                            <br>
-                                            <hr>
+                                        <div class="mail-sent-time">
+                                            <span class="mail-time">${detail.complete_date}</span>
                                         </div>
-                                        <div class="mailview-inner">
-                                            <p>${detail.replyContent}</p>
-
-                                        </div>
-                                    </c:otherwise>
-                                    </c:choose>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="notification-box">
-                    <div class="msg-sidebar notifications msg-noti">
-                        <div class="topnav-dropdown-header">
-                            <span>Messages</span>
-                        </div>
-                        <div class="drop-scroll msg-list-scroll" id="msg_list">
-                            <ul class="list-box">
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">R</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author">Richard Miles </span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item new-message">
-                                            <div class="list-left">
-                                                <span class="avatar">J</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author">John Doe</span>
-                                                <span class="message-time">1 Aug</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">T</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author"> Tarah Shropshire </span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">M</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author">Mike Litorus</span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">C</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author"> Catherine Manseau </span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">D</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author"> Domenic Houston </span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">B</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author"> Buster Wigton </span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">R</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author"> Rolland Webber </span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">C</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author"> Claire Mapes </span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">M</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author">Melita Faucher</span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">J</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author">Jeffery Lalor</span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">L</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author">Loren Gatlin</span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">
-                                        <div class="list-item">
-                                            <div class="list-left">
-                                                <span class="avatar">T</span>
-                                            </div>
-                                            <div class="list-body">
-                                                <span class="message-author">Tarah Shropshire</span>
-                                                <span class="message-time">12:28 AM</span>
-                                                <div class="clearfix"></div>
-                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="chat.html">See all messages</a>
+                                        <br>
+                                        <br>
+                                        <hr>
+                                    </div>
+                                    <div class="mailview-inner">
+                                        <p>${detail.replyContent}</p>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -408,18 +196,18 @@
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
         <script>
-                                                function confirmDelete(applicationId) {
-                                                    if (confirm("Do you want to Delete?")) {
-                                                        window.location.href = "deleteApplication?application_id=" + applicationId;
-                                                    }
-                                                }
+                                                        function confirmDelete(applicationId) {
+                                                            if (confirm("Do you want to Delete?")) {
+                                                                window.location.href = "deleteApplication?application_id=" + applicationId;
+                                                            }
+                                                        }
         </script>
         <script>
             function refreshPage() {
                 // Chuyển hướng đến servlet khác
                 window.location.href = "viewsendapplication";
             }
-            document.getElementById("reply-btn").addEventListener("click", function() {
+            document.getElementById("reply-btn").addEventListener("click", function () {
                 document.getElementById("reply-form").style.display = "block";
             });
 
