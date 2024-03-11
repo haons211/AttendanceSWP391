@@ -115,7 +115,7 @@
                         currentType === 'password' ? 'text' : 'password'
                         );
             }
-             function goBack() {
+            function goBack() {
                 window.location.href = "http://localhost:9999/HRManagement/Setting";
             }
         </script>

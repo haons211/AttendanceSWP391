@@ -345,7 +345,7 @@
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorHireDate}
                                                     </div>
-                                                     <div style="color: red">
+                                                    <div style="color: red">
                                                         ${requestScope.messageErrorDate}
                                                     </div>
                                                 </div>
@@ -361,8 +361,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
         <div class="sidebar-overlay" data-reff=""></div>

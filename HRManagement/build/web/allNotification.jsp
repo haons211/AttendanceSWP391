@@ -53,9 +53,9 @@
                             <nav class="navbar navbar-light bg-light justify-content-between">
                                 <form action="AllNotification" method="POST" class="form-inline">
                                     <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" aria-label="Search" style="height: 30px;">
-                                    
+
                                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px;margin-right: 20px;"name="btAction" value="Search">Search</button>
-                                    
+
                                     <label for="fromDate">From:</label>
                                     <input type="date" name="dateFrom" id="fromDate" class="form-control" style="height: 30px;  ">
 
@@ -68,157 +68,145 @@
                             </nav>
                         </div>
 
-                </form>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped custom-table mb-0 datatable">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Time </th>
-                                        <th>Subject</th>
-                                        <% if (role == 3||role == 1) { %>
-                                            <th></th>
-                                            <th></th>
-                                             <% } %>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="o" items="${listNo1}" varStatus="loop">
-                                            <tr class="table_row">
-                                                <td  class="column-1">${loop.index + 1}</td>    
-                                                <td  class="column-1">${o.sendTime}</td>
-
-                                               
-                                                <td class="column-2">
-                                                    <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
-                                                </td>
-                                                 <% if (role == 3||role == 1) { %>
-                                                <td class="column-2">  
-
-                                                    <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
-                                                        <input type="hidden" name="id" value="${o.notificationId}">
-                                                        <button class="btn btn-danger delete-btn" type="submit">Delete</button>
-                                                    </form>
-                                                </td>
-                                                <td class="column-2">  
-
-                                                    <form action="editNotification?id=" method="get">
-                                                        <input type="hidden" name="id" value="${o.notificationId}">
-                                                        <button class="btn btn-primary" type="submit">Edit</button>
-                                                    </form>
-
-                                                </td>
-                                                <% } %>
-
+                        </form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped custom-table mb-0 datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Time </th>
+                                                <th>Subject</th>
+                                                    <% if (role == 3||role == 1) { %>
+                                                <th></th>
+                                                <th></th>
+                                                    <% } %>
 
                                             </tr>
-                                        </c:forEach>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="o" items="${listNo1}" varStatus="loop">
+                                                <tr class="table_row">
+                                                    <td  class="column-1">${loop.index + 1}</td>    
+                                                    <td  class="column-1">${o.sendTime}</td>
 
 
-                                    </tbody>
-                                </table>
+                                                    <td class="column-2">
+                                                        <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
+                                                    </td>
+                                                    <% if (role == 3||role == 1) { %>
+                                                    <td class="column-2">  
+
+                                                        <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
+                                                            <input type="hidden" name="id" value="${o.notificationId}">
+                                                            <button class="btn btn-danger delete-btn" type="submit">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                    <td class="column-2">  
+
+                                                        <form action="editNotification?id=" method="get">
+                                                            <input type="hidden" name="id" value="${o.notificationId}">
+                                                            <button class="btn btn-primary" type="submit">Edit</button>
+                                                        </form>
+
+                                                    </td>
+                                                    <% } %>
+
+
+                                                </tr>
+                                            </c:forEach>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <script>
+            <script>
 
 
-            function deleteNotification(event, form) {
+                function deleteNotification(event, form) {
                 event.preventDefault();
-
-                var confirmDelete = confirm("B?n c� ch?c ch?n mu?n x�a kh�ng?");
-                if (!confirmDelete) {
-                    return;
+                        var confirmDelete = confirm("B?n c� ch?c ch?n mu?n x�a kh�ng?");
+                        if (!confirmDelete) {
+                return;
                 }
 
 
 
                 // L?y gi� tr? c?a input
                 var notificationId = form.querySelector('input[name="id"]').value;
-
-                // T?o XMLHttpRequest object
-                var xhr = new XMLHttpRequest();
-
-                // X�c ??nh ph??ng th?c v� URL
-                xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
-
-                // X? l� k?t qu? tr? v? t? server
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
+                        // T?o XMLHttpRequest object
+                        var xhr = new XMLHttpRequest();
+                        // X�c ??nh ph??ng th?c v� URL
+                        xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
+                        // X? l� k?t qu? tr? v? t? server
+                        xhr.onload = function () {
+                        if (xhr.status === 200) {
 
 
                         alert('?� x�a th�nh c�ng');
-
-
-            var confirmDelete = confirm("B?n có ch?c ch?n mu?n xóa không?");
-            if (!confirmDelete) {
-                return;
-            }
+                                var confirmDelete = confirm("B?n có ch?c ch?n mu?n xóa không?");
+                                if (!confirmDelete) {
+                        return;
+                        }
 
 
 
-            // L?y giá tr? c?a input
-            var notificationId = form.querySelector('input[name="id"]').value;
-
-            // T?o XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-
-            // Xác ??nh ph??ng th?c và URL
-            xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
-
-            // X? lý k?t qu? tr? v? t? server
-            xhr.onload = function () {
-                if (xhr.status === 200) {
+                        // L?y giá tr? c?a input
+                        var notificationId = form.querySelector('input[name="id"]').value;
+                                // T?o XMLHttpRequest object
+                                var xhr = new XMLHttpRequest();
+                                // Xác ??nh ph??ng th?c và URL
+                                xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
+                                // X? lý k?t qu? tr? v? t? server
+                                xhr.onload = function () {
+                                if (xhr.status === 200) {
 
 
-                    alert('?ã xóa thành công');
+                                alert('?ã xóa thành công');
+                                        location.replace(location.origin + location.pathname);
+                                } else {
+                                alert('Có l?i x?y ra');
+                                }
+                                }
 
-                    location.replace(location.origin + location.pathname);
-                } else {
-                    alert('Có l?i x?y ra');
+                        }
+            </script>
+            <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                        const ellipsisLinks = document.querySelectorAll('.ellipsis');
+                                ellipsisLinks.forEach(link => {
+                                const parentWidth = link.parentNode.offsetWidth;
+                                        const textWidth = link.offsetWidth;
+                                        if (textWidth > parentWidth) {
+                                link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kích th??c phù h?p
+                                }
 
-                }
-            }
-
-        }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ellipsisLinks = document.querySelectorAll('.ellipsis');
-            ellipsisLinks.forEach(link => {
-                const parentWidth = link.parentNode.offsetWidth;
-                const textWidth = link.offsetWidth;
-                if (textWidth > parentWidth) {
-                    link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kích th??c phù h?p
-                }
-
-            });
-
-        </script>
+                                });
+            </script>
 
 
 
 
 
 
-    <div class="sidebar-overlay" data-reff=""></div>
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.dataTables.min.js"></script>
-    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assets/js/select2.min.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <script src="assets/js/app.js"></script>
-</body>
+            <div class="sidebar-overlay" data-reff=""></div>
+            <script src="assets/js/jquery-3.2.1.min.js"></script>
+            <script src="assets/js/popper.min.js"></script>
+            <script src="assets/js/bootstrap.min.js"></script>
+            <script src="assets/js/jquery.dataTables.min.js"></script>
+            <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+            <script src="assets/js/select2.min.js"></script>
+            <script src="assets/js/moment.min.js"></script>
+            <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+            <script src="assets/js/jquery.slimscroll.js"></script>
+            <script src="assets/js/app.js"></script>
+    </body>
 </html>
 

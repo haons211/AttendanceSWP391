@@ -36,7 +36,7 @@
                 <div class="content">
                     <div class="row">
                         <c:set var="o" value="${Noti}" />
-                         <c:set var="a" value="${Author}" />
+                        <c:set var="a" value="${Author}" />
                         <div class="col-md-8">
                             <div class="blog-view">
                                 <article class="blog blog-single-post">
@@ -56,7 +56,7 @@
                                     </div>
                                     <c:if test="${o.inputStream ne null}">
                                         <h4 class="mb-4" id="file"> <a href="Download?id=${o.notificationId}">Click here to Download</a></h4>
-                                        </c:if>
+                                    </c:if>
                                 </article>     
                             </div>
                         </div>

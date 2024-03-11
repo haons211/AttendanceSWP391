@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import models.Attendance;
-import models.AttendanceReport;
+import models.AttendanceDepartmentDTO;
 
 /**
  *
@@ -66,7 +66,7 @@ public class UpdateAttendance extends HttpServlet {
             throws ServletException, IOException {
         AttendanceDAO d = new AttendanceDAO();
         int id = Integer.parseInt(request.getParameter("aid"));
-        AttendanceReport ar = d.getAttendanceReportById(id);
+        AttendanceDepartmentDTO ar = d.getAttendanceReportById(id);
         request.setAttribute("ar", ar);
         // Trong phương thức doGet hoặc doGet
         String successMessage = (String) request.getSession().getAttribute("successMessage");
