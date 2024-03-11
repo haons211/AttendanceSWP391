@@ -151,7 +151,7 @@ public class EmployeesController extends HttpServlet {
                 } else {
 
 //         Nếu không có session hoặc không có account, chuyển hướng đến trang lỗi hoặc xử lý khác
-                    response.sendRedirect("error.jsp");
+//                    response.sendRedirect("error.jsp");
                 }
             }
         }

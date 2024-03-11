@@ -2,12 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
-import configs.Validate;
 import dal.CompanyDAO;
-import dal.DepartmentDAO;
-import dal.EmployeeDAO;
+import dal.SalaryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,54 +14,45 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.AccountDTO;
 import models.Company;
-import models.Department;
-import models.Employee;
+import models.EmployeeSalary;
 
 /**
  *
  * @author Dan
  */
-@WebServlet(name = "SettingController", urlPatterns = {"/Setting"})
-public class SettingController extends HttpServlet {
-
-    private final Validate validate = new Validate();
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+@WebServlet(name="ViewSalaryController", urlPatterns={"/ViewSalary"})
+public class ViewSalary extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SettingController</title>");
+            out.println("<title>Servlet ViewSalary</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SettingController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewSalary at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -70,21 +60,24 @@ public class SettingController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        HttpSession session =  request.getSession();
-        AccountDTO acc = (AccountDTO) session.getAttribute("account");
-        if(acc.getRole() == 2){
-            request.setAttribute("emp", acc);
-        }
+    throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         
-        request.getRequestDispatcher("Setting.jsp").forward(request, response);
+        SalaryDAO sdao  = new SalaryDAO();
+        try {
+            EmployeeSalary employeeSalary = sdao.getEmployeeSalaryById(id);
+            request.setAttribute("employeeSalary", employeeSalary);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViewSalary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        CompanyDAO cdao = new CompanyDAO();
+        Company company = cdao.getCompanyByID(1);
+        request.setAttribute("company", company);
+        request.getRequestDispatcher("ViewSalary.jsp").forward(request, response);
+    } 
 
-    }
-
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -92,13 +85,12 @@ public class SettingController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

@@ -103,17 +103,22 @@
                             <a href="AttendanceReport"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
                         </li>
                         <li> 
-                                <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
-                            </li>
+                            <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
+                        </li>
+
                         <li>
+                            <a href="ListSalary"><i class="fa fa-money"></i> <span> Salary</span> </a>
+                        </li>
+
+                        <li> 
                             <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>
-                        </li>  
+                        </li>
                         <li>
                             <a href="ManagerNotification"><i class="fa fa-bell"></i> <span>Notification</span></a>
                         </li> 
                         <li>
-                                <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                            </li>
+                            <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -4,10 +4,10 @@
  */
 package controller;
 
-import configs.Validate;
-import dal.CompanyDAO;
+import dal.AccountDAO;
 import dal.DepartmentDAO;
 import dal.EmployeeDAO;
+import dal.SalaryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,23 +15,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.AccountDTO;
-import models.Company;
 import models.Department;
 import models.Employee;
+import models.Salary;
 
 /**
  *
  * @author Dan
  */
-@WebServlet(name = "SettingController", urlPatterns = {"/Setting"})
-public class SettingController extends HttpServlet {
-
-    private final Validate validate = new Validate();
+@WebServlet(name = "UpdateSalaryController", urlPatterns = {"/UpdateSalary"})
+public class UpdateSalary extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,10 +47,10 @@ public class SettingController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SettingController</title>");
+            out.println("<title>Servlet UpdateSalary</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SettingController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateSalary at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,15 +68,27 @@ public class SettingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        SalaryDAO dao = new SalaryDAO();
+        EmployeeDAO edao = new EmployeeDAO();
+        DepartmentDAO ddao = new DepartmentDAO();
+        AccountDAO adao = new AccountDAO();
+        LocalDate currentDate = LocalDate.now();
+        try {
+            Salary salary = dao.getSalaryById(id);
+            Employee employee = edao.getEmployeeById(salary.getEmployeeId());
+            Department department = ddao.getDepartmentById(salary.getDepartmentId());
+            AccountDTO account = adao.getUserById(salary.getUserId());
+            request.setAttribute("id", id);
+            request.setAttribute("account", account);
+            request.setAttribute("salary", salary);
+            request.setAttribute("employee", employee);
+            request.setAttribute("department", department);
 
-        HttpSession session =  request.getSession();
-        AccountDTO acc = (AccountDTO) session.getAttribute("account");
-        if(acc.getRole() == 2){
-            request.setAttribute("emp", acc);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateSalary.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.getRequestDispatcher("Setting.jsp").forward(request, response);
-
+        request.getRequestDispatcher("UpdateSalary.jsp").forward(request, response);
     }
 
     /**
@@ -93,7 +102,19 @@ public class SettingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+        int id = Integer.parseInt(request.getParameter("id"));
+        double basicSalary = Double.parseDouble(request.getParameter("basicSalary"));
+        double allowance = Double.parseDouble(request.getParameter("allowance"));
+        double tax = Double.parseDouble(request.getParameter("tax"));
+        double bonus = Double.parseDouble(request.getParameter("bonus"));
+        SalaryDAO dao = new SalaryDAO();
+        try {
+            dao.updateSalary(new Salary(basicSalary, allowance, tax, bonus) ,id);
+            response.sendRedirect("ListSalary");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateSalary.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
