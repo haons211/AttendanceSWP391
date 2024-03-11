@@ -19,43 +19,43 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.poi-4.0.1.jar}</file>
+                    <file>${file.reference.commons-codec-1.11.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.poi-ooxml-4.0.1.jar}</file>
+                    <file>${file.reference.commons-collections4-4.2.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.poi-ooxml-schemas-4.0.1.jar}</file>
+                    <file>${file.reference.commons-compress-1.18.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.xmlbeans-3.0.2.jar}</file>
+                    <file>${file.reference.javax.mail-api-1.6.2-javadoc.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.commons-codec-1.11.jar}</file>
+                    <file>${file.reference.javax.mail-api-1.6.2-sources.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.commons-collections4-4.2.jar}</file>
+                    <file>${file.reference.javax.mail-api-1.6.2.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.commons-compress-1.18.jar}</file>
+                    <file>${file.reference.poi-4.0.1.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javax.mail-api-1.6.2-javadoc.jar}</file>
+                    <file>${file.reference.poi-ooxml-4.0.1.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javax.mail-api-1.6.2-sources.jar}</file>
+                    <file>${file.reference.poi-ooxml-schemas-4.0.1.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javax.mail-api-1.6.2.jar}</file>
+                    <file>${file.reference.xmlbeans-3.0.2.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
