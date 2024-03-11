@@ -19,15 +19,15 @@
     </head>
     <body>
 
-           <%
-                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                 int role=     acc.getRole();
+        <%
+              AccountDTO acc = (AccountDTO) session.getAttribute("account");
+              int role=     acc.getRole();
         %>
         <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
             <% if (role == 2) { %>
             <jsp:include page="SideBarforEm.jsp" />
-                  <% } else if (role == 3||role == 1) { %>
+            <% } else if (role == 3||role == 1) { %>
             <jsp:include page="SideBarforManager.jsp" />
             <% } %>
 
@@ -90,12 +90,12 @@
                                                         <c:choose>
                                                             <c:when test="${em.gender}">
 
- <span>Male</span> 
-                                                            
+                                                                <span>Male</span> 
+
 
                                                             </c:when>
                                                             <c:otherwise>
-                                                                   <span>Female</span> 
+                                                                <span>Female</span> 
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </li>

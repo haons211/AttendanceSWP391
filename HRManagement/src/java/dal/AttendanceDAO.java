@@ -14,8 +14,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import models.Attendance;
+
 import models.AttendanceReport;
 import models.AttendanceSheet;
+
+import models.AttendanceDepartmentDTO;
 
 /**
  *
@@ -117,8 +120,8 @@ public class AttendanceDAO {
         return attendance;
     }
 
-    public ArrayList<AttendanceReport> getAllAttendance(String search, String dep_name, Date fromDate, Date toDate) {
-        ArrayList<AttendanceReport> list = new ArrayList<>();
+    public ArrayList<AttendanceDepartmentDTO> getAllAttendance(String search, String dep_name, Date fromDate, Date toDate) {
+        ArrayList<AttendanceDepartmentDTO> list = new ArrayList<>();
         String query = "SELECT a.attendance_id,e.name,d.name as dep_name,a.date,a.status, a.in_time, a.notes, a.in_status, a.out_time, a.out_status, r.remainDay "
                 + "FROM attendance a "
                 + "JOIN employee e ON a.employee_id = e.employee_id "
@@ -167,7 +170,7 @@ public class AttendanceDAO {
 
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AttendanceReport(rs.getInt("a.attendance_id"), rs.getString("e.name"),
+                list.add(new AttendanceDepartmentDTO(rs.getInt("a.attendance_id"), rs.getString("e.name"),
                         rs.getString("dep_name"), rs.getDate("a.date"), rs.getString("a.status"),
                         rs.getString("a.notes"), rs.getString("a.in_time"), rs.getString("a.in_status"),
                         rs.getString("out_time"), rs.getString("out_status"), rs.getInt("r.remainDay")));
@@ -241,8 +244,8 @@ public class AttendanceDAO {
         return "Update failed";
     }
 
-    public AttendanceReport getAttendanceReportById(int attendanceId) {
-        AttendanceReport attendanceReport = null;
+    public AttendanceDepartmentDTO getAttendanceReportById(int attendanceId) {
+        AttendanceDepartmentDTO attendanceReport = null;
         String query = "SELECT *\n"
                 + "FROM attendance a \n"
                 + "JOIN employee e ON a.employee_id = e.employee_id \n"
@@ -256,7 +259,7 @@ public class AttendanceDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 // Tạo đối tượng Attendance từ thông tin lấy được
-                attendanceReport = new AttendanceReport(rs.getInt("a.attendance_id"), rs.getString("e.name"),
+                attendanceReport = new AttendanceDepartmentDTO(rs.getInt("a.attendance_id"), rs.getString("e.name"),
                         rs.getString("d.name"), rs.getDate("a.date"), rs.getString("a.status"),
                         rs.getString("a.notes"), rs.getString("a.in_time"), rs.getString("a.in_status"),
                         rs.getString("out_time"), rs.getString("out_status"), rs.getInt("r.remainDay"),

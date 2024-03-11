@@ -15,7 +15,7 @@
         </c:forEach>
         <div class="header">
             <div class="header-left">
-                <a href="HomeManager" class="logo">
+                <a href="dashboard" class="logo">
                     <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png" width="35" height="35" alt=""><span>BeztTech</span>
                 </a>
             </div>
@@ -96,9 +96,13 @@
                         <li>
                             <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
                         </li>
-                        <li>
-                            <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span></a>
-                        </li>
+                        <li class="submenu">
+                            <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span> <span class="menu-arrow"></a>
+                            <ul style="display: none;">
+                                <li><a href="employee"><i class="fa fa-id-card"></i>  Employees List</a></li>
+                                <li><a href="insurance"><i class="fa fa-shield"></i>  Insurance</a></li>                                                       
+                            </ul>
+                        </li>        
                         <li> 
                             <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                         </li>    
@@ -119,6 +123,9 @@
                         </li> 
                         <li>
                             <a href="ExportFile.jsp"><i class="fa fa-download"></i> <span>Export File</span></a>
+                        </li> 
+                        <li>
+                        <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
                         </li>
                     </ul>
                 </div>
