@@ -24,6 +24,39 @@ public class EmployeeDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
+    public List<Employee> getAllEmployeesforProject(int departmentID) throws ClassNotFoundException {
+        List<Employee> list = new ArrayList<>();
+        String query = "SELECT e.* FROM employee e join employeedepartment ep on e.employee_id=ep.employee_id where department_id=(select department_id from employeedepartment where employee_id=?)";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, departmentID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String name = rs.getString("name");
+                String phoneNumber = rs.getString("phoneNumber");
+                String address = rs.getString("address");
+                String email = rs.getString("email");
+                boolean gender = rs.getBoolean("gender");
+                String image = rs.getString("image");
+                String birthDate = rs.getString("birth_date");
+                String hireDate = rs.getString("hire_date");
+                int userId = rs.getInt("user_id");
+
+                Employee employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
+                list.add(employee);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return list;
+    }
+
     public boolean updateInformation(
             int userId,
             String name,

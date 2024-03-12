@@ -102,6 +102,7 @@ public class EmployeesController extends HttpServlet {
                             return;
                         }
                     }
+<<<<<<< HEAD
 
                 } catch (SQLException | ClassNotFoundException ex) {
                     System.out.println(ex);
@@ -113,14 +114,14 @@ public class EmployeesController extends HttpServlet {
 
 //         Nếu không có session hoặc không có account, chuyển hướng đến trang lỗi hoặc xử lý khác
                     response.sendRedirect("error.jsp");
-
                 }
             }
         }
     }
-
-    @Override
-    public String getServletInfo() {
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
+        }
     }
-}
