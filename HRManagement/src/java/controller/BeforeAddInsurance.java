@@ -4,27 +4,23 @@
  */
 package controller;
 
-import configs.headerInfor;
+import dal.EmployeeDAO;
 import dal.InsuranceDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import models.InsuranceEmployeeDTO;
+import models.Employee;
 
 /**
  *
  * @author andep
  */
-@WebServlet(name = "DetailInsuranceController", urlPatterns = {"/detailInsurance"})
-public class DetailInsuranceController extends HttpServlet {
+@WebServlet(name = "BeforeAddInsurance", urlPatterns = {"/beforeAddInsurance"})
+public class BeforeAddInsurance extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +39,10 @@ public class DetailInsuranceController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DetailInsuranceController</title>");
+            out.println("<title>Servlet BeforeAddInsurance</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DetailInsuranceController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BeforeAddInsurance at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,28 +60,7 @@ public class DetailInsuranceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        headerInfor.setSessionAttributes(request);
-        HttpSession session = request.getSession();
-        int id = 0; // Default value for "id"
-        String iidParam = request.getParameter("Iid");
-        try {
-            if (iidParam != null && !iidParam.isEmpty()) {
-                id = Integer.parseInt(iidParam);
-                session.setAttribute("Iid", id);
-            }
-        } catch (NumberFormatException e) {
-            // Handle the case where "Iid" parameter cannot be parsed into an integer
-            // Log the exception or perform any necessary error handling
-            e.printStackTrace(); // You can replace this with appropriate error handling
-        }
-
-        InsuranceDAO dao = new InsuranceDAO();
-        InsuranceEmployeeDTO insurance = null;
-        if (id != 0) {
-            insurance = dao.getInsuranceById(id);
-        }
-        request.setAttribute("insurance", insurance);
-        request.getRequestDispatcher("DetailInsurance.jsp").forward(request, response);
+        request.getRequestDispatcher("BeforeAddInsurance.jsp").forward(request, response);
     }
 
     /**
@@ -99,7 +74,36 @@ public class DetailInsuranceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            EmployeeDAO dao = new EmployeeDAO();
+            InsuranceDAO idao = new InsuranceDAO();
+
+            Employee empoyee = dao.getEmployeeById(id);
+
+            if (empoyee == null) {
+                request.setAttribute("fail", "This employee does not exist within the company.");
+                request.getRequestDispatcher("BeforeAddInsurance.jsp").forward(request, response);
+            }
+
+            if (idao.isInsuranceExist(id)) {
+                request.setAttribute("fail", "This employee has insurance.");
+                request.getRequestDispatcher("BeforeAddInsurance.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("addInsurance?id=" + id);
+            }
+        } catch (NumberFormatException e) {
+            // Handle NumberFormatException if the id parameter is not a valid integer
+            e.printStackTrace(); // Print the stack trace for debugging
+            request.setAttribute("fail", "Invalid employee ID format.");
+            request.getRequestDispatcher("BeforeAddInsurance.jsp").forward(request, response);
+        } catch (Exception e) {
+            // Handle other exceptions
+            e.printStackTrace(); // Print the stack trace for debugging
+            request.setAttribute("fail", "An error occurred while processing your request.");
+            request.getRequestDispatcher("BeforeAddInsurance.jsp").forward(request, response);
+        }
     }
 
     /**

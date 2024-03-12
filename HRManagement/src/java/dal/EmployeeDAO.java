@@ -25,19 +25,18 @@ public class EmployeeDAO {
     ResultSet rs = null;
 
     public boolean updateInformation(
-            int userId, 
-            String name, 
-            String phone, 
-            String email, 
-            String address, 
-            boolean gender, 
+            int userId,
+            String name,
+            String phone,
+            String email,
+            String address,
+            boolean gender,
             String birthDate
-    
     ) throws Exception {
         try {
             con = new context.DBContext().getConnection();
             if (con != null) {
-               
+
                 String sql = "UPDATE employee SET name = ?, phoneNumber = ?, email = ?, address = ?, gender = ?, birth_date = ? WHERE user_id=?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, name);
@@ -259,6 +258,7 @@ public class EmployeeDAO {
         }
         return list;
     }
+
     public int GetDepIDfromEmployee(int Employee_id) throws SQLException {
         int dep_id = -1; // Giá trị mặc định nếu không tìm thấy kết quả
         String query = "SELECT department_id FROM employeedepartment WHERE employee_id = ?";
@@ -282,7 +282,7 @@ public class EmployeeDAO {
         }
         return dep_id; // Trả về giá trị department_id
     }
-    
+
     public int GetRemainIDfromEmployee(int Employee_id) throws SQLException {
         int remain_id = -1; // Giá trị mặc định nếu không tìm thấy kết quả
         String query = "SELECT remainDay_id FROM remainday WHERE employee_id = ?";
@@ -292,7 +292,7 @@ public class EmployeeDAO {
             ps = con.prepareStatement(query);
             ps.setInt(1, Employee_id);
 
-            ResultSet rs = ps.executeQuery(); 
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 remain_id = rs.getInt("remainDay_id");
@@ -301,11 +301,12 @@ public class EmployeeDAO {
             e.printStackTrace();
             // Xử lý ngoại lệ nếu có
         } finally {
-            closeResources(); 
+            closeResources();
         }
-        return remain_id; 
+        return remain_id;
     }
-     public Employee getin4byemid(int Id) throws SQLException, ClassNotFoundException {
+
+    public Employee getin4byemid(int Id) throws SQLException, ClassNotFoundException {
 
         Employee em = null;
 
@@ -364,6 +365,5 @@ public class EmployeeDAO {
             e.printStackTrace();
         }
     }
-    
 
 }

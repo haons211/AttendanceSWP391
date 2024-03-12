@@ -241,5 +241,97 @@ public class InsuranceDAO {
         }
     }
 
-    
+    public boolean isInsuranceExist(int employeeId) {
+        boolean exists = false;
+        String query = "SELECT COUNT(*) AS count FROM insurance WHERE employee_id = ?";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, employeeId);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                exists = count > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+
+        return exists;
+    }
+
+    public void addInsurance(int employee_id, String insurance_company,
+            String policy_number, String coverage_type, String start_date,
+            String end_date, String policy_type, String deductible, String co_pay,
+            String coverage_limit, String premium_amount, String renewal_date,
+            String coverage_details, String beneficiary) throws ClassNotFoundException {
+        String query = "INSERT INTO insurance (employee_id, insurance_company, policy_number, "
+                + "coverage_type, start_date, end_date, policy_type, deductible, co_pay, "
+                + "coverage_limit, premium_amount, renewal_date, coverage_details, beneficiary) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (
+                Connection con = new DBContext().getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setInt(1, employee_id);
+            ps.setString(2, insurance_company);
+            ps.setString(3, policy_number);
+            ps.setString(4, coverage_type);
+            ps.setString(5, start_date);
+            ps.setString(6, end_date);
+            ps.setString(7, policy_type);
+            ps.setString(8, deductible);
+            ps.setString(9, co_pay);
+            ps.setString(10, coverage_limit);
+            ps.setString(11, premium_amount);
+            ps.setString(12, renewal_date);
+            ps.setString(13, coverage_details);
+            ps.setString(14, beneficiary);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        }
+    }
+
+    public void updateInsurance(int insurance_id, int employee_id, 
+            String insurance_company, String policy_number, String coverage_type, 
+            String start_date, String end_date, String policy_type, String deductible, 
+            String co_pay, String coverage_limit, String premium_amount, String renewal_date, 
+            String coverage_details, String beneficiary) throws ClassNotFoundException {
+        String query = "UPDATE insurance SET employee_id = ?, insurance_company = ?, policy_number = ?, "
+                + "coverage_type = ?, start_date = ?, end_date = ?, policy_type = ?, deductible = ?, co_pay = ?, "
+                + "coverage_limit = ?, premium_amount = ?, renewal_date = ?, coverage_details = ?, beneficiary = ? "
+                + "WHERE insurance_id = ?";
+
+        try (
+                Connection con = new DBContext().getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setInt(1, employee_id);
+            ps.setString(2, insurance_company);
+            ps.setString(3, policy_number);
+            ps.setString(4, coverage_type);
+            ps.setString(5, start_date);
+            ps.setString(6, end_date);
+            ps.setString(7, policy_type);
+            ps.setString(8, deductible);
+            ps.setString(9, co_pay);
+            ps.setString(10, coverage_limit);
+            ps.setString(11, premium_amount);
+            ps.setString(12, renewal_date);
+            ps.setString(13, coverage_details);
+            ps.setString(14, beneficiary);
+            ps.setInt(15, insurance_id);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        }
+    }
+
 }

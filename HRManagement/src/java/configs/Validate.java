@@ -22,9 +22,11 @@ import java.io.IOException;
  * @author Dan
  */
 public class Validate {
+
     public boolean validateRemainDay(int remainday, int approvedLeaveDays) {
         return remainday <= approvedLeaveDays;
     }
+
     public boolean validateTime(String checkin, String checkout) {
         // Kiểm tra xem checkin và checkout có null hoặc trống không
         if (checkin == null || checkin.isEmpty() || checkout == null || checkout.isEmpty()) {
@@ -168,10 +170,17 @@ public class Validate {
 
         return true;
     }
-    
 
-    
-    
+    public boolean validateDouble(String input) {
+        try {
+            // Attempt to parse the input string to a double value
+            Double.parseDouble(input);
+            // If parsing succeeds, return true
+            return true;
+        } catch (NumberFormatException e) {
+            // If parsing fails (NumberFormatException is thrown), return false
+            return false;
+        }
+    }
 
-  
 }
