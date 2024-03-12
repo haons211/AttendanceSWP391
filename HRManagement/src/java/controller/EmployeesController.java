@@ -1,4 +1,3 @@
-
 package controller;
 
 import configs.headerInfor;
@@ -103,25 +102,16 @@ public class EmployeesController extends HttpServlet {
                             return;
                         }
                     }
-
-                }
-                if (acc == null) {
-                    response.sendRedirect("Login");
-                } else {
-
-//         Nếu không có session hoặc không có account, chuyển hướng đến trang lỗi hoặc xử lý khác
-                   response.sendRedirect("error.jsp");
-
                 } catch (SQLException | ClassNotFoundException ex) {
                     System.out.println(ex);
-
                 }
             }
         }
     }
-
-    @Override
-    public String getServletInfo() {
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
+        }
     }
-}
