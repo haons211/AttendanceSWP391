@@ -980,22 +980,35 @@ VALUES
     
     
     CREATE TABLE dependents (
-    dependent_id INT PRIMARY KEY,
+    dependent_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
+    name VARCHAR(100),
     date_of_birth DATE,
     relationship VARCHAR(50),
+    gender BOOLEAN, -- Sử dụng BOOLEAN để biểu diễn giới tính
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
-INSERT INTO dependents (dependent_id, employee_id, first_name, last_name, date_of_birth, relationship)
+
+INSERT INTO dependents (dependent_id, employee_id, name, date_of_birth, relationship, gender)
 VALUES
-    (1, 1, 'Alice', 'Doe', '1990-01-01', 'Spouse'),       -- Từ bản ghi 1
-    (2, 1, 'Emma', 'Doe', '2010-05-15', 'Child'),          -- Từ bản ghi 1
-    (3, 2, 'Tom', 'Smith', '1995-06-20', 'Spouse'),        -- Từ bản ghi 3
-    (4, 3, 'Sarah', 'Johnson', '1992-11-15', 'Spouse'),    -- Từ bản ghi 4
-    (5, 3, 'Liam', 'Johnson', '2010-09-25', 'Child'),      -- Từ bản ghi 4
-    (6, 4, 'Olivia', 'Williams', '2005-08-12', 'Child'),   -- Từ bản ghi 5
-    (7, 5, 'Noah', 'Brown', '2018-03-30', 'Child');      -- Từ bản ghi 6
+    (1, 1, 'Alice Doe', '1990-01-01', 'Spouse', TRUE),       
+    (2, 1, 'Emma Doe', '2010-05-15', 'Child', TRUE),          
+    (3, 2, 'Tom Smith', '1995-06-20', 'Spouse', FALSE),        
+    (4, 3, 'Sarah Johnson', '1992-11-15', 'Spouse', TRUE),    
+    (5, 3, 'Liam Johnson', '2010-09-25', 'Child', FALSE),      
+    (6, 4, 'Olivia Williams', '2005-08-12', 'Child', TRUE),   
+    (7, 5, 'Noah Brown', '2018-03-30', 'Child', FALSE),        
+    (8, 6, 'Sophia Miller', '2002-06-18', 'Child', TRUE),     
+    (9, 7, 'James Wilson', '2012-12-03', 'Child', FALSE),      
+    (10, 7, 'Ava Wilson', '2015-09-10', 'Child', TRUE),      
+    (11, 8, 'Emily Wilson', '2018-07-20', 'Child', TRUE),     
+    (12, 8, 'Jacob Wilson', '2020-02-12', 'Child', FALSE),     
+    (13, 8, 'Sophie Wilson', '2022-01-05', 'Child', TRUE),    
+    (14, 9, 'Oliver Smith', '2017-10-10', 'Child', FALSE),     
+    (15, 9, 'Charlotte Smith', '2019-04-25', 'Child', NULL),
+    (16, 10, 'Ethan Brown', '2016-12-15', 'Child', FALSE),     
+    (17, 10, 'Amelia Brown', '2018-08-20', 'Child', TRUE);
+    
+    
 

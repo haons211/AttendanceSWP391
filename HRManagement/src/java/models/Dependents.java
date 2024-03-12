@@ -11,21 +11,22 @@ import java.util.Date;
  * @author andep
  */
 public class Dependents {
+
     private int dependentId;
     private int employeeId;
-    private String firstName;
-    private String lastName;
-    private Date dateOfBirth;
+    private String name;
+    private boolean gender;
+    private String dateOfBirth;
     private String relationship;
 
     public Dependents() {
     }
 
-    public Dependents(int dependentId, int employeeId, String firstName, String lastName, Date dateOfBirth, String relationship) {
+    public Dependents(int dependentId, int employeeId, String name, boolean gender, String dateOfBirth, String relationship) {
         this.dependentId = dependentId;
         this.employeeId = employeeId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.relationship = relationship;
     }
@@ -46,27 +47,27 @@ public class Dependents {
         this.employeeId = employeeId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public boolean isGender() {
+        return gender;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -80,7 +81,7 @@ public class Dependents {
 
     @Override
     public String toString() {
-        return "Dependents{" + "dependentId=" + dependentId + ", employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", relationship=" + relationship + '}';
+        return "Dependents{" + "dependentId=" + dependentId + ", employeeId=" + employeeId + ", name=" + name + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", relationship=" + relationship + '}';
     }
-    
+
 }

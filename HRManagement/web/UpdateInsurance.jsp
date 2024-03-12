@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Add Insurance</title>
+        <title>Update Insurance</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -33,7 +33,7 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-sm-5 col-5">
-                            <h4 class="page-title">Add Insurance</h4>
+                            <h4 class="page-title">Update Insurance</h4>
                         </div>
 
 
@@ -43,23 +43,23 @@
                             <a href="insurance">
                                 <button type="button" class="btn btn-secondary" style="margin: 10px 0 ;">Back</button>
                             </a>                 
-                            <form action="addInsurance" method="post" >
+                            <form action="updateInsurance" method="post" >
                                 <div class="main-text-table">
                                     <table>
                                         <tr >
-                                            <td style="display: none;">
+                                            <td>
                                                 <div class = "right-text-table">
                                                     Insurance ID
                                                 </div>
                                             </td>
-                                            <td style="display: none;">
+                                            <td >
                                                 <div class ="right-input-table" style="margin-left: 40px">
                                                     <div class="input-group input-group-sm mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="insurance_id" value="" style="width: 312px;" readonly="">
+                                                               aria-describedby="inputGroup-sizing-sm" name="insurance_id" value="${insurance.insuranceId}" style="width: 312px;" readonly="">
                                                     </div>
                                                 </div>
                                             </td>
@@ -77,7 +77,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="employee_id" value="${employee.employeeId}" style="width: 312px;" readonly="">
+                                                               aria-describedby="inputGroup-sizing-sm" name="employee_id" value="${insurance.employeeId}" style="width: 312px;" readonly="">
                                                     </div>
                                                 </div>
                                             </td>
@@ -96,7 +96,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="name" value="${employee.name}" style="width: 312px;"readonly>
+                                                               aria-describedby="inputGroup-sizing-sm" name="name" value="${insurance.name}" style="width: 312px;"readonly>
                                                     </div>
                                                     <div style="color: red">
                                                     </div>
@@ -130,7 +130,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="phoneNumber" value="${employee.phoneNumber}" style="width: 312px;" readonly="">
+                                                               aria-describedby="inputGroup-sizing-sm" name="phoneNumber" value="${insurance.phoneNumber}" style="width: 312px;" readonly="">
                                                     </div>
                                                 </div>
                                             </td>
@@ -142,7 +142,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="address" value="${employee.address}" style="width: 312px;" readonly="">
+                                                               aria-describedby="inputGroup-sizing-sm" name="address" value="${insurance.address}" style="width: 312px;" readonly="">
                                                     </div>
                                                 </div>
                                             </td>
@@ -161,7 +161,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="insurance_company"  style="width: 312px;" >
+                                                               aria-describedby="inputGroup-sizing-sm" name="insurance_company" value="${insurance.insuranceCompany}" style="width: 312px;" >
                                                     </div>
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorInsuranceCompanyWord}
@@ -177,7 +177,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm"   name="policy_number"  >
+                                                               aria-describedby="inputGroup-sizing-sm" value="${insurance.policyNumber}"  name="policy_number"  >
                                                     </div>
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorDouble}
@@ -197,13 +197,13 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <select class="form-control" name="coverage_type" style="width: 300px;">
+                                                        <select class="form-control" name="coverage_type" value="${insurance.coverageType}" style="width: 300px;">
                                                             <!-- Add options for coverage types -->
 
-                                                            <option value="Health">Health</option>
-                                                            <option value="Life">Life</option>
-                                                            <option value="Accident">Accident</option>
-                                                            <!-- Add more options as needed -->
+                                                            <option ${insurance.coverageType == "Health" ? 'selected' : ''}>Health</option>
+                                                            <option ${insurance.coverageType == "Life" ? 'selected' : ''}>Life</option>
+                                                            <option ${insurance.coverageType == "Accident" ? 'selected' : ''}>Accident</option>
+
                                                         </select>
                                                     </div>                                            
                                                 </div>
@@ -215,22 +215,17 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <select class="form-control" name="policy_type">
-                                                            <!-- Add options for policy types -->
-
-                                                            <option value="Health Insurance">Health Insurance</option>
-                                                            <option value="Life Insurance">Life Insurance</option>
-                                                            <option value="Accident Insurance">Accident Insurance</option>
+                                                        <select class="form-control" name="policy_type" value="${insurance.policyType}">
+                                                            <option ${insurance.coverageType == "Health Insurance" ? 'selected' : ''}>Health Insurance</option>
+                                                            <option ${insurance.coverageType == "Life Insurance" ? 'selected' : ''}>Life Insurance</option>
+                                                            <option ${insurance.coverageType == "Accident Insurance" ? 'selected' : ''}>Accident Insurance</option>
                                                             <!-- Add more options as needed -->
                                                         </select>
                                                     </div>
-
                                                 </div>
                                             </td>
                                         </tr>
-
                                         <tr >
-
                                             <td>
                                                 <div class = "right-text-table">
                                                     Start Date
@@ -243,10 +238,10 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="end_date"  style="width: 312px;" >
-                                                    </div> 
+                                                               aria-describedby="inputGroup-sizing-sm" name="start_date" value="${insurance.startDate}" >
+                                                    </div>
                                                     <div style="color: red">
-                                                        ${requestScope.messageErrorEndDate}
+                                                        ${requestScope.messageErrorStartDate}
                                                     </div>
                                                 </div>
                                             </td>
@@ -260,11 +255,12 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm"   name="start_date"  >
-                                                    </div>
+                                                               aria-describedby="inputGroup-sizing-sm" name="end_date" value="${insurance.endDate}" style="width: 312px;" >
+                                                    </div> 
                                                     <div style="color: red">
-                                                        ${requestScope.messageErrorStartDate}
+                                                        ${requestScope.messageErrorEndDate}
                                                     </div>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -283,7 +279,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="deductible" style="width: 312px;">
+                                                               aria-describedby="inputGroup-sizing-sm" name="deductible" value="${insurance.deductible}" style="width: 312px;">
                                                     </div>  
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorDeductibleDouble}
@@ -298,7 +294,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm"  name="co_pay"  >
+                                                               aria-describedby="inputGroup-sizing-sm" value="${insurance.coPay}" name="co_pay"  >
                                                     </div>
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorCopayDouble}
@@ -321,7 +317,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="coverage_limit"  style="width: 312px;" >
+                                                               aria-describedby="inputGroup-sizing-sm" name="coverage_limit" value="${insurance.coverageLimit}" style="width: 312px;" >
                                                     </div> 
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorLimitDouble}
@@ -337,7 +333,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm"   name="premium_amount"  >
+                                                               aria-describedby="inputGroup-sizing-sm"   name="premium_amount" value="${insurance.premiumAmount}" >
                                                     </div>
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorAmountDouble}
@@ -360,7 +356,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm"   name="renewal_date"  >
+                                                               aria-describedby="inputGroup-sizing-sm"   name="renewal_date" value="${insurance.renewalDate}" >
                                                     </div>
                                                     <div style="color: red">
                                                         ${requestScope.messageErrorRenewalDate}
@@ -377,9 +373,11 @@
                                                         </div>
                                                         <textarea class="form-control" aria-label="Small"
                                                                   aria-describedby="inputGroup-sizing-sm" name="coverage_details" 
-                                                                  style="width: 312px; height: 100px;" ></textarea>
+                                                                  style="width: 312px; height: 100px;">${insurance.coverageDetails}</textarea>
                                                     </div>
-
+                                                    <div style="color: red">
+                                                        ${requestScope.remaindayError}
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -395,12 +393,12 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <select class="form-control" name="beneficiary" style="width: 312px;">
+                                                        <select class="form-control" name="beneficiary" value="${insurance.beneficiary}" style="width: 312px;">
                                                             <!-- Add options for beneficiaries -->
-
-                                                            <option value="Family">Family</option>
-                                                            <option value="Spouse">Spouse</option>
-                                                            <option value="Child">Child</option>
+                                                            <option ${insurance.beneficiary == null ? 'selected' : ''}>No beneficiary</option>
+                                                            <option ${insurance.beneficiary == "Family" ? 'selected' : ''}>Family</option>
+                                                            <option ${insurance.beneficiary == "Spouse" ? 'selected' : ''}>Spouse</option>
+                                                            <option ${insurance.beneficiary == "Children" ? 'selected' : ''}>Children</option>
                                                             <!-- Add more options as needed -->
                                                         </select>
                                                     </div>                                               
@@ -410,7 +408,7 @@
                                     </table>
                                 </div>
                                 <div class="add-to-system">
-                                    <button type="submit" class="btn btn-success" style="margin: 10px 0 ;">Add Insurance</button>
+                                    <button type="submit" class="btn btn-success" style="margin: 10px 0 ;">Update Insurance</button>
                                 </div>
                             </form>
                         </div>
