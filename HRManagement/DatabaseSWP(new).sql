@@ -643,6 +643,259 @@ LOCK TABLES `managerfile` WRITE;
 UNLOCK TABLES;
 
 
+
+DROP TABLE IF EXISTS `project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `project` (
+  `ProjectId` int NOT NULL AUTO_INCREMENT,
+  `employee_id_create` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `datefrom` date DEFAULT NULL,
+  `dateend` date DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`ProjectId`),
+  KEY `KeyforProject_idx` (`employee_id_create`),
+  CONSTRAINT `KeyforProject` FOREIGN KEY (`employee_id_create`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `project`
+--
+
+LOCK TABLES `project` WRITE;
+/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+INSERT INTO `project` VALUES (1,3,'12','2024-11-16','2024-11-12','2'),(13,3,'PetShop','2024-03-01','2024-03-09','222222333333'),(14,3,'PetShop1','2024-03-13','2024-03-30','222222333333');
+/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `InsertManagerProject` AFTER INSERT ON `project` FOR EACH ROW BEGIN
+    DECLARE ProjectId INT;
+
+    -- Láº¥y ProjectId tá»« báº£ng project vá»«a ÄÆ°á»£c insert
+    SET ProjectId = NEW.ProjectId;
+
+    -- Insert dá»¯ liá»u vÃ o báº£ng managerproject
+    INSERT INTO managerproject (ProjectId, Success)
+    VALUES (ProjectId, 1); -- Giáº£ sá»­ "Success" ÄÃ£ ÄÆ°á»£c Äáº·t lÃ  giÃ¡ trá» máº·c Äá»nh 1
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `DeleteManagerProjectTask` BEFORE DELETE ON `project` FOR EACH ROW BEGIN
+    -- Táº¡m vÃ´ hiá»u hÃ³a rÃ ng buá»c khÃ³a ngoáº¡i trÃªn cá»t ProjectId trong báº£ng managerproject
+    SET foreign_key_checks = 0;
+
+    -- XÃ³a dá»¯ liá»u tá»« báº£ng task dá»±a trÃªn cÃ¡c dÃ²ng trong báº£ng managerproject liÃªn káº¿t vá»i ProjectId sáº½ bá» xÃ³a
+    DELETE FROM tasks WHERE MaID IN (SELECT MaID FROM managerproject WHERE ProjectId = OLD.ProjectId);
+
+    -- XÃ³a dá»¯ liá»u tá»« báº£ng managerproject dá»±a trÃªn ProjectId
+    DELETE FROM managerproject WHERE ProjectId = OLD.ProjectId;
+
+    -- KÃ­ch hoáº¡t láº¡i rÃ ng buá»c khÃ³a ngoáº¡i
+    SET foreign_key_checks = 1;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+--
+-- Table structure for table `managerproject`
+--
+
+DROP TABLE IF EXISTS `managerproject`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `managerproject` (
+  `MaID` int NOT NULL AUTO_INCREMENT,
+  `ProjectID` int NOT NULL,
+  `success` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`MaID`),
+  KEY `managerproject_ibfk_2` (`ProjectID`),
+  CONSTRAINT `managerproject_ibfk_2` FOREIGN KEY (`ProjectID`) REFERENCES `project` (`ProjectId`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `managerproject`
+--
+
+LOCK TABLES `managerproject` WRITE;
+/*!40000 ALTER TABLE `managerproject` DISABLE KEYS */;
+INSERT INTO `managerproject` VALUES (1,1,1),(15,13,1),(16,14,1);
+/*!40000 ALTER TABLE `managerproject` ENABLE KEYS */;
+UNLOCK TABLES;
+--
+-- Table structure for table `project`
+--
+
+DROP TABLE IF EXISTS `tasks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tasks` (
+  `TaskId` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Description` text,
+  `TimeSuccess` date DEFAULT NULL,
+  `TimeEnd` date DEFAULT NULL,
+  `Success` int DEFAULT '1',
+  `MaID` int DEFAULT '1',
+  PRIMARY KEY (`TaskId`),
+  KEY `employee_id` (`employee_id`),
+  KEY `MaID_idx` (`MaID`),
+  CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=591 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tasks`
+--
+
+LOCK TABLES `tasks` WRITE;
+/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
+INSERT INTO `tasks` VALUES (1,3,'3','2024-11-11','2024-11-11','2024-11-11',3,1),(2,3,'3','2024-11-11','2024-11-11','2024-11-11',3,1),(4,3,'3','3','2024-11-11','2024-11-11',3,1),(576,4,'LÃ m cÃ¡i nÃ y Äi','LÃ m cÃ¡i nÃ y Äi','2024-03-02','2024-03-02',3,1),(577,4,'LÃ m cÃ¡i nÃ y Äi','LÃ m cÃ¡i nÃ y Äi','2024-03-02','2024-03-02',1,1),(578,3,'LÃ m cÃ¡i nÃ y Äi','LÃ m cÃ¡i nÃ y Äi','2024-03-09','2024-03-09',3,1),(579,4,'LÃ m cÃ¡i nÃ y Äi','LÃ m cÃ¡i nÃ y Äi','2024-11-11','2024-02-09',2,1),(580,4,'LÃ m cÃ¡i nÃ y Äi','LÃ m cÃ¡i nÃ y Äi',NULL,'2024-03-09',2,15),(581,4,'LÃ m cÃ¡i nÃ y Äi','LÃ m cÃ¡i nÃ y Äi','2024-03-11','2024-03-12',3,15),(582,4,'LÃ m cÃ¡i nÃ y Äi','LÃ m cÃ¡i nÃ y Äi','2024-03-11','2024-03-12',3,15),(584,3,'Shoptaycam','LÃ m cÃ¡i nÃ y Äi','2024-03-11','2024-03-16',3,16),(585,4,'Shoptaycam','LÃ m cÃ¡i nÃ y Äi','2024-03-11','2024-03-23',3,16),(586,3,'CÆ°á»ng Nguyá»n Máº¡nh CÆ°á»ng','LÃ m cÃ¡i nÃ y Äi','2024-03-11','2024-03-16',3,16),(587,3,'Nguyen Van A','LÃ m cÃ¡i nÃ y Äi','2024-03-11','2024-03-16',3,16),(588,3,'CÆ°á»ng Nguyá»n Máº¡nh CÆ°á»ng','2222','2024-03-11','2024-03-16',3,16),(589,3,'CÆ°á»ng Nguyá»n Máº¡nh CÆ°á»ng','31312312','2024-03-11','2024-03-16',3,16),(590,4,'CÆ°á»ng Nguyá»n Máº¡nh CÆ°á»ng','LÃ m cÃ¡i nÃ y Äi',NULL,'2024-03-16',1,16);
+/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tasks_AFTER_INSERT` AFTER INSERT ON `tasks` FOR EACH ROW BEGIN
+UPDATE managerproject
+    SET success = 1
+    WHERE managerproject.MaID = NEW.MaID;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tasks_AFTER_UPDATE` AFTER UPDATE ON `tasks` FOR EACH ROW BEGIN
+ IF NEW.TimeSuccess > NEW.TimeEnd THEN
+        UPDATE tasks
+        SET success = 2
+        WHERE TaskId = NEW.TaskId;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+
+
+
+---------------------------------------------------------------------
+
+--
+-- Dumping events for database 'swp'
+--
+/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
+/*!50106 DROP EVENT IF EXISTS `CheckAndUpdateManagerProjectSuccess` */;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb4 */ ;;
+/*!50003 SET character_set_results = utf8mb4 */ ;;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `CheckAndUpdateManagerProjectSuccess` ON SCHEDULE EVERY 1 MINUTE STARTS '2024-03-11 13:28:29' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    UPDATE managerproject mp
+    JOIN (
+        SELECT maid
+        FROM tasks
+        GROUP BY maid
+        HAVING SUM(CASE WHEN success <> 3 THEN 1 ELSE 0 END) = 0
+    ) t ON mp.maid = t.maid
+    SET mp.success = 3;
+END */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+/*!50106 DROP EVENT IF EXISTS `check_update_success` */;;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb4 */ ;;
+/*!50003 SET character_set_results = utf8mb4 */ ;;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `check_update_success` ON SCHEDULE EVERY 1 MINUTE STARTS '2024-03-10 21:29:06' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tasks
+  SET success = 2
+  WHERE TimeSuccess IS NULL
+    AND NOW() > CAST(TimeEnd AS DATETIME) */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+DELIMITER ;
+/*!50106 SET TIME_ZONE= @save_time_zone */ ;
+
+--
+-- Dumping routines for database 'swp'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-03-11 16:12:39
+
+
+
 DELIMITER $$
 
 CREATE PROCEDURE generateDailyAttendance()
