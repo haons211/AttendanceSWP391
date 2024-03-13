@@ -67,7 +67,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                         <a class="dropdown-item" href="Setting">Setting</a>
+                        <a class="dropdown-item" href="Setting">Setting</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -90,7 +90,6 @@
                         <li>
                             <a href="HomeEmployees"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-                     
                         <li>
                             <a href="profile"><i class="fa fa-id-card"></i> <span>Profile</span></a>
                         </li>
@@ -100,13 +99,26 @@
                         <li> 
                             <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
+                        <li> 
+                            <a href="#"><i class="fa fa-shield"></i> <span>Insurance</span> </a>
+                        </li>
+                        <li class="submenu">
+                            <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
+                            <ul style="display: none;">
+                                <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
+                                <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
+                                <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                                    <c:if test="${account.getRole() == 2}">
+                                    <li>
+                                        <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>
+                                    </li>
+                                </c:if>        
+                            </ul>
+                        </li>  
                         <li>
-                            <a href="Setting"><i class="fa fa-cog"></i> <span>Setting </span></a>
-                        </li>    
-                         <li>
                             <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>
                         </li>  
-                            <li>
+                        <li>
                             <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
                         </li>
                     </ul>
