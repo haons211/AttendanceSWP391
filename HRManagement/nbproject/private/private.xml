@@ -3,9 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/Profile.jsp</file>
-            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/SideBarforManager.jsp</file>
-            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/SideBarforEm.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/SideBarSetting.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/AddInsurance.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/ManagerViewFeedback.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/src/java/controller/ListEmployeeController.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/src/java/controller/AddFeedback.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/ViewSalaryEmployee.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/src/java/dal/FeedbackDAO.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/EditFeedback.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/src/java/controller/ViewFeedback.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/AddFeedback.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/ViewContentFeedback.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/EmployeeFeedback.jsp</file>
         </group>
     </open-files>
 </project-private>
