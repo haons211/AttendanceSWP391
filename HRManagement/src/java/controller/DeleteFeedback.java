@@ -4,9 +4,7 @@
  */
 package controller;
 
-import dal.EmployeeDAO;
-import models.EmployeeSalary;
-import dal.SalaryDAO;
+import dal.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,18 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import models.Employee;
-import models.Salary;
+
 
 /**
  *
  * @author Dan
  */
-@WebServlet(name = "ListSalary", urlPatterns = {"/ListSalary"})
-public class ListSalary extends HttpServlet {
+@WebServlet(name = "DeleteFeedbackController", urlPatterns = {"/DeleteFeedback"})
+public class DeleteFeedback extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +38,10 @@ public class ListSalary extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListSalary</title>");
+            out.println("<title>Servlet DeleteFeedback</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListSalary at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteFeedback at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,17 +59,17 @@ public class ListSalary extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SalaryDAO salaryDAO = new SalaryDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        FeedbackDAO dao = new FeedbackDAO();
         try {
-
-            List<EmployeeSalary> lists = salaryDAO.getAllSalary();
-
-            request.setAttribute("listSalary", lists);
+            dao.deleteFeedBack(id);
+            request.setAttribute("id", id);
+            
+           response.sendRedirect("Feedback");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ListSalary.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        request.getRequestDispatcher("Salary.jsp").forward(request, response);
     }
 
     /**

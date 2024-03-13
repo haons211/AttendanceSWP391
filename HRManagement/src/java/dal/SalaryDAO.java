@@ -169,6 +169,48 @@ public class SalaryDAO {
         }
         return list;
     }
+    
+    public List<EmployeeSalary> getAllSalary(String search) throws ClassNotFoundException {
+        List<EmployeeSalary> list = new ArrayList<>();
+        EmployeeSalary employeeSalary = new EmployeeSalary();
+        String query = "select s.salary_id,s.employee_id, s.department_id, s.attendance_id ,\n"
+                + "basic_salary, allowance, tax, bonus, received_date, e.name, e.email, e.image, e.hire_date, d.name, total_salary\n"
+                + "from salary s join employee e on s.employee_id = e.employee_id\n"
+                + "join department d on d.department_id = s.department_id where e.name like ? ";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+               ps.setString(1, "%" + search + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                employeeSalary = new EmployeeSalary(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getDouble(5),
+                        rs.getDouble(6),
+                        rs.getDouble(7),
+                        rs.getDouble(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getDouble(15)
+                );
+                list.add(employeeSalary);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return list;
+    }
 
     public boolean isUsernameExists(int id) {
         String query = "SELECT *\n"

@@ -67,7 +67,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">ChangePassword</a>
+                         <a class="dropdown-item" href="Setting">Setting</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -77,7 +77,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
                     <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">ChangePassword</a>
+                    <a class="dropdown-item" href="Setting">Setting</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </div>
@@ -100,7 +100,10 @@
                             <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
                                 <li><a href="employee"><i class="fa fa-id-card"></i>  Employees List</a></li>
-                                <li><a href="insurance"><i class="fa fa-shield"></i>  Insurance</a></li>                                                       
+                                <li><a href="insurance"><i class="fa fa-shield"></i>  Insurance</a></li>      
+                                <li>
+                                    <a href="ListSalary"><i class="fa fa-money"></i> <span> Salary</span> </a>
+                                </li>
                             </ul>
                         </li>        
                         <li> 
@@ -116,9 +119,7 @@
                             <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
 
-                        <li>
-                            <a href="ListSalary"><i class="fa fa-money"></i> <span> Salary</span> </a>
-                        </li>
+
 
                         <li> 
                             <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>

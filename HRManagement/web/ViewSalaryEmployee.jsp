@@ -24,19 +24,8 @@
     </head>
 
     <body>
-        <%
-                  AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                  int role=     acc.getRole();
-        %>
-        <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
-            <% if (role == 2) { %>
-            <jsp:include page="SideBarforEm.jsp" />
-            <% } else if (role == 3||role == 1) { %>
-            <jsp:include page="SideBarforManager.jsp" />
-            <% } %>
-
-
+            <%@include file="SideBarSetting.jsp" %>
             <div class="page-wrapper">
                 <div class="content">
                     <div class="row">
@@ -147,9 +136,9 @@
         <script src="assets/js/app.js"></script>
 
         <script>
-        
+
             function convertToEnglishWords(number) {
-               
+
                 var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
                 var tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
                 var teens = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
@@ -164,21 +153,21 @@
                 tens = tens.map(capitalizeFirstLetter);
                 teens = teens.map(capitalizeFirstLetter);
                 thousands = thousands.map(capitalizeFirstLetter);
-             
+
                 function convertGroup(number) {
                     var result = '';
 
-               
+
                     var hundredsDigit = Math.floor(number / 100);
                     if (hundredsDigit !== 0) {
                         result += ones[hundredsDigit] + ' hundred ';
                     }
 
-              
+
                     var tensDigit = Math.floor((number % 100) / 10);
                     var onesDigit = number % 10;
 
-                
+
                     if (tensDigit === 1 && onesDigit !== 0) {
                         result += teens[onesDigit];
                     } else {
@@ -188,14 +177,14 @@
                     return result.trim();
                 }
 
-                
+
                 var parts = [];
                 while (number > 0) {
                     parts.push(number % 1000);
                     number = Math.floor(number / 1000);
                 }
 
-             
+
                 var words = '';
                 for (var i = 0; i < parts.length; i++) {
                     if (parts[i] !== 0) {
@@ -206,10 +195,10 @@
                 return words.trim();
             }
 
-          
-            var netSalary = ${employeeSalary.totalSalary}; 
 
-       
+            var netSalary = ${employeeSalary.totalSalary};
+
+
             document.getElementById("netSalaryInWords").innerText = "Net Salary : " + convertToEnglishWords(netSalary);
         </script>
     </body>
