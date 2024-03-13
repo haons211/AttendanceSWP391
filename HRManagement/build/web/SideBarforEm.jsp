@@ -102,9 +102,19 @@
                         <li> 
                             <a href="#"><i class="fa fa-shield"></i> <span>Insurance</span> </a>
                         </li>
-                        <li>
-                            <a href="Setting"><i class="fa fa-cog"></i> <span>Setting </span></a>
-                        </li>    
+                        <li class="submenu">
+                            <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
+                            <ul style="display: none;">
+                                <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
+                                <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
+                                <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                                    <c:if test="${account.getRole() == 2}">
+                                    <li>
+                                        <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>
+                                    </li>
+                                </c:if>        
+                            </ul>
+                        </li>  
                         <li>
                             <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>
                         </li>  

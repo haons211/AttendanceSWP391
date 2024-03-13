@@ -67,7 +67,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
-                         <a class="dropdown-item" href="Setting">Setting</a>
+                        <a class="dropdown-item" href="Setting">Setting</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -102,7 +102,7 @@
                                 <li><a href="employee"><i class="fa fa-id-card"></i>  Employees List</a></li>
                                 <li><a href="insurance"><i class="fa fa-shield"></i>  Insurance</a></li>      
                                 <li>
-                                    <a href="ListSalary"><i class="fa fa-money"></i> <span> Salary</span> </a>
+                                    <a href="ListSalary"><i class="fa fa-money"></i> <span>Employee Salary</span> </a>
                                 </li>
                             </ul>
                         </li>        
@@ -133,10 +133,19 @@
                         <li>
                             <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
                         </li>
-                        <li>
-                            <a href="Setting"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                        </li>
-
+                        <li class="submenu">
+                            <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
+                            <ul style="display: none;">
+                                <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
+                                <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
+                                <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                                  <c:if test="${account.getUserName() eq 'manageruser'}">
+                    <li>
+                        <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
+                    </li>
+                </c:if>
+                            </ul>
+                        </li>     
                     </ul>
                 </div>
             </div>
