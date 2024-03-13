@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.AccountDTO;
 import models.Attendance;
 import models.Employee;
@@ -83,14 +81,7 @@ public class EmployeesController extends HttpServlet {
                     headerInfor.setSessionAttributes(request);
                     EmployeeDAO dao = new EmployeeDAO();
                     RemaindayDAO DAO = new RemaindayDAO();
-                    Employee em = null;
-                    try {
-                        em = dao.getin4(acc.getUserID());
-                    } catch (SQLException ex) {
-                        Logger.getLogger(EmployeesController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(EmployeesController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    Employee em = dao.getin4(acc.getUserID());
                     int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                     session.setAttribute("re", remainDay);
                     request.setAttribute("emp", em);
@@ -111,26 +102,9 @@ public class EmployeesController extends HttpServlet {
                             return;
                         }
                     }
-
-
                 } catch (SQLException | ClassNotFoundException ex) {
                     System.out.println(ex);
-
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(EmployeesController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(EmployeesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                if (acc == null) {
-                    response.sendRedirect("Login");
-                } else {
-
-//         Nếu không có session hoặc không có account, chuyển hướng đến trang lỗi hoặc xử lý khác
-                    response.sendRedirect("error.jsp");
-
-                }
-
             }
         }
     }
