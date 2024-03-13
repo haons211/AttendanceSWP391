@@ -226,7 +226,6 @@
                                                     </div>         
                                                 </div>
                                             </td>
-
                                         </tr>
                                         <tr >
                                             <td>Remain Day</td>

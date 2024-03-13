@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/SideBarSetting.jsp</file>
             <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/AddInsurance.jsp</file>
             <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/ManagerViewFeedback.jsp</file>
@@ -15,6 +16,41 @@
             <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/AddFeedback.jsp</file>
             <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/ViewContentFeedback.jsp</file>
             <file>file:/E:/FPTU/KI5/SWP391/11324/AttendanceSWP391/HRManagement/web/EmployeeFeedback.jsp</file>
+=======
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/models/AttendanceDepartmentDTO.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/dal/SalaryDAO.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/test/test.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/BeforeAddSalary.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/ExportFileController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/models/Employee.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/Insurance.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/configs/Validate.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/AddAccount.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/AddDepartmentController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/AttendanceReportController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/BeforeAddInsurance.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/AttendanceByMonthYear.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/AddEmployeeController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/UpdateCompanyController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/AddAccountController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/dal/AccountDAO.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/UpdateEmployeeController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/Salary.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/BeforeAddSalary.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/AddInsurance.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/BeforeAddInsurance.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/UpdateAttendance.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/EmployeesController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/dal/DepartmentDAO.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/AddInsurance.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/dal/EmployeeDAO.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/controller/UpdateProfileController.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/AddSalary.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/context/DBContext.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/src/java/dal/InsuranceDAO.java</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/UpdateSalary.jsp</file>
+            <file>file:/E:/FPTU/Sem_5/SWP391/New%20folder%20(7)/AttendanceSWP391/HRManagement/web/DetailInsurance.jsp</file>
+>>>>>>> 4658b952071f1d5cbbbf8f67b52d24ec576f0b8e
         </group>
     </open-files>
 </project-private>

@@ -4,27 +4,22 @@
  */
 package controller;
 
-import configs.headerInfor;
-import dal.InsuranceDAO;
+import dal.ProjectDao;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import models.InsuranceEmployeeDTO;
+import models.Project;
 
 /**
  *
- * @author andep
+ * @author NCM
  */
-@WebServlet(name = "DetailInsuranceController", urlPatterns = {"/detailInsurance"})
-public class DetailInsuranceController extends HttpServlet {
+@WebServlet(name = "ManagerProjectController", urlPatterns = {"/ManagerProject"})
+public class ManagerProjectController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +38,10 @@ public class DetailInsuranceController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DetailInsuranceController</title>");
+            out.println("<title>Servlet ManagerProjectController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DetailInsuranceController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManagerProjectController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,28 +59,7 @@ public class DetailInsuranceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        headerInfor.setSessionAttributes(request);
-        HttpSession session = request.getSession();
-        int id = 0; // Default value for "id"
-        String iidParam = request.getParameter("Iid");
-        try {
-            if (iidParam != null && !iidParam.isEmpty()) {
-                id = Integer.parseInt(iidParam);
-                session.setAttribute("Iid", id);
-            }
-        } catch (NumberFormatException e) {
-            // Handle the case where "Iid" parameter cannot be parsed into an integer
-            // Log the exception or perform any necessary error handling
-            e.printStackTrace(); // You can replace this with appropriate error handling
-        }
-
-        InsuranceDAO dao = new InsuranceDAO();
-        InsuranceEmployeeDTO insurance = null;
-        if (id != 0) {
-            insurance = dao.getInsuranceById(id);
-        }
-        request.setAttribute("insurance", insurance);
-        request.getRequestDispatcher("DetailInsurance.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -99,7 +73,11 @@ public class DetailInsuranceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int projectID = Integer.parseInt(request.getParameter("ProjectID"));
+        ProjectDao pd = new ProjectDao();
+        
+        request.getSession().setAttribute("mess", pd.DeleteProject(projectID));
+        response.sendRedirect("ViewProject");
     }
 
     /**

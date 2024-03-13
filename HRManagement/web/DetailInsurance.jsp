@@ -36,13 +36,13 @@
                             <h4 class="page-title">Detail Insurance</h4>
                         </div>
                         <div class="col-sm-7 col-7 text-right m-b-30">
-                            <a href="addInsurance" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Insurance</a>
+                            <a href="beforeAddInsurance" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Insurance</a>
                         </div>
                         <div class="col-sm-12 col-12 text-right m-b-30">
-                            <a href="updateInsurance?Iid=${o.insuranceId}" class="btn btn-primary btn-rounded"><i class="fa fa-pencil"></i> Edit Insurance</a>
+                            <a href="updateInsurance?Iid=${insurance.insuranceId}" class="btn btn-primary btn-rounded"><i class="fa fa-pencil"></i> Edit Insurance</a>
                         </div>
-                        
-                  
+
+
 
                         <div class="main">
                             <a href="insurance">
@@ -68,8 +68,21 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>Employee ID</td>
+                                            <td>
+                                                <div class="left-input-table">
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-label="Small"
+                                                               aria-describedby="inputGroup-sizing-sm" 
+                                                               name="insurance_id" value="${insurance.employeeId}" 
+                                                               style="width: 312px;" readonly="">
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
-
                                         <tr >
                                             <td>
                                                 <div class = "right-text-table">
@@ -355,14 +368,16 @@
                                                                aria-describedby="inputGroup-sizing-sm" name="beneficiary" 
                                                                value="${insurance.beneficiary != null ? insurance.beneficiary : 'No beneficiary'}" 
                                                                style="width: 312px;" readonly>
-                                                        ${insurance.beneficiary != null ? '<button type="button" class="btn btn-primary" onclick="viewBeneficiary()">View Beneficiary</button>' : ''}
                                                     </div>                                               
                                                 </div>
                                             </td>                
                                         </tr>
                                     </table>
                                 </div>
-                            </form>
+                            </form>                     
+                            <div class="col-sm-5 col-5 text-right m-b-30">
+                                <a href="beneficiary?eid=${insurance.employeeId}" class="btn btn-primary">View Beneficiary</a>
+                            </div>
                         </div>
                     </div>
                 </div>

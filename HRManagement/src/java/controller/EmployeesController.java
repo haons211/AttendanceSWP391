@@ -112,6 +112,10 @@ public class EmployeesController extends HttpServlet {
                         }
                     }
 
+
+                } catch (SQLException | ClassNotFoundException ex) {
+                    System.out.println(ex);
+
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(EmployeesController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
@@ -130,9 +134,10 @@ public class EmployeesController extends HttpServlet {
             }
         }
     }
-
-    @Override
-    public String getServletInfo() {
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
+        }
     }
-}

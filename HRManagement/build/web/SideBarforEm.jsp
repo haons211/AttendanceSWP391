@@ -106,7 +106,9 @@
                          <li>
                             <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>
                         </li>  
-                        
+                            <li>
+                            <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
