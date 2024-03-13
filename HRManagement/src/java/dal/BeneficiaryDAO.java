@@ -149,4 +149,66 @@ public class BeneficiaryDAO {
             closeResources();
         }
     }
+
+    public void updateBeneficiary(int dependentId, int employeeId, String name, boolean gender, String dateOfBirth, String relationship) {
+        String query = "UPDATE dependents SET employee_id = ?, name = ?, gender = ?, date_of_birth = ?, relationship = ? WHERE dependent_id = ?";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, employeeId);
+            ps.setString(2, name);
+            ps.setBoolean(3, gender);
+            ps.setString(4, dateOfBirth);
+            ps.setString(5, relationship);
+            ps.setInt(6, dependentId);
+
+            int rowsUpdated = ps.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Beneficiary updated successfully.");
+            } else {
+                System.out.println("Failed to update beneficiary.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResources();
+        }
+    }
+
+    public Dependents getBeneficiaryByID(int id) {
+        Dependents beneficiary = null;
+        String query = "SELECT * FROM dependents WHERE dependent_id = ?";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                beneficiary = new Dependents(
+                        rs.getInt("dependent_id"),
+                        rs.getInt("employee_id"),
+                        rs.getString("name"),
+                        rs.getBoolean("gender"),
+                        rs.getString("date_of_birth"),
+                        rs.getString("relationship")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResources();
+        }
+
+        return beneficiary;
+    }
+
 }
