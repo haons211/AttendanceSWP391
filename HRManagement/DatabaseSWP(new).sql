@@ -988,6 +988,14 @@ VALUES
     gender BOOLEAN, -- Sử dụng BOOLEAN để biểu diễn giới tính
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
+CREATE TABLE `message` (
+                           `message_id` int NOT NULL AUTO_INCREMENT,
+                           `sender_id` int NOT NULL,
+                           `content` TEXT NOT NULL,
+                           `timestamp` DATETIME NOT NULL,
+                           PRIMARY KEY (`message_id`),
+                           CONSTRAINT `fk_message_sender` FOREIGN KEY (`sender_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 INSERT INTO dependents (dependent_id, employee_id, name, date_of_birth, relationship, gender)
