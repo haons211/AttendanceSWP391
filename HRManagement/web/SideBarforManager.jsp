@@ -133,6 +133,9 @@
                         <li>
                             <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
                         </li>
+                        <li>
+                            <a href="ChatSystem"><i class="fa fa-bell"></i> <span>Chat</span></a>
+                        </li>
                         <li class="submenu">
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">

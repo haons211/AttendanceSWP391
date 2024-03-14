@@ -119,7 +119,13 @@ public class Authentication implements Filter {
         
         if (url.contains("404.jsp")) {
             filterchain.doFilter(servletRequest, servletResponse);
-        } 
+        } else if (url.contains("ChatSystem") || url.contains("OpenChat") || url.contains("chatRoomServer")) {
+            if (user != null) {
+                filterchain.doFilter(servletRequest, servletResponse);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/404.jsp");
+            }
+        }
         else if (url.contains("Login")) {
 
             if (user != null) {
@@ -134,7 +140,7 @@ public class Authentication implements Filter {
             }
             ///employee,Homemanager,updateAccount,deleteAccount
         } else if (url.contains("ManagerNotification") || url.contains("department") || url.contains("addDep") || url.contains("UpdateDepartment")
-                || url.contains("DeleteDepartment") || url.contains("employee") || url.contains("HomeManager") || url.contains("addAccount") || url.contains("account")) {
+                || url.contains("DeleteDepartment") || url.contains("employee") || url.contains("HomeManager") || url.contains("addAccount") || url.contains("account")|| url.contains("ChatSystem") || url.contains("AddConversation")||url.contains("OpenChat")|| url.contains("AddPeopletoGroup")||url.contains("chatRoomServer")||url.contains("ChatSystemEm") ) {
             if (user != null) {
                 if (user.getRole() == 1 || user.getRole() == 3) {
                     filterchain.doFilter(servletRequest, servletResponse);
@@ -154,7 +160,7 @@ public class Authentication implements Filter {
             } else {
                 response.sendRedirect(request.getContextPath() + "/401.jsp");
             }
-        } else if (url.contains("employeedetailapplication")) {
+        } else if (url.contains("employeedetailapplication") ||url.contains("ChatSystem")) {
             if (user != null) {
                 if (user.getRole() == 1 || user.getRole() == 3 || user.getRole() == 2) {
                     filterchain.doFilter(servletRequest, servletResponse);

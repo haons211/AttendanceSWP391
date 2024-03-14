@@ -491,7 +491,55 @@ public class ApplicationDAO extends DBContext {
             System.out.println(application);
         }
     }
-}
+    public String getNamebyAccount(AccountDTO account) {
+        String name = "";
+        String sql = "SELECT e.name FROM employee e JOIN users u ON e.user_id = u.user_id WHERE u.user_id = ?";
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
 
+        try {
+            con = super.getConnection();
+            st = con.prepareStatement(sql);
+            st.setInt(1, account.getUserID());
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                name = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new RuntimeException("Error when getting employee name", e);
+        }   catch (ClassNotFoundException ex) {
+            Logger.getLogger(ApplicationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // Đóng ResultSet trước
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            // Sau đó đóng PreparedStatement
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            // Cuối cùng đóng Connection
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return name;
+    }
+}
 
 
