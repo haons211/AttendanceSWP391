@@ -670,7 +670,28 @@ DELIMITER ;
 --
 -- Table structure for table `remainday`
 --
-
+CREATE TABLE `message` (
+                           `message_id` int NOT NULL AUTO_INCREMENT,
+                           `sender_id` int NOT NULL,
+                           `content` TEXT NOT NULL,
+                           `timestamp` DATETIME NOT NULL,
+                           PRIMARY KEY (`message_id`),
+                           CONSTRAINT `fk_message_sender` FOREIGN KEY (`sender_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `project` (
+  `ProjectId` int NOT NULL AUTO_INCREMENT,
+  `employee_id_create` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `datefrom` date DEFAULT NULL,
+  `dateend` date DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`ProjectId`),
+  KEY `KeyforProject_idx` (`employee_id_create`),
+  CONSTRAINT `KeyforProject` FOREIGN KEY (`employee_id_create`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 DROP TABLE IF EXISTS `remainday`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
