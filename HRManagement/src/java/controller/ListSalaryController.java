@@ -69,7 +69,7 @@ public class ListSalaryController extends HttpServlet {
         String search= request.getParameter("search");
         try {
             if(search == null){
-            List<EmployeeSalary> lists = salaryDAO.getAllSalary();
+            List<EmployeeSalary> lists = salaryDAO.getAllSalary("");
             request.setAttribute("listSalary", lists);
             }
             else{

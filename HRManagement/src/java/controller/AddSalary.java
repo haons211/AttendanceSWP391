@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.EmployeeDAO;
 import dal.SalaryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,8 +72,17 @@ public class AddSalary extends HttpServlet {
             throws ServletException, IOException {
 
         String username = request.getParameter("username");
-
-        request.setAttribute("username", username);
+        EmployeeDAO dao = new   EmployeeDAO();
+        AccountDAO adao = new AccountDAO();
+        SalaryDAO sdao = new SalaryDAO();
+        try {
+            request.setAttribute("leaveDay",sdao.getLeaveDayById(adao.getIdByUsername(username).getUserID()) );
+            request.setAttribute("salary", dao.getSalaryByUserName(username));
+            request.setAttribute("username", username);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(AddSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
         request.getRequestDispatcher("AddSalary.jsp").forward(request, response);
     }
 
@@ -88,7 +98,7 @@ public class AddSalary extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
-        double basicSalary = Double.parseDouble(request.getParameter("basicSalary"));
+       
         double allowance = Double.parseDouble(request.getParameter("allowance"));
         double tax = Double.parseDouble(request.getParameter("tax"));
         double bonus = Double.parseDouble(request.getParameter("bonus"));
@@ -97,9 +107,11 @@ public class AddSalary extends HttpServlet {
 
      
         try {
+           
             EmployeeSalary employeeSalary = salaryDAO.getEmployeeSalaryByUserName1(username);
+             
             salaryDAO.addSalary(new Salary(employeeSalary.getEmployeeId(), employeeSalary.getDepartmentId(),
-                    employeeSalary.getAttendanceId(), basicSalary, allowance, tax, bonus,
+                    employeeSalary.getAttendanceId(), allowance, tax, bonus,
                     employeeSalary.getHireDate(), employeeSalary.getUserId()));
 
             response.sendRedirect("ListSalary");

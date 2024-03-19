@@ -52,10 +52,10 @@
                             <button type="button" class="btn btn-secondary" style="margin: 10px 0 ;">Back</button>
                         </a>
                     </div>
-                  <c:set var="id" value="${requestScope.id}" />
+                    <c:set var="id" value="${requestScope.id}" />
                     <div class="row d-flex justify-content-center">
                         <form action="UpdateSalary" method="post">
-                             <input type="hidden" name="id" value="${id}"/>
+                            <input type="hidden" name="id" value="${id}"/>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="" style="font-weight: bold">UserName  
@@ -83,24 +83,32 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="inputFullname4" style="font-weight: bold">Basic Salary</label>
-                                    <input type="number" class="form-control" id="basicSalary" placeholder="Basic Salary" value="${salary.basicSalary}" name="basicSalary" oninput="calculateTax()">
+                                    <input type="number" class="form-control" id="basicSalary" placeholder="Basic Salary" value="${employee.basicSalary}" name="basicSalary" readonly="" oninput="calculateTax()">
                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="inputFullname4" style="font-weight: bold">Real Salary</label>
+                                    <input type="number" class="form-control" id="realSalary" placeholder="Real Salary" readonly="" value="${employee.basicSalary*(26-leaveDay)/26 }" name="basicSalary" oninput="calculateTax()">
+                                </div>
+                                 </div>
+                                 <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputPhone4" style="font-weight: bold">Allowance  
 
                                     </label>
-                                    <input type="number" class="form-control" id="" placeholder="Allowance  "  value="${salary.allowance}" name="allowance">
+                                    <input type="number" class="form-control" id="allowance" placeholder="Allowance  "  value="${salary.allowance}" name="allowance" oninput="calculateTax()">
+                                </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="role" style="font-weight: bold">Bonus</label>
+                                    <input type="number" class="form-control" id="bonus" placeholder="Bonus"  value="${salary.bonus}" name="bonus" oninput="calculateTax()">
                                 </div>
                             </div>
                             <div class="form-row">
+                                
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress" style="font-weight: bold">Tax</label>
-                                    <input type="number" class="form-control" id="tax" readonly placeholder="Tax"  value="${salary.tax}" name="tax">
+                                    <input type="number" class="form-control" id="tax" readonly placeholder="Tax"  value="${salary.tax}" name="tax" oninput="calculateTax()">
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="role" style="font-weight: bold">Bonus</label>
-                                    <input type="number" class="form-control" id="" placeholder="Bonus"  value="${salary.bonus}" name="bonus">
-                                </div>
+                               
 
                             </div>
                             <button type="submit" class="btn btn-primary addBtn">Add</button>
@@ -110,239 +118,33 @@
                 </div>
             </div>
         </div>
-        <div class="notification-box">
-            <div class="msg-sidebar notifications msg-noti">
-                <div class="topnav-dropdown-header">
-                    <span>Messages</span>
-                </div>
-                <div class="drop-scroll msg-list-scroll" id="msg_list">
-                    <ul class="list-box">
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">R</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Richard Miles </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item new-message">
-                                    <div class="list-left">
-                                        <span class="avatar">J</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">John Doe</span>
-                                        <span class="message-time">1 Aug</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">T</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Tarah Shropshire </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">M</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Mike Litorus</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">C</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Catherine Manseau </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">D</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Domenic Houston </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">B</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Buster Wigton </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">R</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Rolland Webber </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">C</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Claire Mapes </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">M</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Melita Faucher</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">J</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Jeffery Lalor</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">L</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Loren Gatlin</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">T</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Tarah Shropshire</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="topnav-dropdown-footer">
-                    <a href="chat.html">See all messages</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="sidebar-overlay" data-reff=""></div>
-<script src="assets/js/jquery-3.2.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/dataTables.bootstrap4.min.js"></script>
-<script src="assets/js/jquery.slimscroll.js"></script>
-<script src="assets/js/app.js"></script>
 
-<script>
-    function calculateTax() {
-        var basicSalary = parseFloat(document.getElementById('basicSalary').value);
-        if (!isNaN(basicSalary)) {
-            var tax = basicSalary * 0.1;
-            document.getElementById('tax').value = tax.toFixed(2);
-        } else {
-            document.getElementById('tax').value = "";
-        }
-    }
-</script>
 
-</body>
+
+        <div class="sidebar-overlay" data-reff=""></div>
+        <script src="assets/js/jquery-3.2.1.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.dataTables.min.js"></script>
+        <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="assets/js/app.js"></script>
+
+        <script>
+            function calculateTax() {
+                var basicSalary = parseFloat(document.getElementById('basicSalary').value);
+                var allowance = parseFloat(document.getElementById('allowance').value);
+                var bonus = parseFloat(document.getElementById('bonus').value);
+
+                var totalAmount = basicSalary + allowance + bonus;
+                var tax = totalAmount * 0.1; // Calculate tax (10%)
+
+                // Display the tax in the tax input field
+                document.getElementById('tax').value = tax.toFixed(2); // Fixed to 2 decimal places
+            }
+        </script>
+
+    </body>
 
 </html>
 

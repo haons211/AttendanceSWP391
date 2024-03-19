@@ -43,8 +43,8 @@ public class EmployeeDAO {
                 String birthDate = rs.getString("birth_date");
                 String hireDate = rs.getString("hire_date");
                 int userId = rs.getInt("user_id");
-
-                Employee employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
+                double salary = rs.getDouble(11);
+                Employee employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId, salary);
                 list.add(employee);
             }
         } catch (Exception e) {
@@ -119,7 +119,7 @@ public class EmployeeDAO {
                 if (rs.next()) {
                     // Lấy dữ liệu từ ResultSet và tạo đối tượng Student
 
-                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
+                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10), rs.getDouble(11));
                     return em;
                 }
             }
@@ -149,10 +149,11 @@ public class EmployeeDAO {
             Boolean gender,
             String image,
             String birthDate,
-            String hireDate) throws SQLException {
+            String hireDate, int id,
+            Double salary) throws SQLException {
         String query = "INSERT INTO employee "
-                + "(name, phoneNumber, address, email, gender, image, birth_date, hire_date) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(name, phoneNumber, address, email, gender, image, birth_date, hire_date,user_id ,basic_salary ) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
         try {
             con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
@@ -164,6 +165,30 @@ public class EmployeeDAO {
             ps.setString(6, image);
             ps.setString(7, birthDate);
             ps.setString(8, hireDate);
+            ps.setInt(9, id);
+            ps.setDouble(10, salary);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+
+    }
+
+    public void addEmployeeDepartment(
+            Employee employee
+    ) throws SQLException {
+        String query = "INSERT INTO employeedepartment "
+                + "(employee_id, department_id) "
+                + "VALUES (?, ?)";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, employee.getEmployeeId());
+            ps.setInt(9, employee.getDepartmentId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -194,8 +219,9 @@ public class EmployeeDAO {
                 String birthDate = rs.getString("birth_date");
                 String hireDate = rs.getString("hire_date");
                 int userId = rs.getInt("user_id");
-
-                employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
+                double salary = rs.getDouble(11);
+                employee = new Employee(employeeId, name, phoneNumber, address,
+                        email, gender, image, birthDate, hireDate, userId, salary);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -208,18 +234,10 @@ public class EmployeeDAO {
     }
 
     public void updateEmployee(Employee e, int id) throws ClassNotFoundException {
-        String query = "UPDATE `swp`.`employee`\n"
-                + "SET\n"
-                + "\n"
-                + "`name` = ?,\n"
-                + "`phoneNumber` =?,\n"
-                + "`address` = ?,\n"
-                + "`email` = ?,\n"
-                + "`gender` = ?,\n"
-                + "`image` = ?,\n"
-                + "`birth_date` = ?,\n"
-                + "`hire_date` =?\n"
-                + "WHERE `employee_id` = ?";
+        String query = "UPDATE employee SET name = ?, "
+                + "phoneNumber = ?, address = ?, email = ?, "
+                + "gender = ?, image = ?, birth_date = ?, hire_date = ?, basic_salary = ? WHERE employee_id = ?";
+
         try {
             con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
@@ -231,7 +249,8 @@ public class EmployeeDAO {
             ps.setString(6, e.getImage());
             ps.setString(7, e.getBirthDate());
             ps.setString(8, e.getHireDate());
-            ps.setInt(9, id);
+            ps.setDouble(9, e.getBasicSalary());
+            ps.setInt(10, id);
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -278,8 +297,8 @@ public class EmployeeDAO {
                 String birthDate = rs.getString("birth_date");
                 String hireDate = rs.getString("hire_date");
                 int userId = rs.getInt("user_id");
-
-                Employee employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
+                double salary = rs.getDouble(11);
+                Employee employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId, salary);
                 list.add(employee);
             }
         } catch (Exception e) {
@@ -339,6 +358,56 @@ public class EmployeeDAO {
         return remain_id;
     }
 
+    public double getSalaryByUserName(String username) throws SQLException {
+
+        String query = "select basic_salary from employee e join users u on e.user_id = u.user_id\n"
+                + "where username = ?";
+        double salary = 0;
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                salary = rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu có
+        } finally {
+            closeResources();
+        }
+        return salary;
+    }
+
+    public int getEmployeeID() throws SQLException {
+
+        String query = "SELECT employee_id \n"
+                + "FROM employee \n"
+                + "ORDER BY employee_id DESC\n"
+                + "LIMIT 1;";
+        int salary = 0;
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+          
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                salary = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu có
+        } finally {
+            closeResources();
+        }
+        return salary;
+    }
+
     public Employee getin4byemid(int Id) throws SQLException, ClassNotFoundException {
 
         Employee em = null;
@@ -361,7 +430,7 @@ public class EmployeeDAO {
                 if (rs.next()) {
                     // Lấy dữ liệu từ ResultSet và tạo đối tượng Student
 
-                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
+                    em = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10), rs.getDouble(11));
                     return em;
                 }
             }

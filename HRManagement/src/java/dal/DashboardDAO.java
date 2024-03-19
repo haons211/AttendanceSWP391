@@ -136,7 +136,8 @@ public class DashboardDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getInt(10)));
+                        rs.getInt(10),
+                rs.getDouble(11)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -231,7 +232,7 @@ public class DashboardDAO {
                     rs.getString(7),
                     rs.getString(8),
                     rs.getString(9),
-                    rs.getInt(10)));
+                    rs.getInt(10), rs.getDouble(11)));
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -260,7 +261,7 @@ public class DashboardDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getInt(10)));
+                        rs.getInt(10), rs.getDouble(11)));
             }
         } catch (Exception e) {
             e.printStackTrace();

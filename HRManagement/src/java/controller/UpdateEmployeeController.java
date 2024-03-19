@@ -51,7 +51,7 @@ public class UpdateEmployeeController extends HttpServlet {
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
         // Retrieve gender parameter and handle null case
-
+         Double salary = Double.parseDouble(request.getParameter("salary"));
         // Default to male if parameter is null
         String messageError = "Please input valid ";
         System.out.println(image);
@@ -107,8 +107,9 @@ public class UpdateEmployeeController extends HttpServlet {
                 request.setAttribute("employee", employeeDAO.getEmployeeById(employeeId));
                 request.getRequestDispatcher("update-employee.jsp").forward(request, response);
             } else {
+                System.out.println(salary);
                 // Create Employee object with updated information
-                Employee employee = new Employee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate);
+                Employee employee = new Employee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate, salary);
                 // Update the employee in the database
                 dao.updateEmployee(employee, employeeId);
                 // Redirect to the list-employee servlet or page

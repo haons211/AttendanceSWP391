@@ -1,6 +1,8 @@
 package controller;
 
 import configs.Validate;
+import dal.AccountDAO;
+import dal.DepartmentDAO;
 import dal.EmployeeDAO;
 import java.io.IOException;
 import java.sql.Date;
@@ -14,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
+import models.Employee;
 
 @WebServlet(name = "AddEmployeeServlet", urlPatterns = {"/add-employee"})
 public class AddEmployeeController extends HttpServlet {
@@ -23,13 +26,18 @@ public class AddEmployeeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DepartmentDAO dao =  new DepartmentDAO();
+        request.setAttribute("department", dao.getAllDepartments(""));
+        String username = request.getParameter("username");
+
+        request.setAttribute("username", username);
         request.getRequestDispatcher("add-employee.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+ String username = request.getParameter("username");
         String name = request.getParameter("name");
         name = validate.normalizeName(name);
         String image = request.getParameter("image");
@@ -39,15 +47,17 @@ public class AddEmployeeController extends HttpServlet {
         String gender = request.getParameter("gender");
         String birthDate = request.getParameter("birthDate");
         String hireDate = request.getParameter("hireDate");
+        Double salary = Double.parseDouble(request.getParameter("salary"));
         System.out.println(birthDate);
         System.out.println(hireDate);
-
+       String department = request.getParameter("department");
         EmployeeDAO dao = new EmployeeDAO();
         String messageError = "Please input valid ";
         boolean genderReturn = true;
         try {
 
             int count = 0;
+            
             if (!validate.checkPhone(phoneNumber)) {
                 request.setAttribute("messageErrorPhoneNumber", messageError + "phone number");
                 count++;
@@ -85,8 +95,10 @@ public class AddEmployeeController extends HttpServlet {
                     count++;
                 }
             }
-
             
+DepartmentDAO ddao =new DepartmentDAO();
+            AccountDAO adao = new AccountDAO();
+            int userId = adao.getIdByUsername(username).getUserID();
             if (count > 0) {
                 request.setAttribute("name", name);
                 request.setAttribute("image", image);
@@ -96,10 +108,16 @@ public class AddEmployeeController extends HttpServlet {
                 request.setAttribute("gender", gender);
                 request.setAttribute("birthDate", birthDate);
                 request.setAttribute("hireDate", hireDate);
+                 request.setAttribute("salary", hireDate);
                 request.getRequestDispatcher("add-employee.jsp").forward(request, response);
             } else {
-
-                dao.addEmployee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate);
+              
+                dao.addEmployee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate,userId,  salary);
+                System.out.println(dao.getEmployeeID());
+                if(dao.getEmployeeID() == 0){
+                    request.getRequestDispatcher("add-employee").forward(request, response);
+                }
+//                dao.addEmployeeDepartment(new Employee(dao.getEmployeeID(), ddao.getDepartmentByName(department).getDepartment_id()));
                 response.sendRedirect("employee");
             }
 

@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.AccountDAO;
 import dal.SalaryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,17 +15,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.AccountDTO;
-import models.Attendance;
-import models.Department;
-import models.Employee;
-import models.Salary;
 
 /**
  *
  * @author Dan
  */
-@WebServlet(name="AdddSalary", urlPatterns={"/AdddSalary"})
-public class AdddSalary extends HttpServlet {
+@WebServlet(name="BeforeAddEmployee", urlPatterns={"/BeforeAddEmployee"})
+public class BeforeAddEmployee extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +38,10 @@ public class AdddSalary extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdddSalary</title>");  
+            out.println("<title>Servlet BeforeAddEmployee</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdddSalary at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet BeforeAddEmployee at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +58,7 @@ public class AdddSalary extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("AddSalary.jsp").forward(request, response);
+       request.getRequestDispatcher("BeforeAddEmployee.jsp").forward(request, response);
     } 
 
     /** 
@@ -74,25 +71,22 @@ public class AdddSalary extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        double basicSalary = Double.parseDouble(request.getParameter("basicSalary"));
-        double allowance = Double.parseDouble(request.getParameter("allowance"));
-        double tax = Double.parseDouble(request.getParameter("tax"));
-        double bonus = Double.parseDouble(request.getParameter("bonus"));
-        
-        SalaryDAO salaryDAO = new SalaryDAO();
-        Employee employee = new Employee();
-        Department department = new Department();
-        Attendance attendance = new Attendance();
-        AccountDTO account = new AccountDTO();
-        
-        try {
-//            salaryDAO.addSalary(new Salary(employee.getEmployeeId(), department.getDepartment_id(),
-//                     attendance.getDepartment_id(), basicSalary, allowance, tax, bonus,
-//                    employee.getHireDate(), account.getUserID()));
-            salaryDAO.addSalary(new Salary(basicSalary, allowance, tax, bonus));
-//           response.sendRedirect("ListSalary");
-        } catch (Exception exception) {
-            
+        String username = request.getParameter("username");
+
+        AccountDAO dao = new AccountDAO();
+        SalaryDAO sdao  =new SalaryDAO();
+        AccountDTO accountDTO = dao.getIdByUsername(username);
+        if (accountDTO == null) {
+            request.setAttribute("fail", "This account does not exist within the company.");
+            request.getRequestDispatcher("BeforeAddEmployee.jsp").forward(request, response);
+        }
+       
+        if(sdao.isUsernameExists(accountDTO.getUserID())){
+             request.setAttribute("fail", "This account is already in the payroll system.");
+            request.getRequestDispatcher("BeforeAddEmployee.jsp").forward(request, response);
+        }
+        else{
+             response.sendRedirect("add-employee?username=" + username);
         }
     }
 

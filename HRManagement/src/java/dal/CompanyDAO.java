@@ -129,8 +129,8 @@ public class CompanyDAO {
                 String birthDate = rs.getString("birth_date");
                 String hireDate = rs.getString("hire_date");
                 int userId = rs.getInt("user_id");
-
-                employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId);
+                double salary = rs.getDouble(11);
+                employee = new Employee(employeeId, name, phoneNumber, address, email, gender, image, birthDate, hireDate, userId, salary);
             }
         } catch (Exception e) {
             e.printStackTrace();
