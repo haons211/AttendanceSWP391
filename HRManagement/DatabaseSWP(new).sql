@@ -29,7 +29,7 @@ CREATE TABLE `application` (
   `sender_id` int NOT NULL,
   `type_id` int NOT NULL,
   `receiver_id` int NOT NULL,
-  `file` varchar(255) NOT NULL,
+  `file` varchar(255) NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `status` varchar(50) NOT NULL,
