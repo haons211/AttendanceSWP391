@@ -46,6 +46,24 @@ public class EmployeeSalary {
       
     }
 
+    public EmployeeSalary(int salaryId, int employeeId, int departmentId, int attendanceId, double basicSalary, double allowance, double tax, double bonus, String receivedDate, String ename, String email, String image, String hireDate, String dname) {
+        this.salaryId = salaryId;
+        this.employeeId = employeeId;
+        this.departmentId = departmentId;
+        this.attendanceId = attendanceId;
+        this.basicSalary = basicSalary;
+        this.allowance = allowance;
+        this.tax = tax;
+        this.bonus = bonus;
+        this.receivedDate = receivedDate;
+        this.ename = ename;
+        this.email = email;
+        this.image = image;
+        this.hireDate = hireDate;
+        this.dname = dname;
+    }
+    
+
     public EmployeeSalary(int salaryId, int employeeId, int departmentId, int attendanceId, double basicSalary, double allowance, double tax, double bonus, String receivedDate, String ename, String email, String image, String hireDate, String dname, double totalSalary, int userId) {
         this.salaryId = salaryId;
         this.employeeId = employeeId;

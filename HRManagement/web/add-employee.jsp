@@ -44,6 +44,7 @@
                             </a>
 
                             <form action="add-employee" method="post">
+                                <input type="hidden" name="username" value="${username}"/>
                                 <div class="main-text-table">
                                     <table>
 
@@ -67,17 +68,23 @@
                                             </td>
                                             <td>
                                                 <div  class = "right-text-table" >
-                                                    Employee Image
+                                                    Employee Salary
                                                 </div>
 
                                             </td>
                                             <td>
-                                                <div class ="right-input-table" style= "width: 250px" >
-                                                    <input type="file" id="fileInput"   
-                                                           accept="image/*" class="btn btn-outline-secondary"
-                                                           style="margin:  0 30px; "  name="image" placeholder="Employee Image" >
+                                                <div class ="right-input-table" style="margin-left: 40px">
 
-                                                </div>
+
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <input type="number" class="form-control" aria-label="Small" value="${salary}"
+                                                               aria-describedby="inputGroup-sizing-sm" name="salary" id="salaryInput" placeholder="Employee Salary" style="width: 312px;">
+                                                    </div>
+                                                    <div style="color: red" id="salaryValidationMessage"></div>
+
                                             </td>
                                         </tr>
 
@@ -244,7 +251,56 @@
                                                     </div>
                                                 </div>
                                             </td>
+
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <div  class = "left-text-table" >
+                                                    Employee Image
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class ="left-input-table" style= "width: 200px" >
+                                                    <input type="file" id="fileInput"   
+                                                           accept="image/*" class="btn btn-outline-secondary"
+                                                           name="image" placeholder="Employee Image" >
+
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div  class = "right-text-table" >
+                                                    Employee Image
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class = "right-input-table" style="margin-left: 40px" >
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <select name="department" class="form-control">
+                                                            <c:forEach items="${department}" var="d">
+                                                                <option value="${d.name}">${d.name}</option>
+                                                            </c:forEach>
+                                                        </select>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+                                            </td>
+
+                                        </tr>
+
+
+
                                     </table>
                                     <div class="add-to-system">
                                         <button type="submit" class="btn btn-success" style="margin-top: 30px" >Add to
@@ -268,6 +324,17 @@
         <script src="assets/js/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
+        <script >
+            document.getElementById('salaryInput').addEventListener('input', function () {
+                var salary = parseFloat(this.value);
+                var validationMessage = document.getElementById('salaryValidationMessage');
+                if (salary < 0) {
+                    validationMessage.textContent = "Salary cannot be negative.";
+                } else {
+                    validationMessage.textContent = ""; // Clear the message
+                }
+            });
+        </script>
     </body>
 
 </html>

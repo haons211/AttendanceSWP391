@@ -1,8 +1,10 @@
+
 CREATE DATABASE  IF NOT EXISTS `swp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `swp`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: swp30
+
 -- ------------------------------------------------------
 -- Server version	8.0.35
 
@@ -29,6 +31,7 @@ CREATE TABLE `application` (
   `sender_id` int NOT NULL,
   `type_id` int NOT NULL,
   `receiver_id` int NOT NULL,
+
   `file` varchar(255) NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
@@ -350,6 +353,7 @@ CREATE TABLE `employee` (
   `birth_date` date NOT NULL,
   `hire_date` date NOT NULL,
   `user_id` int DEFAULT NULL,
+  `basic_salary` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`employee_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
@@ -362,7 +366,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Nguyễn Văn A','0987654321','Số 10, Đường Nguyễn Chí Thanh, Hà Nội','van.a@example.com',_binary '','van_a.jpg','1990-05-15','2022-01-01',1),(2,'Trần Thị B','0912345678','Số 20, Đường Lê Lợi, Hồ Chí Minh','thi.b@example.com',_binary '\0','thi_b.jpg','1993-08-25','2022-01-02',2),(3,'Lê Văn C','0905123456','Số 30, Đường Trần Hưng Đạo, Đà Nẵng','van.c@example.com',_binary '','van_c.jpg','1988-02-10','2022-01-03',3),(4,'Hoàng Thị D','0978123456','Số 40, Đường Nguyễn Huệ, Cần Thơ','thi.d@example.com',_binary '\0','thi_d.jpg','1997-11-30','2022-01-04',4),(5,'Phạm Văn E','0987123456','Số 50, Đường Trần Phú, Hải Phòng','van.e@example.com',_binary '','van_e.jpg','1991-04-20','2022-01-05',5);
+INSERT INTO `employee` VALUES (1,'Nguyễn Văn A','0987654321','Số 10, Đường Nguyễn Chí Thanh, Hà Nội','van.a@example.com',_binary '','van_a.jpg','1990-05-15','2022-01-01',1,9999.00),(2,'Trần Thị B','0912345678','Số 20, Đường Lê Lợi, Hồ Chí Minh','thi.b@example.com',_binary '\0','thi_b.jpg','1993-08-25','2022-01-02',2,9898.00),(3,'Lê Văn C','0905123456','Số 30, Đường Trần Hưng Đạo, Đà Nẵng','van.c@example.com',_binary '','van_c.jpg','1988-02-10','2022-01-03',3,89898.00),(4,'Hoàng Thị D','0978123456','Số 40, Đường Nguyễn Huệ, Cần Thơ','thi.d@example.com',_binary '\0','thi_d.jpg','1997-11-30','2022-01-04',4,98989.00),(5,'Phạm Văn E','0987123456','Số 50, Đường Trần Phú, Hải Phòng','van.e@example.com',_binary '','van_e.jpg','1991-04-20','2022-01-05',5,99998.00);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -696,7 +700,10 @@ CREATE TABLE `remainday` (
 
 LOCK TABLES `remainday` WRITE;
 /*!40000 ALTER TABLE `remainday` DISABLE KEYS */;
+
+
 INSERT INTO `remainday` VALUES (1,1,2,5,3,2,1),(2,2,1,2,1,1,1),(3,3,3,8,4,4,1),(4,4,3,8,2,6,1),(5,5,3,8,3,5,1);
+
 /*!40000 ALTER TABLE `remainday` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -733,13 +740,12 @@ CREATE TABLE `salary` (
   `employee_id` int DEFAULT NULL,
   `department_id` int DEFAULT NULL,
   `attendance_id` int DEFAULT NULL,
-  `basic_salary` decimal(10,2) DEFAULT NULL,
+
   `allowance` decimal(10,2) DEFAULT NULL,
   `tax` decimal(10,2) DEFAULT NULL,
   `bonus` decimal(10,2) DEFAULT NULL,
   `received_date` date DEFAULT NULL,
   `user_id` int DEFAULT NULL,
-  `total_salary` decimal(10,2) GENERATED ALWAYS AS ((((`basic_salary` + `allowance`) - `tax`) + `bonus`)) STORED,
   PRIMARY KEY (`salary_id`),
   KEY `employee_id` (`employee_id`),
   KEY `department_id` (`department_id`),
@@ -758,7 +764,9 @@ CREATE TABLE `salary` (
 
 LOCK TABLES `salary` WRITE;
 /*!40000 ALTER TABLE `salary` DISABLE KEYS */;
-INSERT INTO `salary` (`salary_id`, `employee_id`, `department_id`, `attendance_id`, `basic_salary`, `allowance`, `tax`, `bonus`, `received_date`, `user_id`) VALUES (1,2,3,2,1005353.00,1000.00,1000.00,5000.00,'2024-03-01',2),(8,3,2,3,9999.00,999.00,999.90,999.00,'2022-01-03',3),(9,1,1,1,9999.00,99999.00,999.90,999999.00,'2022-01-01',1),(10,4,3,4,9999.00,999.00,999.90,99999.00,'2022-01-04',4),(11,5,1,5,8888.00,8888.00,888.80,8888.00,'2022-01-05',5);
+
+INSERT INTO `salary` VALUES (1,2,3,2,1000.00,1000.00,5000.00,'2024-03-01',2),(8,3,2,3,999.00,999.90,999.00,'2022-01-03',3),(9,1,1,1,99999.00,999.90,999999.00,'2022-01-01',1),(10,4,3,4,999.00,999.90,99999.00,'2022-01-04',4),(11,5,1,5,8888.00,888.80,8888.00,'2022-01-05',5);
+
 /*!40000 ALTER TABLE `salary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -848,6 +856,97 @@ CREATE TABLE `type_application` (
   PRIMARY KEY (`type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Dumping data for table `type_application`
+--
+
+LOCK TABLES `type_application` WRITE;
+/*!40000 ALTER TABLE `type_application` DISABLE KEYS */;
+INSERT INTO `type_application` VALUES (1,'Nghỉ phép'),(2,'Đi muộn'),(3,'Về sớm'),(4,'Công tác'),(5,'Nghỉ bệnh'),(6,'Nghỉ phục vụ dân sự');
+/*!40000 ALTER TABLE `type_application` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_role`
+--
+
+DROP TABLE IF EXISTS `user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_role` (
+  `role_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_role`
+--
+
+LOCK TABLES `user_role` WRITE;
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+INSERT INTO `user_role` VALUES (1,'admin'),(2,'user'),(3,'manager');
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usercheckstatus`
+--
+
+DROP TABLE IF EXISTS `usercheckstatus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usercheckstatus` (
+  `check_id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int DEFAULT NULL,
+  `CheckedIn` tinyint(1) DEFAULT NULL,
+  `CheckedOut` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`check_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `usercheckstatus_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usercheckstatus`
+--
+
+LOCK TABLES `usercheckstatus` WRITE;
+/*!40000 ALTER TABLE `usercheckstatus` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usercheckstatus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `role_id` int DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'adminuser','5291a0858dfafff116e37dea26d5bfaf',1),(2,'normaluser','5291a0858dfafff116e37dea26d5bfaf',2),(3,'manageruser','5291a0858dfafff116e37dea26d5bfaf',3),(4,'hoangd','5291a0858dfafff116e37dea26d5bfaf',2),(5,'phame','5291a0858dfafff116e37dea26d5bfaf',2);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 --
 -- Dumping data for table `type_application`
@@ -1059,4 +1158,8 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-18  8:19:17
+
+-- Dump completed on 2024-03-19 22:08:15
+
+
+

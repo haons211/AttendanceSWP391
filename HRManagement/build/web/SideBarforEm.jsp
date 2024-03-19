@@ -121,6 +121,9 @@
                         <li>
                             <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
                         </li>
+                        <li>
+                            <a href="ChatSystemEm"><i class="fa fa-bell"></i> <span>Chat</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

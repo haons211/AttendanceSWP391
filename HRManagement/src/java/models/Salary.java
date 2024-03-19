@@ -9,37 +9,19 @@ package models;
  * @author Dan
  */
 public class Salary {
-     private int salaryId;
+
+    private int salaryId;
     private int employeeId;
     private int departmentId;
     private int attendanceId;
-    private double basicSalary;
     private double allowance;
     private double tax;
     private double bonus;
     private String receivedDate;
     private int userId;
-    private double totalSalary;
-    
+
     public Salary() {
     }
-
-    public Salary(int salaryId, int employeeId, int departmentId, int attendanceId, double basicSalary, double allowance, double tax, double bonus, String receivedDate, int userId, double totalSalary) {
-        this.salaryId = salaryId;
-        this.employeeId = employeeId;
-        this.departmentId = departmentId;
-        this.attendanceId = attendanceId;
-        this.basicSalary = basicSalary;
-        this.allowance = allowance;
-        this.tax = tax;
-        this.bonus = bonus;
-        this.receivedDate = receivedDate;
-        this.userId = userId;
-        this.totalSalary = totalSalary;
-    }
-
-    
-    
 
     public int getUserId() {
         return userId;
@@ -49,28 +31,41 @@ public class Salary {
         this.userId = userId;
     }
 
-    public Salary(int employeeId, int departmentId, int attendanceId, double basicSalary, double allowance, double tax, double bonus, String receivedDate,  int userId) {
+    public Salary(double allowance, double tax, double bonus) {
+        this.allowance = allowance;
+        this.tax = tax;
+        this.bonus = bonus;
+    }
+
+    public Salary(int salaryId, int employeeId, int departmentId, int attendanceId, double allowance, double tax, double bonus, String receivedDate, int userId) {
+        this.salaryId = salaryId;
         this.employeeId = employeeId;
         this.departmentId = departmentId;
         this.attendanceId = attendanceId;
-        this.basicSalary = basicSalary;
         this.allowance = allowance;
         this.tax = tax;
         this.bonus = bonus;
         this.receivedDate = receivedDate;
-    this.userId = userId;
-            
+        this.userId = userId;
     }
 
-    public Salary(double basicSalary, double allowance, double tax, double bonus) {
-        this.basicSalary = basicSalary;
+    public Salary(double allowance, double tax, double bonus, String receivedDate) {
         this.allowance = allowance;
         this.tax = tax;
         this.bonus = bonus;
-       
+        this.receivedDate = receivedDate;
     }
 
-    
+    public Salary(int employeeId, int departmentId, int attendanceId, double allowance, double tax, double bonus, String receivedDate, int userId) {
+        this.employeeId = employeeId;
+        this.departmentId = departmentId;
+        this.attendanceId = attendanceId;
+        this.allowance = allowance;
+        this.tax = tax;
+        this.bonus = bonus;
+        this.receivedDate = receivedDate;
+        this.userId = userId;
+    }
 
     public int getSalaryId() {
         return salaryId;
@@ -104,14 +99,6 @@ public class Salary {
         this.attendanceId = attendanceId;
     }
 
-    public double getBasicSalary() {
-        return basicSalary;
-    }
-
-    public void setBasicSalary(double basicSalary) {
-        this.basicSalary = basicSalary;
-    }
-
     public double getAllowance() {
         return allowance;
     }
@@ -143,6 +130,5 @@ public class Salary {
     public void setReceivedDate(String receivedDate) {
         this.receivedDate = receivedDate;
     }
-    
-    
+
 }

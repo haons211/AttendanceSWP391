@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,12 +74,14 @@ public class UpdateSalary extends HttpServlet {
         EmployeeDAO edao = new EmployeeDAO();
         DepartmentDAO ddao = new DepartmentDAO();
         AccountDAO adao = new AccountDAO();
-        LocalDate currentDate = LocalDate.now();
+      
         try {
             Salary salary = dao.getSalaryById(id);
             Employee employee = edao.getEmployeeById(salary.getEmployeeId());
             Department department = ddao.getDepartmentById(salary.getDepartmentId());
             AccountDTO account = adao.getUserById(salary.getUserId());
+            String username = account.getUserName();
+            request.setAttribute("leaveDay",dao.getLeaveDayById(adao.getIdByUsername(username).getUserID()) );
             request.setAttribute("id", id);
             request.setAttribute("account", account);
             request.setAttribute("salary", salary);
@@ -86,6 +89,8 @@ public class UpdateSalary extends HttpServlet {
             request.setAttribute("department", department);
 
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateSalary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(UpdateSalary.class.getName()).log(Level.SEVERE, null, ex);
         }
         request.getRequestDispatcher("UpdateSalary.jsp").forward(request, response);
@@ -104,13 +109,13 @@ public class UpdateSalary extends HttpServlet {
             throws ServletException, IOException {
        
         int id = Integer.parseInt(request.getParameter("id"));
-        double basicSalary = Double.parseDouble(request.getParameter("basicSalary"));
+       
         double allowance = Double.parseDouble(request.getParameter("allowance"));
         double tax = Double.parseDouble(request.getParameter("tax"));
         double bonus = Double.parseDouble(request.getParameter("bonus"));
         SalaryDAO dao = new SalaryDAO();
         try {
-            dao.updateSalary(new Salary(basicSalary, allowance, tax, bonus) ,id);
+            dao.updateSalary(new Salary( allowance, tax, bonus) ,id);
             response.sendRedirect("ListSalary");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateSalary.class.getName()).log(Level.SEVERE, null, ex);
