@@ -23,7 +23,7 @@ CREATE TABLE `application` (
   sender_id INT NOT NULL,
   type_id INT NOT NULL,
   receiver_id INT NOT NULL,
-  file VARCHAR(255) NOT NULL,
+  file VARCHAR(255) DEFAULT NULL,
   title varchar(255) NOT NULL,
   content TEXT NOT NULL,
   status VARCHAR(50) NOT NULL,
