@@ -215,22 +215,29 @@
         <script src="assets/js/chart.js"></script>
         <script src="assets/js/app.js"></script>
         <script>
-            // Lấy thời gian check-in từ session hoặc một nguồn khác
-            var checkInTime = new Date("<%= session.getAttribute("checkInTime") %>");
+    // Lấy thời gian check-in từ session hoặc một nguồn khác
+    var checkInTimeString = "<%= session.getAttribute("checkInTime") %>";
 
-            // Hàm cập nhật thời gian hiển thị
-            function updateTotalTime() {
-                var now = new Date();
-                var elapsedTime = now - checkInTime;
-                var hours = Math.floor(elapsedTime / 3600000);
-                var minutes = Math.floor((elapsedTime % 3600000) / 60000);
-                var seconds = Math.floor((elapsedTime % 60000) / 1000);
-                document.getElementById("totalTime").innerHTML = "Total time<br>" + hours + " hours <br>" + minutes + " minutes<br> " + seconds + " seconds";
-            }
+    // Chuyển đổi chuỗi thời gian thành đối tượng Date
+    var checkInTimeParts = checkInTimeString.split(":");
+    var checkInTime = new Date();
+    checkInTime.setHours(checkInTimeParts[0]);
+    checkInTime.setMinutes(checkInTimeParts[1]);
+    checkInTime.setSeconds(checkInTimeParts[2]);
 
-            // Gọi hàm cập nhật thời gian mỗi giây
-            setInterval(updateTotalTime, 1000);
-        </script>
+    // Hàm cập nhật thời gian hiển thị
+    function updateTotalTime() {
+        var now = new Date();
+        var elapsedTime = now.getTime() - checkInTime.getTime();
+        var hours = Math.floor(elapsedTime / 3600000);
+        var minutes = Math.floor((elapsedTime % 3600000) / 60000);
+        var seconds = Math.floor((elapsedTime % 60000) / 1000);
+        document.getElementById("totalTime").innerHTML = "Total time<br>" + hours + " hours <br>" + minutes + " minutes<br> " + seconds + " seconds";
+    }
+
+    // Gọi hàm cập nhật thời gian mỗi giây
+    setInterval(updateTotalTime, 1000);
+</script>
         <script>
             var currentDate = new Date();
             var options = {
@@ -280,3 +287,5 @@
         </script>
 
 </html>
+
+

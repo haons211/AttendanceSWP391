@@ -112,11 +112,7 @@
                                                                                             href="UpdateSalary?id=${lists.salaryId}"><i
                                                                                                 class="fa fa-pencil m-r-5"></i>
                                                                                             Edit</a>
-                                                                                        <a class="dropdown-item"
-                                                                                            href="#" data-toggle="modal"
-                                                                                            onclick="doDelete('${lists.salaryId}')"><i
-                                                                                                class="fa fa-trash-o m-r-5"></i>
-                                                                                            Delete</a>
+                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </td>

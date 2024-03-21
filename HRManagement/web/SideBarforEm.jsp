@@ -99,9 +99,6 @@
                         <li> 
                             <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
-                        <li> 
-                            <a href="#"><i class="fa fa-shield"></i> <span>Insurance</span> </a>
-                        </li>
                         <li class="submenu">
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">

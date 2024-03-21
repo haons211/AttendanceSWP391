@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import models.AccountDTO;
 import models.Attendance;
 import models.Employee;
@@ -37,25 +39,25 @@ public class EmployeesController extends HttpServlet {
             Employee em = dao.getin4(acc.getUserID());
             AttendanceDAO atDao = new AttendanceDAO();
             atDao.CallAttendanceByDay();
-
-//            if (session.getAttribute("checkedOut") != null && (boolean) session.getAttribute("checkedOut")) {
-            if (session.getAttribute("checkedOut") != null && (boolean) session.getAttribute("checkedOut")) {
-                int attendanceId = (int) session.getAttribute("attendanceId");
-                AttendanceDAO attendanceDAO = new AttendanceDAO();
-                Attendance attendance = attendanceDAO.getAttendanceById(attendanceId);
-                request.setAttribute("attendance", attendance);
-                request.getRequestDispatcher("Success.jsp").forward(request, response);
-
-//            } else if (session.getAttribute("checkedIn") != null && (boolean) session.getAttribute("checkedIn")) {
-            } else if (session.getAttribute("checkedIn") != null && (boolean) session.getAttribute("checkedIn")) {
-                Timestamp timeIn = (Timestamp) session.getAttribute("checkInTime");
+            Attendance attendanceCheck = atDao.getAttendanceByEmployeeId(em.getEmployeeId());
+            if(attendanceCheck.getOut_time()!=null){
+                
+                session.setAttribute("checkInTime", attendanceCheck.getIn_time());
+                
+                    session.setAttribute("checkOutTime", attendanceCheck.getOut_time());
                 int remainDay = DAO.getRemainDayById(em.getEmployeeId());
-                session.setAttribute("checkInTime", timeIn);
-                int id = (int) session.getAttribute("attendanceId");
+                    session.setAttribute("re", remainDay);
+                request.setAttribute("attendance", attendanceCheck);
+                request.getRequestDispatcher("Success.jsp").forward(request, response);
+            }else if(attendanceCheck.getIn_time()!=null && attendanceCheck.getOut_time()==null){
+                int remainDay = DAO.getRemainDayById(em.getEmployeeId());
+                session.setAttribute("re", remainDay);
+                session.setAttribute("checkInTime", attendanceCheck.getIn_time());
+                int id = attendanceCheck.getAttendance_id();
                 session.setAttribute("attendanceId", id);
                 request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
-
-            } else {
+            }
+             else {
                 try {
                     int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                     session.setAttribute("re", remainDay);
@@ -92,12 +94,11 @@ public class EmployeesController extends HttpServlet {
                         AttendanceDAO attendanceDAO = new AttendanceDAO();
                         int attendanceId = attendanceDAO.CheckIn(em_id, notes, remain_id);
                         if (attendanceId != -1) {
-                            attendanceDAO.insertCheckStatus(em_id, true, false);
-                            Timestamp checkInTime = new Timestamp(System.currentTimeMillis());
-                            session.setAttribute("checkInTime", checkInTime);
+                            AttendanceDAO atDao = new AttendanceDAO();
+                            Attendance attendanceCheck = atDao.getAttendanceByEmployeeId(em.getEmployeeId());
+                            session.setAttribute("checkInTime", attendanceCheck.getIn_time());                            
                             session.setAttribute("attendanceId", attendanceId);
                             session.setAttribute("checkedIn", true);
-//                            session.setAttribute("checkedIn", attendanceDAO.getCheckedInStatus(em_id));
                             request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
                             return;
                         }
@@ -108,6 +109,9 @@ public class EmployeesController extends HttpServlet {
             }
         }
     }
+    
+    
+
         @Override
         public String getServletInfo
         
@@ -115,3 +119,4 @@ public class EmployeesController extends HttpServlet {
         return "Short description";
         }
     }
+

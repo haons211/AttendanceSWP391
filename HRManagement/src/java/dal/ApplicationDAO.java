@@ -8,6 +8,7 @@ import models.*;
 import context.DBContext;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -539,6 +540,24 @@ public class ApplicationDAO extends DBContext {
             }
         }
         return name;
+    }
+
+    public void UpdateApplication(int application_id, String newTitle, String newContent) {
+       String sql = "update application set title = ?, content = ?, create_date = ? "
+                + "where application_id = ?";
+        try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setString(1, newTitle);
+            st.setString(2, newContent);
+            LocalDateTime currentTime = LocalDateTime.now();
+            Timestamp timestamp = Timestamp.valueOf(currentTime);
+            st.setTimestamp(3, timestamp);
+            st.setInt(4, application_id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
