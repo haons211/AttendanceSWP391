@@ -18,10 +18,10 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
     <body>
-        
-           <%
-                     AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                     int role=     acc.getRole();
+
+        <%
+                  AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                  int role=     acc.getRole();
         %>
 
         <c:set var="em" value="${requestScope.emp}" />
@@ -111,15 +111,16 @@
                                     <div class="form-group form-focus">
                                         <label class="focus-label">Phone Number</label>
                                         <input type="text" id="empNumber" name="empNumber" class="form-control floating"required>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <
-
                         <input type="submit" value="Update" name="btAction">
                     </form>
+                    <c:if test="${not empty ms}">
+                        <p class="alert alert-danger alert-dismissible fade show" role="alert"><c:out value="${ms}" /></p>
+                    </c:if>
                 </div>
 
             </div>

@@ -90,12 +90,20 @@
                         <li>
                             <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-                        <li>
-                            <a href="HomeEmployees"><i class="fa fa-check-square-o"></i> <span>Take Attendance</span></a>
-                        </li>
-                        <li>
-                            <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
-                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-id-card"></i> <span>Attendance</span> <span class="menu-arrow"></a>
+                            <ul style="display: none;">
+                                <li>
+                                    <a href="HomeEmployees"><i class="fa fa-check-square-o"></i> <span>Take Attendance</span></a>
+                                </li>
+                                <li>
+                                    <a href="AttendanceReport"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
+                                </li>
+                                <li>
+                                    <a href="AttendanceSheet"><i class="fa fa-calendar"></i> <span>Attendance Sheet</span></a>
+                                </li>
+                            </ul>
+                        </li> 
                         <li class="submenu">
                             <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
@@ -105,16 +113,15 @@
                                     <a href="ListSalary"><i class="fa fa-money"></i> <span>Employee Salary</span> </a>
                                 </li>
                             </ul>
-                        </li>        
+                        </li>   
+                        <li>
+                            <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
+                        </li>
+                             
                         <li> 
                             <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                         </li>    
-                        <li>
-                            <a href="AttendanceReport"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
-                        </li>
-                        <li>
-                            <a href="AttendanceSheet"><i class="fa fa-calendar"></i> <span>Attendance Sheet</span></a>
-                        </li>
+
                         <li> 
                             <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
@@ -142,11 +149,11 @@
                                 <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
                                 <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
                                 <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
-                                  <c:if test="${account.getUserName() eq 'manageruser'}">
-                    <li>
-                        <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
-                    </li>
-                </c:if>
+                                    <c:if test="${account.getUserName() eq 'manageruser'}">
+                                    <li>
+                                        <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
+                                    </li>
+                                </c:if>
                             </ul>
                         </li>     
                     </ul>

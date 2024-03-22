@@ -262,7 +262,8 @@ public class EmployeeDAO {
     }
 
     public void deleteEmployee(int id) throws ClassNotFoundException {
-        String query = "  DELETE FROM employee WHERE employee_id =?";
+
+        String query = " delete from attendance where employee_id=? DELETE FROM employee WHERE employee_id =?";
         try {
 
             con = new DBContext().getConnection();
@@ -276,6 +277,45 @@ public class EmployeeDAO {
             // Close resources in a finally block
             closeResources();
         }
+    }
+
+    public void deleteEmployee1(int id) throws ClassNotFoundException {
+
+        String query = " DELETE FROM employee WHERE employee_id =?";
+        try {
+
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+    }
+
+    public boolean isEmpExists(int id) {
+        String query = "SELECT COUNT(DISTINCT e.employee_id) AS so_luong_nguoi_diem_danh\n"
+                + "FROM employee e\n"
+                + "JOIN attendance a ON e.employee_id = a.employee_id\n"
+                + "where e.employee_id = ?";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+           rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        }
+        return false;
     }
 
     public List<Employee> getAllEmployees(String search) throws ClassNotFoundException {
@@ -392,7 +432,6 @@ public class EmployeeDAO {
         try {
             con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
-          
 
             ResultSet rs = ps.executeQuery();
 
@@ -468,4 +507,8 @@ public class EmployeeDAO {
         }
     }
 
+    public static void main(String[] args) throws ClassNotFoundException {
+        EmployeeDAO dAO = new EmployeeDAO();
+        dAO.deleteEmployee(8);
+    }
 }

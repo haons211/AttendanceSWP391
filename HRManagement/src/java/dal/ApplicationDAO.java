@@ -541,8 +541,9 @@ public class ApplicationDAO extends DBContext {
         }
         return name;
     }
+
     public void UpdateApplication(int application_id, String newTitle, String newContent) {
-        String sql = "update application set title = ?, content = ?, create_date = ? "
+       String sql = "update application set title = ?, content = ?, create_date = ? "
                 + "where application_id = ?";
         try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
             st.setString(1, newTitle);

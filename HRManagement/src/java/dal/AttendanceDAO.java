@@ -120,6 +120,39 @@ public class AttendanceDAO {
         return attendance;
     }
 
+    public Attendance getAttendanceByEmployeeId(int emId) {
+        Attendance attendance = null;
+        String query = "SELECT * FROM attendance WHERE date=CURRENT_DATE() and employee_id=?;";
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, emId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int attendanceId =rs.getInt("attendance_id");
+                int employee_id = rs.getInt("employee_id");
+                String in_time = rs.getString("in_time");
+                String out_time = rs.getString("out_time");
+                String notes = rs.getString("notes");
+                String image = rs.getString("image");
+                String status = rs.getString("status");
+                String in_status = rs.getString("in_status");
+                String out_status = rs.getString("out_status");
+                int remainDay_id = rs.getInt("remainDay_id");
+                int department_id = rs.getInt("department_id");
+                Date date = rs.getDate("date");
+                // Tạo đối tượng Attendance từ thông tin lấy được
+                attendance = new Attendance(attendanceId, employee_id, in_time, out_time, notes, image, status, in_status, out_status, remainDay_id, department_id, date);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return attendance;
+    }
+
+
     public ArrayList<AttendanceDepartmentDTO> getAllAttendance(String search, String dep_name, Date fromDate, Date toDate) {
         ArrayList<AttendanceDepartmentDTO> list = new ArrayList<>();
         String query = "SELECT a.attendance_id,e.name,d.name as dep_name,a.date,a.status, a.in_time, a.notes, a.in_status, a.out_time, a.out_status, r.remainDay "

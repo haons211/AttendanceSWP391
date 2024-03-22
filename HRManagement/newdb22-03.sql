@@ -29,7 +29,11 @@ CREATE TABLE `application` (
   `sender_id` int NOT NULL,
   `type_id` int NOT NULL,
   `receiver_id` int NOT NULL,
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+  `file` varchar(255) NOT NULL,
+========
   `file` varchar(255) NULL,
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `status` varchar(50) NOT NULL,
@@ -43,7 +47,7 @@ CREATE TABLE `application` (
   CONSTRAINT `application_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `type_application` (`type_id`),
   CONSTRAINT `application_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `employee` (`employee_id`),
   CONSTRAINT `application_ibfk_3` FOREIGN KEY (`receiver_id`) REFERENCES `employee` (`employee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,6 +56,7 @@ CREATE TABLE `application` (
 
 LOCK TABLES `application` WRITE;
 /*!40000 ALTER TABLE `application` DISABLE KEYS */;
+INSERT INTO `application` VALUES (1,2,1,3,'','da','da','complete','2024-03-20 13:10:27','2024-03-20 13:19:53','ad'),(2,2,1,3,'','toi da update','toi da update','Pending','2024-03-20 13:22:32',NULL,NULL);
 /*!40000 ALTER TABLE `application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +87,11 @@ CREATE TABLE `attendance` (
   CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
   CONSTRAINT `attendance_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`),
   CONSTRAINT `attendance_ibfk_3` FOREIGN KEY (`remainDay_id`) REFERENCES `remainday` (`remainDay_id`)
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+========
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +100,11 @@ CREATE TABLE `attendance` (
 
 LOCK TABLES `attendance` WRITE;
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+INSERT INTO `attendance` VALUES (1,1,'van_a.jpg',1,1,'2024-03-01','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(2,2,'thi_b.jpg',2,3,'2024-03-01','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(3,3,'van_c.jpg',3,2,'2024-03-01','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(4,4,'thi_d.jpg',4,3,'2024-03-01','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(5,5,'van_e.jpg',5,1,'2024-03-01','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(6,1,'van_a.jpg',1,1,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(7,2,'thi_b.jpg',2,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(8,3,'van_c.jpg',3,2,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(9,4,'thi_d.jpg',4,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(10,5,'van_e.jpg',5,1,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(11,1,'van_a.jpg',1,1,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(12,2,'thi_b.jpg',2,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(13,3,'van_c.jpg',3,2,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(14,4,'thi_d.jpg',4,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(15,5,'van_e.jpg',5,1,'2024-03-03','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(16,1,'van_a.jpg',1,1,'2024-03-04','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(17,2,'thi_b.jpg',2,3,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(18,3,'van_c.jpg',3,2,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(19,4,'thi_d.jpg',4,3,'2024-03-04','07:50:00','16:00:00','','Checked In','Early','Present'),(20,5,'van_e.jpg',5,1,'2024-03-04','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(21,1,'van_a.jpg',1,1,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(22,2,'thi_b.jpg',2,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(23,3,'van_c.jpg',3,2,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(24,4,'thi_d.jpg',4,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(25,5,'van_e.jpg',5,1,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(26,1,'van_a.jpg',1,1,'2024-03-06','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(27,2,'thi_b.jpg',2,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(28,3,'van_c.jpg',3,2,'2024-03-06','07:50:00','09:00:00','hehe','Checked In','Early','Absent'),(29,4,'thi_d.jpg',4,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(30,5,'van_e.jpg',5,1,'2024-03-06','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(31,1,'van_a.jpg',1,1,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(32,2,'thi_b.jpg',2,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(33,3,'van_c.jpg',3,2,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(34,4,'thi_d.jpg',4,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(35,5,'van_e.jpg',5,1,'2024-03-07','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(36,1,'van_a.jpg',1,1,'2024-03-08','07:50:00','09:00:00','','Checked In','Early','Absent'),(37,2,'thi_b.jpg',2,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(38,3,'van_c.jpg',3,2,'2024-03-08','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(39,4,'thi_d.jpg',4,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(40,5,'van_e.jpg',5,1,'2024-03-08','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(41,1,'van_a.jpg',1,1,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(42,2,'thi_b.jpg',2,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(43,3,'van_c.jpg',3,2,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(44,4,'thi_d.jpg',4,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(45,5,'van_e.jpg',5,1,'2024-03-09','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(46,1,'van_a.jpg',1,1,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(47,2,'thi_b.jpg',2,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(48,3,'van_c.jpg',3,2,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(49,4,'thi_d.jpg',4,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(50,5,'van_e.jpg',5,1,'2024-03-10','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(51,1,'van_a.jpg',1,1,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(52,2,'thi_b.jpg',2,3,'2024-03-11','07:50:00','12:00:00','','Checked In','Early','Absent'),(53,3,'van_c.jpg',3,2,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(54,4,'thi_d.jpg',4,3,'2024-03-11','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(55,5,'van_e.jpg',5,1,'2024-03-11','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(56,1,'van_a.jpg',1,1,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(57,2,'thi_b.jpg',2,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(58,3,'van_c.jpg',3,2,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(59,4,'thi_d.jpg',4,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(60,5,'van_e.jpg',5,1,'2024-03-12','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(61,1,'van_a.jpg',1,1,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(62,2,'thi_b.jpg',2,3,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(63,3,'van_c.jpg',3,2,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(64,4,'thi_d.jpg',4,3,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(65,5,'van_e.jpg',5,1,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(66,1,'van_a.jpg',1,1,'2024-03-20','12:54:33','12:54:36','','Late','Early','Absent'),(67,2,'thi_b.jpg',2,3,'2024-03-20','13:16:18','13:16:38','f','Late','Early','Absent'),(68,3,'van_c.jpg',3,2,'2024-03-20',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(69,4,'thi_d.jpg',4,3,'2024-03-20',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(70,5,'van_e.jpg',5,1,'2024-03-20',NULL,NULL,NULL,'Not yet','Not yet','Absent');
+========
 INSERT INTO `attendance` VALUES (1,1,'van_a.jpg',1,1,'2024-03-01','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(2,2,'thi_b.jpg',2,3,'2024-03-01','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(3,3,'van_c.jpg',3,2,'2024-03-01','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(4,4,'thi_d.jpg',4,3,'2024-03-01','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(5,5,'van_e.jpg',5,1,'2024-03-01','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(6,1,'van_a.jpg',1,1,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(7,2,'thi_b.jpg',2,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(8,3,'van_c.jpg',3,2,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(9,4,'thi_d.jpg',4,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(10,5,'van_e.jpg',5,1,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(11,1,'van_a.jpg',1,1,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(12,2,'thi_b.jpg',2,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(13,3,'van_c.jpg',3,2,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(14,4,'thi_d.jpg',4,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(15,5,'van_e.jpg',5,1,'2024-03-03','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(16,1,'van_a.jpg',1,1,'2024-03-04','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(17,2,'thi_b.jpg',2,3,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(18,3,'van_c.jpg',3,2,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(19,4,'thi_d.jpg',4,3,'2024-03-04','07:50:00','16:00:00','','Checked In','Early','Present'),(20,5,'van_e.jpg',5,1,'2024-03-04','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(21,1,'van_a.jpg',1,1,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(22,2,'thi_b.jpg',2,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(23,3,'van_c.jpg',3,2,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(24,4,'thi_d.jpg',4,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(25,5,'van_e.jpg',5,1,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(26,1,'van_a.jpg',1,1,'2024-03-06','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(27,2,'thi_b.jpg',2,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(28,3,'van_c.jpg',3,2,'2024-03-06','07:50:00','09:00:00','hehe','Checked In','Early','Absent'),(29,4,'thi_d.jpg',4,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(30,5,'van_e.jpg',5,1,'2024-03-06','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(31,1,'van_a.jpg',1,1,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(32,2,'thi_b.jpg',2,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(33,3,'van_c.jpg',3,2,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(34,4,'thi_d.jpg',4,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(35,5,'van_e.jpg',5,1,'2024-03-07','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(36,1,'van_a.jpg',1,1,'2024-03-08','07:50:00','09:00:00','','Checked In','Early','Absent'),(37,2,'thi_b.jpg',2,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(38,3,'van_c.jpg',3,2,'2024-03-08','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(39,4,'thi_d.jpg',4,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(40,5,'van_e.jpg',5,1,'2024-03-08','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(41,1,'van_a.jpg',1,1,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(42,2,'thi_b.jpg',2,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(43,3,'van_c.jpg',3,2,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(44,4,'thi_d.jpg',4,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(45,5,'van_e.jpg',5,1,'2024-03-09','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(46,1,'van_a.jpg',1,1,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(47,2,'thi_b.jpg',2,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(48,3,'van_c.jpg',3,2,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(49,4,'thi_d.jpg',4,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(50,5,'van_e.jpg',5,1,'2024-03-10','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(51,1,'van_a.jpg',1,1,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(52,2,'thi_b.jpg',2,3,'2024-03-11','07:50:00','12:00:00','','Checked In','Early','Absent'),(53,3,'van_c.jpg',3,2,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(54,4,'thi_d.jpg',4,3,'2024-03-11','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(55,5,'van_e.jpg',5,1,'2024-03-11','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(56,1,'van_a.jpg',1,1,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(57,2,'thi_b.jpg',2,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(58,3,'van_c.jpg',3,2,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(59,4,'thi_d.jpg',4,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(60,5,'van_e.jpg',5,1,'2024-03-12','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(61,1,'van_a.jpg',1,1,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(62,2,'thi_b.jpg',2,3,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(63,3,'van_c.jpg',3,2,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(64,4,'thi_d.jpg',4,3,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent'),(65,5,'van_e.jpg',5,1,'2024-03-13',NULL,NULL,NULL,'Not yet','Not yet','Absent');
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -129,6 +142,10 @@ ELSEIF NEW.in_time IS NULL AND NEW.out_time IS NULL THEN
 ELSE
     SET NEW.status = 'Present';
 END IF;
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+
+========
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
     
     -- Check if the status is Absent after 17:00 and update remainDay and leaveDays accordingly
     IF TIME(NOW()) > '17:00:00' AND NEW.status = 'Absent' THEN
@@ -168,7 +185,11 @@ DELIMITER ;;
         END IF;
     END IF;
     
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+      IF NEW.in_time IS NOT NULL AND NEW.out_time IS NOT NULL AND TIMEDIFF(NEW.out_time, NEW.in_time) < '07:00:00' THEN
+========
      IF NEW.in_time IS NOT NULL AND NEW.out_time IS NOT NULL AND TIMEDIFF(NEW.out_time, NEW.in_time) < '07:00:00' THEN
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
     SET NEW.status = 'Absent';
 ELSEIF NEW.in_time IS NULL AND NEW.out_time IS NULL THEN
     SET NEW.status = 'Absent';
@@ -177,6 +198,10 @@ ELSEIF NEW.in_time IS NULL AND NEW.out_time IS NULL THEN
 ELSE
     SET NEW.status = 'Present';
 END IF;
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+
+========
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
     
     -- Check if the status is Absent after 17:00 and update remainDay and leaveDays accordingly
     IF TIME(NOW()) > '17:00:00' AND NEW.status = 'Absent' THEN
@@ -319,7 +344,11 @@ CREATE TABLE `dependents` (
   PRIMARY KEY (`dependent_id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `dependents_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+========
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -502,7 +531,11 @@ CREATE TABLE `insurance` (
 
 LOCK TABLES `insurance` WRITE;
 /*!40000 ALTER TABLE `insurance` DISABLE KEYS */;
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+INSERT INTO `insurance` VALUES (1,1,'ABC Insurance','POL001','Health','2024-01-01','2025-01-01',1000.00,100.00,20.00,'Health checkups','Health Insurance','ABC Insurance','No beneficiary',5000.00,'2025-01-01'),(2,2,'XYZ Insurance','POL002','Life','2024-03-15','2034-03-15',500.00,NULL,NULL,'Death Benefit','Life Insurance','XYZ Insurance','Family',100000.00,'2034-03-15'),(3,3,'ABC Insurance','POL003','Accident','2023-06-01','2024-06-01',800.00,50.00,NULL,'Medical Expense','Accident Insurance','ABC Insurance',NULL,2000.00,'2024-06-01');
+========
 INSERT INTO `insurance` VALUES (1,1,'ABC Insurance','POL001','Health','2024-01-01','2025-01-01',1000.00,100.00,20.00,'Health checkups','Health Insurance','ABC Insurance','No beneficiary',5000.00,'2025-01-01'),(2,2,'XYZ Insurance','POL002','Life','2024-03-15','2034-03-15',500.00,NULL,NULL,'Death Benefit','Life Insurance','XYZ Insurance','Family',100000.00,'2034-03-15'),(3,3,'ABC Insurance','POL003','Accident','2023-06-01','2024-06-01',800.00,50.00,NULL,'Medical Expense','Accident Insurance','ABC Insurance',NULL,2000.00,'2024-06-01'),(4,4,'DEF Insurance','POL004','Health','2023-12-01','2024-12-01',1200.00,150.00,30.00,'Hospitalization','Health Insurance','DEF Insurance',NULL,8000.00,'2024-12-01');
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
 /*!40000 ALTER TABLE `insurance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -562,6 +595,37 @@ INSERT INTO `managerproject` VALUES (1,1,1),(19,17,3);
 UNLOCK TABLES;
 
 --
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+-- Table structure for table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `message` (
+  `message_id` int NOT NULL AUTO_INCREMENT,
+  `sender_id` int NOT NULL,
+  `content` text NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `fk_message_sender` (`sender_id`),
+  CONSTRAINT `fk_message_sender` FOREIGN KEY (`sender_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message`
+--
+
+LOCK TABLES `message` WRITE;
+/*!40000 ALTER TABLE `message` DISABLE KEYS */;
+INSERT INTO `message` VALUES (1,3,'hihihi\n','2024-03-20 12:56:10'),(2,3,'hihihi\n','2024-03-20 12:56:11'),(3,3,'hihihi\n','2024-03-20 12:56:11'),(4,3,'he lo c\n','2024-03-20 13:04:06'),(5,2,'oke','2024-03-20 13:04:11'),(6,3,'hi toi la Hao','2024-03-20 13:22:55'),(7,2,'oke','2024-03-20 13:23:11');
+/*!40000 ALTER TABLE `message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+========
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
 -- Table structure for table `notification`
 --
 
@@ -666,6 +730,16 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+
+--
+-- Table structure for table `remainday`
+--
+
+DROP TABLE IF EXISTS `remainday`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+========
 
 --
 -- Table structure for table `remainday`
@@ -695,6 +769,7 @@ CREATE TABLE `project` (
 DROP TABLE IF EXISTS `remainday`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
 CREATE TABLE `remainday` (
   `remainDay_id` int NOT NULL,
   `employee_id` int DEFAULT NULL,
@@ -940,7 +1015,11 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+  `username` varchar(20) NOT NULL,employeesalary
+========
   `username` varchar(20) NOT NULL,
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
   `password` varchar(128) NOT NULL,
   `role_id` int DEFAULT NULL,
   PRIMARY KEY (`user_id`),
@@ -959,6 +1038,12 @@ INSERT INTO `users` VALUES (1,'adminuser','5291a0858dfafff116e37dea26d5bfaf',1),
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+
+ALTER TABLE employee
+ADD basic_salary DECIMAL(10,2);
+========
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql
 --
 -- Dumping events for database 'swp30'
 --
@@ -1079,5 +1164,32 @@ DELIMITER ;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+<<<<<<<< HEAD:HRManagement/newdb22-03.sql
+
+-- Dump completed on 2024-03-20 13:34:55
+ALTER TABLE salary
+DROP COLUMN basic_salary;
+
+UPDATE employee
+SET basic_salary = 5000000
+WHERE employee_id = 1;
+
+UPDATE employee
+SET basic_salary = 99999 
+WHERE employee_id = 2;
+
+UPDATE employee
+SET basic_salary = 88888 
+WHERE employee_id = 3;
+
+UPDATE employee
+SET basic_salary = 77777 
+WHERE employee_id = 4;
+
+UPDATE employee
+SET basic_salary = 66666 
+WHERE employee_id = 5;
+========
 
 -- Dump completed on 2024-03-18  8:19:17
+>>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61:HRManagement/dbmoi.sql

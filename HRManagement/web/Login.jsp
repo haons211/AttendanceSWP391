@@ -31,7 +31,7 @@
         </style>
     </head>
     <body>
-        <form action="Login" method="POST">  
+          
             <section class="h-100 gradient-form" style="background-color: #eee;">
                 <div class="container py-5 h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -46,7 +46,7 @@
                                                      style="width: 185px;" alt="logo">
                                                 <h4 class="mt-1 mb-5 pb-1"></h4>
                                             </div>
-                                            <form>
+                                            <form action="Login" method="POST">
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="form2Example11">Username</label>
                                                     <input type="text" id="form2Example11" class="form-control"
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </section>
-        </form>
+       
         <!-- Show error if any -->
     </div>
 </body>

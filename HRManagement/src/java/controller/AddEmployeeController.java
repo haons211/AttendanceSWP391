@@ -51,6 +51,7 @@ public class AddEmployeeController extends HttpServlet {
         System.out.println(birthDate);
         System.out.println(hireDate);
        String department = request.getParameter("department");
+        System.out.println(department);
         EmployeeDAO dao = new EmployeeDAO();
         String messageError = "Please input valid ";
         boolean genderReturn = true;
@@ -114,9 +115,12 @@ DepartmentDAO ddao =new DepartmentDAO();
               
                 dao.addEmployee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate,userId,  salary);
                 System.out.println(dao.getEmployeeID());
-                if(dao.getEmployeeID() == 0){
+
+             
+      if(dao.getEmployeeID() == 0){
                     request.getRequestDispatcher("add-employee").forward(request, response);
                 }
+
 //                dao.addEmployeeDepartment(new Employee(dao.getEmployeeID(), ddao.getDepartmentByName(department).getDepartment_id()));
                 response.sendRedirect("employee");
             }

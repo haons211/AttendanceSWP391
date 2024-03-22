@@ -1,6 +1,7 @@
 package controller;
 
 import configs.Validate;
+import dal.DepartmentDAO;
 import dal.EmployeeDAO;
 import java.io.IOException;
 import java.sql.Date;
@@ -29,6 +30,8 @@ public class UpdateEmployeeController extends HttpServlet {
             // set attribute employeeList
             EmployeeDAO employeeDAO = new EmployeeDAO();
             try {
+                DepartmentDAO dao =  new DepartmentDAO();
+        request.setAttribute("department", dao.getAllDepartments(""));
                 request.setAttribute("employee", employeeDAO.getEmployeeById(id));
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);

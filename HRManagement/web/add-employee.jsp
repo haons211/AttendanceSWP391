@@ -81,7 +81,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <input type="number" class="form-control" aria-label="Small" value="${salary}"
-                                                               aria-describedby="inputGroup-sizing-sm" name="salary" id="salaryInput" placeholder="Employee Salary" style="width: 312px;">
+                                                               aria-describedby="inputGroup-sizing-sm" name="salary" id="salaryInput" placeholder="Employee Salary" required="" style="width: 312px;">
                                                     </div>
                                                     <div style="color: red" id="salaryValidationMessage"></div>
 
@@ -271,7 +271,9 @@
                                             </td>
                                             <td>
                                                 <div  class = "right-text-table" >
-                                                    Employee Image
+
+                                                    Department
+
                                                 </div>
 
                                             </td>

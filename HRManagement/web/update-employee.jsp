@@ -83,7 +83,7 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <input type="number" class="form-control" aria-label="Small" value="${employee.basicSalary}"
-                                                               aria-describedby="inputGroup-sizing-sm" name="salary" id="salaryInput" placeholder="Employee Salary" style="width: 312px;">
+                                                               aria-describedby="inputGroup-sizing-sm" name="salary" id="salaryInput" placeholder="Employee Salary" required="" style="width: 312px;">
                                                     </div>
                                                     <div style="color: red" id="salaryValidationMessage"></div>
 
@@ -246,6 +246,35 @@
                                                 </div>
 
                                             </td>
+
+                                            <td>
+                                                <div  class = "right-text-table" >
+                                                    Department
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class = "right-input-table" style="margin-left: 40px" >
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                                        </div>
+                                                        <select name="department" class="form-control">
+                                                            <c:forEach items="${department}" var="d">
+                                                                <option value="${d.name}">${d.name}</option>
+                                                            </c:forEach>
+                                                        </select>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+                                            </td>
+
                                         </tr>
                                     </table>
                                     <div class="add-to-system">

@@ -40,7 +40,15 @@
             <div class="sidebar-inner slimscroll">
                 <div class="sidebar-menu">
                     <ul>
-
+                        <% if (role == 2) { %>
+                                <li>
+                                    <a href="HomeEmployees">Back</a>
+                                </li>
+                                <% } else if (role == 3||role==1) { %>
+                                <li>
+                                    <a href="dashboard">Back</a>
+                                </li>
+                                <% } %>
                         <li>
                             <a href="OpenChat">All</a>
                         </li>

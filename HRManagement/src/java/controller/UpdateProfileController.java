@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.Validate;
 import configs.headerInfor;
 import dal.EmployeeDAO;
 import models.AccountDTO;
@@ -37,10 +38,8 @@ public class UpdateProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-       
-        
-        }
-    
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -54,10 +53,12 @@ public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           headerInfor.setSessionAttributes(request);
-                request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
-            }
-    
+        headerInfor.setSessionAttributes(request);
+           String ms = (String) request.getAttribute("ms");
+           request.setAttribute("ms", ms);
+           
+             request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -70,6 +71,8 @@ public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String ms = "";
+        Validate v = new Validate();
         String url = null;
         String button = request.getParameter("btAction");
         try {
@@ -80,7 +83,16 @@ public class UpdateProfileController extends HttpServlet {
 
                 int accid = Integer.parseInt(request.getParameter("empId"));
                 String name = request.getParameter("empName");
+
                 String Phone = request.getParameter("empNumber");
+                if (!v.checkPhone(Phone)) {
+                    
+                    ms = "Phone numbers should only have numbers and only 10 numbers";
+                     request.setAttribute("ms", ms);
+                     request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
+                     request.getRequestDispatcher("UpdateInformation").forward(request, response);
+
+                }else{
                 String email = request.getParameter("empEmail");
                 String address = request.getParameter("empAddress");
                 int gender = Integer.parseInt(request.getParameter("empGender"));
@@ -96,25 +108,24 @@ public class UpdateProfileController extends HttpServlet {
 
                 boolean checkUpdate = false;
                 checkUpdate = dao.updateInformation(accid, name, Phone, email, address, genderCheck, birthdateString);
-                String ms = "";
+
                 if (checkUpdate == true) {
                     url = "profile";
-                    ms = "Update Succes";
-                    request.setAttribute("ms", ms);
+
                 } else {
                     url = "profile";
-                    ms = "Update Failed";
-                    request.setAttribute("ms", ms);
-                }
 
+                }}
+               
             } // sang tab thay doi thong tin nhan vien
             else if (button.equals("Edit profile")) {
                 url = "UpdateInformation";
+                   response.sendRedirect(url);
             }
-       } catch (Exception ex) {
+        } catch (Exception ex) {
 
         }
-        response.sendRedirect(url);
+       
     }
 }
 /**

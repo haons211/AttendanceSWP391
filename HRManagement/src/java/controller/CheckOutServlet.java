@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import models.AccountDTO;
 import models.Attendance;
@@ -37,28 +38,20 @@ public class CheckOutServlet extends HttpServlet {
             AccountDTO acc = (AccountDTO) session.getAttribute("account");
             EmployeeDAO dao = new EmployeeDAO();
             RemaindayDAO DAO = new RemaindayDAO();
-            out.print("abc");
-            if (session.getAttribute("checkedOut") != null && (boolean) session.getAttribute("checkedOut")) {
+            AttendanceDAO atDao = new AttendanceDAO();
+            try {
+                Employee em = dao.getin4(acc.getUserID());
+                Attendance attendanceCheck = atDao.getAttendanceByEmployeeId(em.getEmployeeId());
 
-                request.getRequestDispatcher("Success.jsp").forward(request, response);
-            } else {
-                try {
-                    Employee em = dao.getin4(acc.getUserID());
-                    int remainDay = DAO.getRemainDayById(em.getEmployeeId());
-                    session.setAttribute("re", remainDay);
-                    request.setAttribute("emp", em);
-
-                    int attendanceId = (int) session.getAttribute("attendanceId");
-                    Timestamp checkOutTime = new Timestamp(System.currentTimeMillis());
-                    session.setAttribute("checkOutTime", checkOutTime);
-
-                    Timestamp checkInTime = (Timestamp) request.getAttribute("checkInTime");
-                    session.setAttribute("checkInTime", checkInTime);
-
-                } catch (Exception e) {
-                }
+                int remainDay = DAO.getRemainDayById(em.getEmployeeId());
+                session.setAttribute("re", remainDay);
+                request.setAttribute("emp", em);
+                session.setAttribute("checkOutTime", attendanceCheck.getOut_time());
+                session.setAttribute("checkInTime", attendanceCheck.getIn_time());
+                request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
+            } catch (ServletException | IOException | ClassNotFoundException | SQLException e) {
+                System.out.println(e);
             }
-
         }
     }
 
@@ -87,15 +80,13 @@ public class CheckOutServlet extends HttpServlet {
                     int attendanceId = (int) session.getAttribute("attendanceId");
                     AttendanceDAO attendanceDAO = new AttendanceDAO();
                     attendanceDAO.CheckOut(attendanceId);
-                    Attendance attendance = attendanceDAO.getAttendanceById(attendanceId);
-                    request.setAttribute("attendance", attendance);
-                    Timestamp checkOutTime = new Timestamp(System.currentTimeMillis());
-                    session.setAttribute("checkOutTime", checkOutTime);
-                    Timestamp checkInTime = (Timestamp) session.getAttribute("checkInTime");
-                    session.setAttribute("checkInTime", checkInTime);
-//                    attendanceDAO.insertCheckStatus(em.getEmployeeId(), true, true);
+                    Attendance attendanceCheck = attendanceDAO.getAttendanceByEmployeeId(em.getEmployeeId());
+                    request.setAttribute("attendance", attendanceCheck);
+                    
+                    session.setAttribute("checkOutTime", attendanceCheck.getOut_time());
+                    
+                    session.setAttribute("checkInTime", attendanceCheck.getIn_time());
                     session.setAttribute("checkedOut", true);
-//                    session.setAttribute("checkedOut", attendanceDAO.getCheckedOutStatus(em.getEmployeeId()));
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -112,3 +103,5 @@ public class CheckOutServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
+

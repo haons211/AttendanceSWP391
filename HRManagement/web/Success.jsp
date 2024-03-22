@@ -225,22 +225,38 @@
             <script src="assets/js/chart.js"></script>
             <script src="assets/js/app.js"></script>
             <script>
-                var checkInTime = new Date("<%= session.getAttribute("checkInTime") %>");
-                var checkOutTime = new Date("<%= session.getAttribute("checkOutTime") %>");
-                console.log("checkInTime: ", checkInTime);
-                console.log("checkOutTime: ", checkOutTime);
+    // Lấy thời gian check-in và check-out từ session hoặc một nguồn khác
+    var checkInTimeString = "<%= session.getAttribute("checkInTime") %>";
+    var checkOutTimeString = "<%= session.getAttribute("checkOutTime") %>";
 
-                // Tính số milliseconds giữa checkOutTime và checkInTime
-                var elapsedTime = checkOutTime - checkInTime;
+    // Chuyển đổi chuỗi thời gian thành đối tượng Date
+    var checkInTimeParts = checkInTimeString.split(":");
+    var checkInTime = new Date();
+    checkInTime.setHours(checkInTimeParts[0]);
+    checkInTime.setMinutes(checkInTimeParts[1]);
+    checkInTime.setSeconds(checkInTimeParts[2]);
 
-                // Chuyển đổi số milliseconds thành số giờ, phút và giây
-                var hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-                var minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+    var checkOutTimeParts = checkOutTimeString.split(":");
+    var checkOutTime = new Date();
+    checkOutTime.setHours(checkOutTimeParts[0]);
+    checkOutTime.setMinutes(checkOutTimeParts[1]);
+    checkOutTime.setSeconds(checkOutTimeParts[2]);
 
-                // Hiển thị kết quả
-                document.getElementById("totalTime").innerHTML = "Total time<br>" + hours + " hours <br>" + minutes + " minutes<br> " + seconds + " seconds";
-            </script>
+    console.log("checkInTime: ", checkInTime);
+    console.log("checkOutTime: ", checkOutTime);
+
+    // Tính số milliseconds giữa checkOutTime và checkInTime
+    var elapsedTime = checkOutTime - checkInTime;
+
+    // Chuyển đổi số milliseconds thành số giờ, phút và giây
+    var hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+    var minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+    // Hiển thị kết quả
+    document.getElementById("totalTime").innerHTML = "Total time<br>" + hours + " hours <br>" + minutes + " minutes<br> " + seconds + " seconds";
+</script>
+
 
             <script>
                 var currentDate = new Date();
@@ -291,4 +307,5 @@
             </script>
 
 </html>
+
 
