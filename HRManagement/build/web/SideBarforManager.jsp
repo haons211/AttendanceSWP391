@@ -87,9 +87,17 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title">Main</li>
-                        <li>
+                        
+                        <c:if test="${account.getRole() == 1}">
+                            <li>
                             <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
+                        </c:if>
+                        <c:if test="${account.getRole() == 3}">
+                            <li>
+                                <a href="HomeManager"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            </li>
+                        </c:if>
                         <li class="submenu">
                             <a href="#"><i class="fa fa-id-card"></i> <span>Attendance</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
@@ -117,7 +125,7 @@
                         <li>
                             <a href="account"><i class="fa fa-users"></i> <span>Accounts</span></a>
                         </li>
-                             
+
                         <li> 
                             <a href="department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                         </li>    

@@ -246,7 +246,7 @@ public class DashboardDAO {
         String query = "SELECT *\n"
                 + "FROM employee e\n"
                 + "LEFT JOIN attendance a ON e.employee_id = a.employee_id\n"
-                + "WHERE a.status = 'Absent';";
+                + "WHERE a.status = 'Absent' and date = CURRENT_DATE();";
         try {
             con = new DBContext().getConnection();
             stm = con.prepareStatement(query);

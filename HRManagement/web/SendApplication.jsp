@@ -69,7 +69,6 @@
     <% } else if (role == 3|| role == 1) { %>
     <jsp:include page="SideBarforManager.jsp" />
     <% } %>
-    //CODE CHINH O DAY
     <div class="page-wrapper">
         <div class="content">
             <div class="row">

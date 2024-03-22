@@ -126,7 +126,7 @@
                                             <div class="contact-cont">
 
                                                 <div class="float-left user-img m-r-10">
-                                                    <a href="#" title=${a.name}><img src=${a.image} alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
+                                                    <a href="#" title=${a.name}><img src=${a.image} alt="" class="w-40 rounded-circle"></a>
                                                 </div>
                                                 <div class="contact-info" style="padding: 0 30px 0 30px;">
                                                     <span class="contact-name text-ellipsis">${a.name}</span>

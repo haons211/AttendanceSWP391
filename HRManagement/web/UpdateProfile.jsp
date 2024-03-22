@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+        <title>Update Profile</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
@@ -116,7 +116,10 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" value="Update" name="btAction">
+                                        <div class="add-to-system">
+                                    <button type="submit" value="Update" name="btAction" class="btn btn-success" style="margin: 10px 0;">Update Profile</button>
+                                </div>
+<!--                        <input type="submit" value="Update" name="btAction">-->
                     </form>
                     <c:if test="${not empty ms}">
                         <p class="alert alert-danger alert-dismissible fade show" role="alert"><c:out value="${ms}" /></p>

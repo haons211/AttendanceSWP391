@@ -325,47 +325,6 @@ public class AttendanceDAO {
         }
     }
 
-    public boolean getCheckedInStatus(int employeeId) throws ClassNotFoundException {
-        String sql = "SELECT CheckedIn FROM UserCheckStatus WHERE employee_id = ?";
-        try {
-            con = DBContext.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, employeeId);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getBoolean("CheckedIn");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle exceptions if any
-        } finally {
-            // Close resources in a finally block
-            closeResources();
-        }
-        return false;
-    }
-
-    public boolean getCheckedOutStatus(int employeeId) throws ClassNotFoundException {
-        String sql = "SELECT CheckedOut FROM UserCheckStatus WHERE employee_id = ?";
-        try {
-            con = DBContext.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, employeeId);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getBoolean("CheckedOut");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle exceptions if any
-        } finally {
-            // Close resources in a finally block
-            closeResources();
-        }
-        return false;
-    }
 
     public void CallAttendanceByDay() {
         String procedureCall = "{CALL generateDailyAttendance()}";

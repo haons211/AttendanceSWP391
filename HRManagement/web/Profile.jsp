@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+        <title>Profile</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -64,7 +64,7 @@
                                                     <h3 class="user-name m-t-0 mb-0">${em.name}</h3>
                                                     <small class="text-muted">Employee </small>
                                                     <div class="staff-id">Employee ID :${em.employeeId}</div>
-                                                    <div class="staff-msg"><a href="chat.html" class="btn btn-primary">Send Message</a></div>
+                                                    <div class="staff-msg"><a href="ChatSystemEm" class="btn btn-primary">Send Message</a></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
@@ -107,25 +107,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="profile-tabs">
-                        <ul class="nav nav-tabs nav-tabs-bottom">
-                            <li class="nav-item"><a class="nav-link active" href="#about-cont" data-toggle="tab">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#bottom-tab2" data-toggle="tab">Profile</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#bottom-tab3" data-toggle="tab">Messages</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane show active" id="about-cont">
-
-                            </div>
-                            <div class="tab-pane" id="bottom-tab2">
-                                Tab content 2
-                            </div>
-                            <div class="tab-pane" id="bottom-tab3">
-                                Tab content 3
-                            </div>
-                        </div>
                     </div>
                 </div>
 
