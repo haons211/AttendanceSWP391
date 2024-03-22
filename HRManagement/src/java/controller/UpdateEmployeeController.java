@@ -1,6 +1,7 @@
 package controller;
 
 import configs.Validate;
+import dal.DepartmentDAO;
 import dal.EmployeeDAO;
 import java.io.IOException;
 import java.sql.Date;
@@ -29,6 +30,8 @@ public class UpdateEmployeeController extends HttpServlet {
             // set attribute employeeList
             EmployeeDAO employeeDAO = new EmployeeDAO();
             try {
+                DepartmentDAO dao =  new DepartmentDAO();
+        request.setAttribute("department", dao.getAllDepartments(""));
                 request.setAttribute("employee", employeeDAO.getEmployeeById(id));
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UpdateEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,7 +54,7 @@ public class UpdateEmployeeController extends HttpServlet {
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
         // Retrieve gender parameter and handle null case
-
+         Double salary = Double.parseDouble(request.getParameter("salary"));
         // Default to male if parameter is null
         String messageError = "Please input valid ";
         System.out.println(image);
@@ -107,8 +110,9 @@ public class UpdateEmployeeController extends HttpServlet {
                 request.setAttribute("employee", employeeDAO.getEmployeeById(employeeId));
                 request.getRequestDispatcher("update-employee.jsp").forward(request, response);
             } else {
+                System.out.println(salary);
                 // Create Employee object with updated information
-                Employee employee = new Employee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate);
+                Employee employee = new Employee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate, salary);
                 // Update the employee in the database
                 dao.updateEmployee(employee, employeeId);
                 // Redirect to the list-employee servlet or page

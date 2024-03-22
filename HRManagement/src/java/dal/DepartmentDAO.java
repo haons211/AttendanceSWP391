@@ -211,6 +211,29 @@ public void updateDepartment(int id, String name, String code) {
         }
         return null;
     }
+    public Department getDepartmentByName(String dname) {
+        String query = "SELECT * FROM department WHERE name = ?";
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, dname);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String code = rs.getString("dep_code");
+                
+                return new Department(id, name,code);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if any
+        } finally {
+            // Close resources in a finally block
+            closeResources();
+        }
+        return null;
+    }
 
     // Other methods for department operations
     private void closeResources() {

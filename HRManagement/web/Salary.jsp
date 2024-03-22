@@ -72,7 +72,7 @@
                                                                         <th>Email</th>
                                                                         <th>Joining Date</th>
                                                                         <th>Department</th>
-                                                                        <th>Salary</th>
+                                                                        
                                                                         <th>Payslip</th>
                                                                         <th class="text-right">Action</th>
                                                                     </tr>
@@ -93,7 +93,7 @@
                                                                             </td>
                                                                             <td>${lists.hireDate}</td>
                                                                             <td>${lists.dname} </td>
-                                                                            <td>$${lists.totalSalary}</td>
+                                                                            
 
                                                                             <td><a class="btn btn-sm btn-primary"
                                                                                     href="ViewSalary?id=${lists.salaryId}">Generate
@@ -126,20 +126,7 @@
                                             </div>
 
                                         </div>
-                                        <div id="delete_salary" class="modal fade delete-modal" role="dialog">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-body text-center">
-                                                        <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                                        <h3>Are you sure want to delete this Salary?</h3>
-                                                        <div class="m-t-20"> <a href="#" class="btn btn-white"
-                                                                data-dismiss="modal">Close</a>
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      
                         </div>
                         <div class="sidebar-overlay" data-reff=""></div>
                         <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -152,13 +139,7 @@
                         <script src="assets/js/moment.min.js"></script>
                         <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
                         <script src="assets/js/app.js"></script>
-                        <script type="text/javascript">
-                            function doDelete(id) {
-                                if (confirm("are you sure to delete id = " + id)) {
-                                    window.location = "DeleteSalary?id=" + id;
-                                }
-                            }
-                        </script>
+                        
                 </body>
 
                 </html>

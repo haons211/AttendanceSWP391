@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+        <title>4</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
@@ -50,7 +50,12 @@
                                 <h4 class="payslip-title">Payslip for the month of March 2024</h4>
                                 <div class="row">
                                     <div class="col-sm-6 m-b-20">
-                                        
+                                        <img src="assets/img/logo-dark.png" class="inv-logo" alt="">
+                                        <ul class="list-unstyled mb-0">
+                                            <li>${company.companyName} Company</li>
+
+                                            <li>Address: ${company.address}</li>
+                                        </ul>
                                     </div>
                                     <div class="col-sm-6 m-b-20">
                                         <div class="invoice-details">
@@ -78,9 +83,7 @@
                                             <h4 class="m-b-10"><strong>Earnings</strong></h4>
                                             <table class="table table-bordered">
                                                 <tbody>
-                                                    <tr>
-                                                        <td><strong>Basic Salary</strong> <span class="float-right">$${employeeSalary.basicSalary}</span></td>
-                                                    </tr>
+                                                    
                                                     <tr>
                                                         <td><strong>Allowance</strong> <span class="float-right">$${employeeSalary.allowance}</span></td>
                                                     </tr>
@@ -89,7 +92,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td><strong>Total Earnings</strong> <span class="float-right"><strong>$${employeeSalary.basicSalary + employeeSalary.bonus + employeeSalary.allowance }</strong></span></td>
+                                                        <td><strong>Basic Salary</strong> <span class="float-right"><strong>$${employeeSalary.basicSalary }</strong></span></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -104,11 +107,9 @@
                                                         <td><strong>Personal Income Tax</strong> <span class="float-right">$${employeeSalary.tax}</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><strong>Health Insurance</strong> <span class="float-right">$0</span></td>
+                                                        <td><strong> Insurance</strong> <span class="float-right">$0</span></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><strong>Social Insurance</strong> <span class="float-right">$0</span></td>
-                                                    </tr>
+                                                  
 
                                                     <tr>
                                                         <td><strong>Total Deductions</strong> <span class="float-right"><strong>$${employeeSalary.tax }</strong></span></td>
@@ -118,7 +119,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <p id="netSalaryText"><strong>Net Salary: $${employeeSalary.totalSalary }</strong></p>
+                                        <p id="netSalaryText"><strong>Net Salary:$${employeeSalary.basicSalary + employeeSalary.bonus + employeeSalary.allowance - employeeSalary.tax }</strong></p>
                                     </div>
 
                                     <div class="col-sm-12">
@@ -192,7 +193,7 @@
                 return words.trim();
             }
 
-            var netSalary = Math.round(${employeeSalary.totalSalary}); // Round the net salary
+            var netSalary = Math.round(${employeeSalary.basicSalary + employeeSalary.bonus + employeeSalary.allowance - employeeSalary.tax }); // Round the net salary
             var netSalaryInWords = convertToEnglishWords(netSalary);
 
             document.getElementById("netSalaryInWords").innerText = "Net Salary : " + netSalaryInWords;

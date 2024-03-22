@@ -41,7 +41,14 @@ public class DeleteEmployeeController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         EmployeeDAO dao = new EmployeeDAO();
         try {
-            dao.deleteEmployee(id);
+            if(!dao.isEmpExists(id)){
+                   dao.deleteEmployee1(id);
+            }
+            else{
+              
+                dao.deleteEmployee(id);
+            }
+           
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DeleteEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -15,7 +15,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+        <title></title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
@@ -73,19 +73,16 @@
                                             <h4 class="m-b-10"><strong>Earnings</strong></h4>
                                             <table class="table table-bordered">
                                                 <tbody>
-                                                    <tr>
-                                                        <td><strong>Basic Salary</strong> <span class="float-right">$${employeeSalary.basicSalary}</span></td>
-                                                    </tr>
+                                                   
                                                     <tr>
                                                         <td><strong>Allowance</strong> <span class="float-right">$${employeeSalary.allowance}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Bonus</strong> <span class="float-right">$${employeeSalary.bonus}</span></td>
+                                                      <tr>
+                                                        <td><strong>Basic Salary</strong> <span class="float-right"><strong>$${employeeSalary.basicSalary }</strong></span></td>
                                                     </tr>
-
-                                                    <tr>
-                                                        <td><strong>Total Earnings</strong> <span class="float-right"><strong>$${employeeSalary.basicSalary + employeeSalary.bonus + employeeSalary.allowance }</strong></span></td>
-                                                    </tr>
+                                                   
                                                 </tbody>
                                             </table>
                                         </div>
@@ -98,11 +95,9 @@
                                                     <tr>
                                                         <td><strong>Personal Income Tax</strong> <span class="float-right">$${employeeSalary.tax}</span></td>
                                                     </tr>
+                                                    
                                                     <tr>
-                                                        <td><strong>Health Insurance</strong> <span class="float-right">$0</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Social Insurance</strong> <span class="float-right">$0</span></td>
+                                                        <td><strong>Insurance</strong> <span class="float-right">$0</span></td>
                                                     </tr>
 
                                                     <tr>
@@ -113,7 +108,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <p id="netSalaryText"><strong>Net Salary: $${employeeSalary.totalSalary }</strong></p>
+                                        <p id="netSalaryText"><strong>Net Salary: $${employeeSalary.basicSalary + employeeSalary.bonus + employeeSalary.allowance - employeeSalary.tax }</strong></p>
                                     </div>
 
                                     <div class="col-sm-12">
@@ -136,9 +131,7 @@
         <script src="assets/js/app.js"></script>
 
         <script>
-
             function convertToEnglishWords(number) {
-
                 var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
                 var tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
                 var teens = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
@@ -148,7 +141,6 @@
                     return word.charAt(0).toUpperCase() + word.slice(1);
                 }
 
-
                 ones = ones.map(capitalizeFirstLetter);
                 tens = tens.map(capitalizeFirstLetter);
                 teens = teens.map(capitalizeFirstLetter);
@@ -157,16 +149,13 @@
                 function convertGroup(number) {
                     var result = '';
 
-
                     var hundredsDigit = Math.floor(number / 100);
                     if (hundredsDigit !== 0) {
                         result += ones[hundredsDigit] + ' hundred ';
                     }
 
-
                     var tensDigit = Math.floor((number % 100) / 10);
                     var onesDigit = number % 10;
-
 
                     if (tensDigit === 1 && onesDigit !== 0) {
                         result += teens[onesDigit];
@@ -177,13 +166,11 @@
                     return result.trim();
                 }
 
-
                 var parts = [];
                 while (number > 0) {
                     parts.push(number % 1000);
                     number = Math.floor(number / 1000);
                 }
-
 
                 var words = '';
                 for (var i = 0; i < parts.length; i++) {
@@ -195,11 +182,10 @@
                 return words.trim();
             }
 
+            var netSalary = Math.round(${employeeSalary.basicSalary + employeeSalary.bonus + employeeSalary.allowance - employeeSalary.tax }); // Round the net salary
+            var netSalaryInWords = convertToEnglishWords(netSalary);
 
-            var netSalary = ${employeeSalary.totalSalary};
-
-
-            document.getElementById("netSalaryInWords").innerText = "Net Salary : " + convertToEnglishWords(netSalary);
+            document.getElementById("netSalaryInWords").innerText = "Net Salary : " + netSalaryInWords;
         </script>
     </body>
 

@@ -954,7 +954,7 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
+  `username` varchar(20) NOT NULL,employeesalary
   `password` varchar(128) NOT NULL,
   `role_id` int DEFAULT NULL,
   PRIMARY KEY (`user_id`),
@@ -973,6 +973,9 @@ INSERT INTO `users` VALUES (1,'adminuser','5291a0858dfafff116e37dea26d5bfaf',1),
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+ALTER TABLE employee
+ADD basic_salary DECIMAL(10,2);
 --
 -- Dumping events for database 'swp30'
 --
@@ -1095,3 +1098,25 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-03-20 13:34:55
+ALTER TABLE salary
+DROP COLUMN basic_salary;
+
+UPDATE employee
+SET basic_salary = 5000000
+WHERE employee_id = 1;
+
+UPDATE employee
+SET basic_salary = 99999 
+WHERE employee_id = 2;
+
+UPDATE employee
+SET basic_salary = 88888 
+WHERE employee_id = 3;
+
+UPDATE employee
+SET basic_salary = 77777 
+WHERE employee_id = 4;
+
+UPDATE employee
+SET basic_salary = 66666 
+WHERE employee_id = 5;
