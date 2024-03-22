@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Departments</title>
+        <title>View Application</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -22,16 +22,14 @@
     </head>
 
     <body>
-
         <%
-                 AccountDTO acc = (AccountDTO) session.getAttribute("account");
-                 int role=     acc.getRole();
+                    AccountDTO acc = (AccountDTO) session.getAttribute("account");
+                    int role = acc.getRole();
         %>
-        <c:set var="em" value="${requestScope.emp}" />
         <div class="main-wrapper">
             <% if (role == 2) { %>
             <jsp:include page="SideBarforEm.jsp" />
-            <% } else if (role == 3) { %>
+            <% } else if (role == 3 || role == 1) { %>
             <jsp:include page="SideBarforManager.jsp" />
             <% } %>
 
@@ -39,14 +37,10 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-sm-5 col-5">
-                            <h4 class="page-title">Inbox</h4>
+                            <h4 class="page-title">Application</h4>
                         </div>
-                        <!--                        <div class="col-sm-7 col-7 text-right m-b-30">
-                                                    <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Department</a>
-                                                </div>-->
                     </div>
                     <div class="main-option">
-
                         <div class="main-option-search">
                             <nav class="navbar navbar-light bg-light justify-content-between">
                                 <div class="col-sm-10 col-md-8 col-8 top-action-left">
@@ -60,7 +54,6 @@
                                                 </c:forEach>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="float-left d-none d-sm-block">
                                         <input type="text" placeholder="Search Messages" class="form-control search-message" id="searchInput">
@@ -72,18 +65,9 @@
                                     </span>
                                     <% } %>
                                     <% } %>
-
-
                                 </div>
-                                <!--                                <form action="department" method="get" class="form-inline">
-                                                                    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search"
-                                                                           aria-label="Search" style="height: 30px;" >
-                                                                    <button class="btn btn-outline-success my-2 my-sm-0"
-                                                                            type="submit" style="height: 30px;">Search</button>
-                                                                </form>-->
                             </nav>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -91,13 +75,6 @@
                                 <table class="table table-striped custom-table mb-0 datatable">
                                     <thead>
                                         <tr>
-                                            <!--<th colspan="6">-->
-                                            <!--<input type="checkbox" id="check_all">-->
-                                            <!--</th>-->
-
-
-
-
                                             <th>Receiver</th>
                                             <th>Title</th>
                                             <th>Status</th>
@@ -107,7 +84,6 @@
                                     <tbody>
                                         <c:forEach var="la" items="${requestScope.list_application}">
                                             <tr class="unread clickable-row">
-
                                                 <td class="name">${la.receiver_name}</td>
                                                 <td>
                                                     <a href="detailapplication?applicationId=${la.application_id}">
@@ -125,40 +101,12 @@
                                                 <td class="mail-date">${la.formatCreDate}</td>
                                             </tr>
                                         </c:forEach>
-
-
-
-
-                                        <!--                                        <tr class="clickable-row" data-href="mail-view.html">
-                                                                                    <td>
-                                                                                        <input type="checkbox" class="checkmail">
-                                                                                    </td>
-                                                                                    <td><span class="mail-important"><i class="fa fa-star-o"></i></span></td>
-                                                                                    <td class="name">Twitter</td>
-                                                                                    <td class="subject">HRMS Bootstrap Admin Template</td>
-                                                                                    <td></td>
-                                                                                    <td class="mail-date">30 Nov</td>
-                                                                                </tr>-->
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!--            		<div id="delete_department" class="modal fade delete-modal" role="dialog">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                    <div class="modal-body text-center">
-                                                                            <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                                                            <h3>Are you sure want to delete this Department?</h3>
-                                                                            <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                                            </div>
-                                                                    </div>
-                                                            </div>
-                                                    </div>
-                                            </div>-->
             </div>
             <div class="sidebar-overlay" data-reff=""></div>
             <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -180,5 +128,4 @@
                 });
             </script>
     </body>
-
 </html>

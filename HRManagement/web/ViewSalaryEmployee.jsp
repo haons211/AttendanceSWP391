@@ -4,7 +4,6 @@
     Author     : Dan
 --%>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="models.AccountDTO" %>
@@ -15,10 +14,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title></title>
+        <title>Salary</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     </head>
@@ -37,12 +36,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-box">
-                                <h4 class="payslip-title">Payslip for the month of March 2024</h4>
+                                <h2 class="payslip-title">Payslip for the month of March 2024</h2>
                                 <div class="row">
                                     <div class="col-sm-6 m-b-20">
-                                        <img src="assets/img/logo-dark.png" class="inv-logo" alt="">
+                                       
                                         <ul class="list-unstyled mb-0">
-                                            <li>${company.companyName} Company</li>
+                                            <li >   <h3 class="text-uppercase">${company.companyName} Company </h3></li>
 
                                             <li>Address: ${company.address}</li>
                                         </ul>

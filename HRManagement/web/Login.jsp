@@ -42,9 +42,9 @@
                                         <div class="card-body p-md-5 mx-md-4">
 
                                             <div class="text-center">
-                                                <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png"
-                                                     style="width: 185px;" alt="logo">
-                                                <h4 class="mt-1 mb-5 pb-1"></h4>
+<!--                                                <img src="assets/img/pngtree-hacker-logo-png-image_6408677.png"
+                                                     style="width: 185px;" alt="logo">-->
+                                                <h1 class="mt-1 mb-5 pb-1" style="font-style: italic; color:#FF90BC ">SGIP5</h1>
                                             </div>
                                             <form action="Login" method="POST">
                                                 <div class="form-outline mb-4">

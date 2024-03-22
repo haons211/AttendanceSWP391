@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+        <title>Chat system</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -35,15 +35,21 @@
                     <div class="sidebar-inner slimscroll">
                         <div class="sidebar-menu">
                             <ul>
-                                <% if (role == 2) { %>
-                                <li>
-                                    <a href="HomeEmployees">Back</a>
-                                </li>
-                                <% } else if (role == 3||role==1) { %>
-                                <li>
-                                    <a href="dashboard">Back</a>
-                                </li>
-                                <% } %>
+                                <c:if test="${account.getRole() == 1}">
+                                    <li>
+                                        <a href="HomeAdmin"><i class="fa fa-home back-icon"></i> <span>Back to Home</span></a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${account.getRole() == 2}">
+                                    <li>
+                                        <a href="HomeEmployees"><i class="fa fa-home back-icon"></i> <span>Back to Home</span></a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${account.getRole() == 3}">
+                                    <li>
+                                        <a href="HomeManager"><i class="fa fa-home back-icon"></i> <span>Back to Home</span></a>
+                                    </li>
+                                </c:if>
 
                                 <li>
                                     <a href="OpenChat">All</a>

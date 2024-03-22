@@ -16,14 +16,14 @@
         <title>Change Password</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
-        <!-- font awesome 5.13.1 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
     </head>
 
     <body>
         <div class="main-wrapper account-wrapper">
+            <%@include file="SideBarSetting.jsp" %>
             <div class="account-page" >
                 <div class="account-center">
                     <div class="col-md-6 offset-md-3">

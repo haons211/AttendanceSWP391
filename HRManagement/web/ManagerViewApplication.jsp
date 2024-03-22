@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Departments</title>
+        <title>View Application</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -32,7 +32,7 @@
         <div class="main-wrapper">
             <% if (role == 2) { %>
             <jsp:include page="SideBarforEm.jsp" />
-            <% } else if (role == 3) { %>
+            <% } else if (role == 3 || role == 1) { %>
             <jsp:include page="SideBarforManager.jsp" />
             <% } %>
 
@@ -40,7 +40,7 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-sm-5 col-5">
-                            <h4 class="page-title">Inbox</h4>
+                            <h4 class="page-title">Application</h4>
                         </div>
                         <!--                        <div class="col-sm-7 col-7 text-right m-b-30">
                                                     <a href="addDep" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Department</a>
@@ -92,13 +92,6 @@
                                 <table class="table table-striped custom-table mb-0 datatable">
                                     <thead>
                                         <tr>
-                                            <!--<th colspan="6">-->
-                                            <!--<input type="checkbox" id="check_all">-->
-                                            <!--</th>-->
-
-
-                                            <th><input type="checkbox" id="check_all"></th>
-
                                             <th>Sender</th>
                                             <th>Title</th>
                                             <th>Status</th>
@@ -108,9 +101,6 @@
                                     <tbody>
                                         <c:forEach var="la" items="${requestScope.list_application}">
                                             <tr class="unread clickable-row">
-                                                <td>
-                                                    <input type="checkbox" class="checkmail">
-                                                </td>
                                                 <td class="name">${la.sender_name}</td>
                                                 <td>
                                                     <a href="detailapplication?applicationId=${la.application_id}">
