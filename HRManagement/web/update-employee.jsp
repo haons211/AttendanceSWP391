@@ -246,6 +246,7 @@
                                                 </div>
 
                                             </td>
+
                                             <td>
                                                 <div  class = "right-text-table" >
                                                     Department
@@ -273,6 +274,7 @@
 
 
                                             </td>
+
                                         </tr>
                                     </table>
                                     <div class="add-to-system">

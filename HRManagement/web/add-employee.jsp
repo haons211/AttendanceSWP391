@@ -271,7 +271,9 @@
                                             </td>
                                             <td>
                                                 <div  class = "right-text-table" >
+
                                                     Department
+
                                                 </div>
 
                                             </td>

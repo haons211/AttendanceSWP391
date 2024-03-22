@@ -3,12 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/FPT/SWP391/AttendanceSWP391/HRManagement/web/OpenChat.jsp</file>
             <file>file:/D:/FPT/SWP391/AttendanceSWP391/HRManagement/web/SideBarforManager.jsp</file>
             <file>file:/D:/FPT/SWP391/AttendanceSWP391/HRManagement/web/Login.jsp</file>
             <file>file:/D:/FPT/SWP391/AttendanceSWP391/HRManagement/web/ViewSalary.jsp</file>
             <file>file:/D:/FPT/SWP391/AttendanceSWP391/HRManagement/web/ViewSalaryEmployee.jsp</file>
             <file>file:/D:/FPT/SWP391/AttendanceSWP391/HRManagement/web/SideBarforEm.jsp</file>
+=======
+            <file>file:/E:/FPTU/KI5/SWP391/14324/AttendanceSWP391/HRManagement/src/java/dal/EmployeeDAO.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/14324/AttendanceSWP391/HRManagement/src/java/controller/ViewSalary.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/14324/AttendanceSWP391/HRManagement/src/java/controller/AddEmployeeController.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/14324/AttendanceSWP391/HRManagement/src/java/dal/SalaryDAO.java</file>
+            <file>file:/E:/FPTU/KI5/SWP391/14324/AttendanceSWP391/HRManagement/web/ViewSalary.jsp</file>
+            <file>file:/E:/FPTU/KI5/SWP391/14324/AttendanceSWP391/HRManagement/web/ViewSalaryEmployee.jsp</file>
+>>>>>>> 016975b47ed4521d00235a57a2636d435a586b61
         </group>
     </open-files>
 </project-private>
