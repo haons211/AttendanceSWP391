@@ -94,7 +94,13 @@ public class UpdateAttendance extends HttpServlet {
         String status = request.getParameter("status");
         String message = request.getParameter("message");
         String checkin = request.getParameter("checkin");
+        if (checkin.isEmpty()) {
+            checkin = null;
+        }
         String checkout = request.getParameter("checkout");
+        if (checkout.isEmpty()) {
+            checkout = null;
+        }
         String instatus = request.getParameter("instatus");
         String outstatus = request.getParameter("outstatus");
         String remainday = request.getParameter("remainday");
@@ -127,9 +133,11 @@ public class UpdateAttendance extends HttpServlet {
                 count++;
             }
         }
+
         
         if (!validate.validateTime(checkin, checkout)) {
-            request.setAttribute("checkInError", "Check-in time must be earlier than check-out time");
+            request.setAttribute("checkInError", "Check-in time cannot be left blank when check-out time exists "
+                    + "and check-in time must be earlier than check-out time");
             count++;
         }
         if (!validate.validateDateBeforeToday(date)) {
@@ -143,7 +151,6 @@ public class UpdateAttendance extends HttpServlet {
         if (count > 0) {
             request.setAttribute("ar", dao.getAttendanceReportById(attendanceId));
             request.getRequestDispatcher("UpdateAttendance.jsp").forward(request, response);
-
         } else {
             // Create Employee object with updated information
 

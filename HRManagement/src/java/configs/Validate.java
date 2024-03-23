@@ -28,9 +28,16 @@ public class Validate {
     }
 
     public boolean validateTime(String checkin, String checkout) {
-        // Kiểm tra xem checkin và checkout có null hoặc trống không
-        if (checkin == null || checkin.isEmpty() || checkout == null || checkout.isEmpty()) {
+        // Kiểm tra xem checkin có null hoặc trống không
+        if (isNullOrEmpty(checkin) && isNullOrEmpty(checkout)) {
+            return true;
+        }
+        if (isNullOrEmpty(checkin)) {
             return false;
+        }
+        // Nếu checkout là null, cho phép
+        if (isNullOrEmpty(checkout)) {
+            return true;
         }
 
         // Chuyển đổi chuỗi thời gian thành đối tượng thời gian (Date) để so sánh
@@ -46,6 +53,10 @@ public class Validate {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
     }
 
     public boolean validateDateBeforeToday(String date) {

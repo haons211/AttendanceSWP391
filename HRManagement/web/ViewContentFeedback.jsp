@@ -30,7 +30,7 @@
 
 
         <div class="main-wrapper">
-            <%@include file="SideBarSetting.jsp" %>
+            <%@include file="SideBarforManager.jsp" %>
             <div class="page-wrapper">
                 <div class="content">
                     <div class="row">
