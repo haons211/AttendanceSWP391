@@ -84,20 +84,6 @@
                 <li>
                     <a href="ChangePassword"><i class="fa fa-lock"></i> <span>Change Password</span></a>
                 </li>
-                <li>
-                    <a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span> Salary</span> </a>
-                </li>
-                <c:if test="${account.getRole() == 2}">
-                    <li>
-                        <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>
-                    </li>
-                </c:if>               
-                <c:if test="${account.getUserName() eq 'manageruser'}">
-                    <li>
-                        <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
-                    </li>
-                </c:if>
-
             </ul>
         </div>
     </div>

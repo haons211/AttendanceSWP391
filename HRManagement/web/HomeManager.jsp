@@ -114,31 +114,34 @@
                             </div>
                         </c:forEach>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4 col-xl-4">
-                        <div class="card member-panel">
-                            <div class="card-header bg-white">
-                                <h4 class="card-title mb-0">Leaves List(${numberLeave})</h4>
-                            </div>
-                            <div class="card-body">
-                                <ul class="contact-list">
-                                    <c:forEach items="${listLeave}" var="a">
-                                        <li style="    margin: 20px;">
-                                            <div class="contact-cont">
+                    <div class="row">
+                        <div class="col-12 col-md-4"></div>
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                            <div class="card member-panel">
+                                <div class="card-header bg-white">
+                                    <h4 class="card-title mb-0">Leaves List</h4>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="contact-list">
+                                        <c:forEach items="${listLeave}" var="a">
+                                            <li>
+                                                <div class="contact-cont">
 
-                                                <div class="float-left user-img m-r-10">
-                                                    <a href="#" title=${a.name}><img src=${a.image} alt="" class="w-40 rounded-circle"></a>
+                                                    <div class="float-left user-img m-r-10">
+                                                        <a href="#" title=${a.name}><img src=${a.image} alt="" class="w-40 rounded-circle"></a>
+                                                    </div>
+                                                    <div class="contact-info">
+                                                        <span class="contact-name text-ellipsis">${a.name}</span>
+                                                        <span class="contact-date">${a.email}</span>
+                                                    </div>
                                                 </div>
-                                                <div class="contact-info" style="padding: 0 30px 0 30px;">
-                                                    <span class="contact-name text-ellipsis">${a.name}</span>
-                                                    <span class="contact-date">${a.email}</span>
-                                                </div>
-                                            </div>
-                                        </li> 
-                                    </c:forEach>
-                                </ul>
-                            </div>
-                            <div class="card-footer text-center bg-white">
-                                <a href="AttendanceReport" class="text-muted">View attendance report</a>
+                                            </li> 
+                                        </c:forEach>
+                                    </ul>
+                                </div>
+                                <div class="card-footer text-center bg-white">
+                                    <a href="AttendanceReport" class="text-muted">View attendance report</a>
+                                </div>
                             </div>
                         </div>
                     </div>

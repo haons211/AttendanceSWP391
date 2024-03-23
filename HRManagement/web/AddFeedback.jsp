@@ -27,7 +27,7 @@
 
 
         <div class="main-wrapper">
-            <%@include file="SideBarSetting.jsp" %>
+            <%@include file="SideBarforEm.jsp" %>
             <div class="page-wrapper">
                 <div class="content">
 
