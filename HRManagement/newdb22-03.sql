@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `swp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `swp`;
+CREATE DATABASE  IF NOT EXISTS `swp33` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `swp33`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: swp
+-- Host: 127.0.0.1    Database: swp33
 -- ------------------------------------------------------
--- Server version	8.2.0
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,7 +52,7 @@ CREATE TABLE `application` (
 
 LOCK TABLES `application` WRITE;
 /*!40000 ALTER TABLE `application` DISABLE KEYS */;
-INSERT INTO `application` VALUES (1,2,1,3,'','da','da','complete','2024-03-20 13:10:27','2024-03-20 13:19:53','ad'),(2,2,1,3,'','toi da update','toi da update','Pending','2024-03-20 13:22:32',NULL,NULL);
+REPLACE INTO `application` VALUES (1,2,1,3,'','da','da','complete','2024-03-20 13:10:27','2024-03-20 13:19:53','ad'),(2,2,1,3,'','toi da update','toi da update','Pending','2024-03-20 13:22:32',NULL,NULL);
 /*!40000 ALTER TABLE `application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `attendance` (
 
 LOCK TABLES `attendance` WRITE;
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
-INSERT INTO `attendance` VALUES (1,1,'van_a.jpg',1,1,'2024-03-01','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(2,2,'thi_b.jpg',2,3,'2024-03-01','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(3,3,'van_c.jpg',3,2,'2024-03-01','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(4,4,'thi_d.jpg',4,3,'2024-03-01','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(5,5,'van_e.jpg',5,1,'2024-03-01','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(6,1,'van_a.jpg',1,1,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(7,2,'thi_b.jpg',2,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(8,3,'van_c.jpg',3,2,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(9,4,'thi_d.jpg',4,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(10,5,'van_e.jpg',5,1,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(11,1,'van_a.jpg',1,1,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(12,2,'thi_b.jpg',2,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(13,3,'van_c.jpg',3,2,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(14,4,'thi_d.jpg',4,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(15,5,'van_e.jpg',5,1,'2024-03-03','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(16,1,'van_a.jpg',1,1,'2024-03-04','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(17,2,'thi_b.jpg',2,3,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(18,3,'van_c.jpg',3,2,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(19,4,'thi_d.jpg',4,3,'2024-03-04','07:50:00','16:00:00','','Checked In','Early','Present'),(20,5,'van_e.jpg',5,1,'2024-03-04','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(21,1,'van_a.jpg',1,1,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(22,2,'thi_b.jpg',2,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(23,3,'van_c.jpg',3,2,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(24,4,'thi_d.jpg',4,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(25,5,'van_e.jpg',5,1,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(26,1,'van_a.jpg',1,1,'2024-03-06','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(27,2,'thi_b.jpg',2,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(28,3,'van_c.jpg',3,2,'2024-03-06','07:50:00','09:00:00','hehe','Checked In','Early','Absent'),(29,4,'thi_d.jpg',4,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(30,5,'van_e.jpg',5,1,'2024-03-06','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(31,1,'van_a.jpg',1,1,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(32,2,'thi_b.jpg',2,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(33,3,'van_c.jpg',3,2,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(34,4,'thi_d.jpg',4,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(35,5,'van_e.jpg',5,1,'2024-03-07','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(36,1,'van_a.jpg',1,1,'2024-03-08','07:50:00','09:00:00','','Checked In','Early','Absent'),(37,2,'thi_b.jpg',2,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(38,3,'van_c.jpg',3,2,'2024-03-08','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(39,4,'thi_d.jpg',4,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(40,5,'van_e.jpg',5,1,'2024-03-08','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(41,1,'van_a.jpg',1,1,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(42,2,'thi_b.jpg',2,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(43,3,'van_c.jpg',3,2,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(44,4,'thi_d.jpg',4,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(45,5,'van_e.jpg',5,1,'2024-03-09','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(46,1,'van_a.jpg',1,1,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(47,2,'thi_b.jpg',2,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(48,3,'van_c.jpg',3,2,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(49,4,'thi_d.jpg',4,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(50,5,'van_e.jpg',5,1,'2024-03-10','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(51,1,'van_a.jpg',1,1,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(52,2,'thi_b.jpg',2,3,'2024-03-11','07:50:00','12:00:00','','Checked In','Early','Absent'),(53,3,'van_c.jpg',3,2,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(54,4,'thi_d.jpg',4,3,'2024-03-11','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(55,5,'van_e.jpg',5,1,'2024-03-11','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(56,1,'van_a.jpg',1,1,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(57,2,'thi_b.jpg',2,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(58,3,'van_c.jpg',3,2,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(59,4,'thi_d.jpg',4,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(60,5,'van_e.jpg',5,1,'2024-03-12','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(61,1,'van_a.jpg',1,1,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(62,2,'thi_b.jpg',2,3,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(63,3,'van_c.jpg',3,2,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(64,4,'thi_d.jpg',4,3,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(65,5,'van_e.jpg',5,1,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(66,1,'van_a.jpg',1,1,'2024-03-14','07:50:00','12:54:36','','Checked In','Early','Absent'),(67,2,'thi_b.jpg',2,3,'2024-03-14','07:50:00','13:16:38','f','Checked In','Early','Absent'),(68,3,'van_c.jpg',3,2,'2024-03-14','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(69,4,'thi_d.jpg',4,3,'2024-03-14','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(70,5,'van_e.jpg',5,1,'2024-03-14','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(71,1,'van_a.jpg',1,1,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(72,2,'thi_b.jpg',2,3,'2024-03-15','07:50:00','17:00:00','g','Checked In','Checked Out','Present'),(73,3,'van_c.jpg',3,2,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(74,4,'thi_d.jpg',4,3,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(75,5,'van_e.jpg',5,1,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(76,1,'van_a.jpg',1,1,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(77,2,'thi_b.jpg',2,3,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(78,3,'van_c.jpg',3,2,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(79,4,'thi_d.jpg',4,3,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(80,5,'van_e.jpg',5,1,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present');
+REPLACE INTO `attendance` VALUES (1,1,'van_a.jpg',1,1,'2024-03-01',NULL,NULL,'hehe','Not Yet','Not Yet','Absent'),(2,2,'thi_b.jpg',2,3,'1900-03-01',NULL,NULL,'đâsdasdas','Not Yet','Not Yet','Absent'),(3,3,'van_c.jpg',3,2,'2024-03-01',NULL,NULL,'hehe','Not Yet','Not Yet','Absent'),(4,4,'thi_d.jpg',4,3,'2024-03-01',NULL,NULL,'','Not Yet','Not Yet','Absent'),(5,5,'van_e.jpg',5,1,'2024-03-01','07:00:00','21:00:00','hehehe','Checked In','Checked Out','Present'),(6,1,'van_a.jpg',1,1,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(7,2,'thi_b.jpg',2,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(8,3,'van_c.jpg',3,2,'2024-03-02','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(9,4,'thi_d.jpg',4,3,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(10,5,'van_e.jpg',5,1,'2024-03-02','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(11,1,'van_a.jpg',1,1,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(12,2,'thi_b.jpg',2,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(13,3,'van_c.jpg',3,2,'2024-03-03','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(14,4,'thi_d.jpg',4,3,'2024-03-03','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(15,5,'van_e.jpg',5,1,'2024-03-03','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(16,1,'van_a.jpg',1,1,'2024-03-04','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(17,2,'thi_b.jpg',2,3,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(18,3,'van_c.jpg',3,2,'2024-03-04','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(19,4,'thi_d.jpg',4,3,'2024-03-04','07:50:00','16:00:00','','Checked In','Early','Present'),(20,5,'van_e.jpg',5,1,'2024-03-04','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(21,1,'van_a.jpg',1,1,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(22,2,'thi_b.jpg',2,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(23,3,'van_c.jpg',3,2,'2024-03-05','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(24,4,'thi_d.jpg',4,3,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(25,5,'van_e.jpg',5,1,'2024-03-05','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(26,1,'van_a.jpg',1,1,'2024-03-06','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(27,2,'thi_b.jpg',2,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(28,3,'van_c.jpg',3,2,'2024-03-06','07:50:00','09:00:00','hehe','Checked In','Early','Absent'),(29,4,'thi_d.jpg',4,3,'2024-03-06','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(30,5,'van_e.jpg',5,1,'2024-03-06','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(31,1,'van_a.jpg',1,1,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(32,2,'thi_b.jpg',2,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(33,3,'van_c.jpg',3,2,'2024-03-07','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(34,4,'thi_d.jpg',4,3,'2024-03-07','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(35,5,'van_e.jpg',5,1,'2024-03-07','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(36,1,'van_a.jpg',1,1,'2024-03-08','07:50:00','09:00:00','','Checked In','Early','Absent'),(37,2,'thi_b.jpg',2,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(38,3,'van_c.jpg',3,2,'2024-03-08','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(39,4,'thi_d.jpg',4,3,'2024-03-08','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(40,5,'van_e.jpg',5,1,'2024-03-08','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(41,1,'van_a.jpg',1,1,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(42,2,'thi_b.jpg',2,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(43,3,'van_c.jpg',3,2,'2024-03-09','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(44,4,'thi_d.jpg',4,3,'2024-03-09','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(45,5,'van_e.jpg',5,1,'2024-03-09','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(46,1,'van_a.jpg',1,1,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(47,2,'thi_b.jpg',2,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(48,3,'van_c.jpg',3,2,'2024-03-10','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(49,4,'thi_d.jpg',4,3,'2024-03-10','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(50,5,'van_e.jpg',5,1,'2024-03-10','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(51,1,'van_a.jpg',1,1,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(52,2,'thi_b.jpg',2,3,'2024-03-11','07:50:00','12:00:00','','Checked In','Early','Absent'),(53,3,'van_c.jpg',3,2,'2024-03-11','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(54,4,'thi_d.jpg',4,3,'2024-03-11','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(55,5,'van_e.jpg',5,1,'2024-03-11','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(56,1,'van_a.jpg',1,1,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(57,2,'thi_b.jpg',2,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(58,3,'van_c.jpg',3,2,'2024-03-12','07:50:00','17:00:00','hehe','Checked In','Checked Out','Present'),(59,4,'thi_d.jpg',4,3,'2024-03-12','07:50:00','17:00:00','','Checked In','Checked Out','Present'),(60,5,'van_e.jpg',5,1,'2024-03-12','07:50:00','17:00:00','hehehe','Checked In','Checked Out','Present'),(61,1,'van_a.jpg',1,1,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(62,2,'thi_b.jpg',2,3,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(63,3,'van_c.jpg',3,2,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(64,4,'thi_d.jpg',4,3,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(65,5,'van_e.jpg',5,1,'2024-03-13','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(66,1,'van_a.jpg',1,1,'2024-03-14','07:50:00','12:54:36','','Checked In','Early','Absent'),(67,2,'thi_b.jpg',2,3,'2024-03-14','07:50:00','13:16:38','f','Checked In','Early','Absent'),(68,3,'van_c.jpg',3,2,'2024-03-14','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(69,4,'thi_d.jpg',4,3,'2024-03-14','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(70,5,'van_e.jpg',5,1,'2024-03-14','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(71,1,'van_a.jpg',1,1,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(72,2,'thi_b.jpg',2,3,'2024-03-15','07:50:00','17:00:00','g','Checked In','Checked Out','Present'),(73,3,'van_c.jpg',3,2,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(74,4,'thi_d.jpg',4,3,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(75,5,'van_e.jpg',5,1,'2024-03-15','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(76,1,'van_a.jpg',1,1,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(77,2,'thi_b.jpg',2,3,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(78,3,'van_c.jpg',3,2,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(79,4,'thi_d.jpg',4,3,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present'),(80,5,'van_e.jpg',5,1,'2024-03-16','07:50:00','17:00:00',NULL,'Checked In','Checked Out','Present');
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -151,11 +151,11 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_attendance_status_update` BEFORE UPDATE ON `attendance` FOR EACH ROW BEGIN
     IF NEW.in_time IS NOT NULL THEN
@@ -187,13 +187,6 @@ ELSEIF NEW.in_time IS NOT NULL AND NEW.out_time IS NULL THEN
 ELSE
     SET NEW.status = 'Present';
 END IF;
-    
-    -- Check if the status is Absent after 17:00 and update remainDay and leaveDays accordingly
-    IF TIME(NOW()) > '17:00:00' AND NEW.status = 'Absent' THEN
-        UPDATE remainday
-        SET remainDay = remainDay - 1, leaveDays = leaveDays + 1
-        WHERE employee_id = NEW.employee_id;
-    END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -232,7 +225,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'SGIP5','69, Trần Duy Hưng, Cầu Giấy, Hà Nội','sgip5.com@example.com','0123456789','0123456789','https://www.sgip5.com/',1,1);
+REPLACE INTO `company` VALUES (1,'SGIP5','69, Trần Duy Hưng, Cầu Giấy, Hà Nội','sgip5.com@example.com','0123456789','0123456789','https://www.sgip5.com/',1,1);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,7 +253,7 @@ CREATE TABLE `config` (
 
 LOCK TABLES `config` WRITE;
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
-INSERT INTO `config` VALUES (1,'08:00:00','17:00:00','2022-01-15',2,5);
+REPLACE INTO `config` VALUES (1,'08:00:00','17:00:00','2022-01-15',2,5);
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -308,7 +301,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'Software Engineering','SE'),(2,'Digital Marketing','DM'),(3,'Bussiness Analyst','BA');
+REPLACE INTO `department` VALUES (1,'Software Engineering','SE'),(2,'Digital Marketing','DM'),(3,'Bussiness Analyst','BA');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +331,7 @@ CREATE TABLE `dependents` (
 
 LOCK TABLES `dependents` WRITE;
 /*!40000 ALTER TABLE `dependents` DISABLE KEYS */;
-INSERT INTO `dependents` VALUES (1,1,'Alice Doe','1990-01-01','Spouse',1),(2,1,'Emma Doe','2010-05-15','Child',1),(3,2,'Tom Smith','1995-06-20','Spouse',0),(4,3,'Sarah Johnson','1992-11-15','Spouse',1),(5,3,'Liam Johnson','2010-09-25','Child',0),(6,4,'Olivia Williams','2005-08-12','Child',1),(7,5,'Noah Brown','2018-03-30','Child',0);
+REPLACE INTO `dependents` VALUES (1,1,'Alice Doe','1990-01-01','Spouse',1),(2,1,'Emma Doe','2010-05-15','Child',1),(3,2,'Tom Smith','1995-06-20','Spouse',0),(4,3,'Sarah Johnson','1992-11-15','Spouse',1),(5,3,'Liam Johnson','2010-09-25','Child',0),(6,4,'Olivia Williams','2005-08-12','Child',1),(7,5,'Noah Brown','2018-03-30','Child',0);
 /*!40000 ALTER TABLE `dependents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +366,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Nguyễn Văn A','0987654321','Số 10, Đường Nguyễn Chí Thanh, Hà Nội','van.a@example.com',_binary '','van_a.jpg','1990-05-15','2022-01-01',1,5000000.00),(2,'Trần Thị B','0912345678','Số 20, Đường Lê Lợi, Hồ Chí Minh','thi.b@example.com',_binary '\0','thi_b.jpg','1993-08-25','2022-01-02',2,99999.00),(3,'Lê Văn C','0905123456','Số 30, Đường Trần Hưng Đạo, Đà Nẵng','van.c@example.com',_binary '','van_c.jpg','1988-02-10','2022-01-03',3,88888.00),(4,'Hoàng Thị D','0978123456','Số 40, Đường Nguyễn Huệ, Cần Thơ','thi.d@example.com',_binary '\0','thi_d.jpg','1997-11-30','2022-01-04',4,77777.00),(5,'Phạm Văn E','0987123456','Số 50, Đường Trần Phú, Hải Phòng','van.e@example.com',_binary '','van_e.jpg','1991-04-20','2022-01-05',5,66666.00);
+REPLACE INTO `employee` VALUES (1,'Nguyễn Văn A','0987654321','Số 10, Đường Nguyễn Chí Thanh, Hà Nội','van.a@example.com',_binary '','van_a.jpg','1990-05-15','2022-01-01',1,5000000.00),(2,'Trần Thị B','0912345678','Số 20, Đường Lê Lợi, Hồ Chí Minh','thi.b@example.com',_binary '\0','thi_b.jpg','1993-08-25','2022-01-02',2,99999.00),(3,'Lê Văn C','0905123456','Số 30, Đường Trần Hưng Đạo, Đà Nẵng','van.c@example.com',_binary '','van_c.jpg','1988-02-10','2022-01-03',3,88888.00),(4,'Hoàng Thị D','0978123456','Số 40, Đường Nguyễn Huệ, Cần Thơ','thi.d@example.com',_binary '\0','thi_d.jpg','1997-11-30','2022-01-04',4,77777.00),(5,'Phạm Văn E','0987123456','Số 50, Đường Trần Phú, Hải Phòng','van.e@example.com',_binary '','van_e.jpg','1991-04-20','2022-01-05',5,66666.00);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -420,7 +413,7 @@ CREATE TABLE `employeedepartment` (
 
 LOCK TABLES `employeedepartment` WRITE;
 /*!40000 ALTER TABLE `employeedepartment` DISABLE KEYS */;
-INSERT INTO `employeedepartment` VALUES (1,1),(5,1),(3,2),(2,3),(4,3);
+REPLACE INTO `employeedepartment` VALUES (1,1),(5,1),(3,2),(2,3),(4,3);
 /*!40000 ALTER TABLE `employeedepartment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,7 +442,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,5,'Về Trưởng phòng','Hay đi muộn, nói chuyện hãm','2024-03-12'),(3,5,'Về Công ty','Công ty to quá làm em đi mỏi chân','2024-03-13'),(4,2,'Về Trưởng phòng','Hay đi muộn, nói chuyện hãm','2024-03-13'),(5,2,'Về giám đốc','Không làm mà nói nhiều','2024-03-13'),(10,2,'Về Trưởng phòng','Good','2024-03-13'),(14,2,'Về Trưởng phòng','Good','2024-03-13'),(16,2,'Về Trưởng phòng','Not Good','2024-03-13'),(21,2,'Về giám đốc','Good','2024-03-13'),(30,2,'Về Trưởng phòng','Not Good','2024-03-13'),(32,2,'Về giám đốc','Good','2024-03-13'),(33,2,'Về Trưởng phòng','Not Good','2024-03-13'),(34,2,'Về Trưởng phòng','Good','2024-03-13'),(35,2,'Về Trưởng phòng','Good','2024-03-13'),(36,2,'Về Trưởng phòng','Not Good','2024-03-13');
+REPLACE INTO `feedback` VALUES (1,5,'Về Trưởng phòng','Hay đi muộn, nói chuyện hãm','2024-03-12'),(3,5,'Về Công ty','Công ty to quá làm em đi mỏi chân','2024-03-13'),(4,2,'Về Trưởng phòng','Hay đi muộn, nói chuyện hãm','2024-03-13'),(5,2,'Về giám đốc','Không làm mà nói nhiều','2024-03-13'),(10,2,'Về Trưởng phòng','Good','2024-03-13'),(14,2,'Về Trưởng phòng','Good','2024-03-13'),(16,2,'Về Trưởng phòng','Not Good','2024-03-13'),(21,2,'Về giám đốc','Good','2024-03-13'),(30,2,'Về Trưởng phòng','Not Good','2024-03-13'),(32,2,'Về giám đốc','Good','2024-03-13'),(33,2,'Về Trưởng phòng','Not Good','2024-03-13'),(34,2,'Về Trưởng phòng','Good','2024-03-13'),(35,2,'Về Trưởng phòng','Good','2024-03-13'),(36,2,'Về Trưởng phòng','Not Good','2024-03-13');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -513,7 +506,7 @@ CREATE TABLE `insurance` (
 
 LOCK TABLES `insurance` WRITE;
 /*!40000 ALTER TABLE `insurance` DISABLE KEYS */;
-INSERT INTO `insurance` VALUES (1,1,'ABC Insurance','POL001','Health','2024-01-01','2025-01-01',1000.00,100.00,20.00,'Health checkups','Health Insurance','ABC Insurance','No beneficiary',5000.00,'2025-01-01'),(2,2,'XYZ Insurance','POL002','Life','2024-03-15','2034-03-15',500.00,NULL,NULL,'Death Benefit','Life Insurance','XYZ Insurance','Family',100000.00,'2034-03-15'),(3,3,'ABC Insurance','POL003','Accident','2023-06-01','2024-06-01',800.00,50.00,NULL,'Medical Expense','Accident Insurance','ABC Insurance',NULL,2000.00,'2024-06-01');
+REPLACE INTO `insurance` VALUES (1,1,'ABC Insurance','POL001','Health','2024-01-01','2025-01-01',1000.00,100.00,20.00,'Health checkups','Health Insurance','ABC Insurance','No beneficiary',5000.00,'2025-01-01'),(2,2,'XYZ Insurance','POL002','Life','2024-03-15','2034-03-15',500.00,NULL,NULL,'Death Benefit','Life Insurance','XYZ Insurance','Family',100000.00,'2034-03-15'),(3,3,'ABC Insurance','POL003','Accident','2023-06-01','2024-06-01',800.00,50.00,NULL,'Medical Expense','Accident Insurance','ABC Insurance',NULL,2000.00,'2024-06-01');
 /*!40000 ALTER TABLE `insurance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -568,7 +561,7 @@ CREATE TABLE `managerproject` (
 
 LOCK TABLES `managerproject` WRITE;
 /*!40000 ALTER TABLE `managerproject` DISABLE KEYS */;
-INSERT INTO `managerproject` VALUES (1,1,3);
+REPLACE INTO `managerproject` VALUES (1,1,3);
 /*!40000 ALTER TABLE `managerproject` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -596,7 +589,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (1,3,'hihihi\n','2024-03-20 12:56:10'),(2,3,'hihihi\n','2024-03-20 12:56:11'),(3,3,'hihihi\n','2024-03-20 12:56:11'),(4,3,'he lo c\n','2024-03-20 13:04:06'),(5,2,'oke','2024-03-20 13:04:11'),(6,3,'hi toi la Hao','2024-03-20 13:22:55'),(7,2,'oke','2024-03-20 13:23:11');
+REPLACE INTO `message` VALUES (1,3,'hihihi\n','2024-03-20 12:56:10'),(2,3,'hihihi\n','2024-03-20 12:56:11'),(3,3,'hihihi\n','2024-03-20 12:56:11'),(4,3,'he lo c\n','2024-03-20 13:04:06'),(5,2,'oke','2024-03-20 13:04:11'),(6,3,'hi toi la Hao','2024-03-20 13:22:55'),(7,2,'oke','2024-03-20 13:23:11');
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -625,7 +618,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (1,1,'You have a new message','New Message','2022-01-20 10:30:00'),(2,2,'Approval for leave request','Leave Request','2022-01-21 08:45:00'),(3,3,'Reminder: Upcoming meeting','Meeting Reminder','2022-01-22 15:20:00');
+REPLACE INTO `notification` VALUES (1,1,'You have a new message','New Message','2022-01-20 10:30:00'),(2,2,'Approval for leave request','Leave Request','2022-01-21 08:45:00'),(3,3,'Reminder: Upcoming meeting','Meeting Reminder','2022-01-22 15:20:00');
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,7 +648,7 @@ CREATE TABLE `project` (
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` VALUES (1,3,'12','2024-11-16','2024-11-12','2');
+REPLACE INTO `project` VALUES (1,3,'12','2024-11-16','2024-11-12','2');
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -728,24 +721,80 @@ CREATE TABLE `remainday` (
 
 LOCK TABLES `remainday` WRITE;
 /*!40000 ALTER TABLE `remainday` DISABLE KEYS */;
-INSERT INTO `remainday` VALUES (1,1,3,5,0,5,1),(2,2,2,2,0,2,1),(3,3,4,8,5,3,1),(4,4,4,8,3,5,1),(5,5,4,8,4,4,1);
+REPLACE INTO `remainday` VALUES (1,1,4,8,3,5,1),(2,2,4,8,5,3,1),(3,3,4,8,5,3,1),(4,4,4,8,5,3,1),(5,5,4,8,5,3,1);
 /*!40000 ALTER TABLE `remainday` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_remainday_leave_days` AFTER UPDATE ON `remainday` FOR EACH ROW BEGIN
-    IF OLD.remainDay < NEW.remainDay THEN
-        UPDATE remainday
-        SET leaveDays = leaveDays - (OLD.remainDay - NEW.remainDay)
-        WHERE employee_id = NEW.employee_id;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_leave_days` BEFORE UPDATE ON `remainday` FOR EACH ROW BEGIN
+    DECLARE in_status VARCHAR(120);
+    DECLARE out_status VARCHAR(120);
+    DECLARE att_status VARCHAR(120);
+
+    -- Fetching in_status, out_status, and status from the latest attendance record
+    SELECT in_status, out_status, status 
+    INTO in_status, out_status, att_status
+    FROM attendance 
+    WHERE employee_id = NEW.employee_id 
+    ORDER BY date DESC 
+    LIMIT 1;
+
+    IF (TIME(NOW()) > '17:00:00' AND att_status = 'Absent') THEN
+        -- If the employee was marked as absent after 5 PM, update leave days
+        SET NEW.leaveDays = NEW.leaveDays + 1;
     END IF;
+
+    IF (in_status = 'Present' AND out_status = 'Present' AND att_status = 'Present') THEN
+        -- If both check-in and check-out statuses are 'Present', update remaining days
+        SET NEW.remainDay_id = NEW.remainDay_id - 1;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_remainDay` BEFORE UPDATE ON `remainday` FOR EACH ROW BEGIN
+    DECLARE new_leaveDays INT;
+    SET new_leaveDays = NEW.approvedLeaveDays - NEW.remainDay;
+    
+    SET NEW.leaveDays = new_leaveDays;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_leaveDays` BEFORE UPDATE ON `remainday` FOR EACH ROW BEGIN
+    DECLARE new_remainDay INT;
+    SET new_remainDay = NEW.approvedLeaveDays - NEW.leaveDays;
+    
+    SET NEW.remainDay = new_remainDay;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -788,7 +837,7 @@ CREATE TABLE `salary` (
 
 LOCK TABLES `salary` WRITE;
 /*!40000 ALTER TABLE `salary` DISABLE KEYS */;
-INSERT INTO `salary` VALUES (1,2,3,2,1000.00,1000.00,5000.00,'2024-03-01',2),(8,3,2,3,999.00,999.90,999.00,'2022-01-03',3),(9,1,1,1,99999.00,999.90,999999.00,'2022-01-01',1),(10,4,3,4,999.00,999.90,99999.00,'2022-01-04',4),(11,5,1,5,8888.00,888.80,8888.00,'2022-01-05',5);
+REPLACE INTO `salary` VALUES (1,2,3,2,1000.00,1000.00,5000.00,'2024-03-01',2),(8,3,2,3,999.00,999.90,999.00,'2022-01-03',3),(9,1,1,1,99999.00,999.90,999999.00,'2022-01-01',1),(10,4,3,4,999.00,999.90,99999.00,'2022-01-04',4),(11,5,1,5,8888.00,888.80,8888.00,'2022-01-05',5);
 /*!40000 ALTER TABLE `salary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -821,7 +870,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,3,'3','2024-11-11','2024-11-11','2024-11-11',3,1),(2,3,'3','2024-11-11','2024-11-11','2024-11-11',3,1),(3,3,'3','task đầu tiên','2024-11-11','2024-11-11',3,1);
+REPLACE INTO `tasks` VALUES (1,3,'3','2024-11-11','2024-11-11','2024-11-11',3,1),(2,3,'3','2024-11-11','2024-11-11','2024-11-11',3,1),(3,3,'3','task đầu tiên','2024-11-11','2024-11-11',3,1);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -885,7 +934,7 @@ CREATE TABLE `type_application` (
 
 LOCK TABLES `type_application` WRITE;
 /*!40000 ALTER TABLE `type_application` DISABLE KEYS */;
-INSERT INTO `type_application` VALUES (1,'Nghỉ phép'),(2,'Đi muộn'),(3,'Về sớm'),(4,'Công tác'),(5,'Nghỉ bệnh'),(6,'Nghỉ phục vụ dân sự');
+REPLACE INTO `type_application` VALUES (1,'Nghỉ phép'),(2,'Đi muộn'),(3,'Về sớm'),(4,'Công tác'),(5,'Nghỉ bệnh'),(6,'Nghỉ phục vụ dân sự');
 /*!40000 ALTER TABLE `type_application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -909,7 +958,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,'admin'),(2,'user'),(3,'manager');
+REPLACE INTO `user_role` VALUES (1,'admin'),(2,'user'),(3,'manager');
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -937,12 +986,12 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'adminuser','5291a0858dfafff116e37dea26d5bfaf',1),(2,'normaluser','5291a0858dfafff116e37dea26d5bfaf',2),(3,'manageruser','5291a0858dfafff116e37dea26d5bfaf',3),(4,'hoangd','5291a0858dfafff116e37dea26d5bfaf',2),(5,'phame','5291a0858dfafff116e37dea26d5bfaf',2);
+REPLACE INTO `users` VALUES (1,'adminuser','5291a0858dfafff116e37dea26d5bfaf',1),(2,'normaluser','5291a0858dfafff116e37dea26d5bfaf',2),(3,'manageruser','5291a0858dfafff116e37dea26d5bfaf',3),(4,'hoangd','5291a0858dfafff116e37dea26d5bfaf',2),(5,'phame','5291a0858dfafff116e37dea26d5bfaf',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'swp'
+-- Dumping events for database 'swp33'
 --
 /*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
 /*!50106 DROP EVENT IF EXISTS `CheckAndUpdateManagerProjectSuccess` */;
@@ -997,7 +1046,7 @@ DELIMITER ;
 /*!50106 SET TIME_ZONE= @save_time_zone */ ;
 
 --
--- Dumping routines for database 'swp'
+-- Dumping routines for database 'swp33'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `generateDailyAttendance` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1062,4 +1111,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-22 19:43:14
+-- Dump completed on 2024-03-23 21:40:15
