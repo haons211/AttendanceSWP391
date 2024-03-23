@@ -106,26 +106,30 @@ UNLOCK TABLES;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_attendance_status_insert` BEFORE INSERT ON `attendance` FOR EACH ROW BEGIN
     IF NEW.in_time IS NOT NULL THEN
-        IF NEW.in_time < (SELECT intime_config FROM config WHERE config_id = 1) THEN
-            SET NEW.in_status = 'Checked In';
-        ELSE
-            SET NEW.in_status = 'Late';
-        END IF;
+    IF NEW.in_time <= (SELECT intime_config FROM config WHERE config_id = 1) THEN
+        SET NEW.in_status = 'Checked In';
+    ELSE
+        SET NEW.in_status = 'Late';
     END IF;
-    
-    IF NEW.out_time IS NOT NULL THEN
-        IF NEW.out_time < (SELECT outtime_config FROM config WHERE config_id = 1) THEN
-            SET NEW.out_status = 'Early';
-        ELSE
-            SET NEW.out_status = 'Checked Out';
-        END IF;
+ELSE
+    SET NEW.in_status = 'Not Yet';
+END IF;
+
+IF NEW.out_time IS NOT NULL THEN
+    IF NEW.out_time < (SELECT outtime_config FROM config WHERE config_id = 1) THEN
+        SET NEW.out_status = 'Early';
+    ELSE
+        SET NEW.out_status = 'Checked Out';
     END IF;
-    
-    IF NEW.in_time IS NOT NULL AND NEW.out_time IS NOT NULL AND TIMEDIFF(NEW.out_time, NEW.in_time) < '07:00:00' THEN
+ELSE
+    SET NEW.out_status = 'Not Yet';
+END IF;
+
+IF NEW.in_time IS NOT NULL AND NEW.out_time IS NOT NULL AND TIMEDIFF(NEW.out_time, NEW.in_time) < '07:00:00' THEN
     SET NEW.status = 'Absent';
 ELSEIF NEW.in_time IS NULL AND NEW.out_time IS NULL THEN
     SET NEW.status = 'Absent';
-    ELSEIF NEW.in_time IS NOT NULL AND NEW.out_time IS NULL THEN
+ELSEIF NEW.in_time IS NOT NULL AND NEW.out_time IS NULL THEN
     SET NEW.status = 'Absent';
 ELSE
     SET NEW.status = 'Present';
@@ -155,31 +159,34 @@ DELIMITER ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_attendance_status_update` BEFORE UPDATE ON `attendance` FOR EACH ROW BEGIN
     IF NEW.in_time IS NOT NULL THEN
-        IF NEW.in_time <= (SELECT intime_config FROM config WHERE config_id = 1) THEN
-            SET NEW.in_status = 'Checked In';
-        ELSE
-            SET NEW.in_status = 'Late';
-        END IF;
+    IF NEW.in_time <= (SELECT intime_config FROM config WHERE config_id = 1) THEN
+        SET NEW.in_status = 'Checked In';
+    ELSE
+        SET NEW.in_status = 'Late';
     END IF;
-    
-    IF NEW.out_time IS NOT NULL THEN
-        IF NEW.out_time < (SELECT outtime_config FROM config WHERE config_id = 1) THEN
-            SET NEW.out_status = 'Early';
-        ELSE
-            SET NEW.out_status = 'Checked Out';
-        END IF;
+ELSE
+    SET NEW.in_status = 'Not Yet';
+END IF;
+
+IF NEW.out_time IS NOT NULL THEN
+    IF NEW.out_time < (SELECT outtime_config FROM config WHERE config_id = 1) THEN
+        SET NEW.out_status = 'Early';
+    ELSE
+        SET NEW.out_status = 'Checked Out';
     END IF;
-    
-      IF NEW.in_time IS NOT NULL AND NEW.out_time IS NOT NULL AND TIMEDIFF(NEW.out_time, NEW.in_time) < '07:00:00' THEN
+ELSE
+    SET NEW.out_status = 'Not Yet';
+END IF;
+
+IF NEW.in_time IS NOT NULL AND NEW.out_time IS NOT NULL AND TIMEDIFF(NEW.out_time, NEW.in_time) < '07:00:00' THEN
     SET NEW.status = 'Absent';
 ELSEIF NEW.in_time IS NULL AND NEW.out_time IS NULL THEN
     SET NEW.status = 'Absent';
-    ELSEIF NEW.in_time IS NOT NULL AND NEW.out_time IS NULL THEN
+ELSEIF NEW.in_time IS NOT NULL AND NEW.out_time IS NULL THEN
     SET NEW.status = 'Absent';
 ELSE
     SET NEW.status = 'Present';
 END IF;
-
     
     -- Check if the status is Absent after 17:00 and update remainDay and leaveDays accordingly
     IF TIME(NOW()) > '17:00:00' AND NEW.status = 'Absent' THEN
