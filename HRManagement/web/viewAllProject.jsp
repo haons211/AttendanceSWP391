@@ -66,11 +66,11 @@
 
                 <div class="content">
                     <div class="row">
-                        <div class="col-12">
-                            <h1 class="page-title" style="text-align: center">Project</h1>
+                        <div class="col-sm-5 col-5">
+                            <h1 class="page-title">Project</h1>
                         </div>
                         <%  if (role == 3) { %>
-                        <div class="col-sm-4 col-8 text-right m-b-30" style="margin-left: 65%;">
+                                              <div class="col-sm-7 col-7 text-right m-b-30" >
                             <a href="#" class="btn btn-primary btn-rounded" data-toggle="modal" data-target="#add_event"><i class="fa fa-plus"></i> Add Project</a>
                         </div> <% } %>
                     </div>
@@ -166,7 +166,7 @@
                                            
                                         </form>
  <% } %> 
-
+                                        
                                         </tr>
                                     </c:forEach>
 

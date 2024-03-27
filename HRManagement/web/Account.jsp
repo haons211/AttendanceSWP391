@@ -83,8 +83,8 @@
                                                 <td class="column-1">
                                                     <c:choose>
                                                         <c:when test="${o.getRole() eq 1}">Admin</c:when>
-                                                        <c:when test="${o.getRole() eq 2}">Manager</c:when>
-                                                        <c:when test="${o.getRole() eq 3}">Employee</c:when>
+                                                        <c:when test="${o.getRole() eq 3}">Manager</c:when>
+                                                        <c:when test="${o.getRole() eq 2}">Employee</c:when>
                                                         <c:otherwise>Unknown Role</c:otherwise>
                                                     </c:choose>
                                                 </td>
