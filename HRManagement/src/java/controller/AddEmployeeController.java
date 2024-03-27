@@ -48,8 +48,8 @@ public class AddEmployeeController extends HttpServlet {
         String birthDate = request.getParameter("birthDate");
         String hireDate = request.getParameter("hireDate");
         Double salary = Double.parseDouble(request.getParameter("salary"));
-        System.out.println(birthDate);
-        System.out.println(hireDate);
+        DepartmentDAO ddao =  new DepartmentDAO();
+        
        String department = request.getParameter("department");
         System.out.println(department);
         EmployeeDAO dao = new EmployeeDAO();
@@ -83,6 +83,10 @@ public class AddEmployeeController extends HttpServlet {
                 request.setAttribute("messageErrorGender", messageError + "gender");
                 count++;
             }
+            if(salary <0){
+                 request.setAttribute("messageErrorSalary", messageError + "salary");
+                count++;
+            }
             if (validate.checkDate(birthDate) && validate.checkDate(hireDate) ) {
                 if (!validate.compareDate(birthDate, hireDate)) {
                     request.setAttribute("messageErrorDate", messageError + ". The hire date is after the birth date");
@@ -90,6 +94,11 @@ public class AddEmployeeController extends HttpServlet {
                 }
                 
             }
+            if(!validate.checkEmail(email)){
+                 request.setAttribute("messageErrorEmail", messageError + "Email");
+                count++;
+            }
+                    
             if(validate.checkDate(birthDate)){
                 if (!validate.isAdult(birthDate)) {
                     request.setAttribute("messageErrorBirthday", messageError + ". The age of employee must be greater than 18");
@@ -97,10 +106,11 @@ public class AddEmployeeController extends HttpServlet {
                 }
             }
             
-DepartmentDAO ddao =new DepartmentDAO();
+
             AccountDAO adao = new AccountDAO();
-            int userId = adao.getIdByUsername(username).getUserID();
+            
             if (count > 0) {
+                 request.setAttribute("username", username);
                 request.setAttribute("name", name);
                 request.setAttribute("image", image);
                 request.setAttribute("phoneNumber", phoneNumber);
@@ -110,16 +120,15 @@ DepartmentDAO ddao =new DepartmentDAO();
                 request.setAttribute("birthDate", birthDate);
                 request.setAttribute("hireDate", hireDate);
                  request.setAttribute("salary", hireDate);
+                request.setAttribute("department", ddao.getAllDepartments(""));
                 request.getRequestDispatcher("add-employee.jsp").forward(request, response);
             } else {
-              
+              int userId = adao.getIdByUsername(username).getUserID();
                 dao.addEmployee(name, phoneNumber, address, email, genderReturn, image, birthDate, hireDate,userId,  salary);
                 System.out.println(dao.getEmployeeID());
 
              
-      if(dao.getEmployeeID() == 0){
-                    request.getRequestDispatcher("add-employee").forward(request, response);
-                }
+     
 
 //                dao.addEmployeeDepartment(new Employee(dao.getEmployeeID(), ddao.getDepartmentByName(department).getDepartment_id()));
                 response.sendRedirect("employee");

@@ -85,30 +85,33 @@
                                     <label for="inputFullname4" style="font-weight: bold">Basic Salary</label>
                                     <input type="number" class="form-control" id="basicSalary" placeholder="Basic Salary" value="${employee.basicSalary}" name="basicSalary" readonly="" oninput="calculateTax()">
                                 </div>
-                                 <div class="form-group col-md-6">
+                                <div class="form-group col-md-6">
                                     <label for="inputFullname4" style="font-weight: bold">Real Salary</label>
                                     <input type="number" class="form-control" id="realSalary" placeholder="Real Salary" readonly="" value="${employee.basicSalary*(26-leaveDay)/26 }" name="basicSalary" oninput="calculateTax()">
                                 </div>
-                                 </div>
-                                 <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputPhone4" style="font-weight: bold">Allowance  
+                            </div>
 
-                                    </label>
-                                    <input type="number" class="form-control" id="allowance" placeholder="Allowance  "  value="${salary.allowance}" name="allowance" oninput="calculateTax()">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputPhone4" style="font-weight: bold">Allowance</label>
+                                    <input type="number" class="form-control" id="allowance" placeholder="Allowance" value="${salary.allowance}"  oninput="calculateTax()" name="allowance" required="">
+                                    <div style="color: red" id="allowanceValidationMessage">${messageErrora}</div>
                                 </div>
-                                 <div class="form-group col-md-6">
+                                <div class="form-group col-md-6">
                                     <label for="role" style="font-weight: bold">Bonus</label>
-                                    <input type="number" class="form-control" id="bonus" placeholder="Bonus"  value="${salary.bonus}" name="bonus" oninput="calculateTax()">
+                                    <input type="number" class="form-control" id="bonus" placeholder="Bonus" name="bonus" value="${salary.bonus}" oninput="calculateTax()" required="">
+                                    <div style="color: red" id="bonusValidationMessage">${messageErrorb}</div>
                                 </div>
+
+
                             </div>
                             <div class="form-row">
-                                
+
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress" style="font-weight: bold">Tax</label>
                                     <input type="number" class="form-control" id="tax" readonly placeholder="Tax"  value="${salary.tax}" name="tax" oninput="calculateTax()">
                                 </div>
-                               
+
 
                             </div>
                             <button type="submit" class="btn btn-primary addBtn">Add</button>

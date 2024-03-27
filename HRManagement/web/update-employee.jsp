@@ -85,7 +85,7 @@
                                                         <input type="number" class="form-control" aria-label="Small" value="${employee.basicSalary}"
                                                                aria-describedby="inputGroup-sizing-sm" name="salary" id="salaryInput" placeholder="Employee Salary" required="" style="width: 312px;">
                                                     </div>
-                                                    <div style="color: red" id="salaryValidationMessage"></div>
+                                                    <div style="color: red" id="salaryValidationMessage">${messageErrorSalary}</div>
 
 
                                                 </div>
@@ -139,8 +139,11 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
-                                                        <input type="text" class="form-control" aria-label="Small"
+                                                        <input type="email" class="form-control" aria-label="Small"
                                                                aria-describedby="inputGroup-sizing-sm" name="email" value="${employee.email}" style="width: 300px;">
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorEmail}
                                                     </div>
                                                 </div>
                                             </td>
@@ -238,12 +241,19 @@
 
                                             </td>
                                             <td>
+                                               
+                                               
                                                 <div class ="left-input-table" style= "width: 200px" >
-                                                    <input type="file" id="fileInput"   
+                                                    <input type="file" 
                                                            accept="image/*" class="btn btn-outline-secondary"
-                                                           name="image" placeholder="Employee Image" >
+                                                           name="image" placeholder="Employee Image" onchange="loadFile(event)" id="exampleFormControlFile1" required="" >
+                                                </div>
+                                                <div class ="left-input-table" style= "width: 200px" >
+
+                                                    <img src="${employee.image}" id="output" style="width: 100px;height: 100px;object-fit: cover"/>
 
                                                 </div>
+
 
                                             </td>
 
@@ -260,6 +270,9 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <select name="department" class="form-control">
+                                                            <c:if test="${department1 != null}">
+                                                                <option value="${department1}">${department1}</option>
+                                                            </c:if>
                                                             <c:forEach items="${department}" var="d">
                                                                 <option value="${d.name}">${d.name}</option>
                                                             </c:forEach>
@@ -274,6 +287,20 @@
 
 
                                             </td>
+
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <div class = "left-text-table"  >
+
+
+
+                                                </div>
+
+                                            </td>
+
+
 
                                         </tr>
                                     </table>
@@ -297,16 +324,24 @@
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/app.js"></script>
         <script >
-            document.getElementById('salaryInput').addEventListener('input', function () {
-                var salary = parseFloat(this.value);
-                var validationMessage = document.getElementById('salaryValidationMessage');
-                if (salary < 0) {
-                    validationMessage.textContent = "Salary cannot be negative.";
-                } else {
-                    validationMessage.textContent = ""; // Clear the message
-                }
-            });
+                                                               document.getElementById('salaryInput').addEventListener('input', function () {
+                                                                   var salary = parseFloat(this.value);
+                                                                   var validationMessage = document.getElementById('salaryValidationMessage');
+                                                                   if (salary < 0) {
+                                                                       validationMessage.textContent = "Salary cannot be negative.";
+                                                                   } else {
+                                                                       validationMessage.textContent = ""; // Clear the message
+                                                                   }
+                                                               });
+                                                               var loadFile = function (event) {
+                                                                   var output = document.getElementById('output');
+                                                                   output.src = URL.createObjectURL(event.target.files[0]);
+                                                                   output.onload = function () {
+                                                                       URL.revokeObjectURL(output.src);
+                                                                   }
+                                                               };
         </script>
+
     </body>
 
 </html>

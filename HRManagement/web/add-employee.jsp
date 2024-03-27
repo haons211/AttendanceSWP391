@@ -83,7 +83,7 @@
                                                         <input type="number" class="form-control" aria-label="Small" value="${salary}"
                                                                aria-describedby="inputGroup-sizing-sm" name="salary" id="salaryInput" placeholder="Employee Salary" required="" style="width: 312px;">
                                                     </div>
-                                                    <div style="color: red" id="salaryValidationMessage"></div>
+                                                    <div style="color: red" id="salaryValidationMessage">${messageErrorSalary}</div>
 
                                             </td>
                                         </tr>
@@ -134,10 +134,12 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <input type="text" class="form-control" aria-label="Small" value="${email}"
+                                                        <input type="email" class="form-control" aria-label="Small" value="${email}"
                                                                aria-describedby="inputGroup-sizing-sm" name="email" placeholder="Employee Email" style="width: 300px;">
                                                     </div>
-
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorEmail}
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td> 
@@ -264,7 +266,7 @@
                                                 <div class ="left-input-table" style= "width: 200px" >
                                                     <input type="file" id="fileInput"   
                                                            accept="image/*" class="btn btn-outline-secondary"
-                                                           name="image" placeholder="Employee Image" >
+                                                           name="image" placeholder="Employee Image" required=""  >
 
                                                 </div>
 
@@ -284,9 +286,12 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <select name="department" class="form-control">
-                                                            <c:forEach items="${department}" var="d">
-                                                                <option value="${d.name}">${d.name}</option>
-                                                            </c:forEach>
+                                                            
+                                                                <c:forEach items="${department}" var="d">
+                                                                    <option value="${d.name}">${d.name}</option>
+                                                                </c:forEach>
+                                                        
+                                                            
                                                         </select>
 
                                                     </div>

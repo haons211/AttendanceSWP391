@@ -76,14 +76,14 @@ public class UpdateSalary extends HttpServlet {
         EmployeeDAO edao = new EmployeeDAO();
         DepartmentDAO ddao = new DepartmentDAO();
         AccountDAO adao = new AccountDAO();
-      
+
         try {
             Salary salary = dao.getSalaryById(id);
             Employee employee = edao.getEmployeeById(salary.getEmployeeId());
             Department department = ddao.getDepartmentById(salary.getDepartmentId());
             AccountDTO account = adao.getUserById(salary.getUserId());
             String username = account.getUserName();
-            request.setAttribute("leaveDay",dao.getLeaveDayById(adao.getIdByUsername(username).getUserID()) );
+            request.setAttribute("leaveDay", dao.getLeaveDayById(adao.getIdByUsername(username).getUserID()));
             request.setAttribute("id", id);
             request.setAttribute("account", account);
             request.setAttribute("salary", salary);
@@ -109,17 +109,46 @@ public class UpdateSalary extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
         int id = Integer.parseInt(request.getParameter("id"));
-       
+        EmployeeDAO edao = new EmployeeDAO();
+        DepartmentDAO ddao = new DepartmentDAO();
+        AccountDAO adao = new AccountDAO();
         double allowance = Double.parseDouble(request.getParameter("allowance"));
         double tax = Double.parseDouble(request.getParameter("tax"));
         double bonus = Double.parseDouble(request.getParameter("bonus"));
         SalaryDAO dao = new SalaryDAO();
+         String messageError = "Please input valid ";
         try {
-            dao.updateSalary(new Salary( allowance, tax, bonus) ,id);
-            response.sendRedirect("ListSalary");
+            int count = 0;
+            if (allowance < 0) {
+                request.setAttribute("messageErrora", messageError + "allowance");
+                count++;
+            }
+            if (bonus < 0) {
+                request.setAttribute("messageErrorb", messageError + "bonus");
+                count++;
+            }
+            if (count > 0) {
+                Salary salary = dao.getSalaryById(id);
+                Employee employee = edao.getEmployeeById(salary.getEmployeeId());
+                Department department = ddao.getDepartmentById(salary.getDepartmentId());
+                AccountDTO account = adao.getUserById(salary.getUserId());
+                String username = account.getUserName();
+                request.setAttribute("leaveDay", dao.getLeaveDayById(adao.getIdByUsername(username).getUserID()));
+                request.setAttribute("id", id);
+                request.setAttribute("account", account);
+                request.setAttribute("salary", salary);
+                request.setAttribute("employee", employee);
+                request.setAttribute("department", department);
+                request.getRequestDispatcher("UpdateSalary.jsp").forward(request, response);
+            } else {
+                dao.updateSalary(new Salary(allowance, tax, bonus), id);
+                response.sendRedirect("ListSalary");
+            }
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateSalary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(UpdateSalary.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

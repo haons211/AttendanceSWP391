@@ -57,9 +57,10 @@
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
-                            <span class="status online"></span>
+                            <img class="rounded-circle" src="assets/img/avatar/${em.image}" width="24" height="24" alt="Admin">
+                           
                         </span>
+                             <span class="status online"></span>
 
                         <c:set var="em" value="${requestScope.emp}" />
                         <span>${em.name}</span>
@@ -67,7 +68,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
-                        <a class="dropdown-item" href="Setting">Setting</a>
+                     
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -77,7 +78,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
                     <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
-                    <a class="dropdown-item" href="Setting">Setting</a>
+                  
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </div>
@@ -145,6 +146,7 @@
                         <li>
                             <a href="ExportFileController"><i class="fa fa-download"></i> <span>Export File</span></a>
                         </li> 
+                         <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
                         <c:if test="${account.getRole() == 3}">
                             <li>
                                 <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
@@ -157,8 +159,8 @@
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
                                 <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
-                                <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
-                                <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                                <li><a href="UpdateCompany"><i class="fa fa-building"></i>   Company Setting</a></li>      
+                               
                                     <c:if test="${account.getUserName() eq 'manageruser'}">
                                     <li>
                                         <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
