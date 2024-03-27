@@ -61,7 +61,7 @@
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
+                            <img class="rounded-circle" src="assets/img/avatar/${em.image}" width="24" alt="Admin">
                             <span class="status online"></span>
                         </span>
 
@@ -71,7 +71,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
                         <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
-                        <a class="dropdown-item" href="Setting">Setting</a>
+                       
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </li>
@@ -81,7 +81,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
                     <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
-                    <a class="dropdown-item" href="Setting">Setting</a>
+                 
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </div>
@@ -101,12 +101,13 @@
                         <li> 
                             <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
+                          <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
                         <li class="submenu">
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
                                 <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
-                                <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
-                                <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                                <li><a href="UpdateCompany"><i class="fa fa-building"></i>   Company Setting</a></li>      
+                              
                                     <c:if test="${account.getRole() == 2}">
                                     <li>
                                         <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>

@@ -90,7 +90,7 @@ public class Validate {
     }
 
     public boolean checkEmail(String email) {
-        String regex = "^[A-Za-z0-9_.-]+@example\\.com$";
+        String regex = "^[A-Za-z0-9_.-]+@sgip5\\.com$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();

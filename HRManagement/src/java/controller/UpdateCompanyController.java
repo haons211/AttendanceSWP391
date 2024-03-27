@@ -71,9 +71,8 @@ public class UpdateCompanyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        headerInfor.setSessionAttributes(request);
-         HttpSession session =  request.getSession();
-        AccountDTO acc = (AccountDTO) session.getAttribute("account");
+       
+        
 
         request.setAttribute("id", 1);
         // set attribute employeeList

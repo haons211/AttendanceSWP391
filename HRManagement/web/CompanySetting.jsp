@@ -56,7 +56,7 @@
                                                 <input class="form-control" type="text" required="" name="employeeName" value="${employeeName}">
                                             </c:if>
                                             <c:if test="${employeeName==null}">
-                                                <input class="form-control" type="text" required="" name="employeeName" value="${employee1.name}">
+                                                <input class="form-control" type="text" required="" name="employeeName" value="${employee.name}">
                                             </c:if>
 
                                             <c:if test="${messageErrorEname!=null}">
@@ -113,7 +113,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Department Name</label>
-                                            <input class="form-control" value="${department.name}" required="" name="departmentName" type="text">
+
+                                            <select name="departmentName" class="form-control">
+
+                                                <c:forEach items="${department}" var="d">
+                                                    <option value="${d.name}">${d.name}</option>
+                                                </c:forEach>
+
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

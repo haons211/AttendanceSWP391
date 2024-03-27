@@ -82,7 +82,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <img class="rounded-circle"
-                                                                                    src="assets/img/${lists.image}"
+                                                                                     src="assets/img/avatar/${lists.image}"
                                                                                     height="28" width="28" alt="">
                                                                                 ${lists.ename}
                                                                             </td>

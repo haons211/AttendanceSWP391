@@ -71,26 +71,28 @@
                                     <label for="inputFullname4" style="font-weight: bold">Real Salary</label>
                                     <input type="number" class="form-control" id="realSalary" placeholder="Real Salary" name="realSalary" oninput="calculateTax()" value="${salary*(26-leaveDay) / 26}" readonly="">
                                 </div>
-                                
+
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputPhone4" style="font-weight: bold">Allowance</label>
-                                    <input type="number" class="form-control" id="allowance" placeholder="Allowance" oninput="calculateTax()" name="allowance">
+                                    <input type="number" class="form-control" id="allowance" placeholder="Allowance" oninput="calculateTax()" name="allowance" required="">
+                                    <div style="color: red" id="allowanceValidationMessage">${messageErrora}</div>
                                 </div>
-                                 <div class="form-group col-md-6">
+                                <div class="form-group col-md-6">
                                     <label for="role" style="font-weight: bold">Bonus</label>
-                                    <input type="number" class="form-control" id="bonus" placeholder="Bonus" name="bonus" oninput="calculateTax()">
+                                    <input type="number" class="form-control" id="bonus" placeholder="Bonus" name="bonus" oninput="calculateTax()" required="">
+                                    <div style="color: red" id="bonusValidationMessage">${messageErrorb}</div>
                                 </div>
-                               
-                                
+
+
                             </div>
-                                <div class="form-row">
+                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAddress" style="font-weight: bold">Tax</label>
                                     <input type="number" class="form-control" id="tax" name="tax" readonly placeholder="Tax">
                                 </div>
-                                    </div>
+                            </div>
                             <button type="submit" class="btn btn-primary addBtn">Add</button>
                         </form>
                     </div>
@@ -114,13 +116,32 @@
                 var basicSalary = parseFloat(document.getElementById('basicSalary').value);
                 var allowance = parseFloat(document.getElementById('allowance').value);
                 var bonus = parseFloat(document.getElementById('bonus').value);
-
+                
                 var totalAmount = basicSalary + allowance + bonus;
                 var tax = totalAmount * 0.1; // Calculate tax (10%)
 
                 // Display the tax in the tax input field
                 document.getElementById('tax').value = tax.toFixed(2); // Fixed to 2 decimal places
             }
+            document.getElementById('allowance').addEventListener('input', function () {
+                var allowance = parseFloat(this.value);
+                var validationMessage = document.getElementById('allowanceValidationMessage');
+                if (allowance < 0) {
+                    validationMessage.textContent = "Allowance cannot be negative.";
+                } else {
+                    validationMessage.textContent = ""; // Clear the message
+                }
+            });
+
+            document.getElementById('bonus').addEventListener('input', function () {
+                var bonus = parseFloat(this.value);
+                var validationMessage = document.getElementById('bonusValidationMessage');
+                if (bonus < 0) {
+                    validationMessage.textContent = "Bonus cannot be negative.";
+                } else {
+                    validationMessage.textContent = ""; // Clear the message
+                }
+            });
         </script>
 
 

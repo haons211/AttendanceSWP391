@@ -46,7 +46,7 @@
                                 <div class="profile-view">
                                     <div class="profile-img-wrap">
                                         <div class="profile-img">
-                                            <a href="#"><img class="avatar" src="assets/img/doctor-03.jpg" alt=""></a>
+                                            <a href="#"><img class="avatar" src="assets/img/avatar/${em.image}" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="profile-basic">
