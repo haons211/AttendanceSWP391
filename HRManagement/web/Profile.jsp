@@ -38,15 +38,7 @@
                             <h4 class="page-title">My Profile</h4>
                         </div>
 
-                        <div class="col-sm-5 col-6 text-right m-b-30">
-                            <form action="UpdateInformation" method="post">
-                                <%
-                                  int accid = acc.getUserID();// Lấy giá trị accid từ dữ liệu đăng nhập, chẳng hạn từ database
-                                %>
-                                <input type="hidden" name="idse" value="<%= accid %>">
-                                <input class="btn btn-primary" type="submit" value="Edit profile" name="btAction"></form>
-                            </a>
-                        </div>
+
                     </div>
                     <div class="card-box profile-header">
                         <div class="row">
@@ -109,6 +101,18 @@
 
                     </div>
                 </div>
+                <c:choose>
+                    <c:when test="${ms != null && ms == true}">
+                        Update Profile successful
+                    </c:when>
+                    <c:when test="${ms != null && ms == false}">
+                        Update Profile failed
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Không hiển thị gì cả -->
+                    </c:otherwise>
+                </c:choose>
+
 
             </div>
         </div>

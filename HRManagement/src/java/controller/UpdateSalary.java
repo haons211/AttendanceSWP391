@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.AccountDAO;
 import dal.DepartmentDAO;
 import dal.EmployeeDAO;
@@ -69,6 +70,7 @@ public class UpdateSalary extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         int id = Integer.parseInt(request.getParameter("id"));
         SalaryDAO dao = new SalaryDAO();
         EmployeeDAO edao = new EmployeeDAO();

@@ -6,6 +6,7 @@ package controller;
 
 import configs.PasswordEncryption;
 import configs.Validate;
+import configs.headerInfor;
 import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -65,6 +66,7 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
     }
 

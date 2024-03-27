@@ -3,7 +3,7 @@
     Created on : Mar 12, 2024, 2:23:22 PM
     Author     : Dan
 --%>
-
+<%@ page import="models.AccountDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
 
         <div class="main-wrapper">
             <%@include file="SideBarforEm.jsp" %>
-
+            <c:set var="em" value="${requestScope.emp}" />
 
             <div class="page-wrapper">
                 <div class="content">
@@ -116,11 +116,11 @@
         <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
         <script src="assets/js/app.js"></script>
         <script type="text/javascript">
-                                                            function doDelete(id) {
-                                                                if (confirm("are you sure to delete id = " + id)) {
-                                                                    window.location = "DeleteFeedback?id=" + id;
+                                                                function doDelete(id) {
+                                                                    if (confirm("are you sure to delete id = " + id)) {
+                                                                        window.location = "DeleteFeedback?id=" + id;
+                                                                    }
                                                                 }
-                                                            }
         </script>
     </body>
 

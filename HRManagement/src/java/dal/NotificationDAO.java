@@ -254,7 +254,7 @@ public class NotificationDAO {
     }
 
     public boolean UpdateFile(String subject, String description, int NotiId) {
-        String sql = "UPDATE swp.notification SET subject = ?, description = ? WHERE notification_id = ?;";
+        String sql = "UPDATE notification SET subject = ?, description = ? WHERE notification_id = ?;";
         boolean success = false;
         try {
             con = new DBContext().getConnection();

@@ -18,7 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Employee;
+import org.apache.poi.poifs.crypt.ChainingMode;
 
 /**
  *
@@ -53,11 +55,18 @@ public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        headerInfor.setSessionAttributes(request);
-           String ms = (String) request.getAttribute("ms");
-           request.setAttribute("ms", ms);
-           
-             request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
+        try {
+            headerInfor.setSessionAttributes(request);
+            int empID=Integer.parseInt(request.getParameter("empID"));
+            EmployeeDAO edao=new EmployeeDAO();
+            Employee e= edao.getin4(empID);
+            request.setAttribute("emp1", e);
+            request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -71,63 +80,44 @@ public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ms = "";
-        Validate v = new Validate();
-        String url = null;
-        String button = request.getParameter("btAction");
         try {
-            if (button == null) {
-
-            } //Update thong tin nhan vien
-            else if (button.equals("Update")) {
-
-                int accid = Integer.parseInt(request.getParameter("empId"));
-                String name = request.getParameter("empName");
-
-                String Phone = request.getParameter("empNumber");
-                if (!v.checkPhone(Phone)) {
-                    
-                    ms = "Phone numbers should only have numbers and only 10 numbers";
-                     request.setAttribute("ms", ms);
-                     request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
-                     request.getRequestDispatcher("UpdateInformation").forward(request, response);
-
-                }else{
-                String email = request.getParameter("empEmail");
-                String address = request.getParameter("empAddress");
-                int gender = Integer.parseInt(request.getParameter("empGender"));
-                boolean genderCheck = false;
-                if (gender == 1) {
-                    genderCheck = false;
-                } else {
-                    genderCheck = true;
-                }
-                String birthdateString = request.getParameter("empBirthdate");
-
-                EmployeeDAO dao = new EmployeeDAO();
-
-                boolean checkUpdate = false;
-                checkUpdate = dao.updateInformation(accid, name, Phone, email, address, genderCheck, birthdateString);
-
-                if (checkUpdate == true) {
-                    url = "profile";
-
-                } else {
-                    url = "profile";
-
-                }}
+         
+            Validate v = new Validate();
+            String url = null;
+            String button = request.getParameter("btAction");
+            
+            
+            int accid = Integer.parseInt(request.getParameter("empId"));
+            String name = request.getParameter("empName");
+            
+            String Phone = request.getParameter("empNumber");
+            String email = request.getParameter("empEmail");
+            String address = request.getParameter("empAddress");
+            int gender = Integer.parseInt(request.getParameter("empGender"));
+            boolean genderCheck = false;
+            if (gender == 1) {
+                genderCheck = false;
+            } else {
+                genderCheck = true;
+            }
+            String birthdateString = request.getParameter("empBirthdate");
+            
+            EmployeeDAO dao = new EmployeeDAO();
+            
+            boolean checkUpdate = false;
+            checkUpdate = dao.updateInformation(accid, name, Phone, email, address, genderCheck, birthdateString);
+       
+           request.getRequestDispatcher("profile").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
                
             } // sang tab thay doi thong tin nhan vien
-            else if (button.equals("Edit profile")) {
-                url = "UpdateInformation";
-                   response.sendRedirect(url);
-            }
-        } catch (Exception ex) {
-
-        }
+         
        
-    }
-}
+    
+
 /**
  * Returns a short description of the servlet.
  *

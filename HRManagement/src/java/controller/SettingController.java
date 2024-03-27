@@ -5,6 +5,7 @@
 package controller;
 
 import configs.Validate;
+import configs.headerInfor;
 import dal.CompanyDAO;
 import dal.DepartmentDAO;
 import dal.EmployeeDAO;
@@ -71,7 +72,7 @@ public class SettingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        headerInfor.setSessionAttributes(request);
         HttpSession session =  request.getSession();
         AccountDTO acc = (AccountDTO) session.getAttribute("account");
         if(acc.getRole() == 2){

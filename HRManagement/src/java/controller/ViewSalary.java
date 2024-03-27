@@ -5,6 +5,7 @@
 
 package controller;
 
+import configs.headerInfor;
 import dal.CompanyDAO;
 import dal.SalaryDAO;
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class ViewSalary extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        
+        headerInfor.setSessionAttributes(request);
         SalaryDAO sdao  = new SalaryDAO();
         try {
             EmployeeSalary employeeSalary = sdao.getEmployeeSalaryById(id);

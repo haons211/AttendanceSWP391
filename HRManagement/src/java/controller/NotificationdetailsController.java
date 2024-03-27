@@ -44,6 +44,7 @@ public class NotificationdetailsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        
         AccountDTO acc = (AccountDTO) session.getAttribute("account");
         EmployeeDAO edao = new EmployeeDAO();
         NotificationDAO ndao = new NotificationDAO();
