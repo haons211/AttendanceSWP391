@@ -116,17 +116,23 @@ public class Authentication implements Filter {
 //        } else {
 //            filterchain.doFilter(servletRequest, servletResponse);
 //        }
-        
+
         if (url.contains("404.jsp")) {
             filterchain.doFilter(servletRequest, servletResponse);
+        } else if (url.contains("ForgetPassword")) {
+            if (user != null) {
+                response.sendRedirect(request.getContextPath() + "/404.jsp");
+
+            } else {
+                filterchain.doFilter(servletRequest, servletResponse);
+            }
         } else if (url.contains("ChatSystem") || url.contains("OpenChat") || url.contains("chatRoomServer")) {
             if (user != null) {
                 filterchain.doFilter(servletRequest, servletResponse);
             } else {
                 response.sendRedirect(request.getContextPath() + "/404.jsp");
             }
-        }
-        else if (url.contains("Login")) {
+        } else if (url.contains("Login")) {
 
             if (user != null) {
 
@@ -138,9 +144,11 @@ public class Authentication implements Filter {
             } else {
                 filterchain.doFilter(servletRequest, servletResponse);
             }
-            ///employee,Homemanager,updateAccount,deleteAccount
-        } else if (url.contains("ManagerNotification") || url.contains("department") || url.contains("addDep") || url.contains("UpdateDepartment")
-                || url.contains("DeleteDepartment") || url.contains("employee") || url.contains("HomeManager") || url.contains("addAccount") || url.contains("account")|| url.contains("ChatSystem") || url.contains("AddConversation")||url.contains("OpenChat")|| url.contains("AddPeopletoGroup")||url.contains("chatRoomServer")||url.contains("ChatSystemEm") ) {
+            ///employee,Homemanager,updateAccount,deleteAccount,ExportFileController,insurance,beforeAddInsurance,AttendanceReport,AttendanceSheet
+        } else if (url.contains("ExportFileController") || url.contains("insurance")
+                || url.contains("beforeAddInsurance") || url.contains("AttendanceReport")
+                || url.contains("AttendanceSheet") || url.contains("ManagerNotification") || url.contains("department") || url.contains("dashboard") || url.contains("addDep") || url.contains("UpdateDepartment")
+                || url.contains("DeleteDepartment") || url.contains("employee") || url.contains("HomeManager") || url.contains("addAccount") || url.contains("account") || url.contains("ChatSystem") || url.contains("AddConversation") || url.contains("OpenChat") || url.contains("AddPeopletoGroup") || url.contains("chatRoomServer") || url.contains("ChatSystemEm")) {
             if (user != null) {
                 if (user.getRole() == 1 || user.getRole() == 3) {
                     filterchain.doFilter(servletRequest, servletResponse);
@@ -151,41 +159,49 @@ public class Authentication implements Filter {
             } else {
                 response.sendRedirect(request.getContextPath() + "/404.jsp");
             }
-        } else if (url.contains("HomeEmployee")) {
+        } else if (url.contains("HomeEmployees")) {
             if (user != null) {
-                
-                    filterchain.doFilter(servletRequest, servletResponse);
-                
 
-            } else {
-                response.sendRedirect(request.getContextPath() + "/401.jsp");
-            }
-        } else if (url.contains("employeedetailapplication") ||url.contains("ChatSystem")||url.contains("updateApplication")) {
-            if (user != null) {
-                if (user.getRole() == 1 || user.getRole() == 3 || user.getRole() == 2) {
+                if (user.getRole() == 2) {
                     filterchain.doFilter(servletRequest, servletResponse);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/401.jsp");
                 }
-
             }
-
-        } else {
-
+        } else if (url.contains("HomeManager")) {
             if (user != null) {
 
-                filterchain.doFilter(servletRequest, servletResponse);
+                if (user.getRole() == 1 || user.getRole() == 3) {
+                    filterchain.doFilter(servletRequest, servletResponse);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/401.jsp");
+                }
+            }
+            } else if (url.contains("employeedetailapplication") || url.contains("ChatSystem") || url.contains("updateApplication")) {
+                if (user != null) {
+                    if (user.getRole() == 1 || user.getRole() == 3 || user.getRole() == 2) {
+                        filterchain.doFilter(servletRequest, servletResponse);
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/401.jsp");
+                    }
+
+                }
+
             } else {
-                response.sendRedirect(request.getContextPath() + "/404.jsp");
+
+                if (user != null) {
+
+                    filterchain.doFilter(servletRequest, servletResponse);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/404.jsp");
+
+                }
 
             }
-
         }
-    }
-
-    /**
-     * Return the filter configuration object for this filter.
-     */
+        /**
+         * Return the filter configuration object for this filter.
+         */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
     }

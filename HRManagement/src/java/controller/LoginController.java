@@ -146,18 +146,18 @@ public class LoginController extends HttpServlet {
 
             if (username != null && inpassword != null) {
                 if (isPasswordValid(inpassword) == false && isusernameValid(username) == true) {
-                    errorMessage = "Password must have at least 6 characters or more, including at least one uppercase character and one special character";
+                    errorMessage = "Incorrect username or password";
                     // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
                     request.setAttribute("error", errorMessage);
                     request.getRequestDispatcher(url).forward(request, response);
 
                 } else if (isPasswordValid(inpassword) == true && isusernameValid(username) == false) {
-                    errorMessage = "Username must be more than 4 characters long and cannot contain special characters";
+                    errorMessage = "Incorrect username or password";
                     // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
                     request.setAttribute("error", errorMessage);
                     request.getRequestDispatcher(url).forward(request, response);
                 } else if (isPasswordValid(inpassword) == false && isusernameValid(username) == false) {
-                    errorMessage = "Username must be more than 4 characters long and cannot contain special characters and Password must have at least 6 characters or more, including at least one uppercase character and one special character ";
+                    errorMessage = "Incorrect username or password";
                     // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
                     request.setAttribute("error", errorMessage);
                     request.getRequestDispatcher(url).forward(request, response);
@@ -210,7 +210,7 @@ public class LoginController extends HttpServlet {
                             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        errorMessage = "Sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại.";
+                        errorMessage = "Incorrect username or password";
                         // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
                         request.setAttribute("error", errorMessage);
                         request.getRequestDispatcher(url).forward(request, response);
@@ -229,7 +229,7 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("error", errorMessage);
                 request.getRequestDispatcher(url).forward(request, response);
             } else {
-                errorMessage = "username and password should not empty";
+                errorMessage = "Username and Password should not empty";
                 // Kiểm tra nếu người dùng chưa đăng nhập hoặc bị chặn bởi filter, không hiển thị lỗi
                 request.setAttribute("error", errorMessage);
                 request.getRequestDispatcher(url).forward(request, response);
