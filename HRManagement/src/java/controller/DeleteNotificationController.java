@@ -59,39 +59,37 @@ public class DeleteNotificationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    try {
-        boolean checkDelete = false;
-        boolean deleteNoti = false;
-        boolean deleteFile = false;
-        boolean deleteManager = false;
-        int notificationId = Integer.parseInt(request.getParameter("id"));
-        
-        NotificationDAO notiDao = new NotificationDAO();
-        int fileId = notiDao.getfileID(notificationId);
-        if (fileId == -1) {
-            deleteNoti = notiDao.DeleteNotification(notificationId);
-            if (deleteNoti) {
-                checkDelete = true;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            boolean checkDelete = false;
+            boolean deleteNoti = false;
+            boolean deleteFile = false;
+            boolean deleteManager = false;
+            int notificationId = Integer.parseInt(request.getParameter("id"));
+            
+            NotificationDAO notiDao = new NotificationDAO();
+            int fileId = notiDao.getfileID(notificationId);
+            if (fileId == -1) {
+                deleteNoti = notiDao.DeleteNotification(notificationId);
+                if (deleteNoti) {
+                    checkDelete = true;
+                } else {
+                    checkDelete = false;
+                }
             } else {
-                checkDelete = false;
+                deleteManager = notiDao.DeleteManagerFile(notificationId);
+                deleteFile = notiDao.DeleteFile(fileId);
+                deleteNoti = notiDao.DeleteNotification(notificationId);
+                checkDelete = true;
             }
-        } else {
-            deleteManager = notiDao.DeleteManagerFile(notificationId);
-            deleteFile = notiDao.DeleteFile(fileId);
-            deleteNoti = notiDao.DeleteNotification(notificationId);
-            checkDelete = true;
+            response.sendRedirect("AllNotification");
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            
+            Logger.getLogger(DeleteNotificationController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        // Phản hồi về client
-     
-    } catch (ClassNotFoundException | SQLException ex) {
-        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Trạng thái lỗi
-        response.getWriter().write("Lỗi xảy ra khi xóa"); // Gửi tin nhắn về client
-        Logger.getLogger(DeleteNotificationController.class.getName()).log(Level.SEVERE, null, ex);
     }
-}
 
     /**
      * Handles the HTTP <code>POST</code> method.

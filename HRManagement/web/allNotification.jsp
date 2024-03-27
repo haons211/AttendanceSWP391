@@ -87,8 +87,8 @@
                                         <th>#</th>
                                         <th>Time </th>
                                         <th>Subject</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>Description</th>
+                                        <th class="text-right">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,22 +99,19 @@
                                             <td class="column-2">
                                                 <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
                                             </td>
-                                            <td class="column-2">  
-
-                                                <form id="deleteForm_${o.notificationId}" onsubmit="deleteNotification(event, this)">
-                                                    <input type="hidden" name="id" value="${o.notificationId}">
-                                                    <button class="btn btn-danger delete-btn" type="submit">Delete</button>
-                                                </form>
-                                            </td>
-                                            <td class="column-2">  
-
-                                                <form action="editNotification?id=" method="get">
-                                                    <input type="hidden" name="id" value="${o.notificationId}">
-                                                    <button class="btn btn-primary" type="submit">Edit</button>
-                                                </form>
-
+                                            <td class="column-2">
+                                                ${o.description}</a>
                                             </td>
 
+                                            <td class="text-right">
+                                                <div class="dropdown dropdown-action">
+                                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="editNotification?id=${o.notificationId}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                        <a class="dropdown-item" href="#" onclick="confirmDelete('${o.notificationId}');"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
 
 
                                         </tr>
@@ -129,110 +126,30 @@
         </div>
 
 
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                        <li class="menu-title">Main</li>
-                        <li>
-                            <a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-flag-o"></i> <span>Attendance Report</span> </a>
-                        </li>
-                        <li> 
-                            <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
-                        </li>
-                        <li> 
-                            <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                        </li>    
-                    </ul>
-                </div>
-            </div>
-        </div>
+
 
 
     </div>
 
-    <script>
-
-
-        function deleteNotification(event, form) {
-            event.preventDefault();
-
-            var confirmDelete = confirm("B?n có ch?c ch?n mu?n xóa không?");
-            if (!confirmDelete) {
-                return;
-            }
 
 
 
-            // L?y giá tr? c?a input
-            var notificationId = form.querySelector('input[name="id"]').value;
-
-            // T?o XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-
-            // Xác ??nh ph??ng th?c và URL
-            xhr.open('GET', 'DeleteNotification?id=' + encodeURIComponent(notificationId), true);
-
-            // X? lý k?t qu? tr? v? t? server
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-
-
-                    alert('?ã xóa thành công');
-
-                    location.replace(location.origin + location.pathname);
-                } else {
-                    alert('Có l?i x?y ra');
-                }
-            };
-
-            // G?i request
-            xhr.send();
-        }
-
-    </script>
-
-
-
-
-
-
-    <script>
-        function toggleFilterOptions() {
-            var filterOptions = document.getElementById("filterOptions");
-            if (filterOptions.style.display === "none") {
-                filterOptions.style.display = "block";
-            } else {
-                filterOptions.style.display = "none";
-            }
-        }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ellipsisLinks = document.querySelectorAll('.ellipsis');
-            ellipsisLinks.forEach(link => {
-                const parentWidth = link.parentNode.offsetWidth;
-                const textWidth = link.offsetWidth;
-                if (textWidth > parentWidth) {
-                    link.style.maxWidth = (parentWidth - 10) + 'px'; // Tr? ?i 10px ?? ??m b?o kích th??c phù h?p
-                }
-            });
-        });
-
-    </script>
 
 
 
 
 
     <div class="sidebar-overlay" data-reff=""></div>
+    <script>
+        function confirmDelete(notificationId) {
+            // Hi?n th? h?p tho?i xác nh?n
+            if (confirm('Are you sure you want to delete this notification?')) {
+                // N?u ng??i dùng nh?n OK, chuy?n h??ng ??n trang xóa v?i tham s? notificationId
+                window.location.href = 'DeleteNotification?id=' + notificationId;
+            }
+        }
+    </script>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

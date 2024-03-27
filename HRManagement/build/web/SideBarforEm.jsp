@@ -6,9 +6,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
 
+<html>
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <aside>
+    
         <c:set var="em" value="${requestScope.emp}" />
         <c:forEach items="${requestScope.listNo}" var="notification">
             <c:set var="notificationCount" value="${notificationCount + 1}" />
@@ -66,7 +70,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
+                        <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
                         <a class="dropdown-item" href="Setting">Setting</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
@@ -76,7 +80,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
-                    <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
+                    <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
                     <a class="dropdown-item" href="Setting">Setting</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
@@ -90,46 +94,38 @@
                         <li>
                             <a href="HomeEmployees"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-                        <li>
-                            <a href="profile"><i class="fa fa-id-card"></i> <span>Profile</span></a>
-                        </li>
-                        <li>
-                            <a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a>
-                        </li>
-                        <li>
-                            <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
-                        </li>
-                        <li>
-                            <a href="AllNotification"><i class="fa fa-bell"></i> <span>View All Notification</span></a>
-                        </li>  
 
-                        <li>
-                            <a href="ChatSystemEm"><i class="fa fa fa-comments"></i> <span>Chat</span></a>
+                        <li> 
+                            <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
                         </li>
-                        <c:if test="${account.getRole() == 2}">
-                            <li>
-                                <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>
-                            </li>
-                        </c:if>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-paper-plane"></i> <span>Application</span> <span class="menu-arrow"></a>
-                            <ul style="display: none;">
-                                <li> 
-                                    <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
-                                </li>
-                                <li> 
-                                    <a href="sendapplication"><i class="fa fa-paper-plane-o"></i> <span>Send Application</span> </a>
-                                </li>
-                            </ul>
+                        <li> 
+                            <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
-
                         <li class="submenu">
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
                                 <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
                                 <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
+                                <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                                    <c:if test="${account.getRole() == 2}">
+                                    <li>
+                                        <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>
+                                    </li>
+                                </c:if>        
                             </ul>
                         </li>  
+                        <li>
+                            <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>
+                        </li>  
+                      
+                        <li>
+                            <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
+                        </li>
+                    
+
+                        <li>
+                            <a href="ChatSystemEm"><i class="fa fa-bell"></i> <span>Chat</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

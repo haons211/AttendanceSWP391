@@ -5,7 +5,7 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ page import="models.AccountDTO" %>
 <!DOCTYPE html>
 <html>
     <aside>
@@ -66,7 +66,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="profile">My Profile</a>
-                        <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
+                        <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
                         <a class="dropdown-item" href="Setting">Setting</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
@@ -76,7 +76,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile">My Profile</a>
-                    <a class="dropdown-item" href="UpdateInformation">Edit Profile</a>
+                    <a class="dropdown-item" href="UpdateInformation?empID=${em.userId}">Edit Profile</a>
                     <a class="dropdown-item" href="Setting">Setting</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
@@ -116,7 +116,7 @@
                             <a href="employee"><i class="fa fa-id-card"></i> <span>Employees</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
                                 <li><a href="employee"><i class="fa fa-id-card"></i>  Employees List</a></li>
-                                <li><a href="insurance"><i class="fa fa-shield"></i>  Employees Insurance</a></li>      
+                                <li><a href="insurance"><i class="fa fa-shield"></i>  Insurance</a></li>      
                                 <li>
                                     <a href="ListSalary"><i class="fa fa-money"></i> <span>Employee Salary</span> </a>
                                 </li>
@@ -131,39 +131,39 @@
                         </li>    
 
                         <li> 
-                            <a href="viewsendapplication"><i class="fa fa-paper-plane"></i> <span>View Application</span> </a>
+                            <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-bell"></i> <span>Notification</span> <span class="menu-arrow"></a>
-                            <ul style="display: none;">
-                                <li> 
-                                    <a href="AllNotification"><i class="fa fa-eye"></i> <span>View All Notification</span></a>
-                                </li>
-                                <li>
-                                    <a href="ManagerNotification"><i class="fa fa-bell-o"></i> <span>Send Notification</span></a>
-                                </li>    
-                            </ul>
-                        </li>     
-                        <c:if test="${account.getUserName() eq 'manageruser'}">
-                            <li>
-                                <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
-                            </li>
-                        </c:if>
+
+
+
+                        <li> 
+                            <a href="AllNotification"><i class="fa fa-bell-o"></i> <span>View All Notification</span></a>
+                        </li>
+                        <li>
+                            <a href="ManagerNotification"><i class="fa fa-bell"></i> <span>Notification</span></a>
+                        </li> 
                         <li>
                             <a href="ExportFileController"><i class="fa fa-download"></i> <span>Export File</span></a>
                         </li> 
-                        <li>
-                            <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
-                        </li>
+                        <c:if test="${account.getRole() == 3}">
+                            <li>
+                                <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
+                            </li>
+                        </c:if>
                         <li>
                             <a href="ChatSystem"><i class="fa fa-bell"></i> <span>Chat</span></a>
                         </li>
-                        <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
                         <li class="submenu">
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
                                 <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
                                 <li><a href="UpdateCompany"><i class="fa fa-building"></i>  Update Company</a></li>      
+                                <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                                    <c:if test="${account.getUserName() eq 'manageruser'}">
+                                    <li>
+                                        <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
+                                    </li>
+                                </c:if>
                             </ul>
                         </li>     
                     </ul>
