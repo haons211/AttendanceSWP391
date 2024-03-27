@@ -3,9 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/ThuyVy/Desktop/workspace/2703/AttendanceSWP391/HRManagement/src/java/controller/AttendanceByMonthYearController.java</file>
             <file>file:/C:/Users/ThuyVy/Desktop/workspace/2703/AttendanceSWP391/HRManagement/src/java/dal/AttendanceDAO.java</file>
             <file>file:/C:/Users/ThuyVy/Desktop/workspace/2703/AttendanceSWP391/HRManagement/src/java/models/AttendanceSheet.java</file>
+=======
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/configs/Validate.java</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/controller/AddDepartmentController.java</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/dal/NotificationDAO.java</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/filter/Authentication.java</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/context/DBContext.java</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/web/allNotification.jsp</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/controller/ForgetPasswordController.java</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/controller/LoginController.java</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/web/UpdateProfile.jsp</file>
+            <file>file:/D:/IT3Test/AttendanceSWP391/HRManagement/src/java/controller/NotificationdetailsController.java</file>
+>>>>>>> f16048286f5549390a359143ea7489e44eb45669
         </group>
     </open-files>
 </project-private>
