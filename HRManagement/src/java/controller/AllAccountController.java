@@ -67,8 +67,8 @@ public class AllAccountController extends HttpServlet {
         int roleId = 0; 
         if (role != null) {
             roleId = role.equals("Admin") ? 1
-                    : role.equals("Manager") ? 2
-                    : role.equals("Employee") ? 3 : 0;
+                    : role.equals("Manager") ? 3
+                    : role.equals("Employee") ? 2 : 0;
         }
         AccountDAO d = new AccountDAO();
         ArrayList<AccountDTO> list = new ArrayList<>();

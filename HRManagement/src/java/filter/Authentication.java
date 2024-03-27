@@ -162,11 +162,11 @@ public class Authentication implements Filter {
         } else if (url.contains("HomeEmployees")) {
             if (user != null) {
 
-                if (user.getRole() == 2) {
+//                if (user.getRole() == 2) {
                     filterchain.doFilter(servletRequest, servletResponse);
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/401.jsp");
-                }
+//                } else {
+//                    response.sendRedirect(request.getContextPath() + "/401.jsp");
+//                }
             }
         } else if (url.contains("HomeManager")) {
             if (user != null) {

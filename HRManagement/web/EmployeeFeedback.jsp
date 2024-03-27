@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-        <title>Salary</title>
+        <title>Employee Feedback</title>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
@@ -40,9 +40,9 @@
                             <a href="AddFeedback" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Feedback</a>
                         </div>
                     </div>
-                    <h2>
-                        List of feedbacks of <span >${employeeSalary.ename} (${userID})</span>
-                    </h2>
+<!--                    <h2>
+                        List of feedback from ${employeeSalary.ename} 
+                    </h2>-->
                     <div class="main-option" style="margin-top: 30px">
 
                         <div class="main-option-search">
