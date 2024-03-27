@@ -44,7 +44,6 @@ public class NotificationdetailsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
         AccountDTO acc = (AccountDTO) session.getAttribute("account");
         EmployeeDAO edao = new EmployeeDAO();
         NotificationDAO ndao = new NotificationDAO();
@@ -81,60 +80,35 @@ public class NotificationdetailsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        AccountDTO acc = (AccountDTO) session.getAttribute("account");
-        EmployeeDAO edao = new EmployeeDAO();
-        NotificationDAO ndao = new NotificationDAO();
-        NotificationDAO NDao = new NotificationDAO();
-        List<Notification> listNotification = ndao.getAllNotification();
         try {
-
+            HttpSession session = request.getSession();
+            AccountDTO acc = (AccountDTO) session.getAttribute("account");
+            EmployeeDAO edao = new EmployeeDAO();
+            NotificationDAO ndao = new NotificationDAO();
+            NotificationDAO NDao = new NotificationDAO();
+            List<Notification> listNotification = ndao.getAllNotification();
+            
+            
             Employee em = edao.getin4(acc.getUserID());
             request.setAttribute("emp", em);
-
-        } catch (Exception e) {
+            
+            
+            
+            String search = request.getParameter("search");
+            int month = Integer.parseInt(request.getParameter("Month"));
+            int Year = Integer.parseInt(request.getParameter("Year"));
+            // LocalDate cho ngày không chứa thông tin về thời gian
+            List<Notification> listNotification1 = NDao.searchNotification(search, Year, month);
+            request.setAttribute("listNo", listNotification);
+            request.setAttribute("listNo1", listNotification1);
+            
+            request.getRequestDispatcher("allNotification.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(NotificationdetailsController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NotificationdetailsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("listNo", listNotification);
-        String url = "allNotification.jsp";
-        String button = request.getParameter("btAction");
-        try {
-            if (button == null) {
 
-            } //Update thong tin nhan vien
-            else if (button.equals("Search")) {
-
-                String search = request.getParameter("search");
-
-                List<Notification> listNotification1 = NDao.searchNotification(search);
-                request.setAttribute("listNo", listNotification);
-                request.setAttribute("listNo1", listNotification1);
-
-            } else if (button.equals("Find")) {
-
-                Date fromDate = null;
-                Date toDate = null;
-                String fromDateStr = request.getParameter("dateFrom");
-                String toDateStr = request.getParameter("dateEnd");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    if (fromDateStr != null && !fromDateStr.isEmpty()) {
-                        fromDate = dateFormat.parse(fromDateStr);
-                    }
-                    if (toDateStr != null && !toDateStr.isEmpty()) {
-                        toDate = dateFormat.parse(toDateStr);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-                // LocalDate cho ngày không chứa thông tin về thời gian
-                List<Notification> listNotification1 = NDao.searchNotificationwithdate(fromDate, toDate);
-                request.setAttribute("listNo", listNotification);
-                request.setAttribute("listNo1", listNotification1);
-            }
-        } catch (Exception ex) {
-
-        }
-        request.getRequestDispatcher(url).forward(request, response);
     }
 
     /**

@@ -44,34 +44,49 @@ public class NotificationDAO {
         return list;
     }
 
-    public List<Notification> searchNotification(String search) {
+    public List<Notification> searchNotification(String search, int year, int month) {
         List<Notification> list = new ArrayList<>();
-        String query = "SELECT n.*,f.file_data FROM notification n left join managerfile mf on n.notification_id=mf.FID left join file f on mf.file_id=f.file_id\n"
-                + "where n.subject like ?";
         try {
             con = new DBContext().getConnection();
-            stm = con.prepareStatement(query);
-            stm.setString(1, "%" + search + "%");
-            rs = stm.executeQuery();
-            while (rs.next()) {
-                list.add(new Notification(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5), rs.getBinaryStream(6)));
+            String query = "";
+            if (year == 0 && month == 0) {
+                query = "SELECT n.*, f.file_data \n"
+                        + "FROM notification n \n"
+                        + "LEFT JOIN managerfile mf ON n.notification_id = mf.FID \n"
+                        + "LEFT JOIN file f ON mf.file_id = f.file_id \n"
+                        + "WHERE  n.subject like ?;";
+                stm = con.prepareStatement(query);
+                stm.setString(1, "%" + search + "%");
+            } else if (year == 0) {
+                query = "SELECT n.*, f.file_data \n"
+                        + "FROM notification n \n"
+                        + "LEFT JOIN managerfile mf ON n.notification_id = mf.FID \n"
+                        + "LEFT JOIN file f ON mf.file_id = f.file_id \n"
+                        + "WHERE MONTH(n.sent_date) = ? and n.subject like ?;";
+                stm = con.prepareStatement(query);
+                stm.setInt(1, month);
+                stm.setString(2, "%" + search + "%");
+            } else if (month == 0) {
+                query = "SELECT n.*, f.file_data \n"
+                        + "FROM notification n \n"
+                        + "LEFT JOIN managerfile mf ON n.notification_id = mf.FID \n"
+                        + "LEFT JOIN file f ON mf.file_id = f.file_id \n"
+                        + "WHERE YEAR(n.sent_date) = ? and n.subject like ?;";
+                stm = con.prepareStatement(query);
+                stm.setInt(1, year);
+                stm.setString(2, "%" + search + "%");
+            } else {
+                query = "SELECT n.*, f.file_data \n"
+                        + "FROM notification n \n"
+                        + "LEFT JOIN managerfile mf ON n.notification_id = mf.FID \n"
+                        + "LEFT JOIN file f ON mf.file_id = f.file_id \n"
+                        + "WHERE YEAR(n.sent_date) = ? AND MONTH(n.sent_date) = ? and n.subject like ?;";
+                stm = con.prepareStatement(query);
+                stm.setInt(1, year);
+                stm.setInt(2, month);
+                stm.setString(3, "%" + search + "%");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle exceptions if any
-        }
-        return list;
-    }
 
-    public List<Notification> searchNotificationwithdate(Date dateFrom, Date dateEnd) {
-        List<Notification> list = new ArrayList<>();
-        String query = "SELECT n.*,f.file_data FROM notification n left join managerfile mf on n.notification_id=mf.FID left join file f on mf.file_id=f.file_id\n"
-                + "where n.sent_date BETWEEN ? AND ?";
-        try {
-            con = new DBContext().getConnection();
-            stm = con.prepareStatement(query);
-            stm.setDate(1, new java.sql.Date(dateFrom.getTime()));
-            stm.setDate(2, new java.sql.Date(dateEnd.getTime()));
             rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new Notification(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5), rs.getBinaryStream(6)));
@@ -79,6 +94,21 @@ public class NotificationDAO {
         } catch (Exception e) {
             e.printStackTrace();
             // Handle exceptions if any
+        } finally {
+            try {
+                // close resources (Connection, PreparedStatement, ResultSet)
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
         return list;
     }

@@ -64,7 +64,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-group form-focus">
                                                     <label class="focus-label">Full Name</label>
-                                                    <input type="text" class="form-control floating" id="empName" name="empName" value="${em1.name}" required> <br><br>
+                                                    <input type="text" class="form-control floating" id="empName" name="empName" value="${em1.name}" required pattern="[a-zA-ZÀ-Ỹà-ỹ ]+" title="Please enter a valid name (letters and spaces only)">
+
 
                                                 </div>
                                             </div>
@@ -97,7 +98,7 @@
                                     <div class="form-group form-focus">
                                         <input type="hidden" id="empId" name="empId" value="${param.idse}" readonly>
                                         <label class="focus-label">Address</label>
-                                        <input type="text" id="empAddress" name="empAddress" class="form-control floating" value="${em1.address}" required pattern="^\s*\S(?:[\s,'-]*\S)?\s*$" title="Address must contain at least one non-space character and can include spaces, commas, dashes, and apostrophes.">
+                                        <input type="text" id="empAddress" name="empAddress" class="form-control floating" value="${em1.address}" required pattern="[a-zA-ZÀ-Ỹà-ỹ0-9 ]+" title="Please enter a valid address (letters, numbers, ',', '-', '/' only)">
 
 
                                     </div>

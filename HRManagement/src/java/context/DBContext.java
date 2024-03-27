@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBContext {
 
-    private static final String DB_NAME = "swp40";
+    private static final String DB_NAME = "swp50";
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
