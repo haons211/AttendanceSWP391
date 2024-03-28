@@ -40,23 +40,24 @@ public class EmployeesController extends HttpServlet {
             AttendanceDAO atDao = new AttendanceDAO();
             atDao.CallAttendanceByDay();
             Attendance attendanceCheck = atDao.getAttendanceByEmployeeId(em.getEmployeeId());
-            if (attendanceCheck.getOut_time() != null) {
-
+            if(attendanceCheck.getOut_time()!=null){
+                
                 session.setAttribute("checkInTime", attendanceCheck.getIn_time());
-
-                session.setAttribute("checkOutTime", attendanceCheck.getOut_time());
+                
+                    session.setAttribute("checkOutTime", attendanceCheck.getOut_time());
                 int remainDay = DAO.getRemainDayById(em.getEmployeeId());
-                session.setAttribute("re", remainDay);
+                    session.setAttribute("re", remainDay);
                 request.setAttribute("attendance", attendanceCheck);
                 request.getRequestDispatcher("Success.jsp").forward(request, response);
-            } else if (attendanceCheck.getIn_time() != null && attendanceCheck.getOut_time() == null) {
+            }else if(attendanceCheck.getIn_time()!=null && attendanceCheck.getOut_time()==null){
                 int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                 session.setAttribute("re", remainDay);
                 session.setAttribute("checkInTime", attendanceCheck.getIn_time());
                 int id = attendanceCheck.getAttendance_id();
                 session.setAttribute("attendanceId", id);
                 request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
-            } else {
+            }
+             else {
                 try {
                     int remainDay = DAO.getRemainDayById(em.getEmployeeId());
                     session.setAttribute("re", remainDay);
@@ -90,19 +91,16 @@ public class EmployeesController extends HttpServlet {
                         int em_id = em.getEmployeeId();
                         int remain_id = dao.GetRemainIDfromEmployee(em_id);
                         String notes = request.getParameter("message");
-                        if (isValidInput(notes)) {
-                            notes = sanitizeInput(notes);
-                            AttendanceDAO attendanceDAO = new AttendanceDAO();
-                            int attendanceId = attendanceDAO.CheckIn(em_id, notes, remain_id);
-                            if (attendanceId != -1) {
-                                AttendanceDAO atDao = new AttendanceDAO();
-                                Attendance attendanceCheck = atDao.getAttendanceByEmployeeId(em.getEmployeeId());
-                                session.setAttribute("checkInTime", attendanceCheck.getIn_time());
-                                session.setAttribute("attendanceId", attendanceId);
-                                session.setAttribute("checkedIn", true);
-                                request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
-                                return;
-                            }
+                        AttendanceDAO attendanceDAO = new AttendanceDAO();
+                        int attendanceId = attendanceDAO.CheckIn(em_id, notes, remain_id);
+                        if (attendanceId != -1) {
+                            AttendanceDAO atDao = new AttendanceDAO();
+                            Attendance attendanceCheck = atDao.getAttendanceByEmployeeId(em.getEmployeeId());
+                            session.setAttribute("checkInTime", attendanceCheck.getIn_time());                            
+                            session.setAttribute("attendanceId", attendanceId);
+                            session.setAttribute("checkedIn", true);
+                            request.getRequestDispatcher("CheckOut.jsp").forward(request, response);
+                            return;
                         }
                     }
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -111,21 +109,14 @@ public class EmployeesController extends HttpServlet {
             }
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
-
-// Validation method to check if the input is not empty
-    private boolean isValidInput(String input) {
-        return input != null && !input.isEmpty();
-    }
-
-// Sanitization method to replace '<' and '>'
-    private String sanitizeInput(String input) {
-        // Manually replace '<' and '>'
-        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-    }
     
-}
+    
+
+        @Override
+        public String getServletInfo
+        
+            () {
+        return "Short description";
+        }
+    }
+
