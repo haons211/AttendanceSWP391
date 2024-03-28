@@ -5,6 +5,7 @@
 package controller;
 
 import configs.Validate;
+import configs.headerInfor;
 import dal.BeneficiaryDAO;
 import dal.EmployeeDAO;
 import jakarta.servlet.ServletException;
@@ -15,8 +16,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Dependents;
 import models.Employee;
 
 /**
@@ -66,6 +69,11 @@ public class AddBeneficiaryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
+        BeneficiaryDAO d = new BeneficiaryDAO();
+        ArrayList<Dependents> relationshipType = d.getAllRelationshipType();
+        request.setAttribute("relationshipType", relationshipType);
+
         int id_employee = 0;
         HttpSession session = request.getSession();
         if (session != null) {
@@ -93,6 +101,7 @@ public class AddBeneficiaryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         int id_employee = 0;
         HttpSession session = request.getSession();
         if (session != null) {
@@ -105,6 +114,7 @@ public class AddBeneficiaryController extends HttpServlet {
         String relationship = request.getParameter("relationship");
 
         BeneficiaryDAO dao = new BeneficiaryDAO();
+
         String messageError = "Please input valid ";
         try {
 
@@ -122,12 +132,12 @@ public class AddBeneficiaryController extends HttpServlet {
                 request.setAttribute("messageErrorDate", messageError + "date");
                 count++;
             }
-            if (!validate.checkWords(gender)) {
-                request.setAttribute("messageErrorGender", messageError + "gender");
+            if (gender.isEmpty() || gender == "") {
+                request.setAttribute("messageErrorGender", "Please choose Gender");
                 count++;
             }
-            if (!validate.checkWords(relationship)) {
-                request.setAttribute("messageErrorRelationship", messageError + "relationship");
+            if (relationship.isEmpty() || relationship == "") {
+                request.setAttribute("messageErrorRelationship", "Please choose Relationship");
                 count++;
             }
             if (count > 0) {
@@ -136,6 +146,9 @@ public class AddBeneficiaryController extends HttpServlet {
                 request.setAttribute("gender", isMale);
                 request.setAttribute("dob", dob);
                 request.setAttribute("relationship", relationship);
+                BeneficiaryDAO d = new BeneficiaryDAO();
+                ArrayList<Dependents> relationshipType = d.getAllRelationshipType();
+                request.setAttribute("relationshipType", relationshipType);
                 request.getRequestDispatcher("AddBeneficiary.jsp").forward(request, response);
             } else {
 

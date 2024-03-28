@@ -182,16 +182,32 @@ public class Validate {
         return true;
     }
 
-    public boolean validateDouble(String input) {
+     public boolean validateDouble(String input) {
         try {
             // Attempt to parse the input string to a double value
-            Double.parseDouble(input);
-            // If parsing succeeds, return true
-            return true;
+            double value = Double.parseDouble(input);
+            // Kiểm tra xem giá trị có lớn hơn hoặc bằng không không
+            if (value >= 0) {
+                // Nếu parsing thành công và giá trị không âm, trả về true
+                return true;
+            } else {
+                // Nếu giá trị âm, trả về false
+                return false;
+            }
         } catch (NumberFormatException e) {
             // If parsing fails (NumberFormatException is thrown), return false
             return false;
         }
+    }
+
+    public static boolean validatePolicyNumber(String policyNumber) {
+        // Sử dụng biểu thức chính quy để kiểm tra định dạng
+        String regex = "POL\\d{6}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(policyNumber);
+
+        // Kiểm tra xem chuỗi khớp với biểu thức chính quy không
+        return matcher.matches();
     }
 
 }

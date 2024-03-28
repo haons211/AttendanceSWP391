@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <title>Chat</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -68,10 +68,10 @@
                                 <div class="navbar">
                                     <div class="user-details mr-auto">
                                         <div class="float-left user-img m-r-10">
-                                            <a href="profile.html" title="Jennifer Robinson"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                            <a href="#" title="Jennifer Robinson"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                         </div>
                                         <div class="user-info float-left">
-                                            <a href="profile.html"><span class="font-bold">All</span> <i class="typing-text"></i></a>
+                                            <a href="#"><span class="font-bold">All</span> <i class="typing-text"></i></a>
 
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                                         <c:otherwise>
                                                             <div class="chat chat-left">
                                                                 <div class="chat-avatar">
-                                                                    <a href="profile.html" class="avatar">
+                                                                    <a href="#" class="avatar">
                                                                         <img alt="Jennifer Robinson" src="assets/img/user.jpg" class="img-fluid rounded-circle">
                                                                     </a>
                                                                 </div>

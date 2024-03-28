@@ -60,7 +60,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                    Employee ID
+                                                Employee ID
                                             </td>
                                             <td>
                                                 <div class ="left-input-table">
@@ -142,14 +142,11 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <select class="form-control" name="relationship" style="width: 312px;">
-                                                            <!-- Add options for beneficiaries -->
+                                                            <c:forEach var="o" items="${requestScope.relationshipType}">
+                                                                <option value="${o.relationship}" ${o.relationship == beneficiary.relationship ? 'selected' : ''}>${o.relationship}</option>
+                                                            </c:forEach>
+                                                            
 
-                                                            <option ${beneficiary.relationship == null ? 'selected' : ''}>Select Relationship</option>
-                                                            <option ${beneficiary.relationship == "Family" ? 'selected' : ''}>Family</option>
-                                                            <option ${beneficiary.relationship == "Spouse" ? 'selected' : ''}>Spouse</option>
-                                                            <option ${beneficiary.relationship == "Child" ? 'selected' : ''}>Child</option>
-
-                                                            <!-- Add more options as needed -->
                                                         </select>
                                                     </div>
                                                     <div style="color: red">

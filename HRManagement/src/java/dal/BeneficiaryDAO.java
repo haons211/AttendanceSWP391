@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Dependents;
+import models.InsuranceEmployeeDTO;
 
 /**
  *
@@ -211,4 +212,38 @@ public class BeneficiaryDAO {
         return beneficiary;
     }
 
+    public ArrayList<Dependents> getAllRelationshipType() {
+        ArrayList<Dependents> typeList = new ArrayList<>();
+        try {
+            con = new DBContext().getConnection();
+            String query = "SELECT DISTINCT relationship FROM dependents";
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Dependents relationshipType = new Dependents();
+                relationshipType.setRelationship(rs.getString("relationship"));
+                typeList.add(relationshipType);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ
+        } finally {
+            // Đóng các tài nguyên
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                // Xử lý ngoại lệ khi đóng tài nguyên
+            }
+        }
+        return typeList;
+    }
 }

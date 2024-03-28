@@ -5,6 +5,7 @@
 package controller;
 
 import configs.Validate;
+import configs.headerInfor;
 import dal.AttendanceDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -64,6 +65,7 @@ public class UpdateAttendance extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         AttendanceDAO d = new AttendanceDAO();
         int id = Integer.parseInt(request.getParameter("aid"));
         AttendanceDepartmentDTO ar = d.getAttendanceReportById(id);
@@ -89,6 +91,7 @@ public class UpdateAttendance extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         String id = request.getParameter("id");
         String date = request.getParameter("date");
         String status = request.getParameter("status");

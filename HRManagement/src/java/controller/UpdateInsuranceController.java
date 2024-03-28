@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.InsuranceEmployeeDTO;
@@ -67,6 +68,12 @@ public class UpdateInsuranceController extends HttpServlet {
         InsuranceDAO d = new InsuranceDAO();
         int id = Integer.parseInt(request.getParameter("Iid"));
         InsuranceEmployeeDTO insurance = d.getInsuranceById(id);
+        ArrayList<InsuranceEmployeeDTO> typeList = d.getAllType();
+        request.setAttribute("typeList", typeList);
+        ArrayList<InsuranceEmployeeDTO> policyTypeList = d.getAllPolicyType();
+        request.setAttribute("policyTypeList", policyTypeList);
+        ArrayList<InsuranceEmployeeDTO> beneficiaryTypeList = d.getAllBeneficiaryType();
+        request.setAttribute("beneficiaryTypeList", beneficiaryTypeList);
         request.setAttribute("insurance", insurance);
         // Trong phương thức doGet hoặc doGet
         String successMessage = (String) request.getSession().getAttribute("successMessage");
@@ -106,13 +113,29 @@ public class UpdateInsuranceController extends HttpServlet {
         String coverage_details = request.getParameter("coverage_details");
         String beneficiary = request.getParameter("beneficiary");
 
-        InsuranceDAO dao = new InsuranceDAO();
+        InsuranceDAO d = new InsuranceDAO();
         String messageError = "Please input valid ";
 
         try {
             int count = 0;
             if (!validate.checkWords(insurance_company)) {
                 request.setAttribute("messageErrorInsuranceCompanyWord", messageError + "insurance company");
+                count++;
+            }
+            if (!validate.validatePolicyNumber(policy_number)) {
+                request.setAttribute("messageErrorPolicyNumber", "Please enter policy number according to example POL123456");
+                count++;
+            }
+            if (coverage_type.isEmpty() || coverage_type == "") {
+                request.setAttribute("messageErrorCoverageType", "Please choose Coverage Type");
+                count++;
+            }
+            if (policy_type.isEmpty() || policy_type == "") {
+                request.setAttribute("messageErrorPolicyType", "Please choose Policy Type");
+                count++;
+            }
+            if (beneficiary.isEmpty() || beneficiary == "") {
+                request.setAttribute("messageErrorBeneficiary", "Please choose Benefficiary");
                 count++;
             }
             if (!validate.checkDate(start_date)) {
@@ -156,14 +179,16 @@ public class UpdateInsuranceController extends HttpServlet {
                 }
             }
             if (count > 0) {
-                request.setAttribute("insurance", dao.getInsuranceById(insurance_id));
+                request.setAttribute("insurance", d.getInsuranceById(insurance_id));
+                request.setAttribute("typeList", d.getAllType());
+                request.setAttribute("policyTypeList", d.getAllPolicyType());
+                request.setAttribute("beneficiaryTypeList", d.getAllBeneficiaryType());
                 request.getRequestDispatcher("UpdateInsurance.jsp").forward(request, response);
-
             } else {
                 // Create Employee object with updated information
 
                 // Update the employee in the database
-                dao.updateInsurance(insurance_id, employee_id, insurance_company, policy_number,
+                d.updateInsurance(insurance_id, employee_id, insurance_company, policy_number,
                         coverage_type, start_date, end_date, policy_type, deductible,
                         co_pay, coverage_limit, premium_amount, renewal_date,
                         coverage_details, beneficiary);

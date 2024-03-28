@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import models.Dependents;
 
 /**
@@ -66,6 +67,8 @@ public class UpdateBeneficiaryController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BeneficiaryDAO d = new BeneficiaryDAO();
+        ArrayList<Dependents> relationshipType = d.getAllRelationshipType();
+        request.setAttribute("relationshipType", relationshipType);
         int id = Integer.parseInt(request.getParameter("bid"));
         Dependents beneficiary = d.getBeneficiaryByID(id);
         request.setAttribute("beneficiary", beneficiary);
@@ -120,15 +123,18 @@ public class UpdateBeneficiaryController extends HttpServlet {
                 request.setAttribute("messageErrorDate", messageError + "date");
                 count++;
             }
-            if (!validate.checkWords(gender)) {
-                request.setAttribute("messageErrorGender", messageError + "gender");
+            if (gender.isEmpty() || gender == "") {
+                request.setAttribute("messageErrorGender", "Please choose Gender");
                 count++;
             }
-            if (!validate.checkWords(relationship)) {
-                request.setAttribute("messageErrorRelationship", messageError + "relationship");
+            if (relationship.isEmpty() || relationship == "") {
+                request.setAttribute("messageErrorRelationship", "Please choose Relationship");
                 count++;
             }
             if (count > 0) {
+                BeneficiaryDAO d = new BeneficiaryDAO();
+                ArrayList<Dependents> relationshipType = d.getAllRelationshipType();
+                request.setAttribute("relationshipType", relationshipType);
                 request.setAttribute("beneficiary", dao.getBeneficiaryByEmployeeID(employeeId, "", "", null, null));
                 request.getRequestDispatcher("UpdateBeneficiary.jsp").forward(request, response);
 

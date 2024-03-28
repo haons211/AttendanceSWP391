@@ -4,7 +4,6 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 import configs.headerInfor;
 import dal.AttendanceDAO;
 import dal.DepartmentDAO;
@@ -45,7 +44,7 @@ public class AttendanceReportController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AttendanceReportController</title>");            
+            out.println("<title>Servlet AttendanceReportController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AttendanceReportController at " + request.getContextPath() + "</h1>");
@@ -74,6 +73,7 @@ public class AttendanceReportController extends HttpServlet {
         Date fromDate = null;
         Date toDate = null;
         // Xử lý fromDate và toDate
+
         String fromDateStr = request.getParameter("fromDate");
         String toDateStr = request.getParameter("toDate");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -89,14 +89,13 @@ public class AttendanceReportController extends HttpServlet {
         }
         // Gọi phương thức DAO để lấy danh sách AttendanceReport
         AttendanceDAO attendanceDAO = new AttendanceDAO();
-        ArrayList<AttendanceDepartmentDTO> attendanceList = attendanceDAO.getAllAttendance(search == null ? "" : search,departmentName ,fromDate==null?null:fromDate, toDate==null?null:toDate);
+        ArrayList<AttendanceDepartmentDTO> attendanceList = attendanceDAO.getAllAttendance(search == null ? "" : search, departmentName, fromDate == null ? null : fromDate, toDate == null ? null : toDate);
         request.setAttribute("listDep", departmentList);
         // Lưu danh sách vào request attribute để truyền tới jsp
         request.setAttribute("list", attendanceList);
         // Chuyển hướng đến trang jsp để hiển thị danh sách
         request.getRequestDispatcher("AttendanceReport.jsp").forward(request, response);
     }
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.

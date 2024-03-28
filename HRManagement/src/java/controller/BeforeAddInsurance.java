@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.EmployeeDAO;
 import dal.InsuranceDAO;
 import jakarta.servlet.ServletException;
@@ -60,6 +61,7 @@ public class BeforeAddInsurance extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         request.getRequestDispatcher("BeforeAddInsurance.jsp").forward(request, response);
     }
 
@@ -74,6 +76,7 @@ public class BeforeAddInsurance extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         try {
             int id = Integer.parseInt(request.getParameter("id"));
 

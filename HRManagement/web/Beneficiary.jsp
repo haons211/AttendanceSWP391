@@ -89,9 +89,9 @@
                                     <label class="focus-label">Relationship</label>
                                     <select class="form-control mr-sm-2" name="relationship">
                                         <option value="">Select Relationship</option>
-                                        <option value="Family">Family</option>
-                                        <option value="Spouse">Spouse</option>
-                                        <option value="Child">Child</option>
+                                        <c:forEach var="o" items="${requestScope.relationshipType}">
+                                            <option value="${o.relationship}">${o.relationship}</option>
+                                        </c:forEach>
                                     </select>
                                     <label>From:</label>
                                     <input id="fromDate" type="date" name="fromDate" class="form-control mr-sm-2" style="height: 30px;">

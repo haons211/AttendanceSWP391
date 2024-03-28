@@ -70,6 +70,7 @@ public class AllBeneficiaryController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         headerInfor.setSessionAttributes(request);
+
         int id_employee = 0;
         HttpSession session = request.getSession();
         if (session != null) {
@@ -110,7 +111,10 @@ public class AllBeneficiaryController extends HttpServlet {
         // Gọi phương thức DAO để lấy danh sách AttendanceReport
         BeneficiaryDAO d = new BeneficiaryDAO();
         ArrayList<Dependents> beneficiaryList;
-
+        
+        ArrayList<Dependents> relationshipType = d.getAllRelationshipType();
+        request.setAttribute("relationshipType", relationshipType);
+        
         beneficiaryList = d.getBeneficiaryByEmployeeID(id_employee,
                 search == null ? "" : search, relationship,
                 fromDate == null ? null : fromDate, toDate == null ? null : toDate);

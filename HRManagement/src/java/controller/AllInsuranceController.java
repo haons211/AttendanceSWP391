@@ -79,9 +79,12 @@ public class AllInsuranceController extends HttpServlet {
         ArrayList<InsuranceEmployeeDTO> typeList = insuranceDAO.getAllType();
         request.setAttribute("typeList", typeList);
         String typeName = request.getParameter("typeName");
-        Date fromDate = null;
-        Date toDate = null;
+//        Date fromDate = null;
+//        Date toDate = null;
         // Xử lý fromDate và toDate
+        Date now = new Date();
+        Date fromDate = now;
+        Date toDate = now;
         String fromDateStr = request.getParameter("fromDate");
         String toDateStr = request.getParameter("toDate");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -98,7 +101,7 @@ public class AllInsuranceController extends HttpServlet {
         // Gọi phương thức DAO để lấy danh sách AttendanceReport
         ArrayList<InsuranceEmployeeDTO> insuranceList = insuranceDAO.getAllInsurance(
                 search == null ? "" : search, typeName,
-                fromDate == null ? null : fromDate, toDate == null ? null : toDate, amount == 10000 ? 10000 : amount);
+                fromDate == null ? null : fromDate, toDate == null ? null : toDate);
         // Lưu danh sách vào request attribute để truyền tới jsp
         request.setAttribute("list", insuranceList);
         // Chuyển hướng đến trang jsp để hiển thị danh sách

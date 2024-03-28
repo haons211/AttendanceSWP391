@@ -250,7 +250,7 @@
                                                 </div>
                                                 <div class ="left-input-table" style= "width: 200px" >
 
-                                                    <img src="${employee.image}" id="output" style="width: 100px;height: 100px;object-fit: cover"/>
+                                                    <img src="assets/img/avatar/${employee.image}" id="output" style="width: 35%;height: 100px;object-fit: cover"/>
 
                                                 </div>
 

@@ -5,6 +5,7 @@
 package controller;
 
 import configs.Validate;
+import configs.headerInfor;
 import dal.EmployeeDAO;
 import dal.InsuranceDAO;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Employee;
@@ -68,14 +70,32 @@ public class AddInsurance extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        headerInfor.setSessionAttributes(request);
+
+        InsuranceDAO d = new InsuranceDAO();
+
+        ArrayList<InsuranceEmployeeDTO> typeList = d.getAllType();
+        request.setAttribute("typeList", typeList);
+
+        ArrayList<InsuranceEmployeeDTO> policyTypeList = d.getAllPolicyType();
+        request.setAttribute("policyTypeList", policyTypeList);
+
+        ArrayList<InsuranceEmployeeDTO> beneficiaryTypeList = d.getAllBeneficiaryType();
+        request.setAttribute("beneficiaryTypeList", beneficiaryTypeList);
+
         int id = Integer.parseInt(request.getParameter("id"));
+
         EmployeeDAO dao = new EmployeeDAO();
+
         Employee employee = new Employee();
+
         try {
             employee = dao.getEmployeeById(id);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddInsurance.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         request.setAttribute("employee", employee);
         request.getRequestDispatcher("AddInsurance.jsp").forward(request, response);
     }
@@ -91,6 +111,9 @@ public class AddInsurance extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        headerInfor.setSessionAttributes(request);
+
         int employee_id = Integer.parseInt(request.getParameter("employee_id"));
         String insurance_company = request.getParameter("insurance_company");
         String policy_number = request.getParameter("policy_number");
@@ -107,13 +130,31 @@ public class AddInsurance extends HttpServlet {
         String beneficiary = request.getParameter("beneficiary");
 
         InsuranceDAO dao = new InsuranceDAO();
+
         String messageError = "Please input valid ";
+
         try {
 
             int count = 0;
 
             if (!validate.checkWords(insurance_company)) {
                 request.setAttribute("messageErrorInsuranceCompanyWord", messageError + "insurance company");
+                count++;
+            }
+            if (!validate.validatePolicyNumber(policy_number)) {
+                request.setAttribute("messageErrorPolicyNumber", "Please enter policy number according to example POL123456");
+                count++;
+            }
+            if (coverage_type.isEmpty() || coverage_type == "") {
+                request.setAttribute("messageErrorCoverageType", "Please choose Coverage Type");
+                count++;
+            }
+            if (policy_type.isEmpty() || policy_type == "") {
+                request.setAttribute("messageErrorPolicyType", "Please choose Policy Type");
+                count++;
+            }
+            if (beneficiary.isEmpty() || beneficiary == "") {
+                request.setAttribute("messageErrorBeneficiary", "Please choose Benefficiary");
                 count++;
             }
             if (!validate.checkDate(start_date)) {
@@ -172,19 +213,37 @@ public class AddInsurance extends HttpServlet {
                 request.setAttribute("renewal_date", renewal_date);
                 request.setAttribute("coverage_details", coverage_details);
                 request.setAttribute("beneficiary", beneficiary);
+                InsuranceDAO d = new InsuranceDAO();
+                ArrayList<InsuranceEmployeeDTO> typeList = d.getAllType();
+                request.setAttribute("typeList", typeList);
+                ArrayList<InsuranceEmployeeDTO> policyTypeList = d.getAllPolicyType();
+                request.setAttribute("policyTypeList", policyTypeList);
+                ArrayList<InsuranceEmployeeDTO> beneficiaryTypeList = d.getAllBeneficiaryType();
+                request.setAttribute("beneficiaryTypeList", beneficiaryTypeList);
                 request.getRequestDispatcher("AddInsurance.jsp").forward(request, response);
             } else {
 
-                dao.addInsurance(employee_id, insurance_company, policy_number,
-                        coverage_type, start_date, end_date, policy_type, deductible,
-                        co_pay, coverage_limit, premium_amount, renewal_date,
-                        coverage_details, beneficiary);
+                dao.addInsurance(
+                        employee_id,
+                        insurance_company,
+                        policy_number,
+                        coverage_type,
+                        start_date,
+                        end_date,
+                        policy_type,
+                        deductible,
+                        co_pay,
+                        coverage_limit,
+                        premium_amount,
+                        renewal_date,
+                        coverage_details,
+                        beneficiary
+                );
                 response.sendRedirect("insurance");
             }
         } catch (Exception ex) {
             Logger.getLogger(AddEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
