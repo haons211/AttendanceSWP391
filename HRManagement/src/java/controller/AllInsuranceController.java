@@ -79,12 +79,9 @@ public class AllInsuranceController extends HttpServlet {
         ArrayList<InsuranceEmployeeDTO> typeList = insuranceDAO.getAllType();
         request.setAttribute("typeList", typeList);
         String typeName = request.getParameter("typeName");
-//        Date fromDate = null;
-//        Date toDate = null;
+        Date fromDate = null;
+        Date toDate = null;
         // Xử lý fromDate và toDate
-        Date now = new Date();
-        Date fromDate = now;
-        Date toDate = now;
         String fromDateStr = request.getParameter("fromDate");
         String toDateStr = request.getParameter("toDate");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
