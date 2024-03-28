@@ -43,8 +43,7 @@ public class DashboardControler extends HttpServlet {
         int numberEmployees = dao.getNumberOfEmployees();
         int numberAttend = dao.getNumberOfAttend();
         int numberLeave = numberEmployees - numberAttend;
-        List<Department> listDepartment = dao.getTop3Department();
-        List<Employee> listTop5Employee = dao.getTop5Employee();
+
         List<Employee> listLeave = dao.getListLeave();
         ArrayList<DepartmentEmployeeCountDTO> listDepartmentEmployee = dao.getEmployeeCountByDepartment();
         ArrayList<DepartmentAttendanceDTO> departmentAttendanceList = dao.getAttendancePercentageByDepartment();
@@ -56,8 +55,6 @@ public class DashboardControler extends HttpServlet {
         request.setAttribute("numberEmployees", numberEmployees);
         request.setAttribute("numberAttend", numberAttend);
         request.setAttribute("numberLeave", numberLeave);
-        request.setAttribute("listDepartment", listDepartment);
-        request.setAttribute("listTop5Employee", listTop5Employee);
         request.setAttribute("listLeave", listLeave);
         request.setAttribute("listDepartmentEmployee", listDepartmentEmployee);
         request.setAttribute("departmentAttendanceList", departmentAttendanceList);

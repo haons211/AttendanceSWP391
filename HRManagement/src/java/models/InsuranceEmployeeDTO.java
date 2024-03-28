@@ -24,7 +24,6 @@ public class InsuranceEmployeeDTO {
     private double coPay;
     private String coverageDetails;
     private String policyType;
-    private String policyIssuer;
     private String beneficiary;
     private double coverageLimit;
     private Date renewalDate;
@@ -42,7 +41,7 @@ public class InsuranceEmployeeDTO {
     public InsuranceEmployeeDTO() {
     }
 
-    public InsuranceEmployeeDTO(int insuranceId, int employeeId, String insuranceCompany, String policyNumber, String coverageType, Date startDate, Date endDate, double premiumAmount, double deductible, double coPay, String coverageDetails, String policyType, String policyIssuer, String beneficiary, double coverageLimit, Date renewalDate, String name, String phoneNumber, String address, String email, boolean gender, String image, String birthDate, String hireDate, int userId) {
+    public InsuranceEmployeeDTO(int insuranceId, int employeeId, String insuranceCompany, String policyNumber, String coverageType, Date startDate, Date endDate, double premiumAmount, double deductible, double coPay, String coverageDetails, String policyType, String beneficiary, double coverageLimit, Date renewalDate, String name, String phoneNumber, String address, String email, boolean gender, String image, String birthDate, String hireDate, int userId) {
         this.insuranceId = insuranceId;
         this.employeeId = employeeId;
         this.insuranceCompany = insuranceCompany;
@@ -55,7 +54,6 @@ public class InsuranceEmployeeDTO {
         this.coPay = coPay;
         this.coverageDetails = coverageDetails;
         this.policyType = policyType;
-        this.policyIssuer = policyIssuer;
         this.beneficiary = beneficiary;
         this.coverageLimit = coverageLimit;
         this.renewalDate = renewalDate;
@@ -166,14 +164,6 @@ public class InsuranceEmployeeDTO {
         this.policyType = policyType;
     }
 
-    public String getPolicyIssuer() {
-        return policyIssuer;
-    }
-
-    public void setPolicyIssuer(String policyIssuer) {
-        this.policyIssuer = policyIssuer;
-    }
-
     public String getBeneficiary() {
         return beneficiary;
     }
@@ -272,7 +262,7 @@ public class InsuranceEmployeeDTO {
 
     @Override
     public String toString() {
-        return "InsuranceEmployeeDTO{" + "insuranceId=" + insuranceId + ", employeeId=" + employeeId + ", insuranceCompany=" + insuranceCompany + ", policyNumber=" + policyNumber + ", coverageType=" + coverageType + ", startDate=" + startDate + ", endDate=" + endDate + ", premiumAmount=" + premiumAmount + ", deductible=" + deductible + ", coPay=" + coPay + ", coverageDetails=" + coverageDetails + ", policyType=" + policyType + ", policyIssuer=" + policyIssuer + ", beneficiary=" + beneficiary + ", coverageLimit=" + coverageLimit + ", renewalDate=" + renewalDate + ", name=" + name + ", phoneNumber=" + phoneNumber + ", address=" + address + ", email=" + email + ", gender=" + gender + ", image=" + image + ", birthDate=" + birthDate + ", hireDate=" + hireDate + ", userId=" + userId + '}';
+        return "InsuranceEmployeeDTO{" + "insuranceId=" + insuranceId + ", employeeId=" + employeeId + ", insuranceCompany=" + insuranceCompany + ", policyNumber=" + policyNumber + ", coverageType=" + coverageType + ", startDate=" + startDate + ", endDate=" + endDate + ", premiumAmount=" + premiumAmount + ", deductible=" + deductible + ", coPay=" + coPay + ", coverageDetails=" + coverageDetails + ", policyType=" + policyType + ", beneficiary=" + beneficiary + ", coverageLimit=" + coverageLimit + ", renewalDate=" + renewalDate + ", name=" + name + ", phoneNumber=" + phoneNumber + ", address=" + address + ", email=" + email + ", gender=" + gender + ", image=" + image + ", birthDate=" + birthDate + ", hireDate=" + hireDate + ", userId=" + userId + '}';
     }
 
 }

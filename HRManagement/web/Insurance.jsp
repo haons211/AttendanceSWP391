@@ -27,7 +27,7 @@
 
             th:nth-child(4),
             td:nth-child(4) {
-                min-width: 80px;
+                min-width: 120px;
             }
 
             th:nth-child(2),
@@ -93,13 +93,13 @@
                                             <option value="${o.coverageType}">${o.coverageType}</option>
                                         </c:forEach>
                                     </select>
-                                    <label class="focus-label">Premium Amount</label>
+<!--                                    <label class="focus-label">Premium Amount</label>
                                     <select class="form-control mr-sm-2" name="amount">
                                         <option value="10000">Select Range ($)</option>
                                         <option value="500">&lt;500$</option>
                                         <option value="1000">&lt;1000$</option>
                                         <option value="5000">&lt;5000$</option>
-                                    </select>
+                                    </select>-->
                                     <label>From:</label>
                                     <input id="fromDate" type="date" name="fromDate" class="form-control mr-sm-2" style="height: 30px;">
                                     <label>To:</label>

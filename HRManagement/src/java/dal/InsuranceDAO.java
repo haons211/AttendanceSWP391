@@ -40,7 +40,7 @@ public class InsuranceDAO {
         }
     }
 
-    public ArrayList<InsuranceEmployeeDTO> getAllInsurance(String search, String coverageType, Date fromDate, Date toDate, double premium_amount) {
+    public ArrayList<InsuranceEmployeeDTO> getAllInsurance(String search, String coverageType, Date fromDate, Date toDate) {
         ArrayList<InsuranceEmployeeDTO> list = new ArrayList<>();
         String query = "SELECT i.*, e.* \n"
                 + "FROM insurance i \n"
@@ -60,9 +60,6 @@ public class InsuranceDAO {
             query += " AND (i.start_date BETWEEN ? AND ? AND i.end_date BETWEEN ? AND ?)";
         }
 
-        if (premium_amount != 0) {
-            query += " AND (i.premium_amount <= ? )";
-        }
         query += " ORDER BY i.insurance_id ASC";
 
         try {
@@ -91,9 +88,7 @@ public class InsuranceDAO {
                 ps.setDate(paramIndex++, new java.sql.Date(fromDate.getTime()));
                 ps.setDate(paramIndex++, new java.sql.Date(toDate.getTime()));
             }
-            if (premium_amount != 0) {
-                ps.setDouble(paramIndex++, premium_amount);
-            }
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new InsuranceEmployeeDTO(
@@ -109,7 +104,6 @@ public class InsuranceDAO {
                         rs.getDouble("co_pay"),
                         rs.getString("coverage_details"),
                         rs.getString("policy_type"),
-                        rs.getString("policy_issuer"),
                         rs.getString("beneficiary"),
                         rs.getDouble("coverage_limit"),
                         rs.getDate("renewal_date"),
@@ -200,7 +194,6 @@ public class InsuranceDAO {
                         rs.getDouble("co_pay"),
                         rs.getString("coverage_details"),
                         rs.getString("policy_type"),
-                        rs.getString("policy_issuer"),
                         rs.getString("beneficiary"),
                         rs.getDouble("coverage_limit"),
                         rs.getDate("renewal_date"),
@@ -271,9 +264,9 @@ public class InsuranceDAO {
             String end_date, String policy_type, String deductible, String co_pay,
             String coverage_limit, String premium_amount, String renewal_date,
             String coverage_details, String beneficiary) throws ClassNotFoundException {
-        String query = "INSERT INTO insurance (employee_id, insurance_company, policy_number, "
-                + "coverage_type, start_date, end_date, policy_type, deductible, co_pay, "
-                + "coverage_limit, premium_amount, renewal_date, coverage_details, beneficiary) "
+        String query = "INSERT INTO insurance (employee_id, insurance_company, policy_number, \n"
+                + "coverage_type, start_date, end_date, premium_amount,  deductible, co_pay, \n"
+                + "coverage_details, policy_type, beneficiary, coverage_limit,  renewal_date) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (
@@ -284,14 +277,14 @@ public class InsuranceDAO {
             ps.setString(4, coverage_type);
             ps.setString(5, start_date);
             ps.setString(6, end_date);
-            ps.setString(7, policy_type);
+            ps.setString(7, premium_amount);
             ps.setString(8, deductible);
             ps.setString(9, co_pay);
-            ps.setString(10, coverage_limit);
-            ps.setString(11, premium_amount);
-            ps.setString(12, renewal_date);
-            ps.setString(13, coverage_details);
-            ps.setString(14, beneficiary);
+            ps.setString(10, coverage_details);
+            ps.setString(11, policy_type);
+            ps.setString(12, beneficiary);
+            ps.setString(13, coverage_limit);
+            ps.setString(14, renewal_date);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -299,10 +292,10 @@ public class InsuranceDAO {
         }
     }
 
-    public void updateInsurance(int insurance_id, int employee_id, 
-            String insurance_company, String policy_number, String coverage_type, 
-            String start_date, String end_date, String policy_type, String deductible, 
-            String co_pay, String coverage_limit, String premium_amount, String renewal_date, 
+    public void updateInsurance(int insurance_id, int employee_id,
+            String insurance_company, String policy_number, String coverage_type,
+            String start_date, String end_date, String policy_type, String deductible,
+            String co_pay, String coverage_limit, String premium_amount, String renewal_date,
             String coverage_details, String beneficiary) throws ClassNotFoundException {
         String query = "UPDATE insurance SET employee_id = ?, insurance_company = ?, policy_number = ?, "
                 + "coverage_type = ?, start_date = ?, end_date = ?, policy_type = ?, deductible = ?, co_pay = ?, "
@@ -334,4 +327,73 @@ public class InsuranceDAO {
         }
     }
 
+    public ArrayList<InsuranceEmployeeDTO> getAllPolicyType() {
+        ArrayList<InsuranceEmployeeDTO> typeList = new ArrayList<>();
+        try {
+            con = new DBContext().getConnection();
+            String query = "SELECT DISTINCT policy_type FROM insurance";
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                InsuranceEmployeeDTO insurancePolicyType = new InsuranceEmployeeDTO();
+                insurancePolicyType.setPolicyType(rs.getString("policy_type"));
+                typeList.add(insurancePolicyType);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ
+        } finally {
+            // Đóng các tài nguyên
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                // Xử lý ngoại lệ khi đóng tài nguyên
+            }
+        }
+        return typeList;
+    }
+
+    public ArrayList<InsuranceEmployeeDTO> getAllBeneficiaryType() {
+        ArrayList<InsuranceEmployeeDTO> typeList = new ArrayList<>();
+        try {
+            con = new DBContext().getConnection();
+            String query = "SELECT DISTINCT beneficiary FROM insurance";
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                InsuranceEmployeeDTO insuranceBeneficiary = new InsuranceEmployeeDTO();
+                insuranceBeneficiary.setBeneficiary(rs.getString("beneficiary"));
+                typeList.add(insuranceBeneficiary);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ
+        } finally {
+            // Đóng các tài nguyên
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                // Xử lý ngoại lệ khi đóng tài nguyên
+            }
+        }
+        return typeList;
+    }
 }

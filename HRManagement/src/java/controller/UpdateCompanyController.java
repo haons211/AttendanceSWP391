@@ -174,8 +174,7 @@ public class UpdateCompanyController extends HttpServlet {
 
                 dao.updateCompany(company, companyID);
 
-                response.sendRedirect("Setting");
-
+                response.sendRedirect("dashboard");
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateCompanyController.class.getName()).log(Level.SEVERE, null, ex);

@@ -180,7 +180,7 @@
                                                                aria-describedby="inputGroup-sizing-sm" value="${insurance.policyNumber}"  name="policy_number"  >
                                                     </div>
                                                     <div style="color: red">
-                                                        ${requestScope.messageErrorDouble}
+                                                        ${requestScope.messageErrorPolicyNumber}
                                                     </div>
                                                 </div>
                                             </td>
@@ -197,15 +197,15 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
-                                                        <select class="form-control" name="coverage_type" value="${insurance.coverageType}" style="width: 300px;">
-                                                            <!-- Add options for coverage types -->
-
-                                                            <option ${insurance.coverageType == "Health" ? 'selected' : ''}>Health</option>
-                                                            <option ${insurance.coverageType == "Life" ? 'selected' : ''}>Life</option>
-                                                            <option ${insurance.coverageType == "Accident" ? 'selected' : ''}>Accident</option>
-
+                                                        <select class="form-control" name="coverage_type" style="width: 300px;">
+                                                            <c:forEach var="o" items="${requestScope.typeList}">
+                                                                <option value="${o.coverageType}" ${o.coverageType == insurance.coverageType ? 'selected' : ''}>${o.coverageType}</option>
+                                                            </c:forEach>
                                                         </select>
-                                                    </div>                                            
+                                                    </div>  
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorCoverageType}
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>Policy Type</td>
@@ -216,11 +216,14 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <select class="form-control" name="policy_type" value="${insurance.policyType}">
-                                                            <option ${insurance.coverageType == "Health Insurance" ? 'selected' : ''}>Health Insurance</option>
-                                                            <option ${insurance.coverageType == "Life Insurance" ? 'selected' : ''}>Life Insurance</option>
-                                                            <option ${insurance.coverageType == "Accident Insurance" ? 'selected' : ''}>Accident Insurance</option>
+                                                            <c:forEach var="o" items="${requestScope.policyTypeList}">
+                                                                <option value="${o.policyType}" ${o.policyType == insurance.policyType ? 'selected' : ''}>${o.policyType}</option>
+                                                            </c:forEach>
                                                             <!-- Add more options as needed -->
                                                         </select>
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorPolicyType}
                                                     </div>
                                                 </div>
                                             </td>
@@ -394,12 +397,9 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <select class="form-control" name="beneficiary" value="${insurance.beneficiary}" style="width: 312px;">
-                                                            <!-- Add options for beneficiaries -->
-                                                            <option ${insurance.beneficiary == null ? 'selected' : ''}>No beneficiary</option>
-                                                            <option ${insurance.beneficiary == "Family" ? 'selected' : ''}>Family</option>
-                                                            <option ${insurance.beneficiary == "Spouse" ? 'selected' : ''}>Spouse</option>
-                                                            <option ${insurance.beneficiary == "Children" ? 'selected' : ''}>Children</option>
-                                                            <!-- Add more options as needed -->
+                                                            <c:forEach var="o" items="${requestScope.beneficiaryTypeList}">
+                                                                <option value="${o.beneficiary}" ${o.beneficiary == insurance.beneficiary ? 'selected' : ''}>${o.beneficiary}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>                                               
                                                 </div>

@@ -1,6 +1,7 @@
 package controller;
 
 import configs.Validate;
+import configs.headerInfor;
 import dal.DepartmentDAO;
 import dal.EmployeeDAO;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class UpdateEmployeeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         // Forward to the update-employee.jsp page for displaying the form
         if (request.getParameter("id") != null) {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -49,6 +51,7 @@ public class UpdateEmployeeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         // Retrieve parameters from the request
         String name = request.getParameter("name");
                 name = validate.normalizeName(name);

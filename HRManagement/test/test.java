@@ -1,26 +1,34 @@
 
+import dal.AttendanceDAO;
 import dal.BeneficiaryDAO;
-
 
 public class test {
 
     public static void main(String[] args) {
-        // Thay thế các giá trị dưới đây bằng dữ liệu thực tế từ yêu cầu của bạn
-        int dependentId = 1;
-        int employeeId = 1;
-        String name = "Updated Name";
-        boolean gender = true; // true nếu là nam, false nếu là nữ
-        String dateOfBirth = "1990-01-01"; // Định dạng: YYYY-MM-DD
-        String relationship = "Updated Relationship";
+        AttendanceDAO dao = new AttendanceDAO();
 
-        BeneficiaryDAO beneficiaryDAO = new BeneficiaryDAO();
+        // Dữ liệu mẫu để kiểm tra
+        int attendance_id = 1;
+        String in_time = "09:00:00";
+        String out_time = "17:00:00";
+        String notes = "Test notes";
+        String status = "Present";
+        String in_status = "On time";
+        String out_status = "On time";
+        int remainDay = 4;
+        String date = "2024-03-28";
 
-        try {
-            // Gọi phương thức updateBeneficiary để cập nhật thông tin người thụ hưởng
-            beneficiaryDAO.updateBeneficiary(dependentId, employeeId, name, gender, dateOfBirth, relationship);
-            System.out.println("Beneficiary updated successfully.");
-        } catch (Exception e) {
-            System.out.println("An error occurred while updating beneficiary: " + e.getMessage());
-        }
+        // Gọi phương thức updateAttendance và in kết quả
+        String result = dao.updateAttendance(
+                attendance_id, 
+                in_time, 
+                out_time, 
+                notes, 
+                status, 
+                in_status, 
+                out_status, 
+                remainDay, 
+                date);
+        System.out.println(result);
     }
 }

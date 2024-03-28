@@ -149,9 +149,9 @@
                                                             <!-- Add options for beneficiaries -->
 
                                                             <option value="">Select Relationship</option>
-                                                            <option value="Family">Family</option>
-                                                            <option value="Spouse">Spouse</option>
-                                                            <option value="Child">Child</option>
+                                                            <c:forEach var="o" items="${requestScope.relationshipType}">
+                                                                <option value="${o.relationship}">${o.relationship}</option>
+                                                            </c:forEach>
                                                             <!-- Add more options as needed -->
                                                         </select>
                                                     </div>

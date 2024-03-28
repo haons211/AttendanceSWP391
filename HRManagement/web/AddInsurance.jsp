@@ -180,7 +180,7 @@
                                                                aria-describedby="inputGroup-sizing-sm"   name="policy_number"  >
                                                     </div>
                                                     <div style="color: red">
-                                                        ${requestScope.messageErrorDouble}
+                                                        ${requestScope.messageErrorPolicyNumber}
                                                     </div>
                                                 </div>
                                             </td>
@@ -198,14 +198,15 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm"></span>
                                                         </div>
                                                         <select class="form-control" name="coverage_type" style="width: 300px;">
-                                                            <!-- Add options for coverage types -->
-
-                                                            <option value="Health">Health</option>
-                                                            <option value="Life">Life</option>
-                                                            <option value="Accident">Accident</option>
-                                                            <!-- Add more options as needed -->
+                                                            <option value="">Select Coverage Type</option>
+                                                            <c:forEach var="o" items="${requestScope.typeList}">
+                                                                <option value="${o.coverageType}">${o.coverageType}</option>
+                                                            </c:forEach>
                                                         </select>
-                                                    </div>                                            
+                                                    </div>
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorCoverageType}
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>Policy Type</td>
@@ -218,13 +219,16 @@
                                                         <select class="form-control" name="policy_type">
                                                             <!-- Add options for policy types -->
 
-                                                            <option value="Health Insurance">Health Insurance</option>
-                                                            <option value="Life Insurance">Life Insurance</option>
-                                                            <option value="Accident Insurance">Accident Insurance</option>
+                                                            <option value="">Select Policy Type</option>
+                                                            <c:forEach var="o" items="${requestScope.policyTypeList}">
+                                                                <option value="${o.policyType}">${o.policyType}</option>
+                                                            </c:forEach>
                                                             <!-- Add more options as needed -->
                                                         </select>
                                                     </div>
-
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorPolicyType}
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -243,10 +247,10 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm" name="end_date"  style="width: 312px;" >
+                                                               aria-describedby="inputGroup-sizing-sm" name="start_date"  style="width: 312px;" >
                                                     </div> 
                                                     <div style="color: red">
-                                                        ${requestScope.messageErrorEndDate}
+                                                        ${requestScope.messageErrorStartDate}
                                                     </div>
                                                 </div>
                                             </td>
@@ -260,10 +264,10 @@
                                                             <span class="input-group-text" id="inputGroup-sizing-sm" ></span>
                                                         </div>
                                                         <input type="date" class="form-control" aria-label="Small"
-                                                               aria-describedby="inputGroup-sizing-sm"   name="start_date"  >
+                                                               aria-describedby="inputGroup-sizing-sm"   name="end_date"  >
                                                     </div>
                                                     <div style="color: red">
-                                                        ${requestScope.messageErrorStartDate}
+                                                        ${requestScope.messageErrorEndDate}
                                                     </div>
                                                 </div>
                                             </td>
@@ -398,12 +402,16 @@
                                                         <select class="form-control" name="beneficiary" style="width: 312px;">
                                                             <!-- Add options for beneficiaries -->
 
-                                                            <option value="Family">Family</option>
-                                                            <option value="Spouse">Spouse</option>
-                                                            <option value="Child">Child</option>
+                                                            <option value="">Select Beneficiary Type</option>
+                                                            <c:forEach var="o" items="${requestScope.beneficiaryTypeList}">
+                                                                <option value="${o.beneficiary}">${o.beneficiary}</option>
+                                                            </c:forEach>
                                                             <!-- Add more options as needed -->
                                                         </select>
-                                                    </div>                                               
+                                                    </div>  
+                                                    <div style="color: red">
+                                                        ${requestScope.messageErrorBeneficiary}
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
