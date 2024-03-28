@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        
     </head>
     <body>
 
@@ -52,17 +53,17 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="profile-img-wrap">
-                                        <img class="inline-block" src="assets/img/user.jpg" alt="user">
-                                        <div class="fileupload btn">
+                                        <img class="" src="assets/img/avatar/${em.image}" alt="user">
+<!--                                        <div class="fileupload btn">
                                             <span class="btn-text">edit</span>
                                             <input class="upload" type="file">
-                                        </div>
+                                        </div>-->
                                     </div>
 
                                     <div class="profile-basic">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="form-group form-focus">
+                                                <div class="form-group ">
                                                     <label class="focus-label">Full Name</label>
                                                     <input type="text" class="form-control floating" id="empName" name="empName" value="${em1.name}" required pattern="[a-zA-ZÀ-Ỹà-ỹ ]+" title="Please enter a valid name (letters and spaces only)">
 
@@ -70,7 +71,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group form-focus">
+                                                <div class="form-group ">
                                                     <label class="focus-label">Birth Date</label>
                                                     <div>
                                                         <input type="date"id="empBirthdate" name="empBirthdate"  class="form-control floating" value="${em1.birthDate}"required>
@@ -78,7 +79,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group form-focus select-focus">
+                                                <div class="form-group select-focus">
                                                     <label class="focus-label">Gender</label>
                                                     <select class="select form-control floating" id="empGender" name="empGender"required>
                                                         <option value="0">Male</option>

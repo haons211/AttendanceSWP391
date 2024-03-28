@@ -170,7 +170,7 @@
                     <div class="row">
                         <div class="containerr">
                             <div class="rectangle">
-                                <img src="assets/img/user.jpg" width="100%" height="100%" alt="">
+                                <img src="assets/img/avatar/${em.image}" width="100%" height="100%" alt="">
                             </div>
                             <div class="user-info">
                                 <div class="info">Hello,${em.name}!</div>

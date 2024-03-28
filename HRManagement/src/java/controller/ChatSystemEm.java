@@ -5,6 +5,7 @@
 
 package controller;
 
+import configs.headerInfor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -55,6 +56,7 @@ public class ChatSystemEm extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         request.getRequestDispatcher("ChatSystem.jsp").forward(request, response);
     } 
 
