@@ -72,7 +72,7 @@ public class UpdateCompanyController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-        
+          headerInfor.setSessionAttributes(request);
 
         request.setAttribute("id", 1);
         // set attribute employeeList
@@ -80,14 +80,15 @@ public class UpdateCompanyController extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         DepartmentDAO departmentDAO = new DepartmentDAO();
 
-        Company company = new Company();
+      
 
         try {
-            Department department = departmentDAO.getDepartmentById(dao.getCompanyByID(1).getDepartment());
+           
             Employee employee = employeeDAO.getEmployeeById(dao.getCompanyByID(1).getContactPerson());
             request.setAttribute("company", dao.getCompanyByID(1));
             request.setAttribute("employee1", employee);
-            request.setAttribute("department", department);
+            request.setAttribute("department", departmentDAO.getAllDepartments(""));
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SettingController.class.getName()).log(Level.SEVERE, null, ex);
         }
