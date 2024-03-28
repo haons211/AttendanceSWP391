@@ -70,7 +70,7 @@ public class ViewFeedback extends HttpServlet {
         AccountDTO acc = (AccountDTO) session.getAttribute("account");
         String search = request.getParameter("search");
         request.setAttribute("search", search);
-        if (!acc.getUserName().equals("manageruser")) {
+        if (acc.getRole() !=3) {
             response.sendRedirect("404.jsp");
         } 
         else {
