@@ -69,6 +69,29 @@ public class AttendanceByMonthYearController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        heade@rInfor.setSessionAttributes(request);
+//
+//        
+//        EmployeeDAO dao = new EmployeeDAO();
+//        List<Employee> employeesList =  new ArrayList<>() ;
+//        try {
+//            employeesList = dao.getAllEmployees("" );
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(ListEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        request.setAttribute("employeeList", employeesList);
+//
+//       AttendanceDAO attendanceDAO = new AttendanceDAO();
+//        ArrayList<AttendanceSheet> attendanceList = attendanceDAO.getAttendanceByEmployeeAndDateRange(2, Month,Year);
+//        System.out.println(attendanceList.toString());
+//        // Lưu danh sách vào request attribute để truyền tới jsp
+//        request.setAttribute("list", attendanceList);
+//        // Chuyển hướng đến trang jsp để hiển thị danh sách
+//        request.getRequestDispatcher("AttendanceByMonthYear.jsp").forward(request, response);
+//    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
