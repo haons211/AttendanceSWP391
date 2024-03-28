@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>Chat</title>
+    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -27,6 +27,7 @@
     int role=     acc.getRole();
     int sender_id= ad.GetEmployeeIDbyUserID(acc);
     String sender_name=ad.getNamebyAccount(acc);
+    String sender_image=ad.getImagebyAccount(acc);
 %>
 <c:set var="em" value="${requestScope.emp}" />
 <div class="main-wrapper">
@@ -68,10 +69,10 @@
                                 <div class="navbar">
                                     <div class="user-details mr-auto">
                                         <div class="float-left user-img m-r-10">
-                                            <a href="#" title="Jennifer Robinson"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                            <a href="profile.html" title="Jennifer Robinson"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                         </div>
                                         <div class="user-info float-left">
-                                            <a href="#"><span class="font-bold">All</span> <i class="typing-text"></i></a>
+                                            <a href="profile.html"><span class="font-bold">All</span> <i class="typing-text"></i></a>
 
                                         </div>
                                     </div>
@@ -104,8 +105,8 @@
                                                         <c:otherwise>
                                                             <div class="chat chat-left">
                                                                 <div class="chat-avatar">
-                                                                    <a href="#" class="avatar">
-                                                                        <img alt="Jennifer Robinson" src="assets/img/user.jpg" class="img-fluid rounded-circle">
+                                                                    <a href="profile.html#" class="avatar">
+                                                                        <img alt="Jennifer Robinson" src="assets/img/avatar/${message.sender_image}" class="img-fluid rounded-circle">
                                                                     </a>
                                                                 </div>
                                                                 <div class="chat-body">
@@ -135,6 +136,7 @@
                                                 <textarea id="textMessage" class="form-control" placeholder="Please Message" name="content" required=""></textarea>
                                                 <input id="sender_id" type="hidden" value="<%=  (int)sender_id %>">
                                                 <input id="sender_name" type="hidden" value="<%= (String)sender_name %>">
+                                                <input id="sender_image" type="hidden" value="<%= (String)sender_image %>">
                                                 <span class="input-group-append">
                                                             <button onclick="send()" class="btn btn-primary" type="button"><i class="fa fa-send"></i></button>
                                                         </span>
@@ -405,22 +407,22 @@
             const message = JSON.parse(event.data);
             const sender_id = document.getElementById("sender_id").value;
             const date = new Date(message.timestamp);
-
+            console.log(message);
             const currentDate = new Date();
             const currentDay = currentDate.getDate();
-            const currentMonth = currentDate.getMonth() + 1; // Th√°ng b?t ??u t? 0 n√™n c?n c?ng th√™m 1
+            const currentMonth = currentDate.getMonth() + 1; // Th·ng b?t ??u t? 0 nÍn c?n c?ng thÍm 1
 
             const messageDay = date.getDate();
             const messageMonth = date.getMonth() + 1;
 
             let formattedTime;
             if (currentDay === messageDay && currentMonth === messageMonth) {
-                // ??nh d?ng gi? v√† ph√∫t t? ??i t??ng Date
+                // ??nh d?ng gi? v‡ ph˙t t? ??i t??ng Date
                 const hours = date.getHours();
                 const minutes = date.getMinutes();
-                formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0'); // ??nh d?ng gi?:ph√∫t
+                formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0'); // ??nh d?ng gi?:ph˙t
             } else {
-                // N?u kh√°c ng√†y g?i, hi?n th? ng√†y v√† th√°ng c?a tin nh?n
+                // N?u kh·c ng‡y g?i, hi?n th? ng‡y v‡ th·ng c?a tin nh?n
                 formattedTime = messageDay.toString().padStart(2, '0') + '/' + messageMonth.toString().padStart(2, '0');
             }
 
@@ -445,8 +447,8 @@
                 chat.innerHTML = `
             <div class="chat chat-left">
                 <div class="chat-avatar">
-                    <a href="profile.html" class="avatar">
-                        <img alt="${message.sender_name}" src="assets/img/user.jpg" class="img-fluid rounded-circle">
+                    <a href="profile.html#" class="avatar">
+                        <img alt="${message.sender_name}" src="assets/img/avatar/` + message.sender_image + `" class="img-fluid rounded-circle">
                     </a>
                 </div>
                 <div class="chat-body">
@@ -503,29 +505,35 @@ function send() {
     const sender_name = document.getElementById("sender_name").value;
     const content = document.getElementById("textMessage").value;
     const timestamp = Date.now();
+    const sender_image=document.getElementById("sender_image").value;
 
     if (content.trim() === '') {
         alert('Please enter a message');
         return;
     }
 
-    // Thay th? c·c d?u '<' v‡ '>' trong n?i dung b?ng c·c th? HTML t??ng ?ng
+    // Thay th? c?c d?u '<' v? '>' trong n?i dung b?ng c?c th? HTML t??ng ?ng
     const sanitizedContent = sanitizeInput(content);
 
     const json = {
         'sender_id': sender_id,
         'content': sanitizedContent,
         'timestamp': timestamp,
-        'sender_name': sender_name
+        'sender_name': sender_name,
+        'sender_image': sender_image
     };
 
     // G?i d? li?u JSON qua WebSocket
     ws.send(JSON.stringify(json));
+    clearInput();
 }
 
-// H‡m ?? thay th? '<' v‡ '>' b?ng c·c th? HTML t??ng ?ng
+// H?m ?? thay th? '<' v? '>' b?ng c?c th? HTML t??ng ?ng
 function sanitizeInput(input) {
     return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function clearInput() {
+    document.getElementById("textMessage").value = '';
 }
 
     </script>

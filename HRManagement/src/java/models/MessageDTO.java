@@ -19,10 +19,27 @@ public class MessageDTO {
     private String content;
     private Date timestamp;
     private String formatTime;
-
+    private String sender_image;
     public MessageDTO() {
     }
 
+    public MessageDTO(int message_id, int sender_id, String sender, String content, String formatTime, String sender_image) {
+        this.message_id = message_id;
+        this.sender_id = sender_id;
+        this.sender = sender;
+        this.content = content;
+        this.formatTime = formatTime;
+        this.sender_image = sender_image;
+    }
+
+    public String getSender_image() {
+        return sender_image;
+    }
+
+    public void setSender_image(String sender_image) {
+        this.sender_image = sender_image;
+    }
+     
     public MessageDTO(int sender_id, String sender, String content, Date timestamp) {
         this.sender_id = sender_id;
         this.sender = sender;

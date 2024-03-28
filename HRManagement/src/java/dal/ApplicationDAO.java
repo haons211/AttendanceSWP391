@@ -59,9 +59,6 @@ public class ApplicationDAO extends DBContext {
         }
     }
 
-
-
-
     public int GetEmployeeIDbyUserID(AccountDTO accountDto0) {
 
         int employeeId = -1;
@@ -107,25 +104,26 @@ public class ApplicationDAO extends DBContext {
     }
 
     public List<ApplicationDTO> getAllApplicationbySenderId(int sender_id, String searchParam, String typeAppParam) {
-        String sql = "SELECT\n" +
-                "    a.application_id,\n" +
-                "    ta.type_id,\n" +  // Thêm cột type_id
-                "    ta.name AS type_name,\n" +
-                "    a.title,\n" +
-                "    e1.name AS sender_name,\n" +
-                "    e2.name AS receiver_name,\n" +
-                "    a.create_date,\n" +
-                "    a.status,\n" +
-                "    a.content,\n" +
-                "    a.file,\n" +
-                "    a.complete_date\n" +
-                "FROM\n" +
-                "    application AS a\n" +
-                "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id\n" +
-                "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id\n" +
-                "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id\n" +
-                "WHERE\n" +
-                "    a.sender_id = ?";
+        String sql = "SELECT\n"
+                + "    a.application_id,\n"
+                + "    ta.type_id,\n"
+                + // Thêm cột type_id
+                "    ta.name AS type_name,\n"
+                + "    a.title,\n"
+                + "    e1.name AS sender_name,\n"
+                + "    e2.name AS receiver_name,\n"
+                + "    a.create_date,\n"
+                + "    a.status,\n"
+                + "    a.content,\n"
+                + "    a.file,\n"
+                + "    a.complete_date\n"
+                + "FROM\n"
+                + "    application AS a\n"
+                + "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id\n"
+                + "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id\n"
+                + "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id\n"
+                + "WHERE\n"
+                + "    a.sender_id = ?";
 
         if (searchParam != null && !searchParam.isEmpty()) {
             sql += " AND LOWER(a.title) LIKE LOWER(?)";
@@ -161,7 +159,7 @@ public class ApplicationDAO extends DBContext {
                     applicationDTO.setReceiver_name(rs.getString("receiver_name"));
                     applicationDTO.setCreate_date(rs.getTimestamp("create_date"));
                     applicationDTO.setComplete_date(rs.getTimestamp("complete_date"));
-                    if(applicationDTO.getComplete_date()!=null){
+                    if (applicationDTO.getComplete_date() != null) {
                         changeStatus(applicationDTO.getComplete_date(), applicationDTO.getApplication_id());
                     }
                     applicationDTO.setStatus(rs.getString("status"));
@@ -183,27 +181,27 @@ public class ApplicationDAO extends DBContext {
         return list;
     }
 
-
     public List<ApplicationDTO> getAllApplicationbyReceiverId(int receiver_id, String searchParam, String typeAppParam) {
-        String sql = "SELECT\n" +
-                "    a.application_id,\n" +
-                "    ta.type_id,\n" +  // Thêm cột type_id
-                "    ta.name AS type_name,\n" +
-                "    a.title,\n" +
-                "    e1.name AS sender_name,\n" +
-                "    e2.name AS receiver_name,\n" +
-                "    a.create_date,\n" +
-                "    a.status,\n" +
-                "    a.content,\n" +
-                "    a.file,\n" +
-                "    a.complete_date\n" +
-                "FROM\n" +
-                "    application AS a\n" +
-                "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id\n" +
-                "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id\n" +
-                "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id\n" +
-                "WHERE\n" +
-                "    a.receiver_id = ?";
+        String sql = "SELECT\n"
+                + "    a.application_id,\n"
+                + "    ta.type_id,\n"
+                + // Thêm cột type_id
+                "    ta.name AS type_name,\n"
+                + "    a.title,\n"
+                + "    e1.name AS sender_name,\n"
+                + "    e2.name AS receiver_name,\n"
+                + "    a.create_date,\n"
+                + "    a.status,\n"
+                + "    a.content,\n"
+                + "    a.file,\n"
+                + "    a.complete_date\n"
+                + "FROM\n"
+                + "    application AS a\n"
+                + "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id\n"
+                + "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id\n"
+                + "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id\n"
+                + "WHERE\n"
+                + "    a.receiver_id = ?";
 
         if (searchParam != null && !searchParam.isEmpty()) {
             sql += " AND LOWER(a.title) LIKE LOWER(?)";
@@ -239,7 +237,7 @@ public class ApplicationDAO extends DBContext {
                     applicationDTO.setReceiver_name(rs.getString("receiver_name"));
                     applicationDTO.setCreate_date(rs.getTimestamp("create_date"));
                     applicationDTO.setComplete_date(rs.getTimestamp("complete_date"));
-                    if(applicationDTO.getComplete_date()!=null){
+                    if (applicationDTO.getComplete_date() != null) {
                         changeStatus(applicationDTO.getComplete_date(), applicationDTO.getApplication_id());
                     }
                     applicationDTO.setStatus(rs.getString("status"));
@@ -261,32 +259,32 @@ public class ApplicationDAO extends DBContext {
         return list;
     }
 
-
     public ApplicationDTO getApplicationById(int applicationId) {
-        String sql = "SELECT " +
-                "    a.application_id, " +
-                "    ta.name AS type_name, " +
-                "    a.title, " +
-                "    e1.name AS sender_name, " +
-                "    e2.name AS receiver_name, " +
-                "    a.create_date, " +
-                "    a.status, " +
-                "    a.content, " +
-                "    a.file, " +
-                "    a.complete_date, " +
-                "    a.replyContent " +
-                "FROM " +
-                "    application AS a " +
-                "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id " +
-                "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id " +
-                "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id " +
-                "WHERE " +
-                "    a.application_id=?";
+        String sql = "SELECT "
+                + "    a.application_id, "
+                + "    ta.name AS type_name, "
+                + "    a.title, "
+                + "    e1.name AS sender_name, "
+                + "    e2.name AS receiver_name, "
+                + "    a.create_date, "
+                + "    a.status, "
+                + "    a.content, "
+                + "    a.file, "
+                + "    a.complete_date, "
+                + "    a.replyContent, "
+                + "    e1.image AS sender_image, "
+                + "    e2.image AS receiver_image "
+                + "FROM "
+                + "    application AS a "
+                + "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id "
+                + "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id "
+                + "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id "
+                + "WHERE "
+                + "    a.application_id=?";
 
         ApplicationDTO applicationDTO = null;
 
-        try (Connection con = super.getConnection();
-             PreparedStatement st = con.prepareStatement(sql)) {
+        try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
 
             st.setInt(1, applicationId);
 
@@ -298,12 +296,17 @@ public class ApplicationDAO extends DBContext {
                     applicationDTO.setTitle(rs.getString("title"));
                     applicationDTO.setSender_name(rs.getString("sender_name"));
                     applicationDTO.setReceiver_name(rs.getString("receiver_name"));
-                    applicationDTO.setCreate_date(rs.getDate("create_date"));
+                    applicationDTO.setCreate_date(rs.getTimestamp("create_date"));
                     applicationDTO.setStatus(rs.getString("status"));
                     applicationDTO.setContent(rs.getString("content"));
                     applicationDTO.setFile(rs.getString("file"));
-                    applicationDTO.setComplete_date(rs.getDate("complete_date"));
-                    applicationDTO.setReplyContent(rs.getString("replyContent"));
+                    applicationDTO.setComplete_date(rs.getTimestamp("complete_date"));
+                    // Check for null before retrieving the value
+                    if (rs.getString("replyContent") != null) {
+                        applicationDTO.setReplyContent(rs.getString("replyContent"));
+                    }
+                    applicationDTO.setSender_image(rs.getString("sender_image"));
+                    applicationDTO.setReceiver_image(rs.getString("receiver_image"));
                 }
             }
         } catch (SQLException e) {
@@ -315,7 +318,6 @@ public class ApplicationDAO extends DBContext {
 
         return applicationDTO;
     }
-
 
     public void DeleteApplication(int applicationId) {
         String sql = "DELETE FROM application WHERE application_id = ?";
@@ -333,9 +335,7 @@ public class ApplicationDAO extends DBContext {
 
     public boolean titlecontain(String para) {
         boolean containsTitle = false;
-        try (Connection con = super.getConnection();
-             PreparedStatement st = con.prepareStatement("SELECT title FROM application");
-             ResultSet rs = st.executeQuery()) {
+        try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement("SELECT title FROM application"); ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 String title = rs.getString("title");
                 if (title != null && para != null && title.toLowerCase().contains(para.toLowerCase())) {
@@ -357,8 +357,7 @@ public class ApplicationDAO extends DBContext {
 
     public void changeStatus(Date completeDate, int applicationId) {
         if (completeDate != null) {
-            try (Connection con = super.getConnection();
-                 PreparedStatement st = con.prepareStatement("UPDATE application SET status = 'complete' WHERE application_id = ?")) {
+            try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement("UPDATE application SET status = 'complete' WHERE application_id = ?")) {
                 st.setInt(1, applicationId);
                 int rowsUpdated = st.executeUpdate();
                 if (rowsUpdated == 0) {
@@ -377,11 +376,9 @@ public class ApplicationDAO extends DBContext {
         }
     }
 
-
     public void SetReplyContent(String replyContent, int applicationId) {
-        if (replyContent != null ) {
-            try (Connection con = super.getConnection();
-                 PreparedStatement st = con.prepareStatement("UPDATE application SET replyContent=?, complete_date=? WHERE application_id=?")) {
+        if (replyContent != null) {
+            try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement("UPDATE application SET replyContent=?, complete_date=? WHERE application_id=?")) {
                 st.setString(1, replyContent);
                 // Sử dụng java.sql.Timestamp thay vì java.util.Date
                 st.setTimestamp(2, new Timestamp(System.currentTimeMillis())); // Thời gian hiện tại
@@ -389,7 +386,6 @@ public class ApplicationDAO extends DBContext {
 
                 // Không cần gọi getAllApplication() ở đây
                 //List<Application> applications = ad.getAllApplication();
-
                 // Thực thi truy vấn
                 st.executeUpdate();
             } catch (SQLException e) {
@@ -400,26 +396,25 @@ public class ApplicationDAO extends DBContext {
         }
     }
 
-
     public List<ApplicationDTO> getAllApplications(String searchParam, String typeAppParam) {
-        String sql = "SELECT\n" +
-                "    a.application_id,\n" +
-                "    ta.type_id,\n" +  // Thêm cột type_id
-                "    ta.name AS type_name,\n" +
-                "    a.title,\n" +
-                "    e1.name AS sender_name,\n" +
-                "    e2.name AS receiver_name,\n" +
-                "    a.create_date,\n" +
-                "    a.status,\n" +
-                "    a.content,\n" +
-                "    a.file,\n" +
-                "    a.complete_date\n" +
-                "FROM\n" +
-                "    application AS a\n" +
-                "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id\n" +
-                "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id\n" +
-                "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id\n";
-
+        String sql = "SELECT\n"
+                + "    a.application_id,\n"
+                + "    ta.type_id,\n"
+                + // Thêm cột type_id
+                "    ta.name AS type_name,\n"
+                + "    a.title,\n"
+                + "    e1.name AS sender_name,\n"
+                + "    e2.name AS receiver_name,\n"
+                + "    a.create_date,\n"
+                + "    a.status,\n"
+                + "    a.content,\n"
+                + "    a.file,\n"
+                + "    a.complete_date\n"
+                + "FROM\n"
+                + "    application AS a\n"
+                + "    INNER JOIN type_application AS ta ON a.type_id = ta.type_id\n"
+                + "    INNER JOIN employee AS e1 ON a.sender_id = e1.employee_id\n"
+                + "    INNER JOIN employee AS e2 ON a.receiver_id = e2.employee_id\n";
 
         if (searchParam != null && !searchParam.isEmpty()) {
             sql += " AND LOWER(a.title) LIKE LOWER(?)";
@@ -455,7 +450,7 @@ public class ApplicationDAO extends DBContext {
                     applicationDTO.setReceiver_name(rs.getString("receiver_name"));
                     applicationDTO.setCreate_date(rs.getTimestamp("create_date"));
                     applicationDTO.setComplete_date(rs.getTimestamp("complete_date"));
-                    if(applicationDTO.getComplete_date()!=null){
+                    if (applicationDTO.getComplete_date() != null) {
                         changeStatus(applicationDTO.getComplete_date(), applicationDTO.getApplication_id());
                     }
                     applicationDTO.setStatus(rs.getString("status"));
@@ -476,22 +471,8 @@ public class ApplicationDAO extends DBContext {
 
         return list;
     }
-    public static void main(String[] args) {
-        // Tạo đối tượng DAO để truy vấn cơ sở dữ liệu
-        ApplicationDAO applicationDAO = new ApplicationDAO();
 
-        // Gọi phương thức getAllApplications với chuỗi tìm kiếm là "t"
-        String searchParam = "t";
-        String typeAppParam = "0"; // Nếu không muốn tìm kiếm theo loại ứng dụng, set giá trị này là "0"
 
-        List<ApplicationDTO> resultList = applicationDAO.getAllApplications(searchParam, typeAppParam);
-
-        // Hiển thị kết quả
-        System.out.println("Danh sách các ứng dụng có chứa chuỗi 't':");
-        for (ApplicationDTO application : resultList) {
-            System.out.println(application);
-        }
-    }
     public String getNamebyAccount(AccountDTO account) {
         String name = "";
         String sql = "SELECT e.name FROM employee e JOIN users u ON e.user_id = u.user_id WHERE u.user_id = ?";
@@ -511,7 +492,7 @@ public class ApplicationDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException("Error when getting employee name", e);
-        }   catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ApplicationDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             // Đóng ResultSet trước
@@ -542,8 +523,58 @@ public class ApplicationDAO extends DBContext {
         return name;
     }
 
+    public String getImagebyAccount(AccountDTO account) {
+        String image = "";
+        String sql = "SELECT e.image FROM employee e JOIN users u ON e.user_id = u.user_id WHERE u.user_id = ?";
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            con = super.getConnection();
+            st = con.prepareStatement(sql);
+            st.setInt(1, account.getUserID());
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                image = rs.getString("image");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new RuntimeException("Error when getting employee name", e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ApplicationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // Đóng ResultSet trước
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            // Sau đó đóng PreparedStatement
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            // Cuối cùng đóng Connection
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return image;
+    }
+
     public void UpdateApplication(int application_id, String newTitle, String newContent) {
-       String sql = "update application set title = ?, content = ?, create_date = ? "
+        String sql = "update application set title = ?, content = ?, create_date = ? "
                 + "where application_id = ?";
         try (Connection con = super.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
             st.setString(1, newTitle);
@@ -559,6 +590,8 @@ public class ApplicationDAO extends DBContext {
             throw new RuntimeException(e);
         }
     }
+
+    
+
+
 }
-
-

@@ -73,7 +73,9 @@ public class SendApplicationController extends HttpServlet {
 
         Date create_date = new Date(); // The create_date is set to the current time
         Date complete_date = null; // The complete_date is null when a new application is created
-
+        if(isValidInput(title) && isValidInput(content)){
+            title=sanitizeInput(title);
+            content=sanitizeInput(content);
         Application application = new Application();
         application.setSender_id(sender_id);
         application.setType_id(type_id);
@@ -94,6 +96,7 @@ public class SendApplicationController extends HttpServlet {
         } catch (Exception e) {
             throw new ServletException("Error inserting application", e);
         }
+        }
     }
     private int parseIntegerParameter(HttpServletRequest request, String parameterName) throws ServletException {
         String rawValue = request.getParameter(parameterName);
@@ -105,5 +108,15 @@ public class SendApplicationController extends HttpServlet {
         } catch (NumberFormatException e) {
             throw new ServletException(parameterName + " is not a valid integer", e);
         }
+    }
+    // Validation method to check if the input is not empty
+    private boolean isValidInput(String input) {
+        return input != null && !input.isEmpty();
+    }
+
+// Sanitization method to replace '<' and '>'
+    private String sanitizeInput(String input) {
+        // Manually replace '<' and '>'
+        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     }
 }

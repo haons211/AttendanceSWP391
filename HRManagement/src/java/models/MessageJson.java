@@ -17,6 +17,7 @@ public class MessageJson {
     String content;
     long timestamp;
     String sender_name;
+    String sender_image;
 
     public MessageJson() {
     }
@@ -26,6 +27,22 @@ public class MessageJson {
         this.content = content;
         this.timestamp = timestamp;
         this.sender_name = sender_name;
+    }
+
+    public String getSender_image() {
+        return sender_image;
+    }
+
+    public void setSender_image(String sender_image) {
+        this.sender_image = sender_image;
+    }
+
+    public MessageJson(int sender_id, String content, long timestamp, String sender_name, String sender_image) {
+        this.sender_id = sender_id;
+        this.content = content;
+        this.timestamp = timestamp;
+        this.sender_name = sender_name;
+        this.sender_image = sender_image;
     }
 
     public int getSender_id() {
@@ -57,9 +74,9 @@ public class MessageJson {
     }
 
     public void setSender_name(int sender_id) {
-        ConversationDAO cd= new ConversationDAO();
-        String name= cd.getNameByEmployeeId(sender_id);
-        this.sender_name=name;
+        ConversationDAO cd = new ConversationDAO();
+        String name = cd.getNameByEmployeeId(sender_id);
+        this.sender_name = name;
     }
 
 }

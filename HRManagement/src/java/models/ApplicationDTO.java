@@ -27,9 +27,43 @@ public class ApplicationDTO {
     private String formatCreDate;
     private String formatComDate;
     private String replyContent;
+    private String sender_image;
+    private String receiver_image;
     public ApplicationDTO() {
     }
 
+    public ApplicationDTO(int application_id, String type_name, String title, String sender_name, String receiver_name, Date create_date, String status, String content, String file, Date complete_date, String replyContent, String sender_image, String receiver_image) {
+        this.application_id = application_id;
+        this.type_name = type_name;
+        this.title = title;
+        this.sender_name = sender_name;
+        this.receiver_name = receiver_name;
+        this.create_date = create_date;
+        this.status = status;
+        this.content = content;
+        this.file = file;
+        this.complete_date = complete_date;
+        this.replyContent = replyContent;
+        this.sender_image = sender_image;
+        this.receiver_image = receiver_image;
+    }
+
+    public String getSender_image() {
+        return sender_image;
+    }
+
+    public void setSender_image(String sender_image) {
+        this.sender_image = sender_image;
+    }
+
+    public String getReceiver_image() {
+        return receiver_image;
+    }
+
+    public void setReceiver_image(String receiver_image) {
+        this.receiver_image = receiver_image;
+    }
+    
     public ApplicationDTO(int application_id, String type_name, String title, Date create_date, String status, String content, String file, Date complete_date) {
         this.application_id = application_id;
         this.type_name = type_name;

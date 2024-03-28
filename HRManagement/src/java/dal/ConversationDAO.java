@@ -191,7 +191,7 @@ public class ConversationDAO extends DBContext {
     }
 
     public List<MessageDTO> getAllMessagesInConversation() {
-    String sql = "SELECT m.message_id, m.sender_id, m.content, e.name AS sender_name, m.timestamp " +
+    String sql = "SELECT m.message_id, m.sender_id, m.content, e.name AS sender_name, m.timestamp,e.image AS sender_image " +
                  "FROM message m " +
                  "INNER JOIN employee e ON m.sender_id = e.employee_id " +
                  "ORDER BY m.timestamp ASC"; // Sắp xếp theo thời gian tăng dần
@@ -208,13 +208,14 @@ public class ConversationDAO extends DBContext {
                 String senderName = rs.getString("sender_name");
                 String content = rs.getString("content");
                 Timestamp timestamp = rs.getTimestamp("timestamp"); // Sử dụng getTimestamp() thay vì getDate()
-        
+                String sender_image= rs.getString("sender_image");
                 MessageDTO m = new MessageDTO();
                 m.setMessage_id(messageId);
                 m.setSender_id(senderId);
                 m.setSender(senderName);
                 m.setContent(content);
                 m.setFormatTime(timestamp); // Sử dụng timestamp thay vì date
+                m.setSender_image(sender_image);
                 messageList.add(m);
             }
         }

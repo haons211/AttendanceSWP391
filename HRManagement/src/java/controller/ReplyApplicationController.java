@@ -26,6 +26,8 @@ public class ReplyApplicationController extends HttpServlet {
         headerInfor.setSessionAttributes(request);
         if (request.getParameter("content") != null && request.getParameter("application_id") != null) {
             String replyContent = request.getParameter("content");
+            if(isValidInput(replyContent)){
+                replyContent=sanitizeInput(replyContent);
             int applicationId = 0;
 
             // Kiểm tra xem tham số application_id có giá trị không
@@ -48,9 +50,18 @@ public class ReplyApplicationController extends HttpServlet {
             // Đặt thuộc tính "app" và chuyển hướng tới trang EmployeeDetailApplication.jsp
             request.setAttribute("app", app);
             request.getRequestDispatcher("EmployeeDetailApplication.jsp").forward(request, response);
-        }
+        }}
+    }
+    // Validation method to check if the input is not empty
+
+    private boolean isValidInput(String input) {
+        return input != null && !input.isEmpty();
     }
 
-
+// Sanitization method to replace '<' and '>'
+    private String sanitizeInput(String input) {
+        // Manually replace '<' and '>'
+        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    }
 
 }
