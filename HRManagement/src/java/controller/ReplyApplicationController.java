@@ -4,6 +4,7 @@
  */
 package controller;
 
+import configs.headerInfor;
 import dal.ApplicationDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class ReplyApplicationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         if (request.getParameter("content") != null && request.getParameter("application_id") != null) {
             String replyContent = request.getParameter("content");
             int applicationId = 0;

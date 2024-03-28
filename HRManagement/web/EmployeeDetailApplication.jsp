@@ -73,9 +73,9 @@
                             </div>
                         </div>
 
-                        <hr>
+<!--                        <hr>
                         <br>
-                        <br>
+                        <br>-->
                         <c:choose>
                         <c:when test="${empty detail.complete_date}">
                         <div class="mailview-footer">
