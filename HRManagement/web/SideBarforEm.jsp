@@ -102,17 +102,18 @@
                             <a href="viewsendapplication"><i class="fa fa-paper-plane-o"></i> <span>View Application</span> </a>
                         </li>
                           <li><a href="ViewSalaryEmployee"><i class="fa fa-money"></i> <span>My Salary</span> </a></li>
+                          <c:if test="${account.getRole() == 3}">
+                            <li>
+                                <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
+                            </li>
+                        </c:if>
                         <li class="submenu">
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">
                                 <li><a href="ChangePassword"><i class="fa fa-lock"></i>  Change Password</a></li>
                                 <li><a href="UpdateCompany"><i class="fa fa-building"></i>   Company Setting</a></li>      
                               
-                                    <c:if test="${account.getRole() == 2}">
-                                    <li>
-                                        <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>
-                                    </li>
-                                </c:if>        
+                                          
                             </ul>
                         </li>  
                         <li>
