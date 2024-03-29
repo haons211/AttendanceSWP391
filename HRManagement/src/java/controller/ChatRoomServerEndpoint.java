@@ -36,14 +36,13 @@ public class ChatRoomServerEndpoint {
             if (userSession != null) {
                 Gson gson = new Gson();
                 MessageJson message = gson.fromJson(json, MessageJson.class);
-                Integer userId = (Integer) userSession.getUserProperties().get("userId");
+                Integer userId = null;
                 if (userId == null) {
                     userId = message.getSender_id();
-                    userSession.getUserProperties().put("userId", userId);
                 }
                 ConversationDAO cd = new ConversationDAO();
                 cd.insertMessage(userId, message.getContent());
-                MessageJsonEncoder encoder = new MessageJsonEncoder();
+               // MessageJsonEncoder encoder = new MessageJsonEncoder();
 //                String encodedMessage = encoder.encode(message);
                 for (Session session : users) {
                     if (session.isOpen()) {
