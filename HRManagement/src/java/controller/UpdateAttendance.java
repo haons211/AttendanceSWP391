@@ -96,6 +96,9 @@ public class UpdateAttendance extends HttpServlet {
         String date = request.getParameter("date");
         String status = request.getParameter("status");
         String message = request.getParameter("message");
+        if(isValidInput(message)){
+                            message = sanitizeInput(message);
+                        }
         String checkin = request.getParameter("checkin");
         if (checkin.isEmpty()) {
             checkin = null;
@@ -167,5 +170,15 @@ public class UpdateAttendance extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Update Employee Servlet";
+    }
+    
+       private boolean isValidInput(String input) {
+        return input != null && !input.isEmpty();
+    }
+
+// Sanitization method to replace '<' and '>'
+    private String sanitizeInput(String input) {
+        // Manually replace '<' and '>'
+        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     }
 }

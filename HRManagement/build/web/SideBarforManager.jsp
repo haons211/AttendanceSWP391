@@ -143,6 +143,11 @@
                         <li>
                             <a href="ManagerNotification"><i class="fa fa-bell"></i> <span>Notification</span></a>
                         </li> 
+                        <c:if test="${account.getRole() eq 3}">
+                                    <li>
+                                        <a href="ViewFeedback"><i class="fa fa-envelope"></i> <span>View Feedback</span> </a>
+                                    </li>
+                                </c:if>
                         <li>
                             <a href="ExportFileController"><i class="fa fa-download"></i> <span>Export File</span></a>
                         </li> 

@@ -45,7 +45,9 @@
                                 <form class="form" action="BeforeAddEmployee" method="post">
 
                                     <div class="form-group">
-                                        <label for="Username">Username</label>
+                                        
+<H5 style="color: gray;">You need to input a new username that exists in the system but does not have information.</H5>
+                                        <!--<label for="Username">Username</label>-->
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="username" name ="username" placeholder="UserName" required=""  />
                                             <div class="input-group-append">

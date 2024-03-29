@@ -71,8 +71,8 @@ public class UpdateCompanyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-          headerInfor.setSessionAttributes(request);
+
+        headerInfor.setSessionAttributes(request);
 
         request.setAttribute("id", 1);
         // set attribute employeeList
@@ -80,15 +80,13 @@ public class UpdateCompanyController extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         DepartmentDAO departmentDAO = new DepartmentDAO();
 
-      
-
         try {
-           
+
             Employee employee = employeeDAO.getEmployeeById(dao.getCompanyByID(1).getContactPerson());
             request.setAttribute("company", dao.getCompanyByID(1));
             request.setAttribute("employee1", employee);
             request.setAttribute("department", departmentDAO.getAllDepartments(""));
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SettingController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,22 +157,32 @@ public class UpdateCompanyController extends HttpServlet {
 
             if (count > 0) {
 
-                Department department = departmentDAO.getDepartmentById(dao.getCompanyByID(1).getDepartment());
                 Employee employee = employeeDAO.getEmployeeById(dao.getCompanyByID(1).getContactPerson());
                 request.setAttribute("company", dao.getCompanyByID(1));
                 request.setAttribute("employee1", employee);
-                request.setAttribute("department", department);
+                request.setAttribute("department", departmentDAO.getAllDepartments(""));
                 request.getRequestDispatcher("CompanySetting.jsp").forward(request, response);
 
             } else {
+
                 Employee employee = dao.getEmployeeByName(employeeName);
-                Department department = dao.getDepartmentByName(departmentName);
+                if (employee == null) {
+                    request.setAttribute("name", "The name is not exsist in company");
+                    Employee employee1 = employeeDAO.getEmployeeById(dao.getCompanyByID(1).getContactPerson());
+                request.setAttribute("company", dao.getCompanyByID(1));
+                request.setAttribute("employee1", employee1);
+                request.setAttribute("department", departmentDAO.getAllDepartments(""));
+                     request.getRequestDispatcher("CompanySetting.jsp").forward(request, response);
+                } else {
+                    Department department = dao.getDepartmentByName(departmentName);
 
-                Company company = new Company(companyID, companyName, address, email, phoneNumber, fax, website, employee.getEmployeeId(), department.getDepartment_id());
+                    Company company = new Company(companyID, companyName, address, email, phoneNumber, fax, website, employee.getEmployeeId(), department.getDepartment_id());
 
-                dao.updateCompany(company, companyID);
+                    dao.updateCompany(company, companyID);
 
-                response.sendRedirect("dashboard");
+                    response.sendRedirect("UpdateCompany");
+                }
+
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateCompanyController.class.getName()).log(Level.SEVERE, null, ex);

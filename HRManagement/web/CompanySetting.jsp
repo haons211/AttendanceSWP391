@@ -52,16 +52,21 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Contact Person</label>
-                                            <c:if test="${employeeName!=null}">
-                                                <input class="form-control" type="text" required="" name="employeeName" value="${employeeName}">
+                                            <c:if test="${employee1.name!=null}">
+                                                <input class="form-control" type="text" required="" name="employeeName" value="${employee1.name}">
                                             </c:if>
-                                            <c:if test="${employeeName==null}">
-                                                <input class="form-control" type="text" required="" name="employeeName" value="${employee.name}">
+                                            <c:if test="${employee1.name==null}">
+                                                <input class="form-control" type="text" required="" name="employeeName" value="${employee1.name}">
                                             </c:if>
 
                                             <c:if test="${messageErrorEname!=null}">
                                                 <div class="text-center alert-danger">
                                                     <label > ${messageErrorEname}</label>    
+                                                </div>
+                                            </c:if>
+                                                <c:if test="${name!=null}">
+                                                <div class="text-center alert-danger">
+                                                    <label > ${name}</label>    
                                                 </div>
                                             </c:if>
                                         </div>
@@ -157,3 +162,4 @@
     </body>
 
 </html>
+

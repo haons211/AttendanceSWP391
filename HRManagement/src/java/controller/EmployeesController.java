@@ -91,6 +91,9 @@ public class EmployeesController extends HttpServlet {
                         int em_id = em.getEmployeeId();
                         int remain_id = dao.GetRemainIDfromEmployee(em_id);
                         String notes = request.getParameter("message");
+                        if(isValidInput(notes)){
+                            notes = sanitizeInput(notes);
+                        }
                         AttendanceDAO attendanceDAO = new AttendanceDAO();
                         int attendanceId = attendanceDAO.CheckIn(em_id, notes, remain_id);
                         if (attendanceId != -1) {
@@ -118,5 +121,15 @@ public class EmployeesController extends HttpServlet {
             () {
         return "Short description";
         }
+            
+            private boolean isValidInput(String input) {
+        return input != null && !input.isEmpty();
+    }
+
+// Sanitization method to replace '<' and '>'
+    private String sanitizeInput(String input) {
+        // Manually replace '<' and '>'
+        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    }
     }
 

@@ -87,7 +87,7 @@ public class UpdateDepartmentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String departmentIDString = request.getParameter("departmentID");
-        String departmentCode = request.getParameter("departmentCode").toLowerCase();
+        String departmentCode = request.getParameter("departmentCode");
         String departmentName = request.getParameter("departmentName");
         departmentName = validate.normalizeName(departmentName);
         

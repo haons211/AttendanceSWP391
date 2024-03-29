@@ -107,6 +107,13 @@
                                 <a href="ViewProject"><i class="fa fa-plus-square"></i> <span>Project</span></a>
                             </li>
                         </c:if>
+                            <c:if test="${account.getRole() == 2}">
+                                    <li>
+                                        <a href="Feedback"><i class="fa fa-envelope"></i> <span> Feedback</span> </a>
+                                    </li>
+                                </c:if> 
+
+
                         <li class="submenu">
                             <a href="Setting"><i class="fa fa-id-card"></i> <span>Settings</span> <span class="menu-arrow"></a>
                             <ul style="display: none;">

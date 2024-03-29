@@ -76,7 +76,7 @@ public class AddDepartmentController extends HttpServlet {
             throws ServletException, IOException {
         // Lấy thông tin từ form
         String name = request.getParameter("departmentName");
-        String code = request.getParameter("departmentCode").toLowerCase();
+        String code = request.getParameter("departmentCode");
         name = validate.normalizeName(name);
         DepartmentDAO dao = new DepartmentDAO();
         String messageError = "Please input valid ";

@@ -68,11 +68,11 @@
                             <div class="fixed-header">
                                 <div class="navbar">
                                     <div class="user-details mr-auto">
-                                        <div class="float-left user-img m-r-10">
-                                            <a href="profile.html" title="Jennifer Robinson"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
-                                        </div>
+<!--                                        <div class="float-left user-img m-r-10">
+                                            <a href="#" title="Jennifer Robinson"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                        </div>-->
                                         <div class="user-info float-left">
-                                            <a href="profile.html"><span class="font-bold">All</span> <i class="typing-text"></i></a>
+                                            <a href="#"><span class="font-bold">SGIP5</span> <i class="typing-text"></i></a>
 
                                         </div>
                                     </div>

@@ -5,6 +5,7 @@
 
 package controller;
 
+import configs.headerInfor;
 import dal.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,6 +60,7 @@ public class ViewContentFeedback extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        headerInfor.setSessionAttributes(request);
         int id = Integer.parseInt(request.getParameter("id"));
         FeedbackDAO dao = new FeedbackDAO();
       

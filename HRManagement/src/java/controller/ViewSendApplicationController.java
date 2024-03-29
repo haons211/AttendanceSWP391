@@ -56,6 +56,10 @@ public class ViewSendApplicationController extends HttpServlet {
             // Xử lí searchParam
             if(a.titlecontain(request.getParameter("searchTerm"))){
                 searchParam= request.getParameter("searchTerm");
+                if(isValidInput(searchParam)){
+                     searchParam = sanitizeInput(searchParam);
+                }
+                       
             }else{
                 msgError="Can't not found";
                 request.setAttribute("SearchError",msgError);
@@ -116,6 +120,14 @@ public class ViewSendApplicationController extends HttpServlet {
         }
 
     }
+     private boolean isValidInput(String input) {
+        return input != null && !input.isEmpty();
+    }
 
+// Sanitization method to replace '<' and '>'
+    private String sanitizeInput(String input) {
+        // Manually replace '<' and '>'
+        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    }
 
 }

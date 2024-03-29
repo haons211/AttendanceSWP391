@@ -71,8 +71,10 @@ public class AttendanceReportController extends HttpServlet {
         DepartmentDAO d = new DepartmentDAO();
         ArrayList<Department> departmentList = d.getAllDepartments("");
         String departmentName = request.getParameter("departmentName");
-        Date fromDate = null;
-        Date toDate = null;
+        
+        Date now = new Date();
+        Date fromDate = now;
+        Date toDate = now;
         // Xử lý fromDate và toDate
         String fromDateStr = request.getParameter("fromDate");
         String toDateStr = request.getParameter("toDate");
