@@ -114,7 +114,7 @@
                                             <th>#</th>
                                             <th>Time </th>
                                             <th>Subject</th>
-                                            <th>Description</th>
+                                         
                                               <%if (role == 3 || role == 1) { %>
                                             <th class="text-right">Action</th>
                                                <% } %>
@@ -128,9 +128,7 @@
                                                 <td class="column-2">
                                                     <a class="ellipsis" href="NotificationDetail?id=${o.notificationId}" title="${o.subject}">${o.subject}</a>
                                                 </td>
-                                                <td class="column-2">
-                                                    ${o.description}</a>
-                                                </td>
+                                              
                                                 <%if (role == 3 || role == 1) { %>
 
 
@@ -186,9 +184,9 @@
         </script>
         <script>
             function confirmDelete(notificationId) {
-                // Hi?n th? h?p tho?i xác nh?n
+                // Hi?n th? h?p tho?i xÃ¡c nh?n
                 if (confirm('Are you sure you want to delete this notification?')) {
-                    // N?u ng??i dùng nh?n OK, chuy?n h??ng ??n trang xóa v?i tham s? notificationId
+                    // N?u ng??i dÃ¹ng nh?n OK, chuy?n h??ng ??n trang xÃ³a v?i tham s? notificationId
                     window.location.href = 'DeleteNotification?id=' + notificationId;
                 }
             }
