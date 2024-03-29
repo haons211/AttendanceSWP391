@@ -87,7 +87,14 @@ public class NotificationManagerController extends HttpServlet {
         NotificationDAO notidao = new NotificationDAO();
 
         String subject = request.getParameter("subject");
+        if(isValidInput(subject)){
+            subject=sanitizeInput(subject);
+        }
         String description = request.getParameter("description");
+        if(isValidInput(description)){
+            description=sanitizeInput(description);
+        }
+         description = description.replaceAll("\r\n", "<br>");
         boolean checkNoti = false;
         boolean checkAlert = false;
 
@@ -161,5 +168,13 @@ public class NotificationManagerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+private boolean isValidInput(String input) {
+        return input != null && !input.isEmpty();
+    }
 
+// Sanitization method to replace '<' and '>'
+    private String sanitizeInput(String input) {
+        // Manually replace '<' and '>'
+        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    }
 }
